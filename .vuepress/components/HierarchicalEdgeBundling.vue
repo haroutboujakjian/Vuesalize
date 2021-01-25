@@ -17,7 +17,7 @@
                @click="clickName(label.name, label.type)">
                 <text :x="label.x" dy="0.31em"
                       :transform="label.texttransform" :text-anchor="label.textAnchor">
-                    {{ shortenText(label.name, 20) }}
+                    {{ label.name }}
                     <title>{{label.name}}</title>
                 </text>
             </g>
@@ -31,7 +31,6 @@
 import {lineRadial, curveBundle} from 'd3-shape';
 import {cluster, hierarchy} from 'd3-hierarchy';
 import {ascending} from 'd3-array';
-import {shortenText} from "@/helpers";
 
 export default {
     name: "HierarchicalEdgeBundling",

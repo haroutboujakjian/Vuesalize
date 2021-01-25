@@ -8,11 +8,7 @@ of the pain. Additionally, the scales that control the layouts points, bar, axes
 in Vue. This allows for automatic updating of the chart purely based on changes in the data without having to define an
 additional function to handle updates.
 
-## Components
-
-something here to try [here](components.md)
-
-## Hierarchical Edge Bundling
+## Basic Legend
 
 ```json
 {
@@ -23,4 +19,13 @@ something here to try [here](components.md)
 
 <base-legend v-bind:legend-data="{'first': 'black', 'second': 'blue'}"></base-legend>
 
+## Hierarchical Edge Bundling
+
+<hierarchical-edge-bundling :width="400" :height="400">
+</hierarchical-edge-bundling>
+
 ## Grouped Bar Chart
+
+## Components
+
+something here to try [here](components.md)
