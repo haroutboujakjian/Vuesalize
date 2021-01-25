@@ -1,13 +1,13 @@
 <template>
     <div ref="donutChartContainer" style="width: 100%; height: calc(100% - 46px)">
-        <svg :width="isComparison ? '50%' : '100%'" :height="height" v-if="chartData.org1.length">
-            <path v-for="slice in slices.org1"
+        <svg width="100%" :height="height" v-if="chartData.slices.length">
+            <path v-for="slice in slices"
                   :key="slice.index"
                   :d="arc(slice)"
                   :fill="colorScale(slice.data.name)" :transform="'translate('+width/2+','+height/2+')'">
             </path>
             <g font-family="sans-serif" font-size="12" text-anchor="middle">
-                <text v-for="slice in slices.org1"
+                <text v-for="slice in slices"
                       :key="slice.index"
                       :transform="textTransform(slice)"
                       >
@@ -15,30 +15,9 @@
                     <tspan x="0" y="0.7em" fill-opacity="0.7">{{slice.data.Total}}</tspan>
                 </text>
             </g>
-            <g v-if="isComparison" font-family="sans-serif" font-size="16" text-anchor="middle" :transform="textTransform()">
+            <g v-if="showTitle" font-family="sans-serif" font-size="16" text-anchor="middle" :transform="textTransform()">
                 <foreignObject :width="titleWidth" height="20" :x="-titleWidth/2" y="-16">
-                    <p class="donut-title" xmlns="http://www.w3.org/1999/xhtml" :title="chartData.org1Name">{{  chartData.org1Name }}</p>
-                </foreignObject>
-            </g>
-        </svg>
-        <svg width="50%" :height="height" v-if="isComparison">
-            <path v-for="slice in slices.org2"
-                  :key="slice.index"
-                  :d="arc(slice)"
-                  :fill="colorScale(slice.data.name)" :transform="'translate('+width/2+','+height/2+')'">
-            </path>
-            <g font-family="sans-serif" font-size="12" text-anchor="middle">
-                <text v-for="slice in slices.org2"
-                      :key="slice.index"
-                      :transform="textTransform(slice)"
-                >
-                    <tspan y="-0.4em" font-weight="bold">{{slice.data.name}}</tspan>
-                    <tspan x="0" y="0.7em" fill-opacity="0.7">{{slice.data.Total}}</tspan>
-                </text>
-            </g>
-            <g font-family="sans-serif" font-size="16" text-anchor="middle" :transform="textTransform()">
-                <foreignObject :width="titleWidth" height="20" :x="-titleWidth/2" y="-16">
-                    <p class="donut-title" xmlns="http://www.w3.org/1999/xhtml" :title="chartData.org2Name">{{  chartData.org2Name }}</p>
+                    <p class="donut-title" xmlns="http://www.w3.org/1999/xhtml" :title="chartData.title">{{ chartData.title }}</p>
                 </foreignObject>
             </g>
         </svg>
@@ -61,26 +40,16 @@ export default {
         }
     },
     computed: {
-        isComparison() {
-            return this.chartData.org2 && this.chartData.org2.length;
-        },
         slices() {
-            return {
-                org1: pie()
-                    .padAngle(0.005)
-                    .sort(null)
-                    .value(d => d.Total)(this.chartData.org1)
-                    .filter(d => d.data.Total),
-                org2: this.chartData.org2 ? pie()
-                    .padAngle(0.005)
-                    .sort(null)
-                    .value(d => d.Total)(this.chartData.org2)
-                    .filter(d => d.data.Total) : null
-            }
+            return pie()
+                .padAngle(0.005)
+                .sort(null)
+                .value(d => d.Total)(this.chartData.slices)
+                .filter(d => d.data.Total);
         },
         colorScale() {
             return scaleOrdinal()
-                .domain(this.chartData.org1.map(d => d.name))
+                .domain(this.chartData.slices.map(d => d.name))
                 .range(this.donutChartColorScale)
                 .unknown("#ccc");
         },
@@ -89,7 +58,7 @@ export default {
             return arc().innerRadius(radius * 0.67).outerRadius(radius - 1);
         },
         titleWidth() {
-            return this.arc.innerRadius()(this.slices.org1[0]) * 2 - 5;
+            return this.arc.innerRadius()(this.slices[0]) * 2 - 5;
         }
     },
     mounted() {
@@ -107,15 +76,8 @@ export default {
             return `translate(${transform})`;
         },
         resize() {
-            this.width = this.$refs.donutChartContainer.getBoundingClientRect().width/(this.isComparison ? 2 : 1);
+            this.width = this.$refs.donutChartContainer.getBoundingClientRect().width;
             this.height = this.$refs.donutChartContainer.getBoundingClientRect().height;
-        }
-    },
-    watch: {
-        isComparison: {
-            handler() {
-                this.resize();
-            }
         }
     }
 }
@@ -123,10 +85,9 @@ export default {
 
 <style scoped>
 
-    svg {
-        display: inline-block;
-        margin-top: 10px;
-    }
+svg {
+    margin-top: 10px;
+}
 
 .donut-title {
     max-width: 100%;
