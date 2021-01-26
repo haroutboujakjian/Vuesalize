@@ -21,11 +21,8 @@ additional function to handle updates.
 
 ## Hierarchical Edge Bundling
 
-<hierarchical-edge-bundling :width="400" :height="400">
-</hierarchical-edge-bundling>
+<chart-selector :chart="'HierarchicalEdgeBundling'"></chart-selector>
 
 ## Grouped Bar Chart
 
 ## Components
-
-something here to try [here](components.md)

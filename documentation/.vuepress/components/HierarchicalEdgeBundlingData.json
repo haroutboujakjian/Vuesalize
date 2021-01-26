@@ -1,0 +1,36 @@
+[
+  {
+    "name": "root|Outcome|Meet Client",
+    "color": "blue",
+    "imports": []
+  },
+  {
+    "name": "root|Indicator|Go To Dinner",
+    "color": "red",
+    "imports": [
+      "root|Outcome|Meet Client"
+    ]
+  },
+  {
+    "name": "root|Indicator|Fill Out Paperwork",
+    "color": "blue",
+    "imports": [
+      "root|Indicator|Go To Dinner",
+      "root|Outcome|fourth"
+    ]
+  },
+  {
+    "name": "root|Outcome|fourth",
+    "color": "red",
+    "imports": [
+      "root|Indicator|Go To Dinner"
+    ]
+  },
+  {
+    "name": "root|Outcome|Address Documentation",
+    "color": "red",
+    "imports": [
+      "root|Indicator|Fill Out Paperwork"
+    ]
+  }
+]

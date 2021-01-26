@@ -51,7 +51,7 @@ export default {
             return `translate(${this.width / 2}, ${this.height / 2})`
         },
         radius() {
-            return this.height / 2 - 80
+            return this.height / 2
         },
         rootData() {
             let plotdataClone = JSON.parse(JSON.stringify(this.plotdata))
@@ -108,7 +108,6 @@ export default {
         }
     },
     methods: {
-        shortenText,
         rootCalc(value) {
             return this.tree(this.bilink(hierarchy(this.hierarchy(value, "|"))
                 .sort((a, b) => ascending(a.height, b.height) || ascending(a.data.name, b.data.name))));
@@ -152,7 +151,7 @@ export default {
         },
 
         tree: function (value) {
-            return cluster().size([2 * Math.PI, this.radius - 110])(value)
+            return cluster().size([2 * Math.PI, this.radius - 90])(value)
         },
 
         line: function (value) {
