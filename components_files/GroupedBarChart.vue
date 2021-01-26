@@ -25,105 +25,107 @@
 </template>
 
 <script>
-    import * as d3 from 'd3';
+import {scaleLinear, scaleOrdinal, scaleBand} from 'd3-scale';
+import {max, range} from 'd3-array';
+import {select} from 'd3-selection';
+import {axisLeft, axisBottom} from 'd3-axis';
 
-    export default {
-        name: "GroupedBarChart",
-        props: ['appdata', 'sortedMeetings'],
-        data() {
-            return {
-                width: 800,
-                height: 450,
-                margin: {
-                    top: 30,
-                    bottom: 20,
-                    left: 30,
-                    right: 20
-                }
-
-
-            }
-        },
-        computed: {
-            xtranslate() {
-                return 'translate(0, ' + (this.height - 20) + ')';
-            },
-            ytranslate() {
-                return 'translate(' + this.margin.left + ', 0)';
-            },
-            groupKeys() {
-                if (this.sortedMeetings.length !== 0){
-                    return Object.keys(this.sortedMeetings[0].values)
-                }
-                return ''
-            },
-            color() {
-                return d3.scaleOrdinal()
-                    .range(["#F8CBAD", "#C5E0B4", "#BDD7EE", "#D5B8EA"])
-            },
-            scale() {
-                const x = d3.scaleBand()
-                    .domain(d3.range(this.sortedMeetings.length))
-                    .range([this.margin.left, this.width - this.margin.right])
-                    .padding(0.15);
-                const x1 = d3.scaleBand()
-                    .domain(this.groupKeys)
-                    .rangeRound([0, x.bandwidth()])
-                    .padding(0.05)
-                const y = d3.scaleLinear()
-                    .domain([0, this.getMax(this.sortedMeetings)])
-                    .range([this.height - this.margin.bottom, this.margin.top]);
-                return {x, x1, y}
-            }
-
-        },
-
-        methods: {
-            getMax(array){
-                let max = d3.max(array.map(item => d3.max(Object.values(item.values))))
-                return max > 5 ? max : 5
-            }
-        },
-
-        directives: {
-            xaxis(el, binding, vnode) {
-                const axis = binding.arg
-                const methodArg = binding.value[axis]
-                const ticks = vnode.context._props.sortedMeetings.map(e => e.MeetingDate + ' ' + e.BoardName)
-                d3.select(el).call(d3.axisBottom(methodArg)
-                    .tickValues(d3.range(ticks.length))
-                    .tickFormat(i => ticks[i])
-                    .tickSizeOuter(0))
-            },
-            yaxis(el, binding) {
-                const axis = binding.arg
-                const methodArg = binding.value[axis]
-                d3.select(el).call(d3.axisLeft(methodArg).ticks(7).tickSizeOuter(0))
+export default {
+    name: "GroupedBarChart",
+    props: {
+        sortedMeetings: Array,
+        width: Number,
+        height: Number,
+    },
+    data() {
+        return {
+            margin: {
+                top: 30,
+                bottom: 20,
+                left: 30,
+                right: 20
             }
         }
+    },
+    computed: {
+        xtranslate() {
+            return 'translate(0, ' + (this.height - 20) + ')';
+        },
+        ytranslate() {
+            return 'translate(' + this.margin.left + ', 0)';
+        },
+        groupKeys() {
+            if (this.sortedMeetings.length !== 0) {
+                return Object.keys(this.sortedMeetings[0].values)
+            }
+            return ''
+        },
+        color() {
+            return scaleOrdinal().range(["#F8CBAD", "#C5E0B4", "#BDD7EE", "#D5B8EA"])
+        },
+        scale() {
+            const x = scaleBand()
+                .domain(d3.range(this.sortedMeetings.length))
+                .range([this.margin.left, this.width - this.margin.right])
+                .padding(0.15);
+            const x1 = scaleBand()
+                .domain(this.groupKeys)
+                .rangeRound([0, x.bandwidth()])
+                .padding(0.05)
+            const y = scaleLinear()
+                .domain([0, this.getMax(this.sortedMeetings)])
+                .range([this.height - this.margin.bottom, this.margin.top]);
+            return {x, x1, y}
+        }
 
+    },
+
+    methods: {
+        getMax(array) {
+            let max_val = max(array.map(item => d3.max(Object.values(item.values))))
+            return max_val > 5 ? max_val : 5
+        }
+    },
+
+    directives: {
+        xaxis(el, binding, vnode) {
+            const axis = binding.arg
+            const methodArg = binding.value[axis]
+            const ticks = vnode.context._props.sortedMeetings.map(e => e.MeetingDate + ' ' + e.BoardName)
+            select(el).call(axisBottom(methodArg)
+                .tickValues(range(ticks.length))
+                .tickFormat(i => ticks[i])
+                .tickSizeOuter(0))
+        },
+        yaxis(el, binding) {
+            const axis = binding.arg
+            const methodArg = binding.value[axis]
+            select(el).call(axisLeft(methodArg).ticks(7).tickSizeOuter(0))
+        }
     }
+
+}
 </script>
 
 <style scoped>
-    .GroupedBarChart {
-        position: relative;
-    }
+.GroupedBarChart {
+    position: relative;
+}
 
-    .chartTitle {
-        font-weight: bold;
-        font-size: 1.1rem;
-    }
+.chartTitle {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
 
-    rect:hover {
-        fill: darkgrey;
-    }
+rect:hover {
+    fill: darkgrey;
+}
 
-    .axis {
-        font-weight: bold;
-        font-size: 0.75rem;
-        shape-rendering: crispEdges;
-    }
+.axis {
+    font-weight: bold;
+    font-size: 0.75rem;
+    shape-rendering: crispEdges;
+}
 
 
 </style>
