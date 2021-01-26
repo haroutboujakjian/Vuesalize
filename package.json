@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "doc:dev": "node_modules/.bin/vuepress dev documentation/",
-    "doc:build": "node_modules/.bin/vuepress build documentation/"
+    "docs:dev": "node_modules/.bin/vuepress dev documentation/",
+    "docs:build": "node_modules/.bin/vuepress build documentation/"
   },
   "repository": {
     "type": "git",
