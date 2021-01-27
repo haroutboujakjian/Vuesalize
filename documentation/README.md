@@ -3,7 +3,7 @@
 This directory contains chart components and other basic components used in building interactive visualizations on the
 web. The charts are built using a combination of [Vue.js](https://vuejs.org/v2/guide/) and [D3.js](https://d3js.org/).
 The main rationale for this approach is to move the SVG definitions to the template (HTML) and let Vue actually control
-creating/destroying elements on the page. This is analagous to the "enter/update/exit" strategy used in D3 but without
+creating/destroying elements on the page. This is analogous to the "enter/update/exit" strategy used in D3 but without
 all of the pain. Additionally, the scales that control the layouts points, bar, axes, etc. are used in computed
 properties in Vue. This allows for automatic updating of the chart purely based on changes in the data without having to
 define an additional function to handle updates. A full explanation of the method used can be
@@ -28,4 +28,54 @@ legend like the one below.
 <chart-selector :chart="'HierarchicalEdgeBundling'"></chart-selector>
 
 ## Grouped Bar Chart
+
+## Leaflet Choropleth Map
+
+### Overview
+
+[Leaflet](https://leafletjs.com/) is an open-source JavaScript library for creating interactive maps. One common 
+visualization that leverages Leaflet is a choropleth, which involves coloring different geographic areas based on 
+some statistic associated with the area.
+
+### Example
+
+```html
+<template>
+  <choropleth
+    :geographies="geographies"
+    :map-data="{ VA: 100, MD: 150, DC: 200 }"
+    :center="[37.43, -78.66]"
+    :zoom="6"
+    :num-colors="3"
+  ></choropleth>
+</template>
+
+<script>
+import Choropleth from "./Choropleth";
+import stateGeographies from "./state-geographies.json";
+
+export default {
+  name: "ChoroplethExample",
+  components: {
+    Choropleth
+  },
+  data() {
+    return {
+      geographies: stateGeographies
+    };
+  }
+};
+</script>
+```
+
+<choropleth-example style="width: 100%; height: 300px"></choropleth-example>
+
+### Properties
+
+* `geographies` (required): [GeoJSON](https://geojson.org/) definition of the geographical regions to be outlined in the map
+* `map-data` (required): Object mapping geography codes to values
+* `center`: Array containing the latitude and longitude of the center of the map display
+* `zoom`: Number between 3 and 10 specifying the default zoom level
+* `tile-url`: URL of the desired Leaflet tile layer
+* `hide-legend`: Boolean that hides the legend in the lower right corner when set to true
 
