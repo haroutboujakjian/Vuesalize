@@ -67,7 +67,7 @@ export default {
 </script>
 ```
 
-<choropleth-example style="width: 100%; height: 300px"></choropleth-example>
+[comment]: <> (<choropleth-example style="width: 100%; height: 300px"></choropleth-example>)
 
 #### Properties
 
