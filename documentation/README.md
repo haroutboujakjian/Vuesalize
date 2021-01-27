@@ -17,6 +17,10 @@ found [here](./rationale.md)
 
 ### Grouped Bar Chart
 
+Grouped bar charts are useful in comparing values together in and between groups.
+
+<chart-selector :chart="'GroupedBarChart'"></chart-selector>
+
 ### Stacked Bar Chart
 
 ### Donut Chart

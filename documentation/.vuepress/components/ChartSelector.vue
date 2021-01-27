@@ -1,6 +1,6 @@
 <template>
     <component :is="chartSelected.type" :plotdata="chartSelected.data"
-               :width="600" :height="600"
+               :width="chartSelected.width" :height="chartSelected.height"
                :radial-margin="100"
                :colors="['#F8CBAD', '#C5E0B4', '#BDD7EE', '#D5B8EA']">
     </component>
@@ -28,12 +28,16 @@ export default {
             if (this.chart === 'HierarchicalEdgeBundling') {
                 return {
                     type: 'HierarchicalEdgeBundling',
-                    data: this.HierarchicalEdgeBundlingData
+                    data: this.HierarchicalEdgeBundlingData,
+                    width: 600,
+                    height: 600
                 }
             } else if (this.chart === 'GroupedBarChart') {
                 return {
                     type: 'GroupedBarChart',
-                    data: this.GroupedBarChartData
+                    data: this.GroupedBarChartData,
+                    width: 550,
+                    height: 400,
                 }
             }
             return 1

@@ -3,7 +3,7 @@
         <svg :width="width" :height="height">
             <g class="bars">
                 <g class="bar"
-                   v-for="(meeting, id) in chartData"
+                   v-for="(meeting, id) in plotdata"
                    :key="id"
                    :transform="'translate( ' + scale.x(id) + ', 0)'">
                     <rect v-for="(value, vid) in Object.keys(meeting.values)"
@@ -25,15 +25,15 @@
 </template>
 
 <script>
-import {scaleLinear, scaleOrdinal, scaleBand} from 'd3-scale';
+import {scaleBand, scaleLinear, scaleOrdinal} from 'd3-scale';
 import {max, range} from 'd3-array';
 import {select} from 'd3-selection';
-import {axisLeft, axisBottom} from 'd3-axis';
+import {axisLeft} from 'd3-axis';
 
 export default {
     name: "GroupedBarChart",
     props: {
-        chartData: Array,
+        plotdata: Array,
         width: Number,
         height: Number,
         colors: Array
@@ -56,8 +56,8 @@ export default {
             return 'translate(' + this.margin.left + ', 0)';
         },
         groupKeys() {
-            if (this.chartData.length !== 0) {
-                return Object.keys(this.chartData[0].values)
+            if (this.plotdata.length !== 0) {
+                return Object.keys(this.plotdata[0].values)
             }
             return ''
         },
@@ -66,7 +66,7 @@ export default {
         },
         scale() {
             const x = scaleBand()
-                .domain(d3.range(this.chartData.length))
+                .domain(range(this.plotdata.length))
                 .range([this.margin.left, this.width - this.margin.right])
                 .padding(0.15);
             const x1 = scaleBand()
@@ -74,7 +74,7 @@ export default {
                 .rangeRound([0, x.bandwidth()])
                 .padding(0.05)
             const y = scaleLinear()
-                .domain([0, this.getMax(this.chartData)])
+                .domain([0, this.getMax(this.plotdata)])
                 .range([this.height - this.margin.bottom, this.margin.top]);
             return {x, x1, y}
         }
@@ -83,8 +83,7 @@ export default {
 
     methods: {
         getMax(array) {
-            let max_val = max(array.map(item => max(Object.values(item.values))))
-            return max_val > 5 ? max_val : 5
+            return max(array.map(item => max(Object.values(item.values))))
         }
     },
 
@@ -92,11 +91,11 @@ export default {
         xaxis(el, binding, vnode) {
             const axis = binding.arg
             const methodArg = binding.value[axis]
-            const ticks = vnode.context._props.sortedMeetings.map(e => e.MeetingDate + ' ' + e.BoardName)
-            select(el).call(axisBottom(methodArg)
-                .tickValues(range(ticks.length))
-                .tickFormat(i => ticks[i])
-                .tickSizeOuter(0))
+            // const ticks = vnode.context._props.sortedMeetings.map(e => e.MeetingDate + ' ' + e.BoardName)
+            // select(el).call(axisBottom(methodArg)
+            //     .tickValues(range(ticks.length))
+            //     .tickFormat(i => ticks[i])
+            //     .tickSizeOuter(0))
         },
         yaxis(el, binding) {
             const axis = binding.arg
@@ -111,11 +110,6 @@ export default {
 <style scoped>
 .GroupedBarChart {
     position: relative;
-}
-
-.chartTitle {
-    font-weight: bold;
-    font-size: 1.1rem;
 }
 
 rect:hover {
