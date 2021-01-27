@@ -40,3 +40,11 @@ legend like the one below.
 ```
 
 <base-legend v-bind:legend-data="{'first': 'black', 'second': 'blue'}"></base-legend>
+
+### Loading Spinner
+
+The loading spinner is useful when data is being fetched from an API and there is some lag before the GUI receives it.
+
+<div style="display: flex; justify-content: center">
+<loader-spinning></loader-spinning>
+</div>
