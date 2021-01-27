@@ -9,35 +9,29 @@ properties in Vue. This allows for automatic updating of the chart purely based 
 define an additional function to handle updates. A full explanation of the method used can be
 found [here](./rationale.md)
 
-## Basic Legend
+## Charts
 
-The legend component takes in a json object with key value pairs in the form of label:color. This will generate a simple
-legend like the one below.
-
-```json
-{
-  "first": "black",
-  "second": "blue"
-}
-```
-
-<base-legend v-bind:legend-data="{'first': 'black', 'second': 'blue'}"></base-legend>
-
-## Hierarchical Edge Bundling
+### Hierarchical Edge Bundling
 
 <chart-selector :chart="'HierarchicalEdgeBundling'"></chart-selector>
 
-## Grouped Bar Chart
+### Grouped Bar Chart
 
-## Leaflet Choropleth Map
+### Stacked Bar Chart
 
-### Overview
+### Donut Chart
+
+### Scatter Plot
+
+### Choropleth
+
+#### Overview
 
 [Leaflet](https://leafletjs.com/) is an open-source JavaScript library for creating interactive maps. One common 
 visualization that leverages Leaflet is a choropleth, which involves coloring different geographic areas based on 
 some statistic associated with the area.
 
-### Example
+#### Example
 
 ```html
 <template>
@@ -70,7 +64,7 @@ export default {
 
 <choropleth-example style="width: 100%; height: 300px"></choropleth-example>
 
-### Properties
+#### Properties
 
 * `geographies` (required): [GeoJSON](https://geojson.org/) definition of the geographical regions to be outlined in the map
 * `map-data` (required): Object mapping geography codes to values
@@ -78,4 +72,29 @@ export default {
 * `zoom`: Number between 3 and 10 specifying the default zoom level
 * `tile-url`: URL of the desired Leaflet tile layer
 * `hide-legend`: Boolean that hides the legend in the lower right corner when set to true
+
+## Additional useful components
+
+### Basic Legend
+
+The legend component takes in a json object with key value pairs in the form of label:color. This will generate a simple
+legend like the one below.
+
+```json
+{
+  "first": "black",
+  "second": "blue"
+}
+```
+
+<base-legend v-bind:legend-data="{'first': 'black', 'second': 'blue'}"></base-legend>
+
+### Loading Spinner
+
+The loading spinner is useful when data is being fetched from an API and there is some lag before the GUI receives it.
+
+<div style="display: flex; justify-content: center">
+<loader-spinning></loader-spinning>
+</div>
+
 
