@@ -9,5 +9,6 @@ module.exports = {
             '/',
         ],
         sidebarDepth: 2,
+        lastUpdated: 'Last Updated'
     }
 }
