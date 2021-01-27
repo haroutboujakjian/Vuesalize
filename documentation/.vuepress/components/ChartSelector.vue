@@ -9,7 +9,7 @@
 <script>
 import HierarchicalEdgeBundling from "./HierarchicalEdgeBundling";
 import HEBdata from './HierarchicalEdgeBundlingData.json'
-import GBdata from './GroupedBarChart.json'
+import GBdata from './GroupedBarChartData.json'
 
 export default {
     name: "ChartSelector",
