@@ -36,6 +36,7 @@ export default {
         chartData: Array,
         width: Number,
         height: Number,
+        colors: Array
     },
     data() {
         return {
@@ -61,7 +62,7 @@ export default {
             return ''
         },
         color() {
-            return scaleOrdinal().range(["#F8CBAD", "#C5E0B4", "#BDD7EE", "#D5B8EA"])
+            return scaleOrdinal().range(this.colors)
         },
         scale() {
             const x = scaleBand()
@@ -82,7 +83,7 @@ export default {
 
     methods: {
         getMax(array) {
-            let max_val = max(array.map(item => d3.max(Object.values(item.values))))
+            let max_val = max(array.map(item => max(Object.values(item.values))))
             return max_val > 5 ? max_val : 5
         }
     },

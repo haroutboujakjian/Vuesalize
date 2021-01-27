@@ -1,7 +1,8 @@
 <template>
     <component :is="chartSelected.type" :plotdata="chartSelected.data"
                :width="600" :height="600"
-               :radial-margin="100">
+               :radial-margin="100"
+               :colors="['#F8CBAD', '#C5E0B4', '#BDD7EE', '#D5B8EA']">
     </component>
 </template>
 

@@ -29,3 +29,11 @@ legend like the one below.
 
 ## Grouped Bar Chart
 
+## Stacked Bar Chart
+
+## Donut Chart
+
+## Scatter Plot
+
+## Chloropleth
+
