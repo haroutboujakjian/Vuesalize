@@ -38,6 +38,7 @@ export default {
         plotdata: {type: Array, required: true},
         width: Number,
         height: Number,
+        radialMargin: Number,
         clickedNode: Object
     },
     data() {
@@ -151,7 +152,7 @@ export default {
         },
 
         tree: function (value) {
-            return cluster().size([2 * Math.PI, this.radius - 90])(value)
+            return cluster().size([2 * Math.PI, this.radius - this.radialMargin])(value)
         },
 
         line: function (value) {

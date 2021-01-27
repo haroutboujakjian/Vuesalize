@@ -1,12 +1,14 @@
 <template>
-    <div>
-        <component :is="chartSelected.type" :plotdata="chartSelected.data" :width="600" :height="600"></component>
-    </div>
+    <component :is="chartSelected.type" :plotdata="chartSelected.data"
+               :width="600" :height="600"
+               :radial-margin="100">
+    </component>
 </template>
 
 <script>
 import HierarchicalEdgeBundling from "./HierarchicalEdgeBundling";
 import HEBdata from './HierarchicalEdgeBundlingData.json'
+import GBdata from './GroupedBarChart.json'
 
 export default {
     name: "ChartSelector",
@@ -16,7 +18,8 @@ export default {
     },
     data() {
         return {
-            HierarchicalEdgeBundlingData: HEBdata
+            HierarchicalEdgeBundlingData: HEBdata,
+            GroupedBarChartData: GBdata,
         }
     },
     computed: {
@@ -25,6 +28,11 @@ export default {
                 return {
                     type: 'HierarchicalEdgeBundling',
                     data: this.HierarchicalEdgeBundlingData
+                }
+            } else if (this.chart === 'GroupedBarChart') {
+                return {
+                    type: 'GroupedBarChart',
+                    data: this.GroupedBarChartData
                 }
             }
             return 1

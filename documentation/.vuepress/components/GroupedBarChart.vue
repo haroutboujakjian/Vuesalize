@@ -3,7 +3,7 @@
         <svg :width="width" :height="height">
             <g class="bars">
                 <g class="bar"
-                   v-for="(meeting, id) in sortedMeetings"
+                   v-for="(meeting, id) in chartData"
                    :key="id"
                    :transform="'translate( ' + scale.x(id) + ', 0)'">
                     <rect v-for="(value, vid) in Object.keys(meeting.values)"
@@ -33,7 +33,7 @@ import {axisLeft, axisBottom} from 'd3-axis';
 export default {
     name: "GroupedBarChart",
     props: {
-        sortedMeetings: Array,
+        chartData: Array,
         width: Number,
         height: Number,
     },
@@ -55,8 +55,8 @@ export default {
             return 'translate(' + this.margin.left + ', 0)';
         },
         groupKeys() {
-            if (this.sortedMeetings.length !== 0) {
-                return Object.keys(this.sortedMeetings[0].values)
+            if (this.chartData.length !== 0) {
+                return Object.keys(this.chartData[0].values)
             }
             return ''
         },
@@ -65,7 +65,7 @@ export default {
         },
         scale() {
             const x = scaleBand()
-                .domain(d3.range(this.sortedMeetings.length))
+                .domain(d3.range(this.chartData.length))
                 .range([this.margin.left, this.width - this.margin.right])
                 .padding(0.15);
             const x1 = scaleBand()
@@ -73,7 +73,7 @@ export default {
                 .rangeRound([0, x.bandwidth()])
                 .padding(0.05)
             const y = scaleLinear()
-                .domain([0, this.getMax(this.sortedMeetings)])
+                .domain([0, this.getMax(this.chartData)])
                 .range([this.height - this.margin.bottom, this.margin.top]);
             return {x, x1, y}
         }
