@@ -1,0 +1,12 @@
+# (C) 2020 The MITRE Corporation. All Rights Reserved.
+version: "3"
+
+services:
+  vuepress-nginx:
+    container_name: component_documentation
+    build:
+      context: .
+    restart: always
+    ports:
+      - "92:80"
+
