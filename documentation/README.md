@@ -9,7 +9,25 @@ properties in Vue. This allows for automatic updating of the chart purely based 
 define an additional function to handle updates. A full explanation of the method used can be
 found [here](./rationale.md)
 
-## Basic Legend
+## Charts
+
+### Hierarchical Edge Bundling
+
+<chart-selector :chart="'HierarchicalEdgeBundling'"></chart-selector>
+
+### Grouped Bar Chart
+
+### Stacked Bar Chart
+
+### Donut Chart
+
+### Scatter Plot
+
+### Chloropleth
+
+## Additional useful components
+
+### Basic Legend
 
 The legend component takes in a json object with key value pairs in the form of label:color. This will generate a simple
 legend like the one below.
@@ -22,18 +40,3 @@ legend like the one below.
 ```
 
 <base-legend v-bind:legend-data="{'first': 'black', 'second': 'blue'}"></base-legend>
-
-## Hierarchical Edge Bundling
-
-<chart-selector :chart="'HierarchicalEdgeBundling'"></chart-selector>
-
-## Grouped Bar Chart
-
-## Stacked Bar Chart
-
-## Donut Chart
-
-## Scatter Plot
-
-## Chloropleth
-
