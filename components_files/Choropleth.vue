@@ -8,17 +8,17 @@
                   style="margin-bottom: 25px;"
                   v-if="min + 1 !== max"
           >
-            <div v-for="index in localNumColors" :key="index">
+            <div v-for="index in numColors" :key="index">
               <i
                       v-bind:style="{
                   background: colorScale[index - 1]
                 }"
               ></i>
               {{
-              Math.floor(min + ((index - 1) * (max - min)) / localNumColors) + 1
+              Math.floor(min + ((index - 1) * (max - min)) / numColors) + 1
               }}
               -
-              {{ Math.floor(min + (index * (max - min)) / localNumColors) }}
+              {{ Math.floor(min + (index * (max - min)) / numColors) }}
             </div>
           </div>
           <div
@@ -28,7 +28,7 @@
           >
             <i
                     v-bind:style="{
-                background: colorScale[localNumColors - 1]
+                background: colorScale[numColors - 1]
               }"
             ></i>
             {{ max }}
@@ -59,7 +59,7 @@
       geographies: { type: Object, require: true },
       mapData: { type: Object, required: true },
       colors: String, // colorbrewer scale
-      numColors: Number,
+      numClasses: Number,
       hideLegend: Boolean,
       center: Array,
       tileURL: String,
@@ -73,13 +73,13 @@
       };
     },
     computed: {
-      localNumColors() {
-        return this.numColors ? this.numColors : 5;
+      numColors() {
+        return this.numClasses ? this.numClasses : 5;
       },
       colorScale() {
         return (this.colors
-                ? colorbrewer[this.colors][this.localNumColors + 1]
-                : colorbrewer.Blues[this.localNumColors + 1]).slice(1);
+                ? colorbrewer[this.colors][this.numColors + 1]
+                : colorbrewer.Blues[this.numColors + 1]).slice(1);
       },
       min() {
         return min(Object.keys(this.mapData), d => this.mapData[d]) - 1;
@@ -135,10 +135,10 @@
     },
     methods: {
       getColor(state) {
-        for (let i = 0; i < this.localNumColors; i++) {
+        for (let i = 0; i < this.numColors; i++) {
           if (
                   this.mapData[state] <=
-                  this.min + ((i + 1) * (this.max - this.min)) / this.localNumColors
+                  this.min + ((i + 1) * (this.max - this.min)) / this.numColors
           )
             return i;
         }

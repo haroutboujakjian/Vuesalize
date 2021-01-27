@@ -4,7 +4,8 @@
     :map-data="{ VA: 100, MD: 150, DC: 200 }"
     :center="[37.43, -78.66]"
     :zoom="6"
-    :num-colors="3"
+    :colors="'Greens'"
+    :num-classes="3"
   ></choropleth>
 </template>
 

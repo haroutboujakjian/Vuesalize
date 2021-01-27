@@ -40,7 +40,8 @@ some statistic associated with the area.
     :map-data="{ VA: 100, MD: 150, DC: 200 }"
     :center="[37.43, -78.66]"
     :zoom="6"
-    :num-colors="3"
+    :colors="'Greens'"
+    :num-classes="3"
   ></choropleth>
 </template>
 
@@ -70,7 +71,9 @@ export default {
 * `map-data` (required): Object mapping geography codes to values
 * `center`: Array containing the latitude and longitude of the center of the map display
 * `zoom`: Number between 3 and 10 specifying the default zoom level
-* `tile-url`: URL of the desired Leaflet tile layer
+* `colors`: [Color Brewer](https://colorbrewer2.org) color scheme name (default: "Blues")
+* `num-classes`: The number of different colors in the color scale (default: 5)
+* `tile-url`: URL of the desired Leaflet tile layer (default: 5)
 * `hide-legend`: Boolean that hides the legend in the lower right corner when set to true
 
 ## Additional useful components
