@@ -56,7 +56,7 @@ export default {
 
 ### Grouped Bar Chart
 
-Grouped bar charts are useful in comparing values together in and between groups. (Fix x axis)
+Grouped bar charts are useful in comparing values together in and between groups.
 
 <div style="display: flex; justify-content: center">
     <grouped-bar-chart-example></grouped-bar-chart-example>
@@ -74,6 +74,36 @@ Grouped bar charts are useful in comparing values together in and between groups
 #### Events Emitted
 
 #### Example
+
+```html
+<template>
+    <GroupedBarChart :plotdata="plotdata"
+                     :width="500"
+                     :height="300"
+                     :colors="['#F8CBAD', '#C5E0B4', '#BDD7EE', '#D5B8EA']">
+    </GroupedBarChart>
+</template>
+
+<script>
+import GroupedBarChart from "./GroupedBarChart";
+import GBCdata from "./GroupedBarChartData.json"
+
+export default {
+    name: "GroupedBarChartExample",
+    components: {
+        GroupedBarChart
+    },
+    data() {
+        return {
+            plotdata: GBCdata
+        }
+    }
+}
+</script>
+
+<style scoped>
+</style>
+```
 
 ### Stacked Bar Chart
 
