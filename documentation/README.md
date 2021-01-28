@@ -13,7 +13,9 @@ found [here](./rationale.md)
 
 ### Hierarchical Edge Bundling
 
-<chart-selector :chart="'HierarchicalEdgeBundling'"></chart-selector>
+<div style="display: flex; justify-content: center">
+<hierarchical-edge-bundling-example></hierarchical-edge-bundling-example>
+</div>
 
 #### Props
 
@@ -22,15 +24,52 @@ found [here](./rationale.md)
 | `plotdata`      | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
 | `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
-| `radial-margin` |                      | `Number  | `70`    | margin (in pixels) between the text label and edge of svg |
+| `radial-margin` |                      | `Number` | 70      | margin (in pixels) between the text label and edge of svg |
 
 #### Events Emitted
+
+#### Example
+
+```html
+<template>
+    <HierarchicalEdgeBundling :plotdata="plotdata"
+                              :width="600"
+                              :height="600">
+    </HierarchicalEdgeBundling>
+</template>
+
+<script>
+import HierarchicalEdgeBundling from "./HierarchicalEdgeBundling";
+import HEBdata from "./HierarchicalEdgeBundlingData.json"
+
+export default {
+    name: "HierarchicalEdgeBundlingExample",
+    components: {HierarchicalEdgeBundling},
+    component: {
+        HierarchicalEdgeBundling
+    },
+    data() {
+        return {
+            plotdata: HEBdata
+        }
+    }
+}
+</script>
+```
 
 ### Grouped Bar Chart
 
 Grouped bar charts are useful in comparing values together in and between groups. (Fix x axis)
 
-<chart-selector :chart="'GroupedBarChart'"></chart-selector>
+<div style="display: flex; justify-content: center">
+<grouped-bar-chart-example></grouped-bar-chart-example>
+</div>
+
+#### Props
+
+#### Events Emitted
+
+#### Example
 
 ### Stacked Bar Chart
 
