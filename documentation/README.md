@@ -14,7 +14,7 @@ found [here](./rationale.md)
 ### Hierarchical Edge Bundling
 
 <div style="display: flex; justify-content: center">
-<hierarchical-edge-bundling-example></hierarchical-edge-bundling-example>
+    <hierarchical-edge-bundling-example></hierarchical-edge-bundling-example>
 </div>
 
 #### Props
@@ -62,10 +62,17 @@ export default {
 Grouped bar charts are useful in comparing values together in and between groups. (Fix x axis)
 
 <div style="display: flex; justify-content: center">
-<grouped-bar-chart-example></grouped-bar-chart-example>
+    <grouped-bar-chart-example></grouped-bar-chart-example>
 </div>
 
 #### Props
+
+| Name            | Required             | Type     | Default | Description                                               |
+|--               | :------------------: | -------  | --      |                                                         --|
+| `plotdata`      | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
+| `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
+| `colors`        |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
 
 #### Events Emitted
 
