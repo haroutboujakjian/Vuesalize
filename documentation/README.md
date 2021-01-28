@@ -17,12 +17,12 @@ found [here](./rationale.md)
 
 #### Props
 
-| Name            | Required           | Type     | Default | Description                                               |
-|--               | ------------------ | -------  | --      |                                                         --|
-| `plotdata`      | :heavy_check_mark: | `Array`  |         | data necessary to create the chart                        |
-| `width`         | :heavy_check_mark: | `Number` |         | chart width in pixels                                     |
-| `height`        | :heavy_check_mark: | `Number` |         | chart height in pixels                                    |
-| `radial-margin` |                    | `Number  | `70`    | margin (in pixels) between the text label and edge of svg |
+| Name            | Required             | Type     | Default | Description                                               |
+|--               | :------------------: | -------  | --      |                                                         --|
+| `plotdata`      | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
+| `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
+| `radial-margin` |                      | `Number  | `70`    | margin (in pixels) between the text label and edge of svg |
 
 #### Events Emitted
 
@@ -83,16 +83,16 @@ statistic associated with the area.
 
 #### Props
 
-| Name          | Required           | Type      | Default                                      | Description                                                                                      |
-|--             | ------------------ | -------   | -------------------------------------------- |                                                                                                --|
-| `geographies` | :heavy_check_mark: | `Object`  |                                              | [GeoJSON](https://geojson.org/) definition of the geographical regions to be outlined in the map |
-| `map-data`    | :heavy_check_mark: | `Object`  |                                              | Object mapping geography codes to values                                                         |
-| `center`      | :heavy_check_mark: | `Array`   | `[38, -95.1]`                                | Two-dimensional Array containing the latitude and longitude of the center of the map display     |
-| `zoom`        |                    | `Number`  | `5`                                          | Number between 3 and 10 specifying the default zoom level                                        |
-| `colors`      |                    | `String`  | `Blues`                                      | [Color Brewer](https://colorbrewer2.org) color scheme name                                       |
-| `num-classes` |                    | `Number`  | `5`                                          | The number of different colors in the color scale                                                |
-| `tile-url`    |                    | `String`  | ArcGIS Light Grey Tiles                      | URL of the desired Leaflet tile layer                                                            |
-| `hide-legend` |                    | `Boolean` | `false                                       | Hides the legend in the lower right corner                                                       |                                                  |
+| Name          | Required             | Type      | Default                                      | Description                                                                                      |
+|--             | :------------------: | -------   | -------------------------------------------- |                                                                                                --|
+| `geographies` | :heavy_check_mark:   | `Object`  |                                              | [GeoJSON](https://geojson.org/) definition of the geographical regions to be outlined in the map |
+| `map-data`    | :heavy_check_mark:   | `Object`  |                                              | Object mapping geography codes to values                                                         |
+| `center`      | :heavy_check_mark:   | `Array`   | `[38, -95.1]`                                | Two-dimensional Array containing the latitude and longitude of the center of the map display     |
+| `zoom`        |                      | `Number`  | `5`                                          | Number between 3 and 10 specifying the default zoom level                                        |
+| `colors`      |                      | `String`  | `Blues`                                      | [Color Brewer](https://colorbrewer2.org) color scheme name                                       |
+| `num-classes` |                      | `Number`  | `5`                                          | The number of different colors in the color scale                                                |
+| `tile-url`    |                      | `String`  | ArcGIS Light Grey Tiles                      | URL of the desired Leaflet tile layer                                                            |
+| `hide-legend` |                      | `Boolean` | `false                                       | Hides the legend in the lower right corner                                                       |                                             |
 
 ## Additional useful components
 
