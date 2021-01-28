@@ -42,8 +42,6 @@ Grouped bar charts are useful in comparing values together in and between groups
 
 ### Choropleth
 
-#### Overview
-
 [Leaflet](https://leafletjs.com/) is an open-source JavaScript library for creating interactive maps. One common
 visualization that leverages Leaflet is a choropleth, which involves coloring different geographic areas based on some
 statistic associated with the area.
@@ -89,12 +87,12 @@ statistic associated with the area.
 |--             | ------------------ | -------   | -------------------------------------------- |                                                                                                --|
 | `geographies` | :heavy_check_mark: | `Object`  |                                              | [GeoJSON](https://geojson.org/) definition of the geographical regions to be outlined in the map |
 | `map-data`    | :heavy_check_mark: | `Object`  |                                              | Object mapping geography codes to values                                                         |
-| `center`      | :heavy_check_mark: | `Array`   |                                              | Two-dimensional Array containing the latitude and longitude of the center of the map display     |
+| `center`      | :heavy_check_mark: | `Array`   | `[38, -95.1]`                                | Two-dimensional Array containing the latitude and longitude of the center of the map display     |
 | `zoom`        |                    | `Number`  | `5`                                          | Number between 3 and 10 specifying the default zoom level                                        |
 | `colors`      |                    | `String`  | `Blues`                                      | [Color Brewer](https://colorbrewer2.org) color scheme name                                       |
 | `num-classes` |                    | `Number`  | `5`                                          | The number of different colors in the color scale                                                |
 | `tile-url`    |                    | `String`  | ArcGIS Light Grey Tiles                      | URL of the desired Leaflet tile layer                                                            |
-| `hide-legend` |                    | `Boolean` | `false                                       | Hides the legend in the lower right corner                                                       |                                                        |
+| `hide-legend` |                    | `Boolean` | `false                                       | Hides the legend in the lower right corner                                                       |                                                  |
 
 ## Additional useful components
 
