@@ -2,7 +2,7 @@
     <div>
         <component :is="chartSelected.type" :plotdata="chartSelected.data"
                    :width="chartSelected.width" :height="chartSelected.height"
-                   :radial-margin="100"
+                   :radial-margin="140"
                    :colors="['#F8CBAD', '#C5E0B4', '#BDD7EE', '#D5B8EA']">
         </component>
     </div>
