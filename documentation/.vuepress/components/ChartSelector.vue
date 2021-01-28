@@ -39,7 +39,7 @@ export default {
                     type: 'GroupedBarChart',
                     data: this.GroupedBarChartData,
                     width: 550,
-                    height: 400,
+                    height: 350,
                 }
             }
             return 1

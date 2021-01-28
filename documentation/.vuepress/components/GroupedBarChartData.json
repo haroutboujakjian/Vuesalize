@@ -1,7 +1,7 @@
 [
   {
-    "MeetingDate": "3/13",
-    "values": {
+    "x": "3/13",
+    "group": {
       "PlannedMembers": 6,
       "Attendees": 7,
       "Guest": 3,
@@ -9,8 +9,8 @@
     }
   },
   {
-    "MeetingDate": "3/18",
-    "values": {
+    "x": "3/18",
+    "group": {
       "PlannedMembers": 4,
       "Attendees": 9,
       "Guest": 0,
@@ -18,8 +18,8 @@
     }
   },
   {
-    "MeetingDate": "3/27",
-    "values": {
+    "x": "3/27",
+    "group": {
       "PlannedMembers": 12,
       "Attendees": 7,
       "Guest": 1,
@@ -27,17 +27,17 @@
     }
   },
   {
-    "MeetingDate": "3/31",
-    "values": {
-      "PlannedMembers": 14,
+    "x": "3/31",
+    "group": {
+      "PlannedMembers": 10,
       "Attendees": 10,
       "Guest": 2,
       "Proxy": 3
     }
   },
   {
-    "MeetingDate": "4/6",
-    "values": {
+    "x": "4/6",
+    "group": {
       "PlannedMembers": 6,
       "Attendees": 2,
       "Guest": 1,
@@ -45,39 +45,21 @@
     }
   },
   {
-    "MeetingDate": "4/9",
-    "values": {
-      "PlannedMembers": 16,
+    "x": "4/9",
+    "group": {
+      "PlannedMembers": 13,
       "Attendees": 3,
-      "Guest": 1,
-      "Proxy": 1
-    }
-  },
-  {
-    "MeetingDate": "4/13",
-    "values": {
-      "PlannedMembers": 16,
-      "Attendees": 3,
-      "Guest": 0,
-      "Proxy": 1
-    }
-  },
-  {
-    "MeetingDate": "4/24",
-    "values": {
-      "PlannedMembers": 12,
-      "Attendees": 3,
-      "Guest": 0,
-      "Proxy": 0
-    }
-  },
-  {
-    "MeetingDate": "5/26",
-    "values": {
-      "PlannedMembers": 10,
-      "Attendees": 4,
       "Guest": 4,
-      "Proxy": 2
+      "Proxy": 1
+    }
+  },
+  {
+    "x": "4/13",
+    "group": {
+      "PlannedMembers": 9,
+      "Attendees": 3,
+      "Guest": 0,
+      "Proxy": 1
     }
   }
 ]

@@ -27,43 +27,46 @@ Grouped bar charts are useful in comparing values together in and between groups
 
 ### Scatter Plot
 
+### Network
+
 ### Choropleth
 
 #### Overview
 
-[Leaflet](https://leafletjs.com/) is an open-source JavaScript library for creating interactive maps. One common 
-visualization that leverages Leaflet is a choropleth, which involves coloring different geographic areas based on 
-some statistic associated with the area.
+[Leaflet](https://leafletjs.com/) is an open-source JavaScript library for creating interactive maps. One common
+visualization that leverages Leaflet is a choropleth, which involves coloring different geographic areas based on some
+statistic associated with the area.
 
 #### Example
 
 ```html
+
 <template>
-  <choropleth
-    :geographies="geographies"
-    :map-data="{ VA: 100, MD: 150, DC: 200 }"
-    :center="[37.43, -78.66]"
-    :zoom="6"
-    :colors="'Greens'"
-    :num-classes="3"
-  ></choropleth>
+    <choropleth
+            :geographies="geographies"
+            :map-data="{ VA: 100, MD: 150, DC: 200 }"
+            :center="[37.43, -78.66]"
+            :zoom="6"
+            :colors="'Greens'"
+            :num-classes="3"
+    ></choropleth>
 </template>
 
 <script>
-import Choropleth from "./Choropleth";
-import stateGeographies from "./state-geographies.json";
+    import Choropleth from "./Choropleth";
+    import stateGeographies from "./state-geographies.json";
 
-export default {
-  name: "ChoroplethExample",
-  components: {
-    Choropleth
-  },
-  data() {
-    return {
-      geographies: stateGeographies
+    export default {
+        name: "ChoroplethExample",
+        components: {
+            Choropleth
+        },
+        data() {
+            return {
+                geographies: stateGeographies
+            };
+        }
     };
-  }
-};
 </script>
 ```
 
@@ -71,7 +74,8 @@ export default {
 
 #### Properties
 
-* `geographies` (required): [GeoJSON](https://geojson.org/) definition of the geographical regions to be outlined in the map
+* `geographies` (required): [GeoJSON](https://geojson.org/) definition of the geographical regions to be outlined in the
+  map
 * `map-data` (required): Object mapping geography codes to values
 * `center`: Array containing the latitude and longitude of the center of the map display
 * `zoom`: Number between 3 and 10 specifying the default zoom level
