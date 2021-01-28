@@ -45,9 +45,6 @@ import HEBdata from "./HierarchicalEdgeBundlingData.json"
 export default {
     name: "HierarchicalEdgeBundlingExample",
     components: {HierarchicalEdgeBundling},
-    component: {
-        HierarchicalEdgeBundling
-    },
     data() {
         return {
             plotdata: HEBdata
