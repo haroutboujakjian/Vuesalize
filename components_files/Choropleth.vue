@@ -8,17 +8,17 @@
                   style="margin-bottom: 25px;"
                   v-if="min + 1 !== max"
           >
-            <div v-for="index in numColors" :key="index">
+            <div v-for="index in numClasses" :key="index">
               <i
                       v-bind:style="{
                   background: colorScale[index - 1]
                 }"
               ></i>
               {{
-              Math.floor(min + ((index - 1) * (max - min)) / numColors) + 1
+              Math.floor(min + ((index - 1) * (max - min)) / numClasses) + 1
               }}
               -
-              {{ Math.floor(min + (index * (max - min)) / numColors) }}
+              {{ Math.floor(min + (index * (max - min)) / numClasses) }}
             </div>
           </div>
           <div
@@ -28,7 +28,7 @@
           >
             <i
                     v-bind:style="{
-                background: colorScale[numColors - 1]
+                background: colorScale[numClasses - 1]
               }"
             ></i>
             {{ max }}
@@ -58,12 +58,16 @@
     props: {
       geographies: { type: Object, require: true },
       mapData: { type: Object, required: true },
-      colors: String, // colorbrewer scale
-      numClasses: Number,
-      hideLegend: Boolean,
-      center: Array,
-      tileURL: String,
-      zoom: Number
+      colors: { type: String, default: "Blues" }, // colorbrewer scale
+      numClasses: { type: Number, default: 5 },
+      hideLegend: { type: Boolean, default: false },
+      center: { type: Array, default: [38, -95.1] },
+      tileURL: {
+        type: String,
+        default:
+                "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+      },
+      zoom: { type: Number, default: 5 }
     },
     data() {
       return {
@@ -73,13 +77,8 @@
       };
     },
     computed: {
-      numColors() {
-        return this.numClasses ? this.numClasses : 5;
-      },
       colorScale() {
-        return (this.colors
-                ? colorbrewer[this.colors][this.numColors + 1]
-                : colorbrewer.Blues[this.numColors + 1]).slice(1);
+        return colorbrewer[this.colors][this.numClasses + 1].slice(1);
       },
       min() {
         return min(Object.keys(this.mapData), d => this.mapData[d]) - 1;
@@ -100,15 +99,13 @@
 
       // create map and add state layer
       self.map = L.map("mapContainer", {
-        center: self.center ? self.center : [38, -95.1],
-        zoom: self.zoom ? self.zoom : 5,
+        center: self.center,
+        zoom: self.zoom,
         zoomControl: false,
         maxZoom: 10,
         minZoom: 3
       });
-      L.tileLayer(self.tileURL ? self.tileURL :
-              "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
-      ).addTo(self.map);
+      L.tileLayer(self.tileURL).addTo(self.map);
 
       self.geographiesLayer = L.geoJson(self.geographies, {
         onEachFeature: function(feature, layer) {
@@ -135,10 +132,10 @@
     },
     methods: {
       getColor(state) {
-        for (let i = 0; i < this.numColors; i++) {
+        for (let i = 0; i < this.numClasses; i++) {
           if (
                   this.mapData[state] <=
-                  this.min + ((i + 1) * (this.max - this.min)) / this.numColors
+                  this.min + ((i + 1) * (this.max - this.min)) / this.numClasses
           )
             return i;
         }
@@ -205,5 +202,4 @@
     position: absolute;
     background: rgba(255, 255, 255, 0.9);
   }
-
 </style>
