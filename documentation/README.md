@@ -15,6 +15,17 @@ found [here](./rationale.md)
 
 <chart-selector :chart="'HierarchicalEdgeBundling'"></chart-selector>
 
+#### Props
+
+| Name          | Required           | Default |                                 Descripition |
+|---------------|:------------------:|:-------:|----------------------------------------------|
+|`plotdata`     | :heavy_check_mark: |         | data necessary to create the chart
+|`width`        | :heavy_check_mark: |         | chart width
+|`height`       | :heavy_check_mark: |         | chart height
+|`radial-margin`|                    |    70px |  margin between the text label and edge of svg
+
+#### Events Emitted
+
 ### Grouped Bar Chart
 
 Grouped bar charts are useful in comparing values together in and between groups. (Fix x axis)

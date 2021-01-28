@@ -38,7 +38,10 @@ export default {
         plotdata: {type: Array, required: true},
         width: Number,
         height: Number,
-        radialMargin: Number,
+        radialMargin: {
+            type: Number,
+            default: 70
+        },
         clickedNode: Object
     },
     data() {

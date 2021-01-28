@@ -44,7 +44,7 @@
   },
   {
     "name": "root|Indicator|Find Source 2",
-    "color": "#red",
+    "color": "red",
     "imports": [
       "root|Outcome|Complete Outcome 1",
       "root|Indicator|Fill Out Paperwork"
