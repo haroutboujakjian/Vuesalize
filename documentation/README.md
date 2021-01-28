@@ -92,7 +92,7 @@ statistic associated with the area.
 | `colors`      |                      | `String`  | `Blues`                                      | [Color Brewer](https://colorbrewer2.org) color scheme name                                       |
 | `num-classes` |                      | `Number`  | `5`                                          | The number of different colors in the color scale                                                |
 | `tile-url`    |                      | `String`  | ArcGIS Light Grey Tiles                      | URL of the desired Leaflet tile layer                                                            |
-| `hide-legend` |                      | `Boolean` | `false                                       | Hides the legend in the lower right corner                                                       |                                             |
+| `hide-legend` |                      | `Boolean` | `false`                                      | Hides the legend in the lower right corner                                                       |                                             |
 
 ## Additional useful components
 
