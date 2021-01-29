@@ -1,5 +1,9 @@
 # Directory of Components
 
+## Installation
+
+## Introduction
+
 This directory contains chart components and other basic components used in building interactive visualizations on the
 web. The charts are built using a combination of [Vue.js](https://vuejs.org/v2/guide/) and [D3.js](https://d3js.org/).
 The main rationale for this approach is to move the SVG definitions to the template (HTML) and let Vue actually control
