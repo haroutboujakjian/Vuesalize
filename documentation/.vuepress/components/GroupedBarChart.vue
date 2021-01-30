@@ -5,14 +5,14 @@
                v-for="(item, id) in plotdata"
                :key="id"
                :transform="`translate(${scale.x(id)}, 0)`">
-                <rect v-for="(value, vid) in Object.keys(item.group)"
+                <rect v-for="(value, vid) in Object.keys(item.y)"
                       :key="vid"
                       :x="scale.xsubgroup(value)"
-                      :y="scale.y(item.group[value])"
-                      :height="height - scale.y(item.group[value])- margin.bottom"
+                      :y="scale.y(item.y[value])"
+                      :height="height - scale.y(item.y[value])- margin.bottom"
                       :width="scale.xsubgroup.bandwidth()"
                       :fill="color(value)">
-                    <title>{{ item.group[value]}}</title>
+                    <title>{{ item.y[value]}}</title>
                 </rect>
             </g>
         </g>
@@ -58,7 +58,7 @@ export default {
             return `translate(${this.margin.left}, 0)`;
         },
         groupKeys() {
-            return this.plotdata.length > 0 ? Object.keys(this.plotdata[0].group) : ''
+            return this.plotdata.length > 0 ? Object.keys(this.plotdata[0].y) : ''
         },
         color() {
             return scaleOrdinal().range(this.colors)
@@ -83,7 +83,7 @@ export default {
 
     methods: {
         getMax(array) {
-            return max(array.map(item => max(Object.values(item.group))))
+            return max(array.map(item => max(Object.values(item.y))))
         }
     },
 

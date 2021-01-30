@@ -1,7 +1,7 @@
 [
   {
     "x": "3/13",
-    "group": {
+    "y": {
       "PlannedMembers": 6,
       "Attendees": 7,
       "Guest": 3,
@@ -10,56 +10,38 @@
   },
   {
     "x": "3/18",
-    "group": {
+    "y": {
       "PlannedMembers": 4,
       "Attendees": 9,
-      "Guest": 0,
+      "Guest": 6,
       "Proxy": 1
     }
   },
   {
     "x": "3/27",
-    "group": {
+    "y": {
       "PlannedMembers": 12,
       "Attendees": 7,
-      "Guest": 1,
+      "Guest": 5,
       "Proxy": 0
     }
   },
   {
     "x": "3/31",
-    "group": {
+    "y": {
       "PlannedMembers": 10,
       "Attendees": 10,
-      "Guest": 2,
+      "Guest": 6,
       "Proxy": 3
     }
   },
   {
     "x": "4/6",
-    "group": {
+    "y": {
       "PlannedMembers": 6,
       "Attendees": 2,
-      "Guest": 1,
+      "Guest": 3,
       "Proxy": 4
-    }
-  },
-  {
-    "x": "4/9",
-    "group": {
-      "PlannedMembers": 13,
-      "Attendees": 3,
-      "Guest": 4,
-      "Proxy": 1
-    }
-  },
-  {
-    "x": "4/13",
-    "group": {
-      "PlannedMembers": 9,
-      "Attendees": 3,
-      "Guest": 0,
-      "Proxy": 1
     }
   }
 ]

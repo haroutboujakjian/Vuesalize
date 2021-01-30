@@ -68,21 +68,99 @@ Grouped bar charts are useful in comparing values together in and between groups
 
 #### Props
 
-| Name            | Required             | Type     | Default | Description                                               |
-|--               | :------------------: | -------  | --      |                                                         --|
-| `plotdata`      | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
-| `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
-| `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
-| `colors`        |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
+| Name         | Required             | Type     | Default | Description                                               |
+|--            | :------------------: | -------  | --      |                                                         --|
+| `plotdata`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
+| `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
+| `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
 
 #### Events Emitted
+
+#### Format of Data
+
+In order for the grouped bar chart to render properly, `plotdata` needs to be as an array of objects that with two keys:
+"x" and "y". The y key is an object of values for each group. Here is a simple example
+
+```json
+[
+  {
+    "x": "3/13",
+    "y": {
+      "value1": 6,
+      "value2": 7,
+      "value3": 3,
+    }
+  },
+  {
+    "x": "3/18",
+    "y": {
+      "value1": 4,
+      "value2": 9,
+      "value3": 6,
+    }
+  }
+]
+```
+
+The data that populates the example grouped bar chart
+
+```json
+[
+  {
+    "x": "3/13",
+    "y": {
+      "PlannedMembers": 6,
+      "Attendees": 7,
+      "Guest": 3,
+      "Proxy": 5
+    }
+  },
+  {
+    "x": "3/18",
+    "y": {
+      "PlannedMembers": 4,
+      "Attendees": 9,
+      "Guest": 6,
+      "Proxy": 1
+    }
+  },
+  {
+    "x": "3/27",
+    "y": {
+      "PlannedMembers": 12,
+      "Attendees": 7,
+      "Guest": 5,
+      "Proxy": 0
+    }
+  },
+  {
+    "x": "3/31",
+    "y": {
+      "PlannedMembers": 10,
+      "Attendees": 10,
+      "Guest": 6,
+      "Proxy": 3
+    }
+  },
+  {
+    "x": "4/6",
+    "y": {
+      "PlannedMembers": 6,
+      "Attendees": 2,
+      "Guest": 3,
+      "Proxy": 4
+    }
+  }
+]
+```
 
 #### Example
 
 ```html
 <template>
     <GroupedBarChart :plotdata="plotdata"
-                     :width="500"
+                     :width="450"
                      :height="300"
                      :colors="['#F8CBAD', '#C5E0B4', '#BDD7EE', '#D5B8EA']">
     </GroupedBarChart>
