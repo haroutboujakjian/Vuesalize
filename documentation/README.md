@@ -131,7 +131,7 @@ The data that populates the example grouped bar chart
       "PlannedMembers": 12,
       "Attendees": 7,
       "Guest": 5,
-      "Proxy": 0
+      "Proxy": 3
     }
   },
   {
@@ -259,11 +259,44 @@ legend like the one below.
 ```json
 {
   "first": "black",
-  "second": "blue"
+  "second": "blue",
+  "third": "red"
 }
 ```
 
-<base-legend v-bind:legend-data="{'first': 'black', 'second': 'blue'}"></base-legend>
+<div style="display: flex; justify-content: center">
+<base-legend style="line-height: 1.3" :legend-data="{'first': 'black', 'second': 'blue', 'third': 'red'}">
+</base-legend>
+</div>
+
+#### Example
+
+```html
+<template>
+    <BaseLegend :legend-data="legendData"></BaseLegend>
+</template>
+
+<script>
+import BaseLegend from "./BaseLegend";
+
+export default {
+    name: "BaseLegendExample",
+    components: {
+        BaseLegend
+    },
+    data() {
+        return {
+            legendData: {
+                "first": "black",
+                "second": "blue",
+                "third": "red"
+            }
+        }
+    }
+}
+</script>
+```
+
 
 ### Loading Spinner
 
