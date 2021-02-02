@@ -264,12 +264,10 @@ legend like the one below.
 }
 ```
 
-<div style="display: flex; justify-content: center">
-<base-legend style="line-height: 1.3" :legend-data="{'first': 'black', 'second': 'blue', 'third': 'red'}">
-</base-legend>
-</div>
 
 #### Example
+
+Here is an example that shows how to use a simple legend component.
 
 ```html
 <template>
@@ -296,6 +294,11 @@ export default {
 }
 </script>
 ```
+
+<div style="display: flex; justify-content: center">
+<base-legend style="line-height: 1.3" :legend-data="{'first': 'black', 'second': 'blue', 'third': 'red'}">
+</base-legend>
+</div>
 
 
 ### Loading Spinner
