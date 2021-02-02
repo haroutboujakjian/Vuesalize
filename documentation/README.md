@@ -29,6 +29,7 @@ found [here](./rationale.md)
 | `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
 | `radial-margin` |                      | `Number` | 70      | margin (in pixels) between the text label and edge of svg |
+|`highlightEvent`|                    | `String`  | 'click'| Event that hightlights connections and has two options: 'click' or 'mouseover'|
 
 #### Events Emitted
 
