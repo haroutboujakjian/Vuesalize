@@ -14,7 +14,8 @@
                class="label"
                :class="{incomingLabel: label.incoming, outgoingLabel: label.outgoing}"
                :style="`fill: ${label.color}`" :transform="label.gtransform"
-               @click="clickName(label.name, label.type)">
+               @[highlightEvent]="clickName(label.name, label.type)"
+               @mouseout="highlightEvent === 'mouseover' ? clickName(label.name, label.type) : null">
                 <text :x="label.x" dy="0.31em"
                       :transform="label.texttransform" :text-anchor="label.textAnchor">
                     {{ label.name }}
@@ -41,6 +42,10 @@ export default {
         radialMargin: {
             type: Number,
             default: 70
+        },
+        highlightEvent: {
+            type: String,
+            default: 'click',
         },
         clickedNode: Object
     },

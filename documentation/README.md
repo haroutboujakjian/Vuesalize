@@ -1,5 +1,9 @@
 # Directory of Components
 
+## Installation
+
+## Introduction
+
 This directory contains chart components and other basic components used in building interactive visualizations on the
 web. The charts are built using a combination of [Vue.js](https://vuejs.org/v2/guide/) and [D3.js](https://d3js.org/).
 The main rationale for this approach is to move the SVG definitions to the template (HTML) and let Vue actually control
@@ -25,6 +29,7 @@ found [here](./rationale.md)
 | `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
 | `radial-margin` |                      | `Number` | 70      | margin (in pixels) between the text label and edge of svg |
+|`highlight-event`|                    | `String`  | 'click'| Event that hightlights connections and has two options: 'click' or 'mouseover'|
 
 #### Events Emitted
 
@@ -56,7 +61,7 @@ export default {
 
 ### Grouped Bar Chart
 
-Grouped bar charts are useful in comparing values together in and between groups. (Fix x axis)
+Grouped bar charts are useful in comparing values together in and between groups.
 
 <div style="display: flex; justify-content: center">
     <grouped-bar-chart-example></grouped-bar-chart-example>
@@ -64,16 +69,124 @@ Grouped bar charts are useful in comparing values together in and between groups
 
 #### Props
 
-| Name            | Required             | Type     | Default | Description                                               |
-|--               | :------------------: | -------  | --      |                                                         --|
-| `plotdata`      | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
-| `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
-| `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
-| `colors`        |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
+| Name         | Required             | Type     | Default | Description                                               |
+|--            | :------------------: | -------  | --      |                                                         --|
+| `plotdata`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
+| `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
+| `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
 
 #### Events Emitted
 
+#### Format of Data
+
+In order for the grouped bar chart to render properly, `plotdata` needs to be as an array of objects that with two keys:
+"x" and "y". The y key is an object of values for each group. Here is a simple example
+
+```json
+[
+  {
+    "x": "3/13",
+    "y": {
+      "value1": 6,
+      "value2": 7,
+      "value3": 3,
+    }
+  },
+  {
+    "x": "3/18",
+    "y": {
+      "value1": 4,
+      "value2": 9,
+      "value3": 6,
+    }
+  }
+]
+```
+
+The data that populates the example grouped bar chart
+
+```json
+[
+  {
+    "x": "3/13",
+    "y": {
+      "PlannedMembers": 6,
+      "Attendees": 7,
+      "Guest": 3,
+      "Proxy": 5
+    }
+  },
+  {
+    "x": "3/18",
+    "y": {
+      "PlannedMembers": 4,
+      "Attendees": 9,
+      "Guest": 6,
+      "Proxy": 1
+    }
+  },
+  {
+    "x": "3/27",
+    "y": {
+      "PlannedMembers": 12,
+      "Attendees": 7,
+      "Guest": 5,
+      "Proxy": 3
+    }
+  },
+  {
+    "x": "3/31",
+    "y": {
+      "PlannedMembers": 10,
+      "Attendees": 10,
+      "Guest": 6,
+      "Proxy": 3
+    }
+  },
+  {
+    "x": "4/6",
+    "y": {
+      "PlannedMembers": 6,
+      "Attendees": 2,
+      "Guest": 3,
+      "Proxy": 4
+    }
+  }
+]
+```
+
 #### Example
+
+```html
+<template>
+    <GroupedBarChart :plotdata="plotdata"
+                     :width="450"
+                     :height="300"
+                     :colors="['#F8CBAD', '#C5E0B4', '#BDD7EE', '#D5B8EA']">
+    </GroupedBarChart>
+</template>
+
+<script>
+import GroupedBarChart from "./GroupedBarChart";
+import GBCdata from "./GroupedBarChartData.json"
+
+export default {
+    name: "GroupedBarChartExample",
+    components: {
+        GroupedBarChart
+    },
+    data() {
+        return {
+            plotdata: GBCdata
+        }
+    }
+}
+</script>
+
+<style scoped>
+</style>
+```
 
 ### Stacked Bar Chart
 
@@ -147,11 +260,47 @@ legend like the one below.
 ```json
 {
   "first": "black",
-  "second": "blue"
+  "second": "blue",
+  "third": "red"
 }
 ```
 
-<base-legend v-bind:legend-data="{'first': 'black', 'second': 'blue'}"></base-legend>
+
+#### Example
+
+Here is an example that shows how to use a simple legend component.
+
+```html
+<template>
+    <BaseLegend :legend-data="legendData"></BaseLegend>
+</template>
+
+<script>
+import BaseLegend from "./BaseLegend";
+
+export default {
+    name: "BaseLegendExample",
+    components: {
+        BaseLegend
+    },
+    data() {
+        return {
+            legendData: {
+                "first": "black",
+                "second": "blue",
+                "third": "red"
+            }
+        }
+    }
+}
+</script>
+```
+
+<div style="display: flex; justify-content: center">
+<base-legend style="line-height: 1.3" :legend-data="{'first': 'black', 'second': 'blue', 'third': 'red'}">
+</base-legend>
+</div>
+
 
 ### Loading Spinner
 
