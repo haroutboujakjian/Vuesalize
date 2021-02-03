@@ -61,7 +61,7 @@ export default {
     colors: { type: String, default: "Blues" }, // colorbrewer scale
     numClasses: { type: Number, default: 5 },
     hideLegend: { type: Boolean, default: false },
-    center: { type: Array, default: [38, -95.1] },
+    center: { type: Array, default: [39.8283, -98.5795] },
     tileURL: {
       type: String,
       default:
