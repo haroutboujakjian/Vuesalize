@@ -29,7 +29,7 @@ found [here](./rationale.md)
 | `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
 | `radial-margin` |                      | `Number` | 70      | margin (in pixels) between the text label and edge of svg |
-|`highlight-event`|                    | `String`  | 'click'| Event that hightlights connections and has two options: 'click' or 'mouseover'|
+|`highlight-event`|                      | `String` | 'click' | Event that hightlights connections and has two options: 'click' or 'mouseover'|
 
 #### Events Emitted
 
@@ -190,6 +190,8 @@ export default {
 
 ### Stacked Bar Chart
 
+### Stacked Area Chart
+
 ### Donut Chart
 
 ### Scatter Plot
@@ -268,11 +270,18 @@ legend like the one below.
 
 #### Example
 
-Here is an example that shows how to use a simple legend component.
+Here is an example that shows how to use a simple legend component in both the vertical and horizontal alignments.
 
 ```html
 <template>
-    <BaseLegend :legend-data="legendData"></BaseLegend>
+    <div>
+        <p>Horiztonal</p>
+        <BaseLegend :legend-data="legendData" :alignment="'horizontal'">
+        </BaseLegend>
+        <p>Vertical</p>
+        <BaseLegend :legend-data="legendData" :alignment="'vertical'">
+        </BaseLegend>
+    </div>
 </template>
 
 <script>
@@ -296,10 +305,15 @@ export default {
 </script>
 ```
 
-<div style="display: flex; justify-content: center">
-<base-legend style="line-height: 1.3" :legend-data="{'first': 'black', 'second': 'blue', 'third': 'red'}">
-</base-legend>
-</div>
+<base-legend-example></base-legend-example>
+
+#### Props
+| Name         | Required             | Type     | Default     | Description                                            |
+|--            | :------------------: | -------  | --          |                                                      --|
+| `legend-data`| :heavy_check_mark:   | `Object` |             | data necessary to create the legend                    |
+| `alignment`  |                      | `String` | 'horizontal'| Two options for alignment: 'vertical' or 'horizontal'  |
+
+
 
 
 ### Loading Spinner

@@ -1,5 +1,10 @@
 <template>
-    <BaseLegend :legend-data="legendData"></BaseLegend>
+    <div>
+        <p>Horiztonal</p>
+        <BaseLegend :legend-data="legendData" :alignment="'horizontal'"></BaseLegend>
+        <p>Vertical</p>
+        <BaseLegend :legend-data="legendData" :alignment="'vertical'"></BaseLegend>
+    </div>
 </template>
 
 <script>
