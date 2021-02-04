@@ -2,6 +2,8 @@
 
 ## Installation
 
+Coming soon...
+
 ## Introduction
 
 This directory contains chart components and other basic components used in building interactive visualizations on the
@@ -17,23 +19,9 @@ found [here](./rationale.md)
 
 ### Hierarchical Edge Bundling
 
-<div style="display: flex; justify-content: center">
-    <hierarchical-edge-bundling-example></hierarchical-edge-bundling-example>
-</div>
-
-#### Props
-
-| Name            | Required             | Type     | Default | Description                                               |
-|--               | :------------------: | -------  | --      |                                                         --|
-| `plotdata`      | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
-| `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
-| `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
-| `radial-margin` |                      | `Number` | 70      | margin (in pixels) between the text label and edge of svg |
-|`highlight-event`|                      | `String` | 'click' | Event that hightlights connections and has two options: 'click' or 'mouseover'|
-
-#### Events Emitted
-
 #### Example
+
+The code below constructs the hierarchical edge bundling plot below it.
 
 ```html
 <template>
@@ -58,6 +46,24 @@ export default {
 }
 </script>
 ```
+
+<div style="display: flex; justify-content: center">
+    <hierarchical-edge-bundling-example></hierarchical-edge-bundling-example>
+</div>
+
+#### Props
+
+| Name            | Required             | Type     | Default | Description                                               |
+|--               | :------------------: | -------  | --      |                                                         --|
+| `plotdata`      | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
+| `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
+| `radial-margin` |                      | `Number` | 70      | margin (in pixels) between the text label and edge of svg |
+|`highlight-event`|                      | `String` | 'click' | Event that hightlights connections for a specific node and has two options: 'click' or 'mouseover'|
+
+#### Events Emitted
+
+
 
 ### Grouped Bar Chart
 
@@ -190,13 +196,105 @@ export default {
 
 ### Stacked Bar Chart
 
+Occassionally, it's easier to compare groups by stacking them in one bar. Here is a simple example that constructs a 
+stacked bar chart
+
+```html
+<template>
+    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
+                     :margin="margin" :x_key="'date'"
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
+    </StackedBarChart>
+</template>
+
+<script>
+import StackedBarChart from "./StackedBarChart";
+import SBCdata from './StackedBarChartData.json'
+
+export default {
+    name: "StackedBarChartExample",
+    components: {
+        StackedBarChart
+    },
+    data() {
+        return {
+            plotData: SBCdata,
+            margin: {top: 20, bottom: 20, left: 40, right: 20}
+        }
+    }
+}
+</script>
+```
+
+<div style="display: flex; justify-content: center">
+<stacked-bar-chart-example></stacked-bar-chart-example>
+</div>
+
+And this is the data that generates the graph above.
+
+```json
+[
+  {
+    "date": "2019",
+    "Veteran's Benefit Administration": 5921,
+    "Veteran's Health Administration": 1026,
+    "National Cemetery Administration": 2324
+  },
+  {
+    "date": "2020",
+    "Veteran's Benefit Administration": 1539,
+    "Veteran's Health Administration": 1560,
+    "National Cemetery Administration": 1257
+  },
+  {
+    "date": "2021",
+    "Veteran's Benefit Administration": 2457,
+    "Veteran's Health Administration": 2784,
+    "National Cemetery Administration": 1438
+  },
+  {
+    "date": "2022",
+    "Veteran's Benefit Administration": 4980,
+    "Veteran's Health Administration": 1332,
+    "National Cemetery Administration": 3200
+  },
+    {
+    "date": "2023",
+    "Veteran's Benefit Administration": 3980,
+    "Veteran's Health Administration": 2332,
+    "National Cemetery Administration": 3100
+  }
+]
+```
+
+#### Props
+
+| Name         | Required             | Type     | Default | Description                                               |
+|--            | :------------------: | -------  | --      |                                                         --|
+| `plotdata`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `x_key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
+| `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
+| `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
+| `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group|
+| `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
+
+#### Events Emitted
+
 ### Stacked Area Chart
+
+Under construction...
 
 ### Donut Chart
 
+Under construction...
+
 ### Scatter Plot
 
+Under construction...
+
 ### Network
+
+Under construction...
 
 ### Choropleth
 

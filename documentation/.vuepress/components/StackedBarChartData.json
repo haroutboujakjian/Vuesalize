@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2019",
+    "Veteran's Benefit Administration": 5921,
+    "Veteran's Health Administration": 1026,
+    "National Cemetery Administration": 2324
+  },
+  {
+    "date": "2020",
+    "Veteran's Benefit Administration": 1539,
+    "Veteran's Health Administration": 1560,
+    "National Cemetery Administration": 1257
+  },
+  {
+    "date": "2021",
+    "Veteran's Benefit Administration": 2457,
+    "Veteran's Health Administration": 2784,
+    "National Cemetery Administration": 1438
+  },
+  {
+    "date": "2022",
+    "Veteran's Benefit Administration": 4980,
+    "Veteran's Health Administration": 1332,
+    "National Cemetery Administration": 3200
+  },
+    {
+    "date": "2023",
+    "Veteran's Benefit Administration": 3980,
+    "Veteran's Health Administration": 2332,
+    "National Cemetery Administration": 3100
+  }
+]
