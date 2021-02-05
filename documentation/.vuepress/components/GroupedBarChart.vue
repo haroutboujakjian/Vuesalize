@@ -19,7 +19,7 @@
 
 <script>
 import {scaleBand, scaleLinear, scaleOrdinal} from 'd3-scale';
-import {max, range} from 'd3-array';
+import {max} from 'd3-array';
 import {select} from 'd3-selection';
 import {axisLeft, axisBottom} from 'd3-axis';
 
@@ -96,10 +96,9 @@ export default {
     },
 
     directives: {
-        xaxis(el, binding, vnode) {
+        xaxis(el, binding) {
             const scale = binding.value.scale
             const tickLabels = binding.value.tickLabels
-            console.log(tickLabels)
             select(el).call(axisBottom(scale).tickValues(tickLabels))
         },
         yaxis(el, binding) {
