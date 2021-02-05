@@ -43,7 +43,6 @@ export default {
                     left: 20,
                     right: 20
                 }
-
             }
         }
     },
