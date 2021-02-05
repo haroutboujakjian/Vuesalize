@@ -74,6 +74,7 @@ Grouped bar charts are useful in comparing values together in and between groups
 ```html
 <template>
     <GroupedBarChart :plotdata="plotdata"
+                     :x_key="'date'"
                      :width="450"
                      :height="300"
                      :colors="['#F8CBAD', '#C5E0B4', '#BDD7EE', '#D5B8EA']">
@@ -96,9 +97,6 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-</style>
 ```
 
 <div style="display: flex; justify-content: center">
@@ -106,60 +104,49 @@ export default {
 </div>
 
 
-
 #### Format of Data
 
-In order for the grouped bar chart to render properly, `plotdata` needs to be as an array of objects with two keys:
-"x" and "y". The y key is an object of values for each group. Here is a simple example
-
-The `GroupedBarChart.json` data file that populates the example grouped bar chart
+In order for the grouped bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
+key for the x value, and all the other keys will be for y values. The `GroupedBarChart.json` data file that populates
+the example grouped bar chart has "date" for the x value, and "PlannedMembers", "Attendees", "Guest", "Proxy" for the 
+y value. Both the grouped bar chart and stacked bar chart use the same data format for input.
 
 ```json
 [
   {
-    "x": "3/13",
-    "y": {
-      "PlannedMembers": 6,
-      "Attendees": 7,
-      "Guest": 3,
-      "Proxy": 5
-    }
+    "date": "3/13",
+    "PlannedMembers": 6,
+    "Attendees": 7,
+    "Guest": 3,
+    "Proxy": 5
   },
   {
-    "x": "3/18",
-    "y": {
-      "PlannedMembers": 4,
-      "Attendees": 9,
-      "Guest": 6,
-      "Proxy": 1
-    }
+    "date": "3/18",
+    "PlannedMembers": 4,
+    "Attendees": 9,
+    "Guest": 6,
+    "Proxy": 1
   },
   {
-    "x": "3/27",
-    "y": {
-      "PlannedMembers": 12,
-      "Attendees": 7,
-      "Guest": 5,
-      "Proxy": 3
-    }
+    "date": "3/27",
+    "PlannedMembers": 12,
+    "Attendees": 7,
+    "Guest": 5,
+    "Proxy": 3
   },
   {
-    "x": "3/31",
-    "y": {
-      "PlannedMembers": 10,
-      "Attendees": 10,
-      "Guest": 6,
-      "Proxy": 3
-    }
+    "date": "3/31",
+    "PlannedMembers": 10,
+    "Attendees": 10,
+    "Guest": 6,
+    "Proxy": 3
   },
   {
-    "x": "4/6",
-    "y": {
-      "PlannedMembers": 6,
-      "Attendees": 2,
-      "Guest": 3,
-      "Proxy": 4
-    }
+    "date": "4/6",
+    "PlannedMembers": 6,
+    "Attendees": 2,
+    "Guest": 3,
+    "Proxy": 4
   }
 ]
 ```
@@ -211,7 +198,11 @@ export default {
 <stacked-bar-chart-example></stacked-bar-chart-example>
 </div>
 
-And this is the `StackedBarChart.json` data file that generates the graph above.
+In order for the grouped bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
+key for the x value, and all the other keys will be for y values. The `StackedBarChart.json` data file that populates
+the example grouped bar chart has "date" for the x value, and "Veteran's Benefit Administration",
+"Veteran's Health Administration", and "National Cemetery Administration" for the y values. Both the grouped bar chart
+and stacked bar chart use the same data format for input.
 
 ```json
 [
