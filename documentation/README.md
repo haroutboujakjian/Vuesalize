@@ -286,7 +286,52 @@ Under construction...
 
 ### Donut Chart
 
-Under construction...
+#### Example
+
+```html
+<template>
+    <div>
+        <donut-chart :chart-data="donutChartData"
+                    :chart-title="'Dummy Data'"
+                    :size="300">
+        </donut-chart>
+    </div>
+</template>
+
+<script>
+import DonutChart from "./DonutChart";
+
+export default {
+    name: "DonutChartExample",
+    components: {
+        DonutChart
+    },
+    data() {
+        return {
+            donutChartData: [
+                {name: "VA", value: 100},
+                {name: "MD", value: 150},
+                {name: "DC", value: 200}
+            ]
+        }
+    }
+}
+</script>
+```
+
+<div style="display: flex; justify-content: center">
+    <donut-chart-example></donut-chart-example>
+</div>
+
+#### Props
+
+| Name          | Required             | Type     | Default                  | Description                                                    |
+|--             | :------------------: | -------  | --                       |                                                              --|
+| `chart-data`  | :heavy_check_mark:   | `Array`  |                          | Data for the slices of the donut chart                         |
+| `chart-title` |                      | `String` | `null`                   | Text in the center of the donut chart                          |
+| `size`        |                      | `Number` | `400`                    | chart width and height in pixels                               |
+| `colors`      |                      | `Array`  | `colorbrewer.Paired[12]` | Array of colors used for each slice                            |
+| `value-key`   |                      | `String` | `value`                  | Key for the value of the slice in each element of `chart-data` |
 
 ### Scatter Plot
 
@@ -421,5 +466,3 @@ The loading spinner is useful when data is being fetched from an API and there i
 <div style="display: flex; justify-content: center">
 <loader-spinning></loader-spinning>
 </div>
-
-
