@@ -1,11 +1,13 @@
 <template>
     <svg :width="width" :height="height">
-        <transition-group tag="g" v-for="row in series" :key="row.key" :fill="color(row.key)">
-            <rect class="animate" v-for="(bar, i) in row" :key="i"
-                  :x="xScale(bar.data[x_key])" :y="yScale(bar[1])"
-                  :width="xScale.bandwidth()" :height="yScale(bar[0])-yScale(bar[1])">
-            </rect>
-            <title :key="row.key">{{ row.key }}</title>
+        <transition-group tag="g">
+            <g v-for="row in series" :key="row.key" :fill="color(row.key)">
+                <rect class="animate" v-for="(bar, i) in row" :key="i"
+                      :x="xScale(bar.data[x_key])" :y="yScale(bar[1])"
+                      :width="xScale.bandwidth()" :height="yScale(bar[0])-yScale(bar[1])">
+                </rect>
+                <title :key="row.key">{{ row.key }}</title>
+            </g>
         </transition-group>
         <g v-xaxis="{scale: xScale}" :transform="`translate(0, ${height - margin.bottom})`"></g>
         <g v-yaxis="{scale: yScale}" :transform="`translate(${margin.left}, 0)`"></g>
@@ -18,6 +20,7 @@ import {scaleBand, scaleLinear, scaleOrdinal} from 'd3-scale';
 import {max} from 'd3-array';
 import {select} from 'd3-selection';
 import {axisBottom, axisLeft} from 'd3-axis';
+import {transition} from 'd3-transition';
 
 export default {
     name: "StackedBarChart",
@@ -63,11 +66,11 @@ export default {
     directives: {
         xaxis(el, binding) {
             let scale = binding.value.scale
-            select(el).call(axisBottom(scale).ticks())
+            select(el).transition().duration(500).call(axisBottom(scale).ticks())
         },
         yaxis(el, binding) {
             let scale = binding.value.scale
-            select(el).call(axisLeft(scale).ticks())
+            select(el).transition().duration(500).call(axisLeft(scale).ticks())
         }
     }
 }
