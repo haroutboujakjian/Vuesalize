@@ -1,36 +1,20 @@
-stages:
-    - publish
-    - deploy
+before_script:
+  - apt-get update -qq
+  - apt-get install -qq git
+  # Setup SSH deploy keys
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$ID_RSA")
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
-variables:
-    TAG_LATEST: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME:latest
-    TAG_COMMIT: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME:$CI_COMMIT_SHORT_SHA
+deploy_prod:
+  type: deploy
+  environment:
+    name: production
+    url: https://sqrt.mitre.org
+  script:
+    - ssh $SERVER_USER@$SERVER_IP "cd var/components/ && git pull && docker-compose up --build -d && exit"
+  only:
+    - master
 
-publish:
-    image: docker:latest
-    stage: publish
-    services:
-        - docker:dind
-    script:
-        - docker build -t $TAG_COMMIT -t $TAG_LATEST .
-        - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-        - docker push $TAG_COMMIT
-        - docker push $TAG_LATEST
-    
-deploy:
-    image: alpine:latest
-    stage: deploy
-    tags: 
-        - deployment
-    script:
-        - chmod og= $ID_RSA
-        - apk update && apk add openssh-client
-        - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN"
-        - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker pull $TAG_COMMIT"
-        - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker container rm -f docs-deployment || true"
-        - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker run -d -p 98:80 --name docs-deployment $TAG_COMMIT"
-    environment:
-        name: production
-        url: https://sqrt.mitre.org
-    only:
-        - master
