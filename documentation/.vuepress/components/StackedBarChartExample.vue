@@ -19,10 +19,15 @@ export default {
             plotData: SBCdata,
             margin: {top: 20, bottom: 20, left: 40, right: 20}
         }
+    },
+    mounted() {
+        setInterval(() => {
+            this.plotData.forEach(d => {
+                for (let key in d) {
+                    if (key !== "date") d[key] = Math.round(Math.random() * 3000);
+                }
+            });
+        }, 2000);
     }
 }
 </script>
-
-<style scoped>
-
-</style>

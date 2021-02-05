@@ -1,12 +1,12 @@
 <template>
     <svg :width="width" :height="height">
-        <g v-for="row in series" :key="row.key" :fill="color(row.key)">
-            <rect v-for="(bar, i) in row" :key="i"
+        <transition-group tag="g" v-for="row in series" :key="row.key" :fill="color(row.key)">
+            <rect class="animate" v-for="(bar, i) in row" :key="i"
                   :x="xScale(bar.data[x_key])" :y="yScale(bar[1])"
                   :width="xScale.bandwidth()" :height="yScale(bar[0])-yScale(bar[1])">
             </rect>
-            <title>{{ row.key}}</title>
-        </g>
+            <title :key="row.key">{{ row.key }}</title>
+        </transition-group>
         <g v-xaxis="{scale: xScale}" :transform="`translate(0, ${height - margin.bottom})`"></g>
         <g v-yaxis="{scale: yScale}" :transform="`translate(${margin.left}, 0)`"></g>
     </svg>
@@ -74,5 +74,7 @@ export default {
 </script>
 
 <style scoped>
-
+.animate {
+    transition: all 0.5s;
+}
 </style>

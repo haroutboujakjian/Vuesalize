@@ -1,20 +1,22 @@
 <template>
     <div ref="donutChartContainer">
         <svg :width="size" :height="size" v-if="chartData.length">
-            <path v-for="slice in slices"
-                  :key="slice.index"
-                  :d="arc(slice)"
-                  :fill="colorScale(slice.data.name)" :transform="'translate('+size/2+','+size/2+')'">
-            </path>
-            <g font-family="sans-serif" font-size="12" text-anchor="middle">
-                <text v-for="slice in slices"
+            <transition-group tag="g">
+                <path class="animate" v-for="slice in slices"
+                    :key="slice.index"
+                    :d="arc(slice)"
+                    :fill="colorScale(slice.data.name)"
+                    :transform="'translate('+size/2+','+size/2+')'"></path>
+            </transition-group>
+            <transition-group tag="g" font-family="sans-serif" font-size="12" text-anchor="middle">
+                <text class="animate" v-for="slice in slices"
                       :key="slice.index"
                       :transform="textTransform(slice)"
                       >
                     <tspan y="-0.4em" font-weight="bold">{{slice.data.name}}</tspan>
                     <tspan x="0" y="0.7em" fill-opacity="0.7">{{slice.data[valueKey]}}</tspan>
                 </text>
-            </g>
+            </transition-group>
             <g v-if="chartTitle" font-family="sans-serif" font-size="16" text-anchor="middle" :transform="textTransform()">
                 <foreignObject :width="titleWidth" height="20" :x="-titleWidth/2" y="-16">
                     <div class="donut-title" xmlns="http://www.w3.org/1999/xhtml" :title="chartTitle">{{ chartTitle }}</div>
@@ -53,7 +55,7 @@ export default {
                 .unknown("#ccc");
         },
         arc() {
-            const radius = (Math.min(this.size, this.size) - 10) / 2;
+            const radius = (this.size - 10) / 2;
             return arc().innerRadius(radius * 0.67).outerRadius(radius - 1);
         },
         titleWidth() {
@@ -81,4 +83,7 @@ export default {
     text-align: center;
 }
 
+.animate {
+    transition: all 0.5s;
+}
 </style>
