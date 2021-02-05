@@ -69,48 +69,50 @@ export default {
 
 Grouped bar charts are useful in comparing values together in and between groups.
 
+#### Example
+
+```html
+<template>
+    <GroupedBarChart :plotdata="plotdata"
+                     :width="450"
+                     :height="300"
+                     :colors="['#F8CBAD', '#C5E0B4', '#BDD7EE', '#D5B8EA']">
+    </GroupedBarChart>
+</template>
+
+<script>
+import GroupedBarChart from "./GroupedBarChart";
+import GBCdata from "./GroupedBarChartData.json"
+
+export default {
+    name: "GroupedBarChartExample",
+    components: {
+        GroupedBarChart
+    },
+    data() {
+        return {
+            plotdata: GBCdata
+        }
+    }
+}
+</script>
+
+<style scoped>
+</style>
+```
+
 <div style="display: flex; justify-content: center">
     <grouped-bar-chart-example></grouped-bar-chart-example>
 </div>
 
-#### Props
 
-| Name         | Required             | Type     | Default | Description                                               |
-|--            | :------------------: | -------  | --      |                                                         --|
-| `plotdata`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
-| `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
-| `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
-| `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
-
-#### Events Emitted
 
 #### Format of Data
 
-In order for the grouped bar chart to render properly, `plotdata` needs to be as an array of objects that with two keys:
+In order for the grouped bar chart to render properly, `plotdata` needs to be as an array of objects with two keys:
 "x" and "y". The y key is an object of values for each group. Here is a simple example
 
-```json
-[
-  {
-    "x": "3/13",
-    "y": {
-      "value1": 6,
-      "value2": 7,
-      "value3": 3,
-    }
-  },
-  {
-    "x": "3/18",
-    "y": {
-      "value1": 4,
-      "value2": 9,
-      "value3": 6,
-    }
-  }
-]
-```
-
-The data that populates the example grouped bar chart
+The `GroupedBarChart.json` data file that populates the example grouped bar chart
 
 ```json
 [
@@ -162,37 +164,16 @@ The data that populates the example grouped bar chart
 ]
 ```
 
-#### Example
+#### Props
 
-```html
-<template>
-    <GroupedBarChart :plotdata="plotdata"
-                     :width="450"
-                     :height="300"
-                     :colors="['#F8CBAD', '#C5E0B4', '#BDD7EE', '#D5B8EA']">
-    </GroupedBarChart>
-</template>
+| Name         | Required             | Type     | Default | Description                                               |
+|--            | :------------------: | -------  | --      |                                                         --|
+| `plotdata`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
+| `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
+| `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
 
-<script>
-import GroupedBarChart from "./GroupedBarChart";
-import GBCdata from "./GroupedBarChartData.json"
-
-export default {
-    name: "GroupedBarChartExample",
-    components: {
-        GroupedBarChart
-    },
-    data() {
-        return {
-            plotdata: GBCdata
-        }
-    }
-}
-</script>
-
-<style scoped>
-</style>
-```
+#### Events Emitted
 
 ### Stacked Bar Chart
 
@@ -230,7 +211,7 @@ export default {
 <stacked-bar-chart-example></stacked-bar-chart-example>
 </div>
 
-And this is the data that generates the graph above.
+And this is the `StackedBarChart.json` data file that generates the graph above.
 
 ```json
 [
@@ -410,7 +391,6 @@ export default {
 |--            | :------------------: | -------  | --          |                                                      --|
 | `legend-data`| :heavy_check_mark:   | `Object` |             | data necessary to create the legend                    |
 | `alignment`  |                      | `String` | 'horizontal'| Two options for alignment: 'vertical' or 'horizontal'  |
-
 
 
 
