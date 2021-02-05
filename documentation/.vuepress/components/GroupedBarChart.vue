@@ -1,29 +1,25 @@
 <template>
     <svg :width="width" :height="height">
-        <g class="bars">
-            <g class="bar"
-               v-for="(item, id) in plotdata"
-               :key="id"
-               :transform="`translate(${scale.x(id)}, 0)`">
-                <rect v-for="(value, vid) in Object.keys(item.y)"
-                      :key="vid"
-                      :x="scale.xsubgroup(value)"
-                      :y="scale.y(item.y[value])"
-                      :height="height - scale.y(item.y[value])- margin.bottom"
-                      :width="scale.xsubgroup.bandwidth()"
-                      :fill="color(value)">
-                    <title>{{ item.y[value]}}</title>
-                </rect>
-            </g>
+        <g v-for="(group, id) in groups" :key="id"
+           :transform="`translate(${xScale(xAxisTicks[id])}, 0)`"
+           class="bar">
+            <rect v-for="(key, vid) in Object.keys(group)" :key="vid"
+                  :x="xSubgroupScale(key)"
+                  :y="yScale(group[key])"
+                  :height="height - yScale(group[key]) - margin.bottom"
+                  :width="xSubgroupScale.bandwidth()"
+                  :fill="color(key)">
+                <title>{{ group[key]}}</title>
+            </rect>
         </g>
-        <g v-xaxis:x="scale" class="axis" :transform="xtranslate"></g>
-        <g v-yaxis:y="scale" class="axis" :transform="ytranslate"></g>
+        <g v-xaxis="{scale: xScale, tickLabels: xAxisTicks}" class="axis" :transform="xtranslate"></g>
+        <g v-yaxis="{scale: yScale}" class="axis" :transform="ytranslate"></g>
     </svg>
 </template>
 
 <script>
 import {scaleBand, scaleLinear, scaleOrdinal} from 'd3-scale';
-import {max, range} from 'd3-array';
+import {max} from 'd3-array';
 import {select} from 'd3-selection';
 import {axisLeft, axisBottom} from 'd3-axis';
 
@@ -34,6 +30,7 @@ export default {
         width: Number,
         height: Number,
         colors: Array,
+        x_key: String,
         margin: {
             type: Object,
             default: function () {
@@ -57,48 +54,56 @@ export default {
             return `translate(${this.margin.left}, 0)`;
         },
         groupKeys() {
-            return this.plotdata.length > 0 ? Object.keys(this.plotdata[0].y) : ''
+            /**
+             * Object keys for each of the y values
+             */
+            return Object.keys(this.plotdata[0]).filter(item => item !== this.x_key)
+        },
+        xAxisTicks() {
+            return this.plotdata.map(item => item[this.x_key])
+        },
+        groups() {
+            return this.plotdata.map(({[this.x_key]: name, ...rest}) => rest)
         },
         color() {
             return scaleOrdinal().range(this.colors)
         },
-        scale() {
-            const x = scaleBand()
-                .domain(range(this.plotdata.length))
+        xScale() {
+            return scaleBand()
+                .domain(this.xAxisTicks)
                 .range([this.margin.left, this.width - this.margin.right])
                 .padding(0.15);
-            const xsubgroup = scaleBand()
+        },
+        xSubgroupScale() {
+            return scaleBand()
                 .domain(this.groupKeys)
-                .rangeRound([0, x.bandwidth()])
+                .rangeRound([0, this.xScale.bandwidth()])
                 .padding(0.05)
-            const y = scaleLinear()
-                .domain([0, this.getMax(this.plotdata)])
+        },
+        yScale() {
+            return scaleLinear()
+                .domain([0, this.getMax(this.groups)])
                 .range([this.height - this.margin.bottom, this.margin.top])
                 .nice()
-            return {x, xsubgroup, y}
         }
 
     },
 
     methods: {
         getMax(array) {
-            return max(array.map(item => max(Object.values(item.y))))
+            return max(array.map(item => max(Object.values(item))))
         }
     },
 
     directives: {
-        xaxis(el, binding, vnode) {
-            const axis = binding.arg
-            const methodArg = binding.value[axis]
-            const ticks = vnode.context._props.plotdata.map(e => e.x)
-            select(el).call(axisBottom(methodArg)
-                .tickValues(range(ticks.length))
-                .tickFormat(i => ticks[i]))
+        xaxis(el, binding) {
+            const scale = binding.value.scale
+            const tickLabels = binding.value.tickLabels
+            select(el).call(axisBottom(scale).tickValues(tickLabels))
         },
         yaxis(el, binding) {
-            const axis = binding.arg
-            const methodArg = binding.value[axis]
-            select(el).call(axisLeft(methodArg).ticks(7))
+            const scale = binding.value.scale
+            select(el).call(axisLeft(scale).ticks(7))
         }
     }
 
