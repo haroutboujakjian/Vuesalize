@@ -196,7 +196,7 @@ export default {
 
 ### Stacked Bar Chart
 
-Occassionally, it's easier to compare groups by stacking them in one bar. Here is a simple example that constructs a 
+Occasionally, it's easier to compare groups by stacking them in one bar. Here is a simple example that constructs a 
 stacked bar chart
 
 ```html
@@ -335,7 +335,7 @@ statistic associated with the area.
 </script>
 ```
 
-[comment]: <> (<choropleth-example style="width: 100%; height: 300px"></choropleth-example>)
+<choropleth-example style="width: 100%; height: 300px"></choropleth-example>
 
 #### Props
 

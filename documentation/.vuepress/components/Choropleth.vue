@@ -49,7 +49,6 @@
 
 <script>
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
 import * as colorbrewer from "colorbrewer";
 import { min, max } from "d3-array";
 
@@ -96,6 +95,7 @@ export default {
   },
   mounted() {
     let self = this;
+    let L = require("leaflet");
 
     // create map and add state layer
     self.map = L.map("mapContainer", {
