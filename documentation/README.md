@@ -156,6 +156,7 @@ y value. Both the grouped bar chart and stacked bar chart use the same data form
 | Name         | Required             | Type     | Default | Description                                               |
 |--            | :------------------: | -------  | --      |                                                         --|
 | `plotdata`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `x_key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
 | `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
 | `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
