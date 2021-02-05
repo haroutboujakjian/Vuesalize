@@ -199,7 +199,7 @@ export default {
 <stacked-bar-chart-example></stacked-bar-chart-example>
 </div>
 
-In order for the grouped bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
+In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
 key for the x value, and all the other keys will be for y values. The `StackedBarChart.json` data file that populates
 the example grouped bar chart has "date" for the x value, and "Veteran's Benefit Administration",
 "Veteran's Health Administration", and "National Cemetery Administration" for the y values. Both the grouped bar chart
