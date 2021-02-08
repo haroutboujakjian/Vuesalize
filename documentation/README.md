@@ -250,8 +250,48 @@ and stacked bar chart use the same data format for input.
 | `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
 | `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group|
 | `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
+|`enable_tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
 
 #### Events Emitted
+
+#### Slots
+
+We provide a default tooltip that gives the x and y value for the bar that is hovered over. However, it is common for
+users to want to define a slightly more custom tooltip that might better fit their needs. So, we provide this option to
+define their own tooltip with the x_label, y_label, x_value, and y_value
+using [slots](https://vuejs.org/v2/guide/components-slots.html). Here is an example below
+
+```html
+<template>
+    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
+                     :margin="margin" :x_key="'date'"
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
+        <template v-slot:tooltip="{ bar }">
+            <h2>Hello from inside the tooltip. Here are values when you hover over a bar</h2>
+            <p>{{ bar.x_label }}, {{ bar.y_label }}, {{ bar.x_value }}, {{ bar.y_value }}</p>
+        </template>
+    </StackedBarChart>
+</template>
+
+<script>
+import StackedBarChart from "./StackedBarChart";
+import SBCdata from './StackedBarChartData.json'
+
+export default {
+    name: "StackedBarChartExample",
+    components: {
+        StackedBarChart
+    },
+    data() {
+        return {
+            plotData: SBCdata,
+            margin: {top: 20, bottom: 20, left: 40, right: 20}
+        }
+    }
+}
+</script>
+```
+
 
 ### Stacked Area Chart
 
