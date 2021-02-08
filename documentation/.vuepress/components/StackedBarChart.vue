@@ -22,6 +22,11 @@ import {select} from 'd3-selection';
 import {axisBottom, axisLeft} from 'd3-axis';
 import {transition} from 'd3-transition';
 
+// todo: ordinal/linear scale toggle
+// todo: include/exclude axes
+// todo: vertical/horizontal toggle
+// todo: default color scale
+
 export default {
     name: "StackedBarChart",
     props: {

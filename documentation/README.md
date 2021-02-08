@@ -324,15 +324,22 @@ statistic associated with the area.
 
 ```html
 <choropleth
+    style="width: 100%; height: 300px;"
     :map-data="{ VA: 100, MD: 150, DC: 200 }"
     :center="[37.43, -78.66]"
     :zoom="6"
     :colors="'Greens'"
     :num-classes="3"
-  ></choropleth>
+></choropleth>
 ```
 
-<choropleth-example style="width: 100%; height: 300px"></choropleth-example>
+<choropleth
+     style="width: 100%; height: 300px;"
+    :map-data="{ VA: 100, MD: 150, DC: 200 }"
+    :center="[37.43, -78.66]"
+    :zoom="6"
+    :colors="'Greens'"
+    :num-classes="3"></choropleth>
 
 #### Props
 
