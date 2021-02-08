@@ -1,5 +1,5 @@
 <template>
-    <div ref="donutChartContainer">
+    <div ref="donutChartContainer" class="donut-chart-container">
         <svg :width="size" :height="size" v-if="chartData.length" :transform="translate">
             <transition-group tag="g">
                 <g v-for="slice in slices" :key="slice.index">
@@ -86,7 +86,7 @@ export default {
         resize() {
             let width = this.$refs.donutChartContainer.getBoundingClientRect().width,
                 height = this.$refs.donutChartContainer.getBoundingClientRect().height;
-            this.size = Math.min(width, height);
+            this.size = Math.min(Math.max(200, width), Math.max(200, height));
 
             // when in a non-square container, center it
             this.translate = "translate(" + (width > height ? (width - height) / 2 : 0) +
@@ -97,6 +97,10 @@ export default {
 </script>
 
 <style scoped>
+.donut-chart-container {
+    width: 100%;
+    height: 100%;
+}
 
 .donut-title {
     max-width: 100%;
