@@ -302,39 +302,27 @@ Under construction...
 #### Example
 
 ```html
-<template>
-    <div>
-        <donut-chart :chart-data="donutChartData"
-                    :chart-title="'Dummy Data'"
-                    :size="300">
-        </donut-chart>
-    </div>
-</template>
-
-<script>
-import DonutChart from "./DonutChart";
-
-export default {
-    name: "DonutChartExample",
-    components: {
-        DonutChart
-    },
-    data() {
-        return {
-            donutChartData: [
-                {name: "VA", value: 100},
-                {name: "MD", value: 150},
-                {name: "DC", value: 200}
-            ]
-        }
-    }
-}
-</script>
+<donut-chart 
+    :chart-data="[
+        {name: 'VA', value: 100},
+        {name: 'MD', value: 150},
+        {name: 'DC', value: 200}
+    ]"
+    :chart-title="'Dummy Data'"
+    style="height: 300px">
+</donut-chart>
 ```
 
-<div style="display: flex; justify-content: center">
-    <donut-chart-example></donut-chart-example>
-</div>
+<donut-chart 
+    :chart-data="[
+      {name: 'VA', value: 100},
+      {name: 'MD', value: 150},
+      {name: 'DC', value: 200}
+    ]"
+    :chart-title="'Dummy Data'"
+    style="height: 300px;">
+</donut-chart>
+
 
 #### Props
 
@@ -342,7 +330,6 @@ export default {
 |--             | :------------------: | -------  | --                       |                                                              --|
 | `chart-data`  | :heavy_check_mark:   | `Array`  |                          | Data for the slices of the donut chart                         |
 | `chart-title` |                      | `String` | `null`                   | Text in the center of the donut chart                          |
-| `size`        |                      | `Number` | `400`                    | chart width and height in pixels                               |
 | `colors`      |                      | `Array`  | `colorbrewer.Paired[12]` | Array of colors used for each slice                            |
 | `value-key`   |                      | `String` | `value`                  | Key for the value of the slice in each element of `chart-data` |
 
@@ -364,15 +351,22 @@ statistic associated with the area.
 
 ```html
 <choropleth
+    style="height: 300px;"
     :map-data="{ VA: 100, MD: 150, DC: 200 }"
     :center="[37.43, -78.66]"
     :zoom="6"
     :colors="'Greens'"
     :num-classes="3"
-  ></choropleth>
+></choropleth>
 ```
 
-<choropleth-example style="width: 100%; height: 300px"></choropleth-example>
+<choropleth
+     style="height: 300px;"
+    :map-data="{ VA: 100, MD: 150, DC: 200 }"
+    :center="[37.43, -78.66]"
+    :zoom="6"
+    :colors="'Greens'"
+    :num-classes="3"></choropleth>
 
 #### Props
 

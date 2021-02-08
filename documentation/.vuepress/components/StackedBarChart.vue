@@ -36,6 +36,11 @@ import {axisBottom, axisLeft} from 'd3-axis';
 // eslint-disable-next-line no-unused-vars
 import {transition} from 'd3-transition';
 
+// todo: ordinal/linear scale toggle
+// todo: include/exclude axes
+// todo: vertical/horizontal toggle
+// todo: default color scale
+
 export default {
     name: "StackedBarChart",
     props: {

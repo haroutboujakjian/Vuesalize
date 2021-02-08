@@ -1,6 +1,6 @@
 <template>
     <div ref="donutChartContainer">
-        <svg :width="size" :height="size" v-if="chartData.length">
+        <svg :width="size" :height="size" v-if="chartData.length" :transform="translate">
             <transition-group tag="g">
                 <g v-for="slice in slices" :key="slice.index">
                     <path class="animate"
@@ -39,8 +39,13 @@ export default {
         "chartData": {type: Array, require: true},
         "colors": {type: Array, default: () => colorbrewer.Paired[12]},
         "valueKey": {type: String, default: "value"},
-        "chartTitle": {type: String},
-        "size": {type: Number, default: 400}
+        "chartTitle": {type: String}
+    },
+    data() {
+        return {
+            size: 300,
+            translate: ""
+        }
     },
     computed: {
         slices() {
@@ -62,7 +67,14 @@ export default {
         },
         titleWidth() {
             return this.arc.innerRadius()(this.slices[0]) * 2 - 5;
-        }
+        },
+    },
+    mounted() {
+        window.addEventListener('resize', this.resize);
+        this.resize();
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.resize)
     },
     methods: {
         textTransform(d) {
@@ -70,6 +82,15 @@ export default {
             transform[0] += this.size/2;
             transform[1] += this.size/2;
             return `translate(${transform})`;
+        },
+        resize() {
+            let width = this.$refs.donutChartContainer.getBoundingClientRect().width,
+                height = this.$refs.donutChartContainer.getBoundingClientRect().height;
+            this.size = Math.min(width, height);
+
+            // when in a non-square container, center it
+            this.translate = "translate(" + (width > height ? (width - height) / 2 : 0) +
+                "," + (height > width ? (height - width) / 2 : 0) + ")";
         }
     }
 }
