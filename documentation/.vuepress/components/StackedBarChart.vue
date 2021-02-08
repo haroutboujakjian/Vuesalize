@@ -9,7 +9,6 @@
                           @mouseover="populateTooltip($event, bar, row)"
                           @mouseout="showTooltip = false">
                     </rect>
-                    <!--                    <title :key="row.key">{{ row.key }}</title>-->
                 </g>
             </transition-group>
             <g v-xaxis="{scale: xScale}" :transform="`translate(0, ${height - margin.bottom})`"></g>
