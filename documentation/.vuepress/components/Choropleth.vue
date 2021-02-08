@@ -51,12 +51,13 @@
 import "leaflet/dist/leaflet.css";
 import * as colorbrewer from "colorbrewer";
 import { min, max } from "d3-array";
+import stateGeographies from "./state-geographies.json";
 
 export default {
   name: "Choropleth",
   props: {
-    geographies: { type: Object, require: true },
     mapData: { type: Object, required: true },
+    geographies: { type: Object, default: () => stateGeographies },
     colors: { type: String, default: "Blues" }, // colorbrewer scale
     numClasses: { type: Number, default: 5 },
     hideLegend: { type: Boolean, default: false },

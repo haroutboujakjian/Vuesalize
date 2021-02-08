@@ -363,34 +363,13 @@ statistic associated with the area.
 #### Example
 
 ```html
-
-<template>
-    <choropleth
-        :geographies="geographies"
-        :map-data="{ VA: 100, MD: 150, DC: 200 }"
-        :center="[37.43, -78.66]"
-        :zoom="6"
-        :colors="'Greens'"
-        :num-classes="3"
-    ></choropleth>
-</template>
-
-<script>
-    import Choropleth from "./Choropleth";
-    import stateGeographies from "./state-geographies.json";
-
-    export default {
-        name: "ChoroplethExample",
-        components: {
-            Choropleth
-        },
-        data() {
-            return {
-                geographies: stateGeographies
-            };
-        }
-    };
-</script>
+<choropleth
+    :map-data="{ VA: 100, MD: 150, DC: 200 }"
+    :center="[37.43, -78.66]"
+    :zoom="6"
+    :colors="'Greens'"
+    :num-classes="3"
+  ></choropleth>
 ```
 
 <choropleth-example style="width: 100%; height: 300px"></choropleth-example>
@@ -399,9 +378,9 @@ statistic associated with the area.
 
 | Name          | Required             | Type      | Default                                      | Description                                                                                      |
 |--             | :------------------: | -------   | -------------------------------------------- |                                                                                                --|
-| `geographies` | :heavy_check_mark:   | `Object`  |                                              | [GeoJSON](https://geojson.org/) definition of the geographical regions to be outlined in the map |
 | `map-data`    | :heavy_check_mark:   | `Object`  |                                              | Object mapping geography codes to values                                                         |
-| `center`      | :heavy_check_mark:   | `Array`   | `[38, -95.1]`                                | Two-dimensional Array containing the latitude and longitude of the center of the map display     |
+| `geographies` |                      | `Object`  | US States                                    | [GeoJSON](https://geojson.org/) definition of the geographical regions to be outlined in the map |
+| `center`      |                      | `Array`   | `[38, -95.1]`                                | Two-dimensional Array containing the latitude and longitude of the center of the map display     |
 | `zoom`        |                      | `Number`  | `5`                                          | Number between 3 and 10 specifying the default zoom level                                        |
 | `colors`      |                      | `String`  | `Blues`                                      | [Color Brewer](https://colorbrewer2.org) color scheme name                                       |
 | `num-classes` |                      | `Number`  | `5`                                          | The number of different colors in the color scale                                                |
