@@ -109,8 +109,8 @@ export default {
         },
         populateTooltip(e, key, group) {
             this.showTooltip = true
-            this.tooltipContent.top = e.clientY
-            this.tooltipContent.left = e.clientX
+            this.tooltipContent.top = e.pageY
+            this.tooltipContent.left = e.pageX
             this.tooltipContent.y_value = group
             this.tooltipContent.y_label = key
         }

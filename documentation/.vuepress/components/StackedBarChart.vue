@@ -95,8 +95,8 @@ export default {
     methods: {
         populateTooltip(e, bar, row) {
             this.showTooltip = true
-            this.tooltipContent.top = e.clientY
-            this.tooltipContent.left = e.clientX
+            this.tooltipContent.top = e.pageY
+            this.tooltipContent.left = e.pageX
             this.tooltipContent.x_value = bar.data[this.x_key]
             this.tooltipContent.x_label = this.x_key
             this.tooltipContent.y_value = bar.data[row.key]
