@@ -101,7 +101,6 @@ export default {
             this.tooltipContent.x_label = this.x_key
             this.tooltipContent.y_value = bar.data[row.key]
             this.tooltipContent.y_label = row.key
-
         }
     },
     directives: {

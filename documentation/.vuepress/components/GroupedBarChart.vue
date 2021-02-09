@@ -1,20 +1,32 @@
 <template>
-    <svg :width="width" :height="height">
-        <g v-for="(group, id) in groups" :key="id"
-           :transform="`translate(${xScale(xAxisTicks[id])}, 0)`"
-           class="bar">
-            <rect v-for="(key, vid) in Object.keys(group)" :key="vid"
-                  :x="xSubgroupScale(key)"
-                  :y="yScale(group[key])"
-                  :height="height - yScale(group[key]) - margin.bottom"
-                  :width="xSubgroupScale.bandwidth()"
-                  :fill="color(key)">
-                <title>{{ group[key]}}</title>
-            </rect>
-        </g>
-        <g v-xaxis="{scale: xScale, tickLabels: xAxisTicks}" class="axis" :transform="xtranslate"></g>
-        <g v-yaxis="{scale: yScale}" class="axis" :transform="ytranslate"></g>
-    </svg>
+    <figure>
+        <svg :width="width" :height="height">
+            <g v-for="(group, id) in groups" :key="id"
+               :transform="`translate(${xScale(xAxisTicks[id])}, 0)`"
+               class="bar">
+                <rect v-for="(key, vid) in Object.keys(group)" :key="vid"
+                      :x="xSubgroupScale(key)"
+                      :y="yScale(group[key])"
+                      :height="height - yScale(group[key]) - margin.bottom"
+                      :width="xSubgroupScale.bandwidth()"
+                      :fill="color(key)"
+                      @mouseover="populateTooltip($event, key, group[key])"
+                      @mouseout="showTooltip = false">
+                </rect>
+            </g>
+            <g v-xaxis="{scale: xScale, tickLabels: xAxisTicks}" class="axis" :transform="xtranslate"></g>
+            <g v-yaxis="{scale: yScale}" class="axis" :transform="ytranslate"></g>
+        </svg>
+        <div v-if="enable_tooltip"
+             class="tooltipContainer"
+             :class="{activeTooltip: showTooltip}"
+             :style="`top: ${tooltipContent.top + 10}px; left: ${tooltipContent.left + 10}px`">
+            <slot name="tooltip" :bar="tooltipContent">
+                <p>{{ tooltipContent.y_label }}: {{ tooltipContent.y_value }}</p>
+            </slot>
+        </div>
+    </figure>
+
 </template>
 
 <script>
@@ -31,20 +43,22 @@ export default {
         height: Number,
         colors: Array,
         x_key: String,
+        enable_tooltip: {
+            type: Boolean,
+            default: true
+        },
         margin: {
             type: Object,
             default: function () {
-                return {
-                    top: 20,
-                    bottom: 20,
-                    left: 20,
-                    right: 20
-                }
+                return {top: 20, bottom: 20, left: 20, right: 20}
             }
         }
     },
     data() {
-        return {}
+        return {
+            showTooltip: false,
+            tooltipContent: {}
+        }
     },
     computed: {
         xtranslate() {
@@ -92,6 +106,13 @@ export default {
     methods: {
         getMax(array) {
             return max(array.map(item => max(Object.values(item))))
+        },
+        populateTooltip(e, key, group) {
+            this.showTooltip = true
+            this.tooltipContent.top = e.clientY
+            this.tooltipContent.left = e.clientX
+            this.tooltipContent.y_value = group
+            this.tooltipContent.y_label = key
         }
     },
 
@@ -112,15 +133,31 @@ export default {
 
 <style scoped>
 
-rect:hover {
-    fill: darkgrey;
-}
-
 .axis {
     font-size: 0.75rem;
     shape-rendering: crispEdges;
 }
 
+rect {
+    cursor: pointer;
+}
+
+.tooltipContainer {
+    position: absolute;
+    font-size: 0.8rem;
+    padding: 10px;
+    border: solid 1px black;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    background-color: #ffffff;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.activeTooltip {
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
 </style>
 
 

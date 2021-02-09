@@ -1,35 +1,35 @@
 [
   {
     "date": "3/13",
-    "PlannedMembers": 6,
+    "Planned Members": 6,
     "Attendees": 7,
     "Guest": 3,
     "Proxy": 5
   },
   {
     "date": "3/18",
-    "PlannedMembers": 4,
+    "Planned Members": 4,
     "Attendees": 9,
     "Guest": 6,
     "Proxy": 1
   },
   {
     "date": "3/27",
-    "PlannedMembers": 12,
+    "Planned Members": 12,
     "Attendees": 7,
     "Guest": 5,
     "Proxy": 3
   },
   {
     "date": "3/31",
-    "PlannedMembers": 10,
+    "Planned Members": 10,
     "Attendees": 10,
     "Guest": 6,
     "Proxy": 3
   },
   {
     "date": "4/6",
-    "PlannedMembers": 6,
+    "Planned Members": 6,
     "Attendees": 2,
     "Guest": 3,
     "Proxy": 4
