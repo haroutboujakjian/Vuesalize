@@ -153,7 +153,7 @@ rect {
 }
 
 .activeTooltip {
-    opacity: 0.9;
+    opacity: 1;
     transition: opacity 0.3s;
 }
 </style>
