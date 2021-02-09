@@ -313,6 +313,7 @@ Under construction...
 </donut-chart>
 ```
 
+<div style="width"
 <donut-chart 
     :chart-data="[
       {name: 'VA', value: 100},
@@ -320,7 +321,7 @@ Under construction...
       {name: 'DC', value: 200}
     ]"
     :chart-title="'Dummy Data'"
-    style="height: 300px;">
+    >
 </donut-chart>
 
 
@@ -351,22 +352,23 @@ statistic associated with the area.
 
 ```html
 <choropleth
-    style="height: 300px;"
     :map-data="{ VA: 100, MD: 150, DC: 200 }"
     :center="[37.43, -78.66]"
     :zoom="6"
     :colors="'Greens'"
     :num-classes="3"
+    style="height: 300px;"
 ></choropleth>
 ```
 
 <choropleth
-     style="height: 300px;"
     :map-data="{ VA: 100, MD: 150, DC: 200 }"
     :center="[37.43, -78.66]"
     :zoom="6"
     :colors="'Greens'"
-    :num-classes="3"></choropleth>
+    :num-classes="3"
+    style="height: 300px;">
+</choropleth>
 
 #### Props
 
