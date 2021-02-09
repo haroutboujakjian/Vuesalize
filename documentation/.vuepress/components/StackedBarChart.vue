@@ -9,7 +9,6 @@
                           @mouseover="populateTooltip($event, bar, row)"
                           @mouseout="showTooltip = false">
                     </rect>
-                    <!--                    <title :key="row.key">{{ row.key }}</title>-->
                 </g>
             </transition-group>
             <g v-xaxis="{scale: xScale}" :transform="`translate(0, ${height - margin.bottom})`"></g>
@@ -96,13 +95,12 @@ export default {
     methods: {
         populateTooltip(e, bar, row) {
             this.showTooltip = true
-            this.tooltipContent.top = e.clientY
-            this.tooltipContent.left = e.clientX
+            this.tooltipContent.top = e.pageY
+            this.tooltipContent.left = e.pageX
             this.tooltipContent.x_value = bar.data[this.x_key]
             this.tooltipContent.x_label = this.x_key
             this.tooltipContent.y_value = bar.data[row.key]
             this.tooltipContent.y_label = row.key
-
         }
     },
     directives: {
@@ -155,7 +153,7 @@ rect {
 }
 
 .activeTooltip {
-    opacity: 0.9;
+    opacity: 1;
     transition: opacity 0.3s;
 }
 </style>

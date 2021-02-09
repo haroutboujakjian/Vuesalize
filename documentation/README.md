@@ -160,6 +160,7 @@ y value. Both the grouped bar chart and stacked bar chart use the same data form
 | `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
 | `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
+|`enable_tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
 
 #### Events Emitted
 
