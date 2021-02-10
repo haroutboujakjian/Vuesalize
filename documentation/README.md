@@ -288,15 +288,23 @@ Under construction...
 </donut-chart>
 ```
 
-<donut-chart 
-    :chart-data="[
-      {name: 'VA', value: 100},
-      {name: 'MD', value: 150},
-      {name: 'DC', value: 200}
-    ]"
-    :chart-title="'Dummy Data'"
-    style="height: 300px;">
-</donut-chart>
+[comment]: <> (<donut-chart )
+
+[comment]: <> (    :chart-data="[)
+
+[comment]: <> (      {name: 'VA', value: 100},)
+
+[comment]: <> (      {name: 'MD', value: 150},)
+
+[comment]: <> (      {name: 'DC', value: 200})
+
+[comment]: <> (    ]")
+
+[comment]: <> (    :chart-title="'Dummy Data'")
+
+[comment]: <> (    style="height: 300px;">)
+
+[comment]: <> (</donut-chart>)
 
 
 #### Props
@@ -335,13 +343,19 @@ statistic associated with the area.
 ></choropleth>
 ```
 
-<choropleth
-     style="height: 300px;"
-    :map-data="{ VA: 100, MD: 150, DC: 200 }"
-    :center="[37.43, -78.66]"
-    :zoom="6"
-    :colors="'Greens'"
-    :num-classes="3"></choropleth>
+[comment]: <> (<choropleth)
+
+[comment]: <> (     style="height: 300px;")
+
+[comment]: <> (    :map-data="{ VA: 100, MD: 150, DC: 200 }")
+
+[comment]: <> (    :center="[37.43, -78.66]")
+
+[comment]: <> (    :zoom="6")
+
+[comment]: <> (    :colors="'Greens'")
+
+[comment]: <> (    :num-classes="3"></choropleth>)
 
 #### Props
 
