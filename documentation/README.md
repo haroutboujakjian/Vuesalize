@@ -444,7 +444,7 @@ and [Scoped Slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots
 default tooltip will also have a slot that passes up data about the part of the chart that is hovered on. Here is an
 example that defines a custom tooltip for the same stacked bar chart using the x_label, y_label, x_value, and y_value of
 the bar that is hovered over, which
-are [deconstructed](https://vuejs.org/v2/guide/components-slots.html#Destructuring-Slot-Props) from the `bar` slot
+are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructuring-Slot-Props) from the `bar` slot
 
 ```html
 <template>
