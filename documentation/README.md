@@ -1,8 +1,5 @@
 # Directory of Components
 
-## Installation
-
-Coming soon...
 
 ## Introduction
 
@@ -14,6 +11,12 @@ all of the pain. Additionally, the scales that control the layouts points, bar, 
 properties in Vue. This allows for automatic updating of the chart purely based on changes in the data without having to
 define an additional function to handle updates. A full explanation of the method used can be
 found [here](./rationale.md)
+
+## Installation
+
+Any Vue.js based project will be able to take advantage of this library.
+
+Install info coming soon...
 
 ## Charts
 
@@ -262,36 +265,7 @@ users to want to define a slightly more custom tooltip that might better fit the
 define their own tooltip with the x_label, y_label, x_value, and y_value
 using [slots](https://vuejs.org/v2/guide/components-slots.html). Here is an example below
 
-```html
-<template>
-    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" :x_key="'date'"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
-        <template v-slot:tooltip="{ bar }">
-            <h2>Hello from inside the tooltip. Here are values when you hover over a bar</h2>
-            <p>{{ bar.x_label }}, {{ bar.y_label }}, {{ bar.x_value }}, {{ bar.y_value }}</p>
-        </template>
-    </StackedBarChart>
-</template>
 
-<script>
-import StackedBarChart from "./StackedBarChart";
-import SBCdata from './StackedBarChartData.json'
-
-export default {
-    name: "StackedBarChartExample",
-    components: {
-        StackedBarChart
-    },
-    data() {
-        return {
-            plotData: SBCdata,
-            margin: {top: 20, bottom: 20, left: 40, right: 20}
-        }
-    }
-}
-</script>
-```
 
 
 ### Stacked Area Chart
@@ -314,16 +288,18 @@ Under construction...
 </donut-chart>
 ```
 
-<div style="width"
-<donut-chart 
-    :chart-data="[
-      {name: 'VA', value: 100},
-      {name: 'MD', value: 150},
-      {name: 'DC', value: 200}
-    ]"
-    :chart-title="'Dummy Data'"
-    >
-</donut-chart>
+<div style="height: 300px">
+    <donut-chart 
+        :chart-data="[
+          {name: 'VA', value: 100},
+          {name: 'MD', value: 150},
+          {name: 'DC', value: 200}
+        ]"
+        :chart-title="'Dummy Data'"
+        >
+    </donut-chart>
+</div>
+
 
 
 #### Props
@@ -369,7 +345,7 @@ statistic associated with the area.
         :zoom="6"
         :colors="'Greens'"
         :num-classes="3"
-        style="height: 300px;">
+         style="height: 300px;">
     </choropleth>
 </div>
 
@@ -455,4 +431,52 @@ The loading spinner is useful when data is being fetched from an API and there i
 
 <div style="display: flex; justify-content: center">
 <loader-spinning></loader-spinning>
+</div>
+
+## Component Parts
+
+### Tooltips
+
+We provide default tooltips for some of the charts, which make it easy to get up and running quickly. However, it is
+common for users to want to define a slightly more custom tooltip that might better fit their needs. We provide the
+option to use [Slots](https://vuejs.org/v2/guide/components-slots.html)
+and [Scoped Slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots) to handle this. Each chart that has a
+default tooltip will also have a slot that passes up data about the part of the chart that is hovered on. Here is an
+example that defines a custom tooltip for the same stacked bar chart using the x_label, y_label, x_value, and y_value of
+the bar that is hovered over, which
+are [deconstructed](https://vuejs.org/v2/guide/components-slots.html#Destructuring-Slot-Props) from the `bar` slot
+
+```html
+<template>
+    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
+                     :margin="margin" :x_key="'date'"
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
+        <template v-slot:tooltip="{ bar }">
+            <h2>Hello from inside the tooltip. Here are values when you hover over a bar</h2>
+            <p>{{ bar.x_label }}, {{ bar.y_label }}, {{ bar.x_value }}, {{ bar.y_value }}</p>
+        </template>
+    </StackedBarChart>
+</template>
+
+<script>
+import StackedBarChart from "./StackedBarChart";
+import SBCdata from './StackedBarChartData.json'
+
+export default {
+    name: "StackedBarChartExample",
+    components: {
+        StackedBarChart
+    },
+    data() {
+        return {
+            plotData: SBCdata,
+            margin: {top: 20, bottom: 20, left: 40, right: 20}
+        }
+    }
+}
+</script>
+```
+
+<div style="display: flex; justify-content: center">
+<stacked-bar-chart-example :tooltip="true"></stacked-bar-chart-example>
 </div>
