@@ -20,30 +20,33 @@ Install info coming soon...
 
 ## Charts
 
-### Hierarchical Edge Bundling
 
-#### Example
+### Stacked Bar Chart
 
-The code below constructs the hierarchical edge bundling plot below it.
+Occasionally, it's easier to compare groups by stacking them in one bar. Here is a simple example that constructs a 
+stacked bar chart
 
 ```html
 <template>
-    <HierarchicalEdgeBundling :plotdata="plotdata"
-                              :width="600"
-                              :height="600">
-    </HierarchicalEdgeBundling>
+    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
+                     :margin="margin" :x_key="'date'"
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
+    </StackedBarChart>
 </template>
 
 <script>
-import HierarchicalEdgeBundling from "./HierarchicalEdgeBundling";
-import HEBdata from "./HierarchicalEdgeBundlingData.json"
+import StackedBarChart from "./StackedBarChart";
+import SBCdata from './StackedBarChartData.json'
 
 export default {
-    name: "HierarchicalEdgeBundlingExample",
-    components: {HierarchicalEdgeBundling},
+    name: "StackedBarChartExample",
+    components: {
+        StackedBarChart
+    },
     data() {
         return {
-            plotdata: HEBdata
+            plotData: SBCdata,
+            margin: {top: 20, bottom: 20, left: 40, right: 20}
         }
     }
 }
@@ -51,21 +54,52 @@ export default {
 ```
 
 <div style="display: flex; justify-content: center">
-    <hierarchical-edge-bundling-example></hierarchical-edge-bundling-example>
+<stacked-bar-chart-example></stacked-bar-chart-example>
 </div>
+
+In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
+key for the x value, and all the other keys will be for y values. The `StackedBarChart.json` data file that populates
+the example grouped bar chart has "date" for the x value, and "Veteran's Benefit Administration",
+"Veteran's Health Administration", and "National Cemetery Administration" for the y values. Both the grouped bar chart
+and stacked bar chart use the same data format for input.
+
+```json
+[
+  {
+    "date": "2019",
+    "Veteran's Benefit Administration": 5921,
+    "Veteran's Health Administration": 1026,
+    "National Cemetery Administration": 2324
+  },
+  {
+    "date": "2020",
+    "Veteran's Benefit Administration": 1539,
+    "Veteran's Health Administration": 1560,
+    "National Cemetery Administration": 1257
+  }, ...
+]
+```
 
 #### Props
 
-| Name            | Required             | Type     | Default | Description                                               |
-|--               | :------------------: | -------  | --      |                                                         --|
-| `plotdata`      | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
-| `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
-| `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
-| `radial-margin` |                      | `Number` | 70      | margin (in pixels) between the text label and edge of svg |
-|`highlight-event`|                      | `String` | 'click' | Event that hightlights connections for a specific node and has two options: 'click' or 'mouseover'|
+| Name         | Required             | Type     | Default | Description                                               |
+|--            | :------------------: | -------  | --      |                                                         --|
+| `plotdata`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `x_key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
+| `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
+| `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
+| `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group|
+| `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
+|`enable_tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
 
 #### Events Emitted
 
+#### Slots
+
+We provide a default tooltip that gives the x and y value for the bar that is hovered over. However, it is common for
+users to want to define a slightly more custom tooltip that might better fit their needs. So, we provide this option to
+define their own tooltip with the x_label, y_label, x_value, and y_value
+using [slots](https://vuejs.org/v2/guide/components-slots.html). Here is an example below
 
 
 ### Grouped Bar Chart
@@ -129,28 +163,7 @@ y value. Both the grouped bar chart and stacked bar chart use the same data form
     "Attendees": 9,
     "Guest": 6,
     "Proxy": 1
-  },
-  {
-    "date": "3/27",
-    "PlannedMembers": 12,
-    "Attendees": 7,
-    "Guest": 5,
-    "Proxy": 3
-  },
-  {
-    "date": "3/31",
-    "PlannedMembers": 10,
-    "Attendees": 10,
-    "Guest": 6,
-    "Proxy": 3
-  },
-  {
-    "date": "4/6",
-    "PlannedMembers": 6,
-    "Attendees": 2,
-    "Guest": 3,
-    "Proxy": 4
-  }
+  }, ...
 ]
 ```
 
@@ -166,106 +179,6 @@ y value. Both the grouped bar chart and stacked bar chart use the same data form
 |`enable_tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
 
 #### Events Emitted
-
-### Stacked Bar Chart
-
-Occasionally, it's easier to compare groups by stacking them in one bar. Here is a simple example that constructs a 
-stacked bar chart
-
-```html
-<template>
-    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" :x_key="'date'"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
-    </StackedBarChart>
-</template>
-
-<script>
-import StackedBarChart from "./StackedBarChart";
-import SBCdata from './StackedBarChartData.json'
-
-export default {
-    name: "StackedBarChartExample",
-    components: {
-        StackedBarChart
-    },
-    data() {
-        return {
-            plotData: SBCdata,
-            margin: {top: 20, bottom: 20, left: 40, right: 20}
-        }
-    }
-}
-</script>
-```
-
-<div style="display: flex; justify-content: center">
-<stacked-bar-chart-example></stacked-bar-chart-example>
-</div>
-
-In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
-key for the x value, and all the other keys will be for y values. The `StackedBarChart.json` data file that populates
-the example grouped bar chart has "date" for the x value, and "Veteran's Benefit Administration",
-"Veteran's Health Administration", and "National Cemetery Administration" for the y values. Both the grouped bar chart
-and stacked bar chart use the same data format for input.
-
-```json
-[
-  {
-    "date": "2019",
-    "Veteran's Benefit Administration": 5921,
-    "Veteran's Health Administration": 1026,
-    "National Cemetery Administration": 2324
-  },
-  {
-    "date": "2020",
-    "Veteran's Benefit Administration": 1539,
-    "Veteran's Health Administration": 1560,
-    "National Cemetery Administration": 1257
-  },
-  {
-    "date": "2021",
-    "Veteran's Benefit Administration": 2457,
-    "Veteran's Health Administration": 2784,
-    "National Cemetery Administration": 1438
-  },
-  {
-    "date": "2022",
-    "Veteran's Benefit Administration": 4980,
-    "Veteran's Health Administration": 1332,
-    "National Cemetery Administration": 3200
-  },
-    {
-    "date": "2023",
-    "Veteran's Benefit Administration": 3980,
-    "Veteran's Health Administration": 2332,
-    "National Cemetery Administration": 3100
-  }
-]
-```
-
-#### Props
-
-| Name         | Required             | Type     | Default | Description                                               |
-|--            | :------------------: | -------  | --      |                                                         --|
-| `plotdata`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
-| `x_key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
-| `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
-| `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
-| `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group|
-| `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
-|`enable_tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
-
-#### Events Emitted
-
-#### Slots
-
-We provide a default tooltip that gives the x and y value for the bar that is hovered over. However, it is common for
-users to want to define a slightly more custom tooltip that might better fit their needs. So, we provide this option to
-define their own tooltip with the x_label, y_label, x_value, and y_value
-using [slots](https://vuejs.org/v2/guide/components-slots.html). Here is an example below
-
-
 
 
 ### Stacked Area Chart
@@ -314,6 +227,84 @@ Under construction...
 ### Scatter Plot
 
 Under construction...
+
+### Hierarchical Edge Bundling
+
+#### Example
+
+The code below constructs the hierarchical edge bundling plot below it.
+
+```html
+<template>
+    <HierarchicalEdgeBundling :plotdata="plotdata"
+                              :width="600"
+                              :height="600">
+    </HierarchicalEdgeBundling>
+</template>
+
+<script>
+import HierarchicalEdgeBundling from "./HierarchicalEdgeBundling";
+import HEBdata from "./HierarchicalEdgeBundlingData.json"
+
+export default {
+    name: "HierarchicalEdgeBundlingExample",
+    components: {HierarchicalEdgeBundling},
+    data() {
+        return {
+            plotdata: HEBdata
+        }
+    }
+}
+</script>
+```
+
+<div style="display: flex; justify-content: center">
+    <hierarchical-edge-bundling-example></hierarchical-edge-bundling-example>
+</div>
+
+#### Format of Data
+
+The format of the data for edge bundling chart requires a bit more work. There are three main keys: `name`, `color`, and
+`imports`. The `name` key is for the name of the node, which should be unique, and `color` which is the color of the
+node. Lastly, the `imports` key contains all of the connection to that node.
+
+```json
+[
+  {
+    "name": "root|Outcome|Meet Client",
+    "color": "#395fa0",
+    "imports": ["root|Outcome|Complete Outcome 1"]
+  },
+  {
+    "name": "root|Indicator|Go To Dinner",
+    "color": "red",
+    "imports": [
+      "root|Outcome|Meet Client"
+    ]
+  },
+  {
+    "name": "root|Indicator|Fill Out Paperwork",
+    "color": "#395fa0",
+    "imports": [
+      "root|Indicator|Go To Dinner",
+      "root|Outcome|Complete Outcome 1"
+    ]
+  }, ...
+]
+```
+
+#### Props
+
+| Name            | Required             | Type     | Default | Description                                               |
+|--               | :------------------: | -------  | --      |                                                         --|
+| `plotdata`      | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
+| `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
+| `radial-margin` |                      | `Number` | 70      | margin (in pixels) between the text label and edge of svg |
+|`highlight-event`|                      | `String` | 'click' | Event that hightlights connections for a specific node and has two options: 'click' or 'mouseover'|
+
+#### Events Emitted
+
 
 ### Network
 

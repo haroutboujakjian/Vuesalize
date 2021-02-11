@@ -2,7 +2,7 @@
   {
     "name": "root|Outcome|Meet Client",
     "color": "#395fa0",
-    "imports": []
+    "imports": ["root|Outcome|Complete Outcome 1"]
   },
   {
     "name": "root|Indicator|Go To Dinner",
