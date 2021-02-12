@@ -18,6 +18,8 @@
                     :key="`n${node.index}`"
                     :cx="node.x" :cy="node.y"
                     :r="nodeRadius" :fill="node.color"
+                    class="nodeGrab"
+                    :class="{ nodeGrabbing: currentMove}"
                     @mousedown="dragStart($event, node)">
             </circle>
         </g>
@@ -95,6 +97,14 @@ circle {
 
 line {
     stroke: black;
+}
+
+.nodeGrab {
+    cursor: grab;
+}
+
+.nodeGrabbing {
+    cursor: grabbing;
 }
 </style>
 
