@@ -7,9 +7,9 @@ This directory contains chart components and other basic components used in buil
 web. The charts are built using a combination of [Vue.js](https://vuejs.org/v2/guide/) and [D3.js](https://d3js.org/).
 The main rationale for this approach is to move the SVG definitions to the template (HTML) and let Vue actually control
 creating/destroying elements on the page. This is analogous to the "enter/update/exit" strategy used in D3 but without
-all of the pain. Additionally, the scales that control the layouts points, bar, axes, etc. are used in computed
+all of the pain. Additionally, the scales that control the layouts points, bar, axes, etc. are defined as computed
 properties in Vue. This allows for automatic updating of the chart purely based on changes in the data without having to
-define an additional function to handle updates. A full explanation of the method used can be
+define an additional function to handle updates. A full explanation of the methods used can be
 found [here](./rationale.md)
 
 ## Installation
@@ -94,9 +94,9 @@ and stacked bar chart use the same data format for input.
 
 #### Events Emitted
 
-| Name         | Value    |  Description                                                         |
-|--            | -------  |                                                                    --|
-| `click`      | `Object` |  x_label, y_label, x_value, and y_value of the bar that is clicked on|
+| Name         | Value    |  Description                                                                      |
+|--            | -------  |                                                                                 --|
+| `click`      | `Object` |  x_label, y_label, x_value, and y_value of the bar in the stack that is clicked on|
 
 #### Slots
 
