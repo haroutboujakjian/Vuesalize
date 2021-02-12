@@ -308,7 +308,14 @@ node. Lastly, the `imports` key contains all of the connection to that node.
 
 ### Network
 
-Under construction...
+Networks are useful in displaying relationships between groups. The sticky force layout below provides an easy way to
+implement one
+
+```html
+
+```
+
+<network-example></network-example>
 
 ### Choropleth
 
