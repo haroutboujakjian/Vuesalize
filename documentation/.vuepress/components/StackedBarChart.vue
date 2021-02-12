@@ -7,7 +7,8 @@
                           :x="xScale(bar.data[x_key])" :y="yScale(bar[1])"
                           :width="xScale.bandwidth()" :height="yScale(bar[0])-yScale(bar[1])"
                           @mouseover="populateTooltip($event, bar, row)"
-                          @mouseout="showTooltip = false">
+                          @mouseout="showTooltip = false"
+                          @click="$emit('click', tooltipContent)">
                     </rect>
                 </g>
             </transition-group>

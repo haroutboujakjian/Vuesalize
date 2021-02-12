@@ -94,6 +94,10 @@ and stacked bar chart use the same data format for input.
 
 #### Events Emitted
 
+| Name         | Value    |  Description                                                         |
+|--            | -------  |                                                                    --|
+| `click`      | `Object` |  x_label, y_label, x_value, and y_value of the bar that is clicked on|
+
 #### Slots
 
 We provide a default tooltip that gives the x and y value for the bar that is hovered over. However, it is common for
