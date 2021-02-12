@@ -1,5 +1,5 @@
 <template>
-    <svg :width="width" :height="height"
+    <svg :width="width" :height="height" ref="svgContainer"
          @mousemove="drag($event)"
          @mouseup="drop()" @mouseleave="drop()">
 
@@ -17,7 +17,7 @@
             <circle v-for="node in graph.nodes"
                     :key="`n${node.index}`"
                     :cx="node.x" :cy="node.y"
-                    :r="10" :fill="node.color"
+                    :r="nodeRadius" :fill="node.color"
                     @mousedown="dragStart($event, node)">
             </circle>
         </g>
@@ -36,6 +36,10 @@ export default {
         width: Number,
         height: Number,
         plotData: Object,
+        nodeRadius: {
+            type: Number,
+            default: 10
+        }
     },
     data() {
         return {
@@ -60,12 +64,14 @@ export default {
         },
         drag(e) {
             if (this.currentMove) {
-                console.log(e.clientY)
-                this.currentMove.node.x = e.clientX
-                this.currentMove.node.y = e.clientY
+                let top = this.$refs.svgContainer.getBoundingClientRect().top
+                let left = this.$refs.svgContainer.getBoundingClientRect().left
 
-                this.currentMove.node.fx = e.clientX
-                this.currentMove.node.fy = e.clientY
+                this.currentMove.node.x = e.clientX - left
+                this.currentMove.node.y = e.clientY - top
+
+                this.currentMove.node.fx = e.clientX - left
+                this.currentMove.node.fy = e.clientY - top
             }
         },
         drop() {
