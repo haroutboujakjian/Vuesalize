@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Network :width="400" :height="400" :plot-data="plotData"></Network>
+        <Network :width="500" :height="400" :plot-data="plotData"></Network>
     </div>
 </template>
 

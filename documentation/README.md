@@ -358,7 +358,8 @@ export default {
 | `plotdata`      | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                        |
 | `width`         | :heavy_check_mark:  | `Number` |         | chart width in pixels                                     |
 | `height`        | :heavy_check_mark:  | `Number` |         | chart height in pixels                                    |
-| `height`        |                     | `Number` |   10px  | size of node circles                                      |
+| `node-radius`   |                     | `Number` |   10    | size of node circles                                      |
+| `force-strength`|                     | `Number` |   -80   | [force](https://github.com/d3/d3-force#many-body) causing nodes to repel each other                   |
 
 ### Choropleth
 

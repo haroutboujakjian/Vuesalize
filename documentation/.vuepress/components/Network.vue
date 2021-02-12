@@ -39,6 +39,10 @@ export default {
         nodeRadius: {
             type: Number,
             default: 10
+        },
+        forceStrength: {
+            type: Number,
+            default: -80
         }
     },
     data() {
@@ -52,7 +56,7 @@ export default {
     created() {
         this.simulation = forceSimulation(this.graph.nodes)
             /*eslint-disable-next-line*/
-            .force('charge', forceManyBody().strength(d => -100))
+            .force('charge', forceManyBody().strength(d => this.forceStrength))
             .force('center', forceCenter(this.width / 2, this.height / 2))
             .force('link', forceLink(this.graph.links))
             .force('x', forceX())
