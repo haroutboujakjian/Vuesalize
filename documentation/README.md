@@ -186,6 +186,9 @@ and stacked bar chart use the same data format for input.
 
 #### Events Emitted
 
+### Line Chart
+
+Under construction...
 
 ### Stacked Area Chart
 
@@ -415,21 +418,9 @@ statistic associated with the area.
 
 ### Basic Legend
 
-The legend component takes in a json object with key value pairs in the form of label:color. This will generate a simple
-legend like the one below.
-
-```json
-{
-  "first": "black",
-  "second": "blue",
-  "third": "red"
-}
-```
-
+Legends are useful for many charts and we provide a simple one in our library. Here is an example that shows how to use a simple legend component in both the vertical and horizontal alignments.
 
 #### Example
-
-Here is an example that shows how to use a simple legend component in both the vertical and horizontal alignments.
 
 <base-legend-example></base-legend-example>
 
@@ -456,9 +447,9 @@ export default {
     data() {
         return {
             legendData: {
-                "first": "black",
-                "second": "blue",
-                "third": "red"
+                "Veteran's Benefit Administration": '#717e9b',
+                "Veteran's Health Administration": '#b6b6db',
+                "National Cemetery Administration": '#bcd8f1'
             }
         }
     }
@@ -471,6 +462,18 @@ export default {
 |--            | :------------------: | -------  | --          |                                                      --|
 | `legend-data`| :heavy_check_mark:   | `Object` |             | data necessary to create the legend                    |
 | `alignment`  |                      | `String` | 'horizontal'| Two options for alignment: 'vertical' or 'horizontal'  |
+
+#### Format of Data
+
+The legend component takes in a simple object with key value pairs in the form of label:color. 
+
+```json
+{
+  "first": "black",
+  "second": "blue",
+  "third": "red"
+}
+```
 
 
 ### Loading Spinner

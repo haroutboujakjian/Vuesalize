@@ -18,9 +18,9 @@ export default {
     data() {
         return {
             legendData: {
-                "first": "black",
-                "second": "blue",
-                "third": "red"
+                "Veteran's Benefit Administration": '#717e9b',
+                "Veteran's Health Administration": '#b6b6db',
+                "National Cemetery Administration": '#bcd8f1'
             }
         }
     }
