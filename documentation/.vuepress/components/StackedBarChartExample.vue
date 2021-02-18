@@ -21,7 +21,7 @@
 
 <script>
 import StackedBarChart from "./StackedBarChart";
-import SBCdata from './StackedBarChartData.json'
+import SBCdata from './BarChartData.json'
 
 export default {
     name: "StackedBarChartExample",

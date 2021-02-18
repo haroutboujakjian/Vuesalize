@@ -40,7 +40,7 @@ stacked bar chart
 
 <script>
 import StackedBarChart from "./StackedBarChart";
-import SBCdata from './StackedBarChartData.json'
+import SBCdata from './BarChartData.json'
 
 export default {
     name: "StackedBarChartExample",
@@ -122,13 +122,14 @@ Grouped bar charts are useful in comparing values together in and between groups
                      :x_key="'date'"
                      :width="450"
                      :height="300"
+                     :margin="margin"
                      :colors="['#F8CBAD', '#C5E0B4', '#BDD7EE', '#D5B8EA']">
     </GroupedBarChart>
 </template>
 
 <script>
 import GroupedBarChart from "./GroupedBarChart";
-import GBCdata from "./GroupedBarChartData.json"
+import GBCdata from "./BarChartData.json"
 
 export default {
     name: "GroupedBarChartExample",
@@ -137,7 +138,8 @@ export default {
     },
     data() {
         return {
-            plotdata: GBCdata
+            plotdata: GBCdata,
+            margin: {top: 20, bottom: 20, left: 40, right: 20}
         }
     }
 }
@@ -147,26 +149,25 @@ export default {
 
 #### Format of Data
 
-In order for the grouped bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
-key for the x value, and all the other keys will be for y values. The `GroupedBarChart.json` data file that populates
-the example grouped bar chart has "date" for the x value, and "PlannedMembers", "Attendees", "Guest", "Proxy" for the 
-y value. Both the grouped bar chart and stacked bar chart use the same data format for input.
+In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be
+one key for the x value, and all the other keys will be for y values. The `StackedBarChart.json` data file that
+populates the example grouped bar chart has "date" for the x value, and "Veteran's Benefit Administration",
+"Veteran's Health Administration", and "National Cemetery Administration" for the y values. Both the grouped bar chart
+and stacked bar chart use the same data format for input.
 
 ```json
 [
   {
-    "date": "3/13",
-    "PlannedMembers": 6,
-    "Attendees": 7,
-    "Guest": 3,
-    "Proxy": 5
+    "date": "2019",
+    "Veteran's Benefit Administration": 5921,
+    "Veteran's Health Administration": 1026,
+    "National Cemetery Administration": 2324
   },
   {
-    "date": "3/18",
-    "PlannedMembers": 4,
-    "Attendees": 9,
-    "Guest": 6,
-    "Proxy": 1
+    "date": "2020",
+    "Veteran's Benefit Administration": 1539,
+    "Veteran's Health Administration": 1560,
+    "National Cemetery Administration": 1257
   }, ...
 ]
 ```
@@ -180,6 +181,7 @@ y value. Both the grouped bar chart and stacked bar chart use the same data form
 | `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
 | `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
+| `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
 |`enable_tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
 
 #### Events Emitted
@@ -510,7 +512,7 @@ are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructurin
 
 <script>
 import StackedBarChart from "./StackedBarChart";
-import SBCdata from './StackedBarChartData.json'
+import SBCdata from './BarChartData.json'
 
 export default {
     name: "StackedBarChartExample",
@@ -545,7 +547,7 @@ Most of the plots that contain x and y axes also have the ability to add annotat
 
 <script>
 import StackedBarChart from "./StackedBarChart";
-import SBCdata from './StackedBarChartData.json'
+import SBCdata from './BarChartData.json'
 
 export default {
     name: "StackedBarChartExample",
