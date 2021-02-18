@@ -14,6 +14,10 @@
             </transition-group>
             <g v-xaxis="{scale: xScale}" :transform="`translate(0, ${height - margin.bottom})`"></g>
             <g v-yaxis="{scale: yScale}" :transform="`translate(${margin.left}, 0)`"></g>
+            <line v-for="(line, i) in annotation_lines" :key="`l${i}}`"
+                  :x1="line.x1" :x2="line.x2" :y1="line.y1" :y2="line.y2"
+                  class="annotation" :stroke="line.color" stroke-dasharray="5 5">
+            </line>
         </svg>
         <div v-if="enable_tooltip"
              class="tooltipContainer"
@@ -37,11 +41,6 @@ import {axisBottom, axisLeft} from 'd3-axis';
 // eslint-disable-next-line no-unused-vars
 import {transition} from 'd3-transition';
 
-// todo: ordinal/linear scale toggle
-// todo: include/exclude axes
-// todo: vertical/horizontal toggle
-// todo: default color scale
-
 export default {
     name: "StackedBarChart",
     props: {
@@ -59,7 +58,8 @@ export default {
         enable_tooltip: {
             type: Boolean,
             default: true
-        }
+        },
+        annotations: Array
     },
     data() {
         return {
@@ -86,11 +86,24 @@ export default {
             return scaleLinear()
                 .domain([0, max(this.series, d => max(d, d => d[1]))])
                 .range([this.height - this.margin.bottom, this.margin.top])
+                .nice()
         },
         color() {
             return scaleOrdinal()
                 .domain(this.series.map(d => d.key))
                 .range(this.colors)
+        },
+        annotation_lines() {
+            if (this.annotations === undefined) {
+                return []
+            }
+            return this.annotations.filter(annotation => annotation.type === 'line').map(item => ({
+                x1: item.axis === 'y' ? this.margin.left : this.xScale(item.value),
+                x2: item.axis === 'y' ? this.width - this.margin.right : this.xScale(item.value),
+                y1: item.axis === 'y' ? this.yScale(item.value) : this.margin.top,
+                y2: item.axis === 'y' ? this.yScale(item.value) : this.height - this.margin.bottom,
+                color: item.color
+            }))
         }
     },
     methods: {
@@ -102,6 +115,7 @@ export default {
             this.tooltipContent.x_label = this.x_key
             this.tooltipContent.y_value = bar.data[row.key]
             this.tooltipContent.y_label = row.key
+
         }
     },
     directives: {
@@ -154,7 +168,11 @@ rect {
 }
 
 .activeTooltip {
-    opacity: 1;
+    opacity: 0.9;
     transition: opacity 0.3s;
+}
+
+.annotation {
+    stroke-width: 1;
 }
 </style>

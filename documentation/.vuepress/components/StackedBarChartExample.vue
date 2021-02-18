@@ -7,6 +7,11 @@
             <p>{{ bar.x_label }}, {{ bar.y_label }}, {{ bar.x_value }}, {{ bar.y_value }}</p>
         </template>
     </StackedBarChart>
+    <StackedBarChart v-else-if="annotation" :width="350" :height="250" :plot-data="plotData"
+                     :margin="margin" :x_key="'date'"
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+                     :annotations="annotations">
+    </StackedBarChart>
     <StackedBarChart v-else :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" :x_key="'date'"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
@@ -23,11 +28,12 @@ export default {
     components: {
         StackedBarChart
     },
-    props: ['tooltip'],
+    props: ['tooltip', 'annotation'],
     data() {
         return {
             plotData: SBCdata,
-            margin: {top: 20, bottom: 20, left: 40, right: 20}
+            margin: {top: 20, bottom: 20, left: 40, right: 20},
+            annotations: [{type: "line", axis: "y", color: "#ef0202", value: 8000}]
         }
     }
 }

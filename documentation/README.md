@@ -23,8 +23,12 @@ Install info coming soon... but in the meantime, the components can be retrieved
 
 ### Stacked Bar Chart
 
-Occasionally, it's easier to compare groups by stacking them in one bar. Here is a simple example that constructs a 
+Occasionally, it's easier to compare groups by stacking them in one bar. Here is a simple example that constructs a
 stacked bar chart
+
+<div style="display: flex; justify-content: center">
+<stacked-bar-chart-example></stacked-bar-chart-example>
+</div>
 
 ```html
 <template>
@@ -52,10 +56,6 @@ export default {
 }
 </script>
 ```
-
-<div style="display: flex; justify-content: center">
-<stacked-bar-chart-example></stacked-bar-chart-example>
-</div>
 
 In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
 key for the x value, and all the other keys will be for y values. The `StackedBarChart.json` data file that populates
@@ -112,6 +112,10 @@ Grouped bar charts are useful in comparing values together in and between groups
 
 #### Example
 
+<div style="display: flex; justify-content: center">
+    <grouped-bar-chart-example></grouped-bar-chart-example>
+</div>
+
 ```html
 <template>
     <GroupedBarChart :plotdata="plotdata"
@@ -139,10 +143,6 @@ export default {
 }
 </script>
 ```
-
-<div style="display: flex; justify-content: center">
-    <grouped-bar-chart-example></grouped-bar-chart-example>
-</div>
 
 
 #### Format of Data
@@ -238,6 +238,10 @@ Under construction...
 
 The code below constructs the hierarchical edge bundling plot below it.
 
+<div style="display: flex; justify-content: center">
+    <hierarchical-edge-bundling-example></hierarchical-edge-bundling-example>
+</div>
+
 ```html
 <template>
     <HierarchicalEdgeBundling :plotdata="plotdata"
@@ -262,9 +266,6 @@ export default {
 </script>
 ```
 
-<div style="display: flex; justify-content: center">
-    <hierarchical-edge-bundling-example></hierarchical-edge-bundling-example>
-</div>
 
 #### Format of Data
 
@@ -315,6 +316,8 @@ node. Lastly, the `imports` key contains all of the connection to that node.
 Networks are useful in displaying relationships between groups. The sticky force layout below provides an easy way to
 implement one
 
+<network-example></network-example>
+
 ```html
 <template>
     <div>
@@ -352,8 +355,6 @@ export default {
 }
 </script>
 ```
-
-<network-example></network-example>
 
 #### Props
 
@@ -428,6 +429,8 @@ legend like the one below.
 
 Here is an example that shows how to use a simple legend component in both the vertical and horizontal alignments.
 
+<base-legend-example></base-legend-example>
+
 ```html
 <template>
     <div>
@@ -461,14 +464,11 @@ export default {
 </script>
 ```
 
-<base-legend-example></base-legend-example>
-
 #### Props
 | Name         | Required             | Type     | Default     | Description                                            |
 |--            | :------------------: | -------  | --          |                                                      --|
 | `legend-data`| :heavy_check_mark:   | `Object` |             | data necessary to create the legend                    |
 | `alignment`  |                      | `String` | 'horizontal'| Two options for alignment: 'vertical' or 'horizontal'  |
-
 
 
 ### Loading Spinner
@@ -491,6 +491,10 @@ default tooltip will also have a slot that passes up data about the part of the 
 example that defines a custom tooltip for the same stacked bar chart using the x_label, y_label, x_value, and y_value of
 the bar that is hovered over, which
 are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructuring-Slot-Props) from the `bar` slot
+
+<div style="display: flex; justify-content: center">
+<stacked-bar-chart-example :tooltip="true"></stacked-bar-chart-example>
+</div>
 
 ```html
 <template>
@@ -523,6 +527,49 @@ export default {
 </script>
 ```
 
+### Annotations
+
+Most of the plots that contain x and y axes also have the ability to add annotations. Annotations need to be an array of objects, even if it is only one object. The chart below shows this
+
 <div style="display: flex; justify-content: center">
-<stacked-bar-chart-example :tooltip="true"></stacked-bar-chart-example>
+<stacked-bar-chart-example :annotation="true"></stacked-bar-chart-example>
 </div>
+
+```html
+<template>
+    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
+                     :margin="margin" :x_key="'date'"
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
+    </StackedBarChart>
+</template>
+
+<script>
+import StackedBarChart from "./StackedBarChart";
+import SBCdata from './StackedBarChartData.json'
+
+export default {
+    name: "StackedBarChartExample",
+    components: {
+        StackedBarChart
+    },
+    data() {
+        return {
+            plotData: SBCdata,
+            margin: {top: 20, bottom: 20, left: 40, right: 20},
+            annotations: [{type: "line", axis: "y", color: "#ef0202", value: 8000}]
+        }
+    }
+}
+</script>
+```
+
+#### Format
+
+The annotation object requires the following properties
+
+| Name         | Required             | Type     | Default     | Description                                            |
+|--            | :------------------: | -------  | --          |                                                      --|
+| `type`       | :heavy_check_mark:   | `String` |             | type of annotation, current options: 'line'            |
+| `axis`       | :heavy_check_mark:   | `String` |             | options: "x" or "y"                                    |
+| `value`      | :heavy_check_mark:   | `Number` |             | value on the x or y axis                               |
+| `color`      |  :heavy_check_mark:  | `String` |             | color name, hex code, or rgb value                     |
