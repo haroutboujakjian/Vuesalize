@@ -16,7 +16,7 @@ found [here](./rationale.md)
 
 Any Vue.js based project will be able to take advantage of this library.
 
-Install info coming soon...
+Install info coming soon... but in the meantime, the components can be retrieved from [gitlab](https://gitlab.mitre.org/full-stack-interactive-visualizations/components/-/tree/master/documentation/.vuepress/components)
 
 ## Charts
 

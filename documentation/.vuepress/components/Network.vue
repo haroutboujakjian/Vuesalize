@@ -40,7 +40,7 @@ export default {
         plotData: Object,
         nodeRadius: {
             type: Number,
-            default: 10
+            default: 8
         },
         forceStrength: {
             type: Number,
@@ -96,7 +96,8 @@ circle {
 }
 
 line {
-    stroke: black;
+    stroke: #d9d9d9;
+    stroke-width: 2;
 }
 
 .nodeGrab {
