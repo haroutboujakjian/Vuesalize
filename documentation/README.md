@@ -94,17 +94,19 @@ and stacked bar chart use the same data format for input.
 
 #### Events Emitted
 
-| Name         | Value    |  Description                                                                      |
-|--            | -------  |                                                                                 --|
-| `click`      | `Object` |  x_label, y_label, x_value, and y_value of the bar in the stack that is clicked on|
+| Event        | Location          | Value Emitted    |  Description                                                                      |
+|--            | --------          |------          |                                                                                 --|
+| `click`      |   Rectangle       | `Object`          |  `x_label`, `y_label`, `x_value`, and `y_value` of the bar in the stack that is clicked on|
 
 #### Slots
 
-We provide a default tooltip that gives the x and y value for the bar that is hovered over. However, it is common for
-users to want to define a slightly more custom tooltip that might better fit their needs. So, we provide this option to
-define their own tooltip with the x_label, y_label, x_value, and y_value
-using [slots](https://vuejs.org/v2/guide/components-slots.html). Here is an example below
+We provide a default tooltip that gives the x and y value for the bar that is hovered over. If you want to define a
+slightly more [custom tooltip](#tooltips), then we pass up the bar's info in
+a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 
+| Name         | Value    |  Description                                                                      |
+|--            | -------  |                                                                                 --|
+| `bar`       | `Object`  | contains `x_label`, `y_label`, `x_value`, and `y_value` keys of the bar in the stack that is hovered over|
 
 ### Grouped Bar Chart
 
@@ -490,9 +492,9 @@ The loading spinner is useful when data is being fetched from an API and there i
 ### Tooltips
 
 We provide default tooltips for some of the charts, which make it easy to get up and running quickly. However, it is
-common for users to want to define a slightly more custom tooltip that might better fit their needs. We provide the
-option to use [Slots](https://vuejs.org/v2/guide/components-slots.html)
-and [Scoped Slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots) to handle this. Each chart that has a
+common for users to want to define a slightly more custom tooltip that might better fit their needs. This can be done
+with [Slots](https://vuejs.org/v2/guide/components-slots.html)
+and [Scoped Slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots). Each chart that has a
 default tooltip will also have a slot that passes up data about the part of the chart that is hovered on. Here is an
 example that defines a custom tooltip for the same stacked bar chart using the x_label, y_label, x_value, and y_value of
 the bar that is hovered over, which
