@@ -469,9 +469,10 @@ The legend component takes in a simple object with key value pairs in the form o
 
 ```json
 {
-  "first": "black",
-  "second": "blue",
-  "third": "red"
+  "Veteran's Benefit Administration": "#717e9b",
+  "Veteran's Health Administration": "#b6b6db",
+  "National Cemetery Administration": "#bcd8f1"
+
 }
 ```
 
