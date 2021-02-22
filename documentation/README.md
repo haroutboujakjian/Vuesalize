@@ -58,7 +58,7 @@ export default {
 ```
 
 In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
-key for the x value, and all the other keys will be for y values. The `StackedBarChart.json` data file that populates
+key for the x value, and all the other keys will be for y values. The `BarChartData.json` data file that populates
 the example grouped bar chart has "date" for the x value, and "Veteran's Benefit Administration",
 "Veteran's Health Administration", and "National Cemetery Administration" for the y values. Both the grouped bar chart
 and stacked bar chart use the same data format for input.
@@ -152,7 +152,7 @@ export default {
 #### Format of Data
 
 In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be
-one key for the x value, and all the other keys will be for y values. The `StackedBarChart.json` data file that
+one key for the x value, and all the other keys will be for y values. The `BarChartData.json` data file that
 populates the example grouped bar chart has "date" for the x value, and "Veteran's Benefit Administration",
 "Veteran's Health Administration", and "National Cemetery Administration" for the y values. Both the grouped bar chart
 and stacked bar chart use the same data format for input.
