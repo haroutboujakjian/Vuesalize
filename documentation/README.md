@@ -190,7 +190,65 @@ and stacked bar chart use the same data format for input.
 
 ### Line Chart
 
-Under construction...
+The line chart component allows for one or more lines to be plotted.
+
+<div style="display: flex; justify-content: center">
+    <line-chart-example></line-chart-example>
+</div>
+
+```html
+<template>
+    <LineChart :plot-data="plotData" :x_key="'date'"
+               :width="450" :height="250"
+               :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+               :margin="margin">
+    </LineChart>
+</template>
+
+<script>
+import LineChart from "./LineChart";
+import LCdata from "./BarChartData.json"
+
+export default {
+    name: "LineChartExample",
+    components: {
+        LineChart
+    },
+    data() {
+        return {
+            plotData: LCdata,
+            margin: {top: 20, bottom: 20, left: 40, right: 20}
+        }
+    }
+}
+</script>
+```
+
+#### Props
+
+| Name         | Required             | Type     | Default | Description                                               |
+|--            | :------------------: | -------  | --      |                                                         --|
+| `plotdata`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `x_key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
+| `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
+| `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
+| `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
+| `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
+|`enable_tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
+
+
+#### Events Emitted
+
+#### Slots
+
+The default tooltip that gives all of the values for the x value hovered over. If you want to define a slightly
+more [custom tooltip](#tooltips), then we pass up the line's info in
+a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
+
+| Name         | Value    |  Description                                                                      |
+|--            | -------  |                                                                                 --|
+| `lines`      | `Object` | contains the x key and all of the y keys for the x value that is hovered over     |
+
 
 ### Stacked Area Chart
 
