@@ -1,12 +1,17 @@
 {
-  "name": "components",
+  "name": "vue-charts",
   "version": "0.0.1",
-  "description": "This directory contains chart components and other basic components used in building interactive visualizations on the web. The charts are built using a combination of [Vue.js](https://vuejs.org/v2/guide/) and [D3.js](https://d3js.org/). The main rationale for doing this is to move the SVG definitions to the template (HTML) and let Vue actually control the creating/destroying elements on the page. This is analagous to the enter/update/exit strategy used in D3 but without all of the pain. Additionally, the scales that control the layouts points, bar, axes, etc. are used in computed properties in Vue. This allows for automatic updating of the chart purely based on changes in the data without having to define an additional function to handle updates.",
-  "main": "index.js",
+  "description": "This directory contains chart components and other basic components used in building interactive visualizations on the web.",
+  "main": "dist/vue-charts.umd.js",
+  "module": "dist/vue-charts.esm.js",
+  "unpkg": "dist/vue-charts.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "node_modules/.bin/vuepress dev documentation/",
-    "docs:build": "node_modules/.bin/vuepress build documentation/"
+    "docs:build": "node_modules/.bin/vuepress build documentation/",
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-charts.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-charts.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-charts.min.js"
   },
   "repository": {
     "type": "git",
@@ -15,6 +20,16 @@
   "author": "Harout Boujakjian",
   "license": "ISC",
   "devDependencies": {
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-buble": "^0.21.3",
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.0",
+    "@rollup/plugin-replace": "^2.4.1",
+    "@vue/cli-service": "^4.5.11",
+    "rollup": "^2.40.0",
+    "rollup-plugin-postcss": "^4.0.0",
+    "rollup-plugin-vue": "^6.0.0",
+    "vue-template-compiler": "^2.6.12",
     "vuepress": "^1.8.0"
   },
   "dependencies": {
