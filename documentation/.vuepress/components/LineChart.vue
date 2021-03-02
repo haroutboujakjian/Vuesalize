@@ -84,6 +84,7 @@ export default {
             return scaleTime()
                 .domain(extent(this.plotData, d => new Date(d[this.x_key])))
                 .range([this.margin.left, this.width - this.margin.right])
+                .nice()
         },
         yScale() {
             return scaleLinear()
