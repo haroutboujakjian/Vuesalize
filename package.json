@@ -25,11 +25,8 @@
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-node-resolve": "^11.2.0",
     "@rollup/plugin-replace": "^2.4.1",
-    "@vue/cli-service": "^4.5.11",
     "rollup": "^2.40.0",
     "rollup-plugin-postcss": "^4.0.0",
-    "rollup-plugin-vue": "^6.0.0",
-    "vue-template-compiler": "^2.6.12",
     "vuepress": "^1.8.0"
   },
   "dependencies": {
@@ -42,6 +39,7 @@
     "d3-selection": "^2.0.0",
     "d3-shape": "^2.0.0",
     "d3-transition": "^2.0.0",
-    "leaflet": "^1.7.1"
+    "leaflet": "^1.7.1",
+    "vue": "^2.6.12"
   }
 }
