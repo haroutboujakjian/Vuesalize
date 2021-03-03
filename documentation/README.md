@@ -379,14 +379,18 @@ node. Lastly, the `imports` key contains all of the connection to that node.
 ### Network
 
 Networks are useful in displaying relationships between groups. The sticky force layout below provides an easy way to
-implement one
+implement one. A few features are available that are quite useful: 
+
+1. Individual nodes can be dragged
+2. The entire graph of nodes and links can be panned (e.g. dragged around)
+3. Nodes and links can be added or removed without having to rerender the entire component
 
 <network-example></network-example>
 
 ```html
 <template>
     <div>
-        <Network :width="400" :height="400" :plot-data="plotData"></Network>
+        <Network :width="500" :height="400" :plot-data="plotData"></Network>
     </div>
 </template>
 
@@ -401,17 +405,17 @@ export default {
     data() {
         return {
             colors: ['#3097e9', '#ef4281', '#916bcd', '#33aca0',
-                '#47d4ea', '#f58e3a', '#e0cc64'],
+                '#75e0f3', '#f58e3a', '#e0cc64'],
         }
     },
     computed: {
         plotData() {
             return {
-                nodes: Array.from(Array(30).keys()).map(i => ({
-                    index: i, x: null, y: null,
+                nodes: Array.from(Array(20).keys()).map(i => ({
+                    name: i, x: null, y: null,
                     color: this.colors[Math.ceil(Math.sqrt(i))]
                 })),
-                links: Array.from(Array(29).keys()).map(i => ({
+                links: Array.from(Array(19).keys()).map(i => ({
                     source: Math.floor(Math.sqrt(i)), target: i + 1
                 }))
             }
@@ -430,6 +434,11 @@ export default {
 | `height`        | :heavy_check_mark:  | `Number` |         | chart height in pixels                                    |
 | `node-radius`   |                     | `Number` |   10    | size of node circles                                      |
 | `force-strength`|                     | `Number` |   -80   | [force](https://github.com/d3/d3-force#many-body) causing nodes to repel each other                   |
+
+#### Events
+| Event        | Location       | Value Emitted     |  Description                                                                      |
+|--            | --------       |------             |                                                                                 --|
+| `click`      |   Circle       | `Object`          |  The entire node object is emitted containing node name, x, y, and any other keys |
 
 ### Choropleth
 

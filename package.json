@@ -39,6 +39,7 @@
     "d3-selection": "^2.0.0",
     "d3-shape": "^2.0.0",
     "d3-transition": "^2.0.0",
+    "d3-zoom": "^2.0.0",
     "leaflet": "^1.7.1",
     "vue": "^2.6.12"
   }

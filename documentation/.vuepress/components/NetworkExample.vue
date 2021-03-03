@@ -21,11 +21,11 @@ export default {
     computed: {
         plotData() {
             return {
-                nodes: Array.from(Array(30).keys()).map(i => ({
-                    index: i, x: null, y: null,
+                nodes: Array.from(Array(20).keys()).map(i => ({
+                    name: i, x: null, y: null,
                     color: this.colors[Math.ceil(Math.sqrt(i))]
                 })),
-                links: Array.from(Array(29).keys()).map(i => ({
+                links: Array.from(Array(19).keys()).map(i => ({
                     source: Math.floor(Math.sqrt(i)), target: i + 1
                 }))
             }
