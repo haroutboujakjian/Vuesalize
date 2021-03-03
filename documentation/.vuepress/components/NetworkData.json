@@ -1,0 +1,70 @@
+{
+  "nodes": [
+    {
+      "name": "Jerry",
+      "x": null,
+      "y": null,
+      "color": "#cd34b5"
+    },
+    {
+      "name": "George",
+      "x": null,
+      "y": null,
+      "color": "#fa8775"
+    },
+    {
+      "name": "Kramer",
+      "x": null,
+      "y": null,
+      "color": "#cd34b5"
+    },
+    {
+      "name": "Elaine",
+      "x": null,
+      "y": null,
+      "color": "#cd34b5"
+    },
+    {
+      "name": "Newman",
+      "x": null,
+      "y": null,
+      "color": "#cd34b5"
+    },
+    {
+      "name": "David",
+      "x": null,
+      "y": null,
+      "color": "#4a5ed5"
+    }
+  ],
+  "links": [
+    {
+      "source": "Jerry",
+      "target": "Elaine"
+    },
+    {
+      "source": "Elaine",
+      "target": "David"
+    },
+    {
+      "source": "Jerry",
+      "target": "George"
+    },
+    {
+      "source": "Kramer",
+      "target": "Jerry"
+    },
+    {
+      "source": "Kramer",
+      "target": "George"
+    },
+    {
+      "source": "Elaine",
+      "target": "George"
+    },
+    {
+      "source": "Kramer",
+      "target": "Newman"
+    }
+  ]
+}
