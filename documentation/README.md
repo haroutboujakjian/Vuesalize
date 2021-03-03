@@ -417,7 +417,7 @@ export default {
 The data needs to be an object that has an array of nodes and array of links. A node object should have a name property,
 a null x and y, and a color (if specific nodes should be colored differently). The links need to have source and target
 keys which reference a node by name. Nodes and links can have additional metadata in them as well, as long as the names
-don't conflict the required keys. Here is the data used to create the network above.
+don't conflict with any the required keys. Here is the data used to create the network above.
 
 ```json
 {
