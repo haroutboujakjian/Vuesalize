@@ -396,6 +396,7 @@ implement one. A few features are available that are quite useful:
 
 <script>
 import Network from "./Network";
+import NetworkData from "./NetworkData.json"
 
 export default {
     name: "NetworkExample",
@@ -404,25 +405,47 @@ export default {
     },
     data() {
         return {
-            colors: ['#3097e9', '#ef4281', '#916bcd', '#33aca0',
-                '#75e0f3', '#f58e3a', '#e0cc64'],
+            plotData: NetworkData
         }
     },
-    computed: {
-        plotData() {
-            return {
-                nodes: Array.from(Array(20).keys()).map(i => ({
-                    name: i, x: null, y: null,
-                    color: this.colors[Math.ceil(Math.sqrt(i))]
-                })),
-                links: Array.from(Array(19).keys()).map(i => ({
-                    source: Math.floor(Math.sqrt(i)), target: i + 1
-                }))
-            }
-        },
-    }
 }
 </script>
+```
+
+#### Format of Data
+
+The data needs to be an object that has an array of nodes and array of links. A node object should have a name property,
+a null x and y, and a color (if specific nodes should be colored differently). The links need to have source and target
+keys which reference a node by name. Nodes and links can have additional metadata in them as well, as long as the names
+don't conflict the required keys. Here is the data used to create the network above.
+
+```json
+{
+  "nodes": [
+    {
+      "name": "Jerry",
+      "x": null,
+      "y": null,
+      "color": "#cd34b5"
+    },
+    {
+      "name": "George",
+      "x": null,
+      "y": null,
+      "color": "#fa8775"
+    }, ...
+  ],
+  "links": [
+    {
+      "source": "Jerry",
+      "target": "Elaine"
+    },
+    {
+      "source": "Elaine",
+      "target": "David"
+    }, ...
+  ]
+}
 ```
 
 #### Props
@@ -432,7 +455,7 @@ export default {
 | `plotdata`      | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                        |
 | `width`         | :heavy_check_mark:  | `Number` |         | chart width in pixels                                     |
 | `height`        | :heavy_check_mark:  | `Number` |         | chart height in pixels                                    |
-| `node-radius`   |                     | `Number` |   10    | size of node circles                                      |
+| `node-radius`   |                     | `Number` |   8    | size of node circles                                      |
 | `force-strength`|                     | `Number` |   -80   | [force](https://github.com/d3/d3-force#many-body) causing nodes to repel each other                   |
 
 #### Events
