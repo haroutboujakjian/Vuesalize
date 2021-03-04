@@ -520,11 +520,9 @@ Legends are useful for many charts and we provide a simple one in our library. H
 <template>
     <div>
         <p>Horiztonal</p>
-        <BaseLegend :legend-data="legendData" :alignment="'horizontal'">
-        </BaseLegend>
+        <BaseLegend :legend-data="legendData" :alignment="'horizontal'"></BaseLegend>
         <p>Vertical</p>
-        <BaseLegend :legend-data="legendData" :alignment="'vertical'">
-        </BaseLegend>
+        <BaseLegend :legend-data="legendData" :alignment="'vertical'"></BaseLegend>
     </div>
 </template>
 
@@ -538,36 +536,49 @@ export default {
     },
     data() {
         return {
-            legendData: {
-                "Veteran's Benefit Administration": '#717e9b',
-                "Veteran's Health Administration": '#b6b6db',
-                "National Cemetery Administration": '#bcd8f1'
-            }
+            legendData: [
+                {name: "Veteran's Benefit Administration", color: '#717e9b'},
+                {name: "Veteran's Health Administration", color: '#b6b6db'},
+                {name: "National Cemetery Administration", color: '#bcd8f1'}
+            ]
         }
     }
 }
 </script>
 ```
 
-#### Props
-| Name         | Required             | Type     | Default     | Description                                            |
-|--            | :------------------: | -------  | --          |                                                      --|
-| `legend-data`| :heavy_check_mark:   | `Object` |             | data necessary to create the legend                    |
-| `alignment`  |                      | `String` | 'horizontal'| Two options for alignment: 'vertical' or 'horizontal'  |
-
 #### Format of Data
 
-The legend component takes in a simple object with key value pairs in the form of label:color. 
+The legend component takes in a simple array of objects that contains name and color keys.
 
 ```json
-{
-  "Veteran's Benefit Administration": "#717e9b",
-  "Veteran's Health Administration": "#b6b6db",
-  "National Cemetery Administration": "#bcd8f1"
-
-}
+[
+  {
+    "name": "Veteran's Benefit Administration",
+    "color": "#717e9b"
+  },
+  {
+    "name": "Veteran's Health Administration",
+    "color": "#b6b6db"
+  },
+  {
+    "name": "National Cemetery Administration",
+    "color": "#bcd8f1"
+  }
+]
 ```
 
+#### Props
+| Name            | Required             | Type     | Default     | Description                                            |
+|--               | :------------------: | -------  | --          |                                                      --|
+| `legend-data`   | :heavy_check_mark:   | `Object` |             | data necessary to create the legend                    |
+| `alignment`     |                      | `String` | 'horizontal'| Two options for alignment: 'vertical' or 'horizontal'  |
+| `enable-toggle` |                      | `Boolean` | false      | allows the items in the legend to be clickable and emits the object on click|
+
+#### Events
+| Event        | Location       | Value Emitted     |  Description                                                                         |
+|--            | --------       |------             |                                                                                    --|
+| `click`      | Marker or text | `Object`          | If `enable-toggle` prop is true, the entire item object (name and color) is emitted                    |
 
 ### Loading Spinner
 

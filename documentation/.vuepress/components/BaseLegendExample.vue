@@ -17,11 +17,11 @@ export default {
     },
     data() {
         return {
-            legendData: {
-                "Veteran's Benefit Administration": '#717e9b',
-                "Veteran's Health Administration": '#b6b6db',
-                "National Cemetery Administration": '#bcd8f1'
-            }
+            legendData: [
+                {name: "Veteran's Benefit Administration", color: '#717e9b'},
+                {name: "Veteran's Health Administration", color: '#b6b6db'},
+                {name: "National Cemetery Administration", color: '#bcd8f1'}
+            ]
         }
     }
 }
