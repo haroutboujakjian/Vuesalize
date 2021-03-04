@@ -3,7 +3,7 @@
         <li v-for="(item, i) in LegendData" :key="item.name"
             :style="item_alignment"
             @click="$emit('click', item)">
-            <div class="legendItem">
+            <div :class="{legendItem: enableToggle}">
                 <span :style="marker[i]" :class="{toggleMarker: enableToggle}"></span>
                 <p :class="{toggle: enableToggle}">{{ item.name }}</p>
             </div>
