@@ -12,14 +12,14 @@
                     </rect>
                 </g>
             </transition-group>
-            <g v-xaxis="{scale: xScale}" :transform="`translate(0, ${height - margin.bottom})`"></g>
-            <g v-yaxis="{scale: yScale}" :transform="`translate(${margin.left}, 0)`"></g>
+            <g v-xaxis="{scale: xScale}" class="xaxis" :transform="`translate(0, ${height - margin.bottom})`"></g>
+            <g v-yaxis="{scale: yScale}" class="yaxis" :transform="`translate(${margin.left}, 0)`"></g>
             <line v-for="(line, i) in annotation_lines" :key="`l${i}}`"
                   :x1="line.x1" :x2="line.x2" :y1="line.y1" :y2="line.y2"
                   class="annotation" :stroke="line.color" stroke-dasharray="5 5">
             </line>
         </svg>
-        <div v-if="enable_tooltip"
+        <div v-if="enable_tooltip && showTooltip"
              class="tooltipContainer"
              :class="{activeTooltip: showTooltip}"
              :style="`top: ${tooltipContent.top + 10}px; left: ${tooltipContent.left + 10}px`">
@@ -125,7 +125,7 @@ export default {
         },
         yaxis(el, binding) {
             let scale = binding.value.scale
-            select(el).transition().duration(500).call(axisLeft(scale).ticks())
+            select(el).transition().duration(500).call(axisLeft(scale).ticks(5))
         }
     }
 }
