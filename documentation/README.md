@@ -648,7 +648,8 @@ Most of the plots that contain x and y axes also have the ability to add annotat
 <template>
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" :x_key="'date'"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+                     :annotations="annotations">
     </StackedBarChart>
 </template>
 
