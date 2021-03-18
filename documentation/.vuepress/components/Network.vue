@@ -20,7 +20,7 @@
                    class="node nozoom"
                    :class="{ nodeGrabbing: currentMove}"
                    @mousedown="dragStart($event, node)"
-                   @mouseup="emitClick(node)">
+                   @mouseup="emitClick($event, node)">
                     <circle :cx="node.x" :cy="node.y"
                             :r="nodeRadius" :fill="node.color"
                             class="nozoom">
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import {forceSimulation, forceManyBody, forceCenter, forceX, forceY, forceLink, forceCollide} from 'd3-force';
+import {forceCenter, forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY} from 'd3-force';
 import {zoom, zoomTransform} from 'd3-zoom';
 import {select} from 'd3-selection';
 //@todo add tooltip
@@ -119,11 +119,14 @@ export default {
             this.currentMove = null
             this.simulation.restart()
         },
-        emitClick(node) {
+        emitClick(evt, node) {
             if (this.dragged) {
                 return
             } else {
-                this.$emit('click', node)
+                const new_node = Object.assign({}, node)
+                new_node.clientX = evt.clientX
+                new_node.clientY = evt.clientY
+                this.$emit('click', new_node)
             }
         },
         addOrRemoveNodesAndLinks(new_nodes, old_nodes, new_links, old_links) {
@@ -157,7 +160,7 @@ export default {
             this.simulation.nodes(this.graph.nodes)
             this.simulation.force('link').links(this.graph.links)
 
-            this.simulation.alpha(1).restart()
+            this.simulation.alpha(0.03).restart()
         }
     }
 }
