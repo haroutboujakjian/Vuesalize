@@ -12,6 +12,10 @@
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                      :annotations="annotations">
     </StackedBarChart>
+    <StackedBarChart v-else-if="horizontal" :width="350" :height="250" :plot-data="plotData"
+                     :margin="margin" :x_key="'date'" :direction="'horizontal'"
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
+    </StackedBarChart>
     <StackedBarChart v-else :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" :x_key="'date'"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
@@ -28,7 +32,7 @@ export default {
     components: {
         StackedBarChart
     },
-    props: ['tooltip', 'annotation'],
+    props: ['tooltip', 'annotation', 'horizontal'],
     data() {
         return {
             plotData: SBCdata,

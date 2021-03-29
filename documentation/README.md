@@ -23,7 +23,7 @@ Install info coming soon... but in the meantime, the components can be retrieved
 
 ### Stacked Bar Chart
 
-Occasionally, it's easier to compare groups by stacking them in one bar. Here is a simple example that constructs a
+Stacked bar charts are one of the most popular chart types. Here is a simple example that constructs a
 stacked bar chart
 
 <div style="display: flex; justify-content: center">
@@ -57,6 +57,41 @@ export default {
 </script>
 ```
 
+or a horiztonal bar chart can be displayed by passing in 'horizontal' for the `direction` prop.
+
+<div style="display: flex; justify-content: center">
+<stacked-bar-chart-example :horizontal="true"></stacked-bar-chart-example>
+</div>
+
+```html
+<template>
+    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
+                     :margin="margin" :x_key="'date'"
+                     :direction="'horizontal'"
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
+    </StackedBarChart>
+</template>
+
+<script>
+import StackedBarChart from "./StackedBarChart";
+import SBCdata from './BarChartData.json'
+
+export default {
+    name: "StackedBarChartExample",
+    components: {
+        StackedBarChart
+    },
+    data() {
+        return {
+            plotData: SBCdata,
+            margin: {top: 20, bottom: 20, left: 40, right: 20}
+        }
+    }
+}
+</script>
+```
+
+
 In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
 key for the x value, and all the other keys will be for y values. The `BarChartData.json` data file that populates
 the example grouped bar chart has "date" for the x value, and "Veteran's Benefit Administration",
@@ -89,6 +124,8 @@ and stacked bar chart use the same data format for input.
 | `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
 | `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group|
+| `direction`  |                      | `String` |'vertical' | direction of the chart. can be 'vertical' or 'horizontal'     |
+| `bar_axis_location`|                      | `String`| 'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
 | `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
 |`enable_tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
 
