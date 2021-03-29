@@ -4,7 +4,7 @@
                      :width="450"
                      :height="300"
                      :margin="margin"
-                     :colors="['#F8CBAD', '#C5E0B4', '#BDD7EE', '#D5B8EA']">
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </GroupedBarChart>
 </template>
 
