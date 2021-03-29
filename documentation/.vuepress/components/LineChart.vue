@@ -126,7 +126,7 @@ export default {
             const scale = binding.value.scale
             const height = binding.value.height
             select(el).transition().duration(500)
-                .call(axisBottom(scale).tickSize(-height).tickSizeOuter(0).ticks(6))
+                .call(axisBottom(scale).tickSize(-height).tickSizeOuter(0).tickPadding(5).ticks(6))
                 .selectAll(".tick line").style("stroke-width", "0.3px")
         },
         yaxis(el, binding) {
