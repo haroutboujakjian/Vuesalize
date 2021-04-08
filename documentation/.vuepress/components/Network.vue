@@ -4,14 +4,22 @@
          @mousemove="drag($event)"
          @mouseup="drop()" @mouseleave="drop()">
 
+        <defs>
+            <marker id="arrow" viewBox="0 -5 10 10" refX="10" refY="0" markerWidth="9" markerHeight="9"
+                    orient="auto" markerUnits="userSpaceOnUse">
+                <path d="M0,-5L10,0L0,5" class="arrowHead"></path>
+            </marker>
+        </defs>
+
         <g id="graphContainer" :transform="zoomTranslate">
             <g class="lines nozoom">
-                <line v-for="link in graph.links"
+                <line v-for="link in links"
                       :key="`${link.source.name}_${link.target.name}`"
                       :x1="link.source.x"
                       :y1="link.source.y"
-                      :x2="link.target.x"
-                      :y2="link.target.y">
+                      :x2="link.x2"
+                      :y2="link.y2"
+                      marker-end="url(#arrow)">
                 </line>
             </g>
 
@@ -86,6 +94,24 @@ export default {
     computed: {
         nodes() {
             return this.graph.nodes.filter(node => typeof node.name !== 'object' && node.name !== null)
+        },
+        links() {
+            if (!this.graph.links) return []
+            return this.graph.links.map(link => {
+                const x1 = link.source.x
+                const y1 = link.source.y
+                const x2 = link.target.x
+                const y2 = link.target.y
+                const target_radius = link.target.radius || this.nodeRadius
+                const r = Math.hypot(x2 - x1, y2 - y1)
+                const offsetX = ((x2 - x1) * target_radius) / r
+                const offsetY = ((y2 - y1) * target_radius) / r
+                return {
+                    ...link,
+                    x2: x2 - offsetX,
+                    y2: y2 - offsetY
+                }
+            })
         },
         zoomFunction() {
             return zoom().filter(event => !event.target.classList.contains("nozoom"))
@@ -176,6 +202,10 @@ circle {
 line {
     stroke: #d9d9d9;
     stroke-width: 2;
+}
+
+.arrowHead {
+    fill: #d9d9d9;
 }
 
 .nodeGrabbing {
