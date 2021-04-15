@@ -1,10 +1,11 @@
 <template>
     <ul>
-        <li v-for="(key, value) in LegendData" :key="key"
-            :style="{'display': item_alignment}">
-            <div>
-                <span :style="`background-color: ${key}`"></span>
-                <p>{{ value }}</p>
+        <li v-for="(item, i) in LegendData" :key="item.name"
+            :style="item_alignment"
+            @click="$emit('click', item)">
+            <div :class="{legendItem: enableToggle}">
+                <span :style="marker[i]" :class="{toggleMarker: enableToggle}"></span>
+                <p :class="{toggle: enableToggle}">{{ item.name }}</p>
             </div>
         </li>
     </ul>
@@ -14,21 +15,46 @@
 export default {
     name: "BaseLegend",
     props: {
-        "LegendData": Object,
-        "alignment": {
+        LegendData: Array,
+        alignment: {
             type: String,
             default: 'horizontal'
+        },
+        enableToggle: {
+            type: Boolean,
+            default: false
         }
+
     },
     computed: {
         item_alignment() {
-            if (this.alignment === 'horizontal') {
-                return 'inline-block'
-            } else if (this.alignment === 'vertical') {
-                return 'block'
-            } else {
-                return ''
+            return {
+                display: this.alignment === 'horizontal' ? 'inline-block' : 'block'
             }
+        },
+        marker() {
+            if (this.enableToggle) {
+                return this.LegendData.map(item => ({
+                    backgroundColor: item.selected ? item.color : '',
+                    border: item.selected ? '' : 'solid 1px black',
+                    cursor: 'pointer',
+                }))
+            } else if (!this.enableToggle) {
+                return this.LegendData.map(item => ({
+                    backgroundColor: item.color,
+                }))
+            }
+            return {}
+        },
+        text() {
+            if (this.enableToggle) {
+                return {
+                    cursor: 'pointer',
+                }
+            } else if (!this.enableToggle) {
+                return {}
+            }
+            return {}
         }
     }
 }
@@ -62,4 +88,26 @@ div {
 p {
     margin: 0;
 }
+
+.legendItem span {
+    border: solid 1px transparent;
+    transition: border 0.2s;
+}
+
+.legendItem:hover span {
+    border: solid 1px #2141c1;
+    transition: border 0.2s;
+}
+
+.toggle {
+    cursor: pointer;
+    color: #4a4a4a;
+    transition: color 0.2s;
+}
+
+.toggle:hover {
+    color: black;
+    transition: color 0.2s;
+}
+
 </style>

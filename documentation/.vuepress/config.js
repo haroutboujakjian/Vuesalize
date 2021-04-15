@@ -1,5 +1,5 @@
 module.exports = {
-    title: 'Vue/D3 charts',
+    title: 'Vuesalize',
     themeConfig: {
         nav: [
             {text: 'Home', link: '/'},

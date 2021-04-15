@@ -1,18 +1,18 @@
 {
-  "name": "vue-charts",
-  "version": "0.0.1",
+  "name": "vuesalize",
+  "version": "0.0.24",
   "description": "This directory contains chart components and other basic components used in building interactive visualizations on the web.",
-  "main": "dist/vue-charts.umd.js",
-  "module": "dist/vue-charts.esm.js",
-  "unpkg": "dist/vue-charts.min.js",
+  "private": false,
+  "main": "dist/vuesalize.common.js",
+  "unpkg": "dist/vuesalize.umd.min.js",
   "scripts": {
     "docs:dev": "node_modules/.bin/vuepress dev documentation/",
     "docs:build": "node_modules/.bin/vuepress build documentation/",
-    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
-    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-charts.umd.js",
-    "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-charts.esm.js",
-    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-charts.min.js"
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git@gitlab.mitre.org:full-stack-interactive-visualizations/components.git"
@@ -20,13 +20,7 @@
   "author": "Harout Boujakjian",
   "license": "ISC",
   "devDependencies": {
-    "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-buble": "^0.21.3",
-    "@rollup/plugin-commonjs": "^17.1.0",
-    "@rollup/plugin-node-resolve": "^11.2.0",
-    "@rollup/plugin-replace": "^2.4.1",
-    "rollup": "^2.40.0",
-    "rollup-plugin-postcss": "^4.0.0",
+    "@vue/cli-service": "^4.5.12",
     "vuepress": "^1.8.0"
   },
   "dependencies": {

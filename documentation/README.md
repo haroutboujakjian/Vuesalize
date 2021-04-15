@@ -14,9 +14,58 @@ found [here](./rationale.md)
 
 ## Installation
 
-Any Vue.js based project will be able to take advantage of this library.
+Any Vue.js based project will be able to take advantage of this library. The library is currently available on npm. The 
+steps to use is it in a project are as follows: 
 
-Install info coming soon... but in the meantime, the components can be retrieved from [gitlab](https://gitlab.mitre.org/full-stack-interactive-visualizations/components/-/tree/master/documentation/.vuepress/components)
+1. Install from npm using `npm install vuesalize`
+2. In `main.js`, add the components that are going to be used in the project. Here is an example below for a project
+using the `BaseLegend` and `LoaderSpinning` components
+   
+```js
+import LoaderSpinning from 'vuesalize'
+import BaseLegend from 'vuesalize'
+import 'vuesalize/dist/vuesalize.css'
+
+Vue.use(LoaderSpinning, BaseLegend)
+```
+
+3. Start using the components in templates. For example, if the `BaseLegend` and `LoaderSpinning` components were going 
+   to be used in a default `App.vue` file, this is how it would be setup:
+
+```html
+<template>
+    <div id="app">
+        <BaseLegend :legend-data="sampleLegendData"></BaseLegend>
+        <LoaderSpinning></LoaderSpinning>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'App',
+    data() {
+        return {
+            sampleLegendData: [{name: 'hello', color: 'red'}, {name: 'bue', color: 'blue'}],
+        }
+    }
+}
+</script>
+
+<style>
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+}
+</style>
+```
+
+Examples of how each of the components can be used in each of the sections.
+
+Additionally, the SFC component templates can be retrieved from [gitlab](https://gitlab.mitre.org/full-stack-interactive-visualizations/components/-/tree/master/documentation/.vuepress/components)
 
 ## Charts
 
