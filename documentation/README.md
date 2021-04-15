@@ -690,7 +690,7 @@ are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructurin
 ```html
 <template>
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" :x_key="'date'"
+                     :margin="margin" x-key="date"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
         <template v-slot:tooltip="{ bar }">
             <h2>Hello from inside the tooltip. Here are values when you hover over a bar</h2>
@@ -729,7 +729,7 @@ Most of the plots that contain x and y axes also have the ability to add annotat
 ```html
 <template>
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" :x_key="'date'"
+                     :margin="margin" x-key="date"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                      :annotations="annotations">
     </StackedBarChart>
