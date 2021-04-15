@@ -8,7 +8,7 @@
   "scripts": {
     "docs:dev": "node_modules/.bin/vuepress dev documentation/",
     "docs:build": "node_modules/.bin/vuepress build documentation/",
-    "build": "npm run build:umd & npm run build:es & npm run build:unpkg"
+    "build": "vue-cli-service build --target lib --name vuesalize src/main.js"
   },
   "files": [
     "dist"
