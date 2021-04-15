@@ -15,7 +15,7 @@
             </g>
         </svg>
 
-        <div v-if="enable_tooltip && showTooltip" class="tooltipContainer"
+        <div v-if="enableTooltip && showTooltip" class="tooltipContainer"
              :class="{ activeTooltip: showTooltip}"
              :style="{top: tooltip.y, left: tooltip.x}">
             <slot name="tooltip" :lines="tooltip.values">
@@ -48,8 +48,8 @@ export default {
             }
         },
         colors: Array,
-        x_key: String,
-        enable_tooltip: {
+        xKey: String,
+        enableTooltip: {
             type: Boolean,
             default: true,
         }
@@ -66,14 +66,14 @@ export default {
     },
     computed: {
         object_keys() {
-            return Object.keys(this.plotData[0]).filter(item => item !== this.x_key).sort()
+            return Object.keys(this.plotData[0]).filter(item => item !== this.xKey).sort()
         },
         x_values() {
-            return this.plotData.map(item => item[this.x_key])
+            return this.plotData.map(item => item[this.xKey])
         },
         y_values() {
             return Object.keys(this.plotData[0])
-                .filter(key => key !== this.x_key)
+                .filter(key => key !== this.xKey)
                 .sort()
                 .map(key => ({name: key, values: this.plotData.map(year => year[key])}))
         },
@@ -82,7 +82,7 @@ export default {
         },
         xScale() {
             return scaleTime()
-                .domain(extent(this.plotData, d => new Date(d[this.x_key])))
+                .domain(extent(this.plotData, d => new Date(d[this.xKey])))
                 .range([this.margin.left, this.width - this.margin.right])
                 .nice()
         },
@@ -101,7 +101,7 @@ export default {
                 .y(d => this.yScale(d))
         },
         xBisector() {
-            return bisector(d => new Date(d[this.x_key])).left
+            return bisector(d => new Date(d[this.xKey])).left
         }
     },
     methods: {
@@ -126,7 +126,7 @@ export default {
             const scale = binding.value.scale
             const height = binding.value.height
             select(el).transition().duration(500)
-                .call(axisBottom(scale).tickSize(-height).tickSizeOuter(0).ticks(6))
+                .call(axisBottom(scale).tickSize(-height).tickSizeOuter(0).tickPadding(5).ticks(6))
                 .selectAll(".tick line").style("stroke-width", "0.3px")
         },
         yaxis(el, binding) {

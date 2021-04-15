@@ -281,7 +281,7 @@ The line chart component allows for one or more lines to be plotted.
 
 ```html
 <template>
-    <LineChart :plot-data="plotData" :x_key="'date'"
+    <LineChart :plot-data="plotData" x-key="date"
                :width="450" :height="250"
                :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                :margin="margin">
@@ -311,13 +311,13 @@ export default {
 
 | Name         | Required             | Type     | Default | Description                                               |
 |--            | :------------------: | -------  | --      |                                                         --|
-| `plotdata`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
-| `x_key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
+| `plot-data`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `x-key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
 | `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
 | `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
 | `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
-|`enable_tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
+|`enable-tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
 
 
 #### Events Emitted
@@ -392,9 +392,8 @@ The code below constructs the hierarchical edge bundling plot below it.
 
 ```html
 <template>
-    <HierarchicalEdgeBundling :plotdata="plotdata"
-                              :width="600"
-                              :height="600">
+    <HierarchicalEdgeBundling :plot-data="plotdata"
+                              :width="600" :height="600">
     </HierarchicalEdgeBundling>
 </template>
 
@@ -450,7 +449,7 @@ node. Lastly, the `imports` key contains all of the connection to that node.
 
 | Name            | Required             | Type     | Default | Description                                               |
 |--               | :------------------: | -------  | --      |                                                         --|
-| `plotdata`      | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `plot-data`      | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
 | `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
 | `radial-margin` |                      | `Number` | 70      | margin (in pixels) between the text label and edge of svg |
@@ -535,7 +534,7 @@ don't conflict with any the required keys. Here is the data used to create the n
 
 | Name            | Required            | Type     | Default | Description                                               |
 |--               | :-----------------: | -------  | --      |                                                         --|
-| `plotdata`      | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                        |
+| `plot-data`      | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                        |
 | `width`         | :heavy_check_mark:  | `Number` |         | chart width in pixels                                     |
 | `height`        | :heavy_check_mark:  | `Number` |         | chart height in pixels                                    |
 | `node-radius`   |                     | `Number` |   8    | size of node circles                                      |

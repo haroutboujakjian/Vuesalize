@@ -36,7 +36,7 @@ import {ascending} from 'd3-array';
 export default {
     name: "HierarchicalEdgeBundling",
     props: {
-        plotdata: {type: Array, required: true},
+        plotData: {type: Array, required: true},
         width: Number,
         height: Number,
         radialMargin: {
@@ -63,7 +63,7 @@ export default {
             return this.height / 2
         },
         rootData() {
-            let plotdataClone = JSON.parse(JSON.stringify(this.plotdata))
+            let plotdataClone = JSON.parse(JSON.stringify(this.plotData))
             return this.rootCalc(plotdataClone)
         },
         lines() {
