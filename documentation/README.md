@@ -82,7 +82,7 @@ stacked bar chart
 ```html
 <template>
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" :x_key="'date'"
+                     :margin="margin" x-key="date"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </StackedBarChart>
 </template>
@@ -115,8 +115,8 @@ or a horiztonal bar chart can be displayed by passing in 'horizontal' for the `d
 ```html
 <template>
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" :x_key="'date'"
-                     :direction="'horizontal'"
+                     :margin="margin" x-key="date"
+                     direction="horizontal"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </StackedBarChart>
 </template>
@@ -168,15 +168,15 @@ and stacked bar chart use the same data format for input.
 
 | Name         | Required             | Type     | Default | Description                                               |
 |--            | :------------------: | -------  | --      |                                                         --|
-| `plotdata`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
-| `x_key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
+| `plot-data`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `x-key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
 | `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
 | `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group|
 | `direction`  |                      | `String` |'vertical' | direction of the chart. can be 'vertical' or 'horizontal'     |
-| `bar_axis_location`|                      | `String`| 'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
+| `bar-axis-location`|                      | `String`| 'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
 | `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
-|`enable_tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
+|`enable-tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
 
 #### Events Emitted
 
@@ -206,11 +206,8 @@ Grouped bar charts are useful in comparing values together in and between groups
 
 ```html
 <template>
-    <GroupedBarChart :plotdata="plotdata"
-                     :x_key="'date'"
-                     :width="450"
-                     :height="300"
-                     :margin="margin"
+    <GroupedBarChart :plot-data="plotdata" x-key="date"
+                     :width="450" :height="300" :margin="margin"
                      :colors="['#F8CBAD', '#C5E0B4', '#BDD7EE', '#D5B8EA']">
     </GroupedBarChart>
 </template>
@@ -237,7 +234,7 @@ export default {
 
 #### Format of Data
 
-In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be
+In order for the stacked bar chart to render properly, `plot-data` needs to be as an array of objects. There should be
 one key for the x value, and all the other keys will be for y values. The `BarChartData.json` data file that
 populates the example grouped bar chart has "date" for the x value, and "Veteran's Benefit Administration",
 "Veteran's Health Administration", and "National Cemetery Administration" for the y values. Both the grouped bar chart
@@ -264,13 +261,13 @@ and stacked bar chart use the same data format for input.
 
 | Name         | Required             | Type     | Default | Description                                               |
 |--            | :------------------: | -------  | --      |                                                         --|
-| `plotdata`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
-| `x_key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
+| `plot-data`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `x-key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
 | `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
 | `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
 | `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
-|`enable_tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
+|`enable-tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
 
 #### Events Emitted
 

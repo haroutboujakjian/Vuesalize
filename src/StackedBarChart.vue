@@ -1,25 +1,50 @@
 <template>
     <figure>
         <svg :width="width" :height="height">
-            <transition-group tag="g">
-                <g v-for="row in series" :key="row.key" :fill="color(row.key)">
-                    <rect class="animate" v-for="(bar, i) in row" :key="i"
-                          :x="xScale(bar.data[x_key])" :y="yScale(bar[1])"
-                          :width="xScale.bandwidth()" :height="yScale(bar[0])-yScale(bar[1])"
-                          @mouseover="populateTooltip($event, bar, row)"
-                          @mouseout="showTooltip = false"
-                          @click="$emit('click', tooltipContent)">
-                    </rect>
+            <template v-if="direction === 'vertical'">
+                <transition-group tag="g">
+                    <g v-for="row in series" :key="row.key" :fill="color(row.key)">
+                        <rect class="animate" v-for="(bar, i) in row" :key="i"
+                              :x="barScale(bar.data[xKey])" :y="linearScale(bar[1])"
+                              :width="barScale.bandwidth()" :height="linearScale(bar[0])-linearScale(bar[1])"
+                              @mouseover="populateTooltip($event, bar, row)"
+                              @mouseout="showTooltip = false"
+                              @click="$emit('click', tooltipContent)">
+                        </rect>
+                    </g>
+                </transition-group>
+                <g v-baraxis="{scale: barScale, direction: 'vertical'}" class="xaxis"
+                   :transform="`translate(0, ${height - margin.bottom})`">
                 </g>
-            </transition-group>
-            <g v-xaxis="{scale: xScale}" :transform="`translate(0, ${height - margin.bottom})`"></g>
-            <g v-yaxis="{scale: yScale}" :transform="`translate(${margin.left}, 0)`"></g>
+                <g v-linearaxis="{scale: linearScale, direction: 'vertical'}" class="yaxis"
+                   :transform="`translate(${margin.left}, 0)`">
+                </g>
+            </template>
+            <template v-else-if="direction === 'horizontal'">
+                <transition-group tag="g">
+                    <g v-for="row in series" :key="row.key" :fill="color(row.key)">
+                        <rect class="animate" v-for="(bar, i) in row" :key="i"
+                              :y="barScale(bar.data[xKey])" :x="linearScale(bar[0])"
+                              :height="barScale.bandwidth()" :width="linearScale(bar[1])-linearScale(bar[0])"
+                              @mouseover="populateTooltip($event, bar, row)"
+                              @mouseout="showTooltip = false"
+                              @click="$emit('click', tooltipContent)">
+                        </rect>
+                    </g>
+                </transition-group>
+                <g v-baraxis="{scale: barScale, direction: 'horizontal'}" class="yaxis"
+                   :transform="`translate(${margin.left}, 0)`">
+                </g>
+                <g v-linearaxis="{scale: linearScale,  direction: 'horizontal'}" class="xaxis"
+                   :transform="`translate(0, ${barAxisLocation === 'top' ? margin.top : height - margin.bottom})`">
+                </g>
+            </template>
             <line v-for="(line, i) in annotation_lines" :key="`l${i}}`"
                   :x1="line.x1" :x2="line.x2" :y1="line.y1" :y2="line.y2"
                   class="annotation" :stroke="line.color" stroke-dasharray="5 5">
             </line>
         </svg>
-        <div v-if="enable_tooltip"
+        <div v-if="enableTooltip && showTooltip"
              class="tooltipContainer"
              :class="{activeTooltip: showTooltip}"
              :style="`top: ${tooltipContent.top + 10}px; left: ${tooltipContent.left + 10}px`">
@@ -37,7 +62,7 @@ import {stack} from 'd3-shape';
 import {scaleBand, scaleLinear, scaleOrdinal} from 'd3-scale';
 import {max} from 'd3-array';
 import {select} from 'd3-selection';
-import {axisBottom, axisLeft} from 'd3-axis';
+import {axisBottom, axisLeft, axisTop} from 'd3-axis';
 // eslint-disable-next-line no-unused-vars
 import {transition} from 'd3-transition';
 
@@ -46,6 +71,20 @@ export default {
     props: {
         width: Number,
         height: Number,
+        direction: {
+            type: String,
+            default: 'vertical',
+            validator: function (value) {
+                return ['vertical', 'horizontal'].indexOf(value) !== -1
+            }
+        },
+        barAxisLocation: {
+            type: String,
+            default: 'bottom',
+            validator: function (value) {
+                return ['top', 'bottom'].indexOf(value) !== -1
+            }
+        },
         margin: {
             type: Object,
             default: function () {
@@ -54,12 +93,17 @@ export default {
         },
         plotData: Array,
         colors: Array,
-        x_key: String,
-        enable_tooltip: {
+        xKey: String,
+        enableTooltip: {
             type: Boolean,
             default: true
         },
-        annotations: Array
+        annotations: {
+            type: Array,
+            default: function () {
+                return []
+            }
+        }
     },
     data() {
         return {
@@ -69,24 +113,30 @@ export default {
     },
     computed: {
         object_keys() {
-            return Object.keys(this.plotData[0]).filter(item => item !== this.x_key)
+            return Object.keys(this.plotData[0]).filter(item => item !== this.xKey)
         },
         series() {
             return stack()
                 .keys(this.object_keys)(this.plotData)
                 .map(e => (e.forEach(v => v.key = e.key), e))
         },
-        xScale() {
-            return scaleBand()
-                .domain(this.plotData.map(d => d[this.x_key]))
-                .range([this.margin.left, this.width - this.margin.right])
+        barScale() {
+            const barScale = scaleBand()
+                .domain(this.plotData.map(d => d[this.xKey]))
                 .padding(0.1)
+
+            return this.direction === 'vertical'
+                ? barScale.range([this.margin.left, this.width - this.margin.right])
+                : barScale.range([this.margin.top, this.height - this.margin.bottom])
         },
-        yScale() {
-            return scaleLinear()
+        linearScale() {
+            const linearScale = scaleLinear()
                 .domain([0, max(this.series, d => max(d, d => d[1]))])
-                .range([this.height - this.margin.bottom, this.margin.top])
                 .nice()
+
+            return this.direction === 'vertical'
+                ? linearScale.range([this.height - this.margin.bottom, this.margin.top])
+                : linearScale.range([this.margin.left, this.width - this.margin.right])
         },
         color() {
             return scaleOrdinal()
@@ -94,14 +144,11 @@ export default {
                 .range(this.colors)
         },
         annotation_lines() {
-            if (this.annotations === undefined) {
-                return []
-            }
             return this.annotations.filter(annotation => annotation.type === 'line').map(item => ({
-                x1: item.axis === 'y' ? this.margin.left : this.xScale(item.value),
-                x2: item.axis === 'y' ? this.width - this.margin.right : this.xScale(item.value),
-                y1: item.axis === 'y' ? this.yScale(item.value) : this.margin.top,
-                y2: item.axis === 'y' ? this.yScale(item.value) : this.height - this.margin.bottom,
+                x1: item.axis === 'y' ? this.margin.left : this.barScale(item.value),
+                x2: item.axis === 'y' ? this.width - this.margin.right : this.barScale(item.value),
+                y1: item.axis === 'y' ? this.linearScale(item.value) : this.margin.top,
+                y2: item.axis === 'y' ? this.linearScale(item.value) : this.height - this.margin.bottom,
                 color: item.color
             }))
         }
@@ -111,21 +158,34 @@ export default {
             this.showTooltip = true
             this.tooltipContent.top = e.pageY
             this.tooltipContent.left = e.pageX
-            this.tooltipContent.x_value = bar.data[this.x_key]
-            this.tooltipContent.x_label = this.x_key
+            this.tooltipContent.x_value = bar.data[this.xKey]
+            this.tooltipContent.x_label = this.xKey
             this.tooltipContent.y_value = bar.data[row.key]
             this.tooltipContent.y_label = row.key
 
         }
     },
     directives: {
-        xaxis(el, binding) {
-            let scale = binding.value.scale
-            select(el).transition().duration(500).call(axisBottom(scale).ticks())
+        baraxis(el, binding) {
+            const scale = binding.value.scale
+            const direction = binding.value.direction
+
+            if (direction === 'vertical') {
+                select(el).transition().duration(500).call(axisBottom(scale).ticks())
+            } else if (direction === 'horizontal') {
+                select(el).transition().duration(500).call(axisLeft(scale).ticks())
+            }
         },
-        yaxis(el, binding) {
-            let scale = binding.value.scale
-            select(el).transition().duration(500).call(axisLeft(scale).ticks())
+        linearaxis(el, binding, vnode) {
+            const scale = binding.value.scale
+            const direction = binding.value.direction
+            const axisType = vnode.context._props.barAxisLocation === 'bottom' ? axisBottom : axisTop
+
+            if (direction === 'vertical') {
+                select(el).transition().duration(500).call(axisLeft(scale).ticks(5))
+            } else if (direction === 'horizontal') {
+                select(el).transition().duration(500).call(axisType(scale).ticks(5))
+            }
         }
     }
 }
