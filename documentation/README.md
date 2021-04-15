@@ -670,6 +670,26 @@ The loading spinner is useful when data is being fetched from an API and there i
 <loader-spinning></loader-spinning>
 </div>
 
+#### Example 
+
+```html
+<template>
+    <LoaderSpinning></LoaderSpinning>
+</template>
+
+<script>
+import LoaderSpinning from "./LoaderSpinning";
+
+export default {
+    name: "StackedBarChartExample",
+    components: {
+        LoaderSpinning
+    },
+}
+</script>
+```
+
+
 ## Component Parts
 
 ### Tooltips
