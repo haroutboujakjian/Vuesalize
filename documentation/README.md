@@ -14,8 +14,11 @@ found [here](./rationale.md)
 
 ## Installation
 
-Any Vue.js based project will be able to take advantage of this library. The library is currently available on npm. The 
-steps to use is it in a project are as follows: 
+Any Vue.js based project will be able to take advantage of this library. The library is currently available on npm, and
+it is possible to use it with Vue CLI (recommended) or directly with the CDN version in a `<script>` tag.
+
+### Vue CLI
+The steps to use is it in a project created using the Vue CLI are as follows: 
 
 1. Install from npm using `npm install vuesalize`
 2. In `main.js`, add the components that are going to be used in the project. Here is an example below for a project
@@ -63,7 +66,43 @@ export default {
 </style>
 ```
 
-Examples of how each of the components can be used in each of the sections.
+### CDN
+
+It is quite simple to get started with the CDN. The vuesalize js and css files need to be linked (lines 5 and 7), 
+and the components that will be used must be declared using `Vue.use()` (line 16).
+
+```html {5,7,16}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Browser test</title>
+    <link rel="stylesheet" href="https://unpkg.com/vuesalize@0.0.25/dist/vuesalize.css">
+    <script src="http_cdn.jsdelivr.net_npm_vue@2.6.12_dist_vue.js"></script>
+    <script src="https://unpkg.com/vuesalize@0.0.25/dist/vuesalize.umd.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <loader-spinning></loader-spinning>
+    <base-legend :legend-data="testlegend"></base-legend>
+</div>
+
+<script>
+    Vue.use('loader-spinning', 'base-legend')
+    
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                testlegend: [{name: 'hello', color: 'red'}, {name: 'bue', color: 'blue'}],
+            }
+        }
+    })
+</script>
+</body>
+</html>
+```
+
+Examples of how each of the components can be used is in each of the sections.
 
 Additionally, the SFC component templates can be retrieved from [gitlab](https://gitlab.mitre.org/full-stack-interactive-visualizations/components/-/tree/master/documentation/.vuepress/components)
 
