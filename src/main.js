@@ -44,4 +44,8 @@ Object.keys(Components).forEach(name => {
 //     GlobalVue.use(plugin);
 // }
 
-export default Components;
+export default {
+    StackedBarChart, BaseLegend, LineChart,
+    GroupedBarChart, LoaderSpinning, Network,
+    HierarchicalEdgeBundling
+};

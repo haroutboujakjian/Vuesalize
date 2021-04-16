@@ -1,6 +1,6 @@
 {
   "name": "vuesalize",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "This directory contains chart components and other basic components used in building interactive visualizations on the web.",
   "private": false,
   "main": "dist/vuesalize.common.js",
