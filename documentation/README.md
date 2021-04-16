@@ -88,14 +88,10 @@ stacked bar chart
 </template>
 
 <script>
-import StackedBarChart from "./StackedBarChart";
 import SBCdata from './BarChartData.json'
 
 export default {
     name: "StackedBarChartExample",
-    components: {
-        StackedBarChart
-    },
     data() {
         return {
             plotData: SBCdata,
@@ -122,14 +118,10 @@ or a horiztonal bar chart can be displayed by passing in 'horizontal' for the `d
 </template>
 
 <script>
-import StackedBarChart from "./StackedBarChart";
 import SBCdata from './BarChartData.json'
 
 export default {
     name: "StackedBarChartExample",
-    components: {
-        StackedBarChart
-    },
     data() {
         return {
             plotData: SBCdata,
@@ -213,14 +205,10 @@ Grouped bar charts are useful in comparing values together in and between groups
 </template>
 
 <script>
-import GroupedBarChart from "./GroupedBarChart";
 import GBCdata from "./BarChartData.json"
 
 export default {
     name: "GroupedBarChartExample",
-    components: {
-        GroupedBarChart
-    },
     data() {
         return {
             plotdata: GBCdata,
@@ -289,14 +277,10 @@ The line chart component allows for one or more lines to be plotted.
 </template>
 
 <script>
-import LineChart from "./LineChart";
 import LCdata from "./BarChartData.json"
 
 export default {
     name: "LineChartExample",
-    components: {
-        LineChart
-    },
     data() {
         return {
             plotData: LCdata,
@@ -392,18 +376,15 @@ The code below constructs the hierarchical edge bundling plot below it.
 
 ```html
 <template>
-    <HierarchicalEdgeBundling :plot-data="plotdata"
-                              :width="600" :height="600">
+    <HierarchicalEdgeBundling :plot-data="plotdata" :width="600" :height="600">
     </HierarchicalEdgeBundling>
 </template>
 
 <script>
-import HierarchicalEdgeBundling from "./HierarchicalEdgeBundling";
 import HEBdata from "./HierarchicalEdgeBundlingData.json"
 
 export default {
     name: "HierarchicalEdgeBundlingExample",
-    components: {HierarchicalEdgeBundling},
     data() {
         return {
             plotdata: HEBdata
@@ -471,20 +452,14 @@ implement one. A few features are available that are quite useful:
 
 ```html
 <template>
-    <div>
-        <Network :width="500" :height="400" :plot-data="plotData"></Network>
-    </div>
+    <Network :width="500" :height="400" :plot-data="plotData"></Network>
 </template>
 
 <script>
-import Network from "./Network";
 import NetworkData from "./NetworkData.json"
 
 export default {
     name: "NetworkExample",
-    components: {
-        Network
-    },
     data() {
         return {
             plotData: NetworkData
@@ -601,7 +576,7 @@ Legends are useful for many charts and we provide a simple one in our library. H
 ```html
 <template>
     <div>
-        <p>Horiztonal</p>
+        <p>Horizontal</p>
         <BaseLegend :legend-data="legendData" :alignment="'horizontal'"></BaseLegend>
         <p>Vertical</p>
         <BaseLegend :legend-data="legendData" :alignment="'vertical'"></BaseLegend>
@@ -609,13 +584,8 @@ Legends are useful for many charts and we provide a simple one in our library. H
 </template>
 
 <script>
-import BaseLegend from "./BaseLegend";
-
 export default {
     name: "BaseLegendExample",
-    components: {
-        BaseLegend
-    },
     data() {
         return {
             legendData: [
@@ -678,13 +648,8 @@ The loading spinner is useful when data is being fetched from an API and there i
 </template>
 
 <script>
-import LoaderSpinning from "./LoaderSpinning";
-
 export default {
     name: "StackedBarChartExample",
-    components: {
-        LoaderSpinning
-    },
 }
 </script>
 ```
@@ -720,14 +685,10 @@ are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructurin
 </template>
 
 <script>
-import StackedBarChart from "./StackedBarChart";
 import SBCdata from './BarChartData.json'
 
 export default {
     name: "StackedBarChartExample",
-    components: {
-        StackedBarChart
-    },
     data() {
         return {
             plotData: SBCdata,
@@ -756,14 +717,10 @@ Most of the plots that contain x and y axes also have the ability to add annotat
 </template>
 
 <script>
-import StackedBarChart from "./StackedBarChart";
 import SBCdata from './BarChartData.json'
 
 export default {
     name: "StackedBarChartExample",
-    components: {
-        StackedBarChart
-    },
     data() {
         return {
             plotData: SBCdata,
