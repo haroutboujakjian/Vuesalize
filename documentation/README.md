@@ -68,8 +68,9 @@ export default {
 
 ### CDN
 
-It is quite simple to get started with the CDN. The vuesalize js and css files need to be linked (lines 5 and 7), 
-and the components that will be used must be declared using `Vue.use()` (line 16).
+It is quite simple to get started with the CDN. The vuesalize [javascript](https://unpkg.com/vuesalize) and [css](https://unpkg.com/vuesalize@0.0.25/dist/vuesalize.css) files need to be linked (lines 5 and 7), 
+and the components that will be used must be declared using `Vue.use()` (line 16). It is also necessary to link the 
+official Vue package as well (line 6).
 
 ```html {5,7,16}
 <html lang="en">
