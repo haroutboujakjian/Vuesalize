@@ -1,6 +1,6 @@
 <template>
     <StackedBarChart v-if="tooltip" :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" :x_key="'date'"
+                     :margin="margin" x-key="date"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
         <template v-slot:tooltip="{ bar }">
             <p>Hello from inside the tooltip. Here are values when you hover over this bar</p>
@@ -8,16 +8,16 @@
         </template>
     </StackedBarChart>
     <StackedBarChart v-else-if="annotation" :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" :x_key="'date'"
+                     :margin="margin" x-key="date"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                      :annotations="annotations">
     </StackedBarChart>
     <StackedBarChart v-else-if="horizontal" :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" :x_key="'date'" :direction="'horizontal'"
+                     :margin="margin" x-key="date" :direction="'horizontal'"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </StackedBarChart>
     <StackedBarChart v-else :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" :x_key="'date'"
+                     :margin="margin" x-key="date"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </StackedBarChart>
 

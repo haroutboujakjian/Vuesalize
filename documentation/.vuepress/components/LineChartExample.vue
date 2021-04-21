@@ -1,8 +1,7 @@
 <template>
-    <LineChart :plot-data="plotData" :x_key="'date'"
-               :width="450" :height="250"
-               :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
-               :margin="margin">
+    <LineChart :plot-data="plotData" x-key="date"
+               :width="450" :height="250" :margin="margin"
+               :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </LineChart>
 </template>
 

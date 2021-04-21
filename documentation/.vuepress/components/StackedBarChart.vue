@@ -5,7 +5,7 @@
                 <transition-group tag="g">
                     <g v-for="row in series" :key="row.key" :fill="color(row.key)">
                         <rect class="animate" v-for="(bar, i) in row" :key="i"
-                              :x="barScale(bar.data[x_key])" :y="linearScale(bar[1])"
+                              :x="barScale(bar.data[xKey])" :y="linearScale(bar[1])"
                               :width="barScale.bandwidth()" :height="linearScale(bar[0])-linearScale(bar[1])"
                               @mouseover="populateTooltip($event, bar, row)"
                               @mouseout="showTooltip = false"
@@ -24,7 +24,7 @@
                 <transition-group tag="g">
                     <g v-for="row in series" :key="row.key" :fill="color(row.key)">
                         <rect class="animate" v-for="(bar, i) in row" :key="i"
-                              :y="barScale(bar.data[x_key])" :x="linearScale(bar[0])"
+                              :y="barScale(bar.data[xKey])" :x="linearScale(bar[0])"
                               :height="barScale.bandwidth()" :width="linearScale(bar[1])-linearScale(bar[0])"
                               @mouseover="populateTooltip($event, bar, row)"
                               @mouseout="showTooltip = false"
@@ -36,7 +36,7 @@
                    :transform="`translate(${margin.left}, 0)`">
                 </g>
                 <g v-linearaxis="{scale: linearScale,  direction: 'horizontal'}" class="xaxis"
-                   :transform="`translate(0, ${bar_axis_location === 'top' ? margin.top : height - margin.bottom})`">
+                   :transform="`translate(0, ${barAxisLocation === 'top' ? margin.top : height - margin.bottom})`">
                 </g>
             </template>
             <line v-for="(line, i) in annotation_lines" :key="`l${i}}`"
@@ -44,7 +44,7 @@
                   class="annotation" :stroke="line.color" stroke-dasharray="5 5">
             </line>
         </svg>
-        <div v-if="enable_tooltip && showTooltip"
+        <div v-if="enableTooltip && showTooltip"
              class="tooltipContainer"
              :class="{activeTooltip: showTooltip}"
              :style="`top: ${tooltipContent.top + 10}px; left: ${tooltipContent.left + 10}px`">
@@ -78,7 +78,7 @@ export default {
                 return ['vertical', 'horizontal'].indexOf(value) !== -1
             }
         },
-        bar_axis_location: {
+        barAxisLocation: {
             type: String,
             default: 'bottom',
             validator: function (value) {
@@ -93,8 +93,8 @@ export default {
         },
         plotData: Array,
         colors: Array,
-        x_key: String,
-        enable_tooltip: {
+        xKey: String,
+        enableTooltip: {
             type: Boolean,
             default: true
         },
@@ -113,7 +113,7 @@ export default {
     },
     computed: {
         object_keys() {
-            return Object.keys(this.plotData[0]).filter(item => item !== this.x_key)
+            return Object.keys(this.plotData[0]).filter(item => item !== this.xKey)
         },
         series() {
             return stack()
@@ -122,7 +122,7 @@ export default {
         },
         barScale() {
             const barScale = scaleBand()
-                .domain(this.plotData.map(d => d[this.x_key]))
+                .domain(this.plotData.map(d => d[this.xKey]))
                 .padding(0.1)
 
             return this.direction === 'vertical'
@@ -158,8 +158,8 @@ export default {
             this.showTooltip = true
             this.tooltipContent.top = e.pageY
             this.tooltipContent.left = e.pageX
-            this.tooltipContent.x_value = bar.data[this.x_key]
-            this.tooltipContent.x_label = this.x_key
+            this.tooltipContent.x_value = bar.data[this.xKey]
+            this.tooltipContent.x_label = this.xKey
             this.tooltipContent.y_value = bar.data[row.key]
             this.tooltipContent.y_label = row.key
 
@@ -179,7 +179,7 @@ export default {
         linearaxis(el, binding, vnode) {
             const scale = binding.value.scale
             const direction = binding.value.direction
-            const axisType = vnode.context._props.bar_axis_location === 'bottom' ? axisBottom : axisTop
+            const axisType = vnode.context._props.barAxisLocation === 'bottom' ? axisBottom : axisTop
 
             if (direction === 'vertical') {
                 select(el).transition().duration(500).call(axisLeft(scale).ticks(5))

@@ -17,7 +17,7 @@
             <g v-xaxis="{scale: xScale, tickLabels: xAxisTicks}" class="axis" :transform="xtranslate"></g>
             <g v-yaxis="{scale: yScale}" class="axis" :transform="ytranslate"></g>
         </svg>
-        <div v-if="enable_tooltip"
+        <div v-if="enableTooltip"
              class="tooltipContainer"
              :class="{activeTooltip: showTooltip}"
              :style="`top: ${tooltipContent.top + 10}px; left: ${tooltipContent.left + 10}px`">
@@ -38,12 +38,12 @@ import {axisLeft, axisBottom} from 'd3-axis';
 export default {
     name: "GroupedBarChart",
     props: {
-        plotdata: Array,
+        plotData: Array,
         width: Number,
         height: Number,
         colors: Array,
-        x_key: String,
-        enable_tooltip: {
+        xKey: String,
+        enableTooltip: {
             type: Boolean,
             default: true
         },
@@ -71,13 +71,13 @@ export default {
             /**
              * Object keys for each of the y values
              */
-            return Object.keys(this.plotdata[0]).filter(item => item !== this.x_key)
+            return Object.keys(this.plotData[0]).filter(item => item !== this.xKey)
         },
         xAxisTicks() {
-            return this.plotdata.map(item => item[this.x_key])
+            return this.plotData.map(item => item[this.xKey])
         },
         groups() {
-            return this.plotdata.map(({[this.x_key]: name, ...rest}) => rest)
+            return this.plotData.map(({[this.xKey]: name, ...rest}) => rest)
         },
         color() {
             return scaleOrdinal().range(this.colors)

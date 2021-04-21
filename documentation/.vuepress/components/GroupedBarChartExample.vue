@@ -1,9 +1,6 @@
 <template>
-    <GroupedBarChart :plotdata="plotdata"
-                     :x_key="'date'"
-                     :width="450"
-                     :height="300"
-                     :margin="margin"
+    <GroupedBarChart :plot-data="plotdata" x-key="date"
+                     :width="450" :height="300" :margin="margin"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </GroupedBarChart>
 </template>
