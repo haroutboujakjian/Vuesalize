@@ -259,6 +259,13 @@ export default {
 </script>
 ```
 
+or a horiztonal bar chart can be displayed by passing in 'horizontal' for the direction prop.
+
+<div style="display: flex; justify-content: center">
+    <grouped-bar-chart-example :horizontal="true">
+</grouped-bar-chart-example>
+</div>
+
 
 #### Format of Data
 

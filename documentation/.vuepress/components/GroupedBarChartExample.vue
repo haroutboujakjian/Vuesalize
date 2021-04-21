@@ -1,5 +1,11 @@
 <template>
-    <GroupedBarChart :plot-data="plotdata" x-key="date"
+    <GroupedBarChart v-if="horizontal" direction="horizontal"
+                     :plot-data="plotdata" x-key="date"
+                     :width="450" :height="300" :margin="margin"
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
+    </GroupedBarChart>
+    <GroupedBarChart v-else
+                     :plot-data="plotdata" x-key="date"
                      :width="450" :height="300" :margin="margin"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </GroupedBarChart>
@@ -10,6 +16,7 @@ import GBCdata from "./BarChartData.json"
 
 export default {
     name: "GroupedBarChartExample",
+    props: ['horizontal'],
     data() {
         return {
             plotdata: GBCdata,

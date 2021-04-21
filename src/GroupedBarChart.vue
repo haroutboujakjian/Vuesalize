@@ -1,21 +1,45 @@
 <template>
     <figure>
         <svg :width="width" :height="height">
-            <g v-for="(group, id) in groups" :key="id"
-               :transform="`translate(${xScale(xAxisTicks[id])}, 0)`"
-               class="bar">
-                <rect v-for="(key, vid) in Object.keys(group)" :key="vid"
-                      :x="xSubgroupScale(key)"
-                      :y="yScale(group[key])"
-                      :height="height - yScale(group[key]) - margin.bottom"
-                      :width="xSubgroupScale.bandwidth()"
-                      :fill="color(key)"
-                      @mouseover="populateTooltip($event, key, group[key])"
-                      @mouseout="showTooltip = false">
-                </rect>
-            </g>
-            <g v-xaxis="{scale: xScale, tickLabels: xAxisTicks}" class="axis" :transform="xtranslate"></g>
-            <g v-yaxis="{scale: yScale}" class="axis" :transform="ytranslate"></g>
+            <template v-if="direction === 'vertical'">
+                <g v-for="(group, id) in groups" :key="id" class="bar"
+                   :transform="`translate(${bandScale(bandAxisTicks[id])}, 0)`">
+                    <rect v-for="(key, vid) in Object.keys(group)" :key="vid"
+                          :x="bandSubgroupScale(key)" :y="linearScale(group[key])"
+                          :height="height - linearScale(group[key]) - margin.bottom"
+                          :width="bandSubgroupScale.bandwidth()"
+                          :fill="color(key)"
+                          @mouseover="populateTooltip($event, key, group[key])"
+                          @mouseout="showTooltip = false">
+                    </rect>
+                </g>
+                <g v-bandaxis="{scale: bandScale, tickLabels: bandAxisTicks, direction: 'vertical'}"
+                   class="axis" :transform="`translate(0, ${this.height - this.margin.bottom})`">
+                </g>
+                <g v-linearaxis="{scale: linearScale, direction: 'vertical'}" class="axis"
+                   :transform="`translate(${this.margin.left}, 0)`">
+                </g>
+            </template>
+            <template v-else>
+                <g v-for="(group, id) in groups" :key="id" class="bar"
+                   :transform="`translate(0 ,${bandScale(bandAxisTicks[id])})`">
+                    <rect v-for="(key, vid) in Object.keys(group)" :key="vid"
+                          :y="bandSubgroupScale(key)" :x="linearScale(vid)"
+                          :width="linearScale(group[key]) - linearScale(vid)"
+                          :height="bandSubgroupScale.bandwidth()"
+                          :fill="color(key)"
+                          @mouseover="populateTooltip($event, key, group[key])"
+                          @mouseout="showTooltip = false">
+                        <title>{{ linearScale(0) }}</title>
+                    </rect>
+                </g>
+                <g v-linearaxis="{scale: linearScale, direction: 'horizontal'}"
+                   :transform="`translate(0, ${this.height - this.margin.bottom})`" class="axis">
+                </g>
+                <g v-bandaxis="{scale: bandScale, tickLabels: bandAxisTicks, direction: 'horizontal'}"
+                   class="axis" :transform="`translate(${this.margin.left}, 0)`">
+                </g>
+            </template>
         </svg>
         <div v-if="enableTooltip"
              class="tooltipContainer"
@@ -43,6 +67,13 @@ export default {
         height: Number,
         colors: Array,
         xKey: String,
+        direction: {
+            type: String,
+            default: 'vertical',
+            validator: function (value) {
+                return ['vertical', 'horizontal'].indexOf(value) !== -1
+            }
+        },
         enableTooltip: {
             type: Boolean,
             default: true
@@ -61,19 +92,13 @@ export default {
         }
     },
     computed: {
-        xtranslate() {
-            return `translate(0, ${this.height - this.margin.bottom})`;
-        },
-        ytranslate() {
-            return `translate(${this.margin.left}, 0)`;
-        },
         groupKeys() {
             /**
              * Object keys for each of the y values
              */
             return Object.keys(this.plotData[0]).filter(item => item !== this.xKey)
         },
-        xAxisTicks() {
+        bandAxisTicks() {
             return this.plotData.map(item => item[this.xKey])
         },
         groups() {
@@ -82,23 +107,32 @@ export default {
         color() {
             return scaleOrdinal().range(this.colors)
         },
-        xScale() {
-            return scaleBand()
-                .domain(this.xAxisTicks)
-                .range([this.margin.left, this.width - this.margin.right])
+        bandScale() {
+            const bandScale = scaleBand()
+                .domain(this.bandAxisTicks)
                 .padding(0.15);
+
+            return this.direction === 'vertical'
+                ? bandScale.range([this.margin.left, this.width - this.margin.right])
+                : bandScale.range([this.margin.top, this.height - this.margin.bottom])
         },
-        xSubgroupScale() {
-            return scaleBand()
+        bandSubgroupScale() {
+            const bandScale = scaleBand()
                 .domain(this.groupKeys)
-                .rangeRound([0, this.xScale.bandwidth()])
                 .padding(0.05)
+
+            return this.direction === 'vertical'
+                ? bandScale.rangeRound([0, this.bandScale.bandwidth()])
+                : bandScale.rangeRound([this.bandScale.bandwidth(), 0])
         },
-        yScale() {
-            return scaleLinear()
+        linearScale() {
+            const linearScale = scaleLinear()
                 .domain([0, this.getMax(this.groups)])
-                .range([this.height - this.margin.bottom, this.margin.top])
                 .nice()
+
+            return this.direction === 'vertical'
+                ? linearScale.range([this.height - this.margin.bottom, this.margin.top])
+                : linearScale.range([this.margin.left, this.width - this.margin.right])
         }
 
     },
@@ -117,14 +151,24 @@ export default {
     },
 
     directives: {
-        xaxis(el, binding) {
+        bandaxis(el, binding) {
             const scale = binding.value.scale
+            const direction = binding.value.direction
             const tickLabels = binding.value.tickLabels
-            select(el).call(axisBottom(scale).tickValues(tickLabels))
+            if (direction === 'vertical') {
+                select(el).call(axisBottom(scale).tickValues(tickLabels))
+            } else if (direction === 'horizontal') {
+                select(el).call(axisLeft(scale).tickValues(tickLabels))
+            }
         },
-        yaxis(el, binding) {
+        linearaxis(el, binding) {
             const scale = binding.value.scale
-            select(el).call(axisLeft(scale).ticks(7))
+            const direction = binding.value.direction
+            if (direction === 'vertical') {
+                select(el).call(axisLeft(scale).ticks(7))
+            } else if (direction === 'horizontal') {
+                select(el).call(axisBottom(scale).ticks(7))
+            }
         }
     }
 
