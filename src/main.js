@@ -1,12 +1,12 @@
 // import * as components from './index';
 import Vue from "vue";
-import StackedBarChart from "@/StackedBarChart";
-import BaseLegend from "@/BaseLegend";
-import LineChart from "@/LineChart";
-import GroupedBarChart from "@/GroupedBarChart";
-import LoaderSpinning from "@/LoaderSpinning";
-import Network from "@/Network";
-import HierarchicalEdgeBundling from "@/HierarchicalEdgeBundling";
+import StackedBarChart from "./StackedBarChart";
+import BaseLegend from "./BaseLegend";
+import LineChart from "./LineChart";
+import GroupedBarChart from "./GroupedBarChart";
+import LoaderSpinning from "./LoaderSpinning";
+import Network from "./Network";
+import HierarchicalEdgeBundling from "./HierarchicalEdgeBundling";
 
 const Components = {
     StackedBarChart,

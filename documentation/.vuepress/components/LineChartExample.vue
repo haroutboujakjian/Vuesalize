@@ -6,14 +6,10 @@
 </template>
 
 <script>
-import LineChart from "./LineChart";
 import LCdata from "./BarChartData.json"
 
 export default {
     name: "LineChartExample",
-    components: {
-        LineChart
-    },
     data() {
         return {
             plotData: LCdata,

@@ -6,14 +6,10 @@
 </template>
 
 <script>
-import GroupedBarChart from "./GroupedBarChart";
 import GBCdata from "./BarChartData.json"
 
 export default {
     name: "GroupedBarChartExample",
-    components: {
-        GroupedBarChart
-    },
     data() {
         return {
             plotdata: GBCdata,

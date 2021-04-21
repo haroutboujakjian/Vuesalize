@@ -5,12 +5,10 @@
 </template>
 
 <script>
-import HierarchicalEdgeBundling from "./HierarchicalEdgeBundling";
 import HEBdata from "./HierarchicalEdgeBundlingData.json"
 
 export default {
     name: "HierarchicalEdgeBundlingExample",
-    components: {HierarchicalEdgeBundling},
     data() {
         return {
             plotdata: HEBdata

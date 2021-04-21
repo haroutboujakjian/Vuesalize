@@ -5,14 +5,10 @@
 </template>
 
 <script>
-import Network from "./Network";
 import NetworkData from "./NetworkData.json"
 
 export default {
     name: "NetworkExample",
-    components: {
-        Network
-    },
     data() {
         return {
             plotData: NetworkData

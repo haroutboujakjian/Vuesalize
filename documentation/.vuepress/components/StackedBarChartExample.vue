@@ -24,14 +24,10 @@
 </template>
 
 <script>
-import StackedBarChart from "./StackedBarChart";
 import SBCdata from './BarChartData.json'
 
 export default {
     name: "StackedBarChartExample",
-    components: {
-        StackedBarChart
-    },
     props: ['tooltip', 'annotation', 'horizontal'],
     data() {
         return {

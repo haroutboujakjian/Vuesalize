@@ -8,13 +8,8 @@
 </template>
 
 <script>
-import BaseLegend from "./BaseLegend";
-
 export default {
     name: "BaseLegendExample",
-    components: {
-        BaseLegend
-    },
     data() {
         return {
             legendData: [
