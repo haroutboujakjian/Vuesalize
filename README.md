@@ -1,5 +1,4 @@
 # Vuesalize
-***
 
 Building interactive visualizations on the web can be hard, and it can be even harder when you would like to leverage
 existing visualization libraries inside of a Vue.js project. The goal of `Vuesalize` is to simplify this process by
