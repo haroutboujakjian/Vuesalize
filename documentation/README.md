@@ -142,7 +142,7 @@ export default {
 </script>
 ```
 
-or a horiztonal bar chart can be displayed by passing in 'horizontal' for the `direction` prop.
+or a horizontal bar chart can be displayed by passing in 'horizontal' for the `direction` prop.
 
 <div style="display: flex; justify-content: center">
 <stacked-bar-chart-example :horizontal="true"></stacked-bar-chart-example>
@@ -302,7 +302,7 @@ and stacked bar chart use the same data format for input.
 | `height`       | :heavy_check_mark:  | `Number` |         | chart height in pixels                                    |
 | `colors`       |  :heavy_check_mark: | `Array`  |         | array of colors used for each bar, must match number of bar in a group |
 | `direction`    |                     |`String` |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'     |
-| `padding-between-bars`|              | `Number` | 0.15    | padding between the bars. Must be between `0` and `1`         |
+| `padding-between-bars`|              | `Number` | 0.15    | padding between the bars in a group. Must be between `0` and `1`         |
 | `padding-between-groups`|            | `Number` | 0.15    | padding between the groups of bars. Must be between `0` and `1`         |
 | `margin`       |                     | `Object` |         | object that contains the top, bottom, right, and left margins|
 |`enable-tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
