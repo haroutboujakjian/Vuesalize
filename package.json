@@ -1,7 +1,7 @@
 {
   "name": "vuesalize",
   "version": "0.0.29",
-  "description": "Component library dedicated to simplifying interactive visualization building in Vue.js on the web.",
+  "description": "Component library dedicated to simplifying interactive visualization building in Vue.js.",
   "private": false,
   "main": "dist/vuesalize.common.js",
   "unpkg": "dist/vuesalize.umd.min.js",
