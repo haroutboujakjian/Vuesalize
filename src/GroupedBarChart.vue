@@ -107,12 +107,14 @@ export default {
             /**
              * Object keys for each of the y values
              */
-            return Object.keys(this.plotData[0]).filter(item => item !== this.xKey)
+            const groupKeys = Object.keys(this.plotData[0]).filter(item => item !== this.xKey)
+            return this.direction === 'vertical' ? groupKeys : groupKeys.reverse()
         },
         bandAxisTicks() {
             return this.plotData.map(item => item[this.xKey])
         },
         groups() {
+            // eslint-disable-next-line no-unused-vars
             return this.plotData.map(({[this.xKey]: name, ...rest}) => rest)
         },
         color() {
@@ -129,11 +131,12 @@ export default {
         },
         bandSubgroupScale() {
             const bandScale = scaleBand()
+                .domain(this.groupKeys)
                 .padding(this.paddingBetweenBars)
 
             return this.direction === 'vertical'
-                ? bandScale.rangeRound([0, this.bandScale.bandwidth()]).domain(this.groupKeys)
-                : bandScale.rangeRound([this.bandScale.bandwidth(), 0]).domain(this.groupKeys.reverse())
+                ? bandScale.rangeRound([0, this.bandScale.bandwidth()])
+                : bandScale.rangeRound([this.bandScale.bandwidth(), 0])
         },
         linearScale() {
             const linearScale = scaleLinear()
@@ -188,7 +191,6 @@ export default {
 <style scoped>
 
 .axis {
-    font-size: 0.75rem;
     shape-rendering: crispEdges;
 }
 
