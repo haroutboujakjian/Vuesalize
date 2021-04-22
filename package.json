@@ -8,7 +8,7 @@
   "scripts": {
     "docs:dev": "node_modules/.bin/vuepress dev documentation/",
     "docs:build": "node_modules/.bin/vuepress build documentation/",
-    "build": "vue-cli-service build --target lib --name vuesalize src/main.js"
+    "build": "vue-cli-service build --target lib --name vuesalize src/main.js && rm dist/demo.html"
   },
   "files": [
     "dist"
@@ -18,7 +18,7 @@
     "url": "git@gitlab.mitre.org:full-stack-interactive-visualizations/components.git"
   },
   "author": "Harout Boujakjian",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@vue/cli-service": "^4.5.12",
     "vuepress": "^1.8.0"
