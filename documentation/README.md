@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Building interactive visualizations on the web can hard, and it can be even harder when you would like to leverage
+Building interactive visualizations on the web can be hard, and it can be even harder when you would like to leverage
 existing visualization libraries inside of a Vue.js project. The goal of `Vuesalize` is to simplify this process by
 providing a set of chart components (and a couple others) that are commonly used in building interactive visualizations
 on the web. The charts are built using a combination of [Vue.js](https://vuejs.org/v2/guide/)
