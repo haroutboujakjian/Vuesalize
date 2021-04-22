@@ -72,7 +72,7 @@ It is quite simple to get started with the CDN. The vuesalize [javascript](https
 and the components that will be used must be declared using `Vue.use()` (line 16). It is also necessary to link the 
 official Vue package as well (line 6).
 
-```html {5,7,16}
+```html
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -102,10 +102,4 @@ official Vue package as well (line 6).
 </body>
 </html>
 ```
-
-Examples of how each of the components can be used is in each of the sections.
-
-Additionally, the SFC component templates can be retrieved from [gitlab](https://gitlab.mitre.org/full-stack-interactive-visualizations/components/-/tree/master/documentation/.vuepress/components)
-
-
 
