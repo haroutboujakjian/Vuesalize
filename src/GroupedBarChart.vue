@@ -83,6 +83,20 @@ export default {
             default: function () {
                 return {top: 20, bottom: 20, left: 20, right: 20}
             }
+        },
+        paddingBetweenBars: {
+            type: Number,
+            default: 0.15,
+            validator: function (value) {
+                return value >= 0 && value <= 1
+            }
+        },
+        paddingBetweenGroups: {
+            type: Number,
+            default: 0.15,
+            validator: function (value) {
+                return value >= 0 && value <= 1
+            }
         }
     },
     data() {
@@ -110,7 +124,7 @@ export default {
         bandScale() {
             const bandScale = scaleBand()
                 .domain(this.bandAxisTicks)
-                .padding(0.15);
+                .padding(this.paddingBetweenGroups);
 
             return this.direction === 'vertical'
                 ? bandScale.range([this.margin.left, this.width - this.margin.right])
@@ -119,7 +133,7 @@ export default {
         bandSubgroupScale() {
             const bandScale = scaleBand()
                 .domain(this.groupKeys)
-                .padding(0.05)
+                .padding(this.paddingBetweenBars)
 
             return this.direction === 'vertical'
                 ? bandScale.rangeRound([0, this.bandScale.bandwidth()])
