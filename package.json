@@ -1,7 +1,7 @@
 {
   "name": "vuesalize",
-  "version": "0.0.28",
-  "description": "This directory contains chart components and other basic components used in building interactive visualizations on the web.",
+  "version": "0.0.29",
+  "description": "Component library dedicated to simplifying interactive visualization building in Vue.js on the web.",
   "private": false,
   "main": "dist/vuesalize.common.js",
   "unpkg": "dist/vuesalize.umd.min.js",
@@ -36,5 +36,15 @@
     "d3-zoom": "^2.0.0",
     "leaflet": "^1.7.1",
     "vue": "^2.6.12"
-  }
+  },
+  "keywords": [
+    "vue.js",
+    "vue",
+    "d3",
+    "d3.js",
+    "visualization",
+    "data visualization",
+    "component library",
+    "ui library"
+  ]
 }
