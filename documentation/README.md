@@ -259,7 +259,7 @@ export default {
 </script>
 ```
 
-or a horiztonal bar chart can be displayed by passing in 'horizontal' for the direction prop.
+or a horizontal bar chart can be displayed by passing in 'horizontal' for the direction prop.
 
 <div style="display: flex; justify-content: center">
     <grouped-bar-chart-example :horizontal="true">
@@ -686,11 +686,12 @@ The legend component takes in a simple array of objects that contains name and c
 
 The loading spinner is useful when data is being fetched from an API and there is some lag before the GUI receives it.
 
+#### Example 
+
 <div style="display: flex; justify-content: center">
 <loader-spinning></loader-spinning>
 </div>
 
-#### Example 
 
 ```html
 <template>

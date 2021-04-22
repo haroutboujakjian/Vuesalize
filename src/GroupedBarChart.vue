@@ -2,14 +2,13 @@
     <figure>
         <svg :width="width" :height="height">
             <template v-if="direction === 'vertical'">
-                <g v-for="(group, id) in groups" :key="id" class="bar"
+                <g v-for="(bargroup, id) in groups" :key="id"
                    :transform="`translate(${bandScale(bandAxisTicks[id])}, 0)`">
-                    <rect v-for="(key, vid) in Object.keys(group)" :key="vid"
-                          :x="bandSubgroupScale(key)" :y="linearScale(group[key])"
-                          :height="height - linearScale(group[key]) - margin.bottom"
-                          :width="bandSubgroupScale.bandwidth()"
-                          :fill="color(key)"
-                          @mouseover="populateTooltip($event, key, group[key])"
+                    <rect v-for="(value, subgroup) in bargroup" :key="subgroup"
+                          :x="bandSubgroupScale(subgroup)" :width="bandSubgroupScale.bandwidth()"
+                          :y="linearScale(value)" :height="height - linearScale(value) - margin.bottom"
+                          :fill="color(subgroup)"
+                          @mouseover="populateTooltip($event, subgroup, value)"
                           @mouseout="showTooltip = false">
                     </rect>
                 </g>
@@ -21,16 +20,14 @@
                 </g>
             </template>
             <template v-else>
-                <g v-for="(group, id) in groups" :key="id" class="bar"
+                <g v-for="(bargroup, id) in groups" :key="id"
                    :transform="`translate(0 ,${bandScale(bandAxisTicks[id])})`">
-                    <rect v-for="(key, vid) in Object.keys(group)" :key="vid"
-                          :y="bandSubgroupScale(key)" :x="linearScale(vid)"
-                          :width="linearScale(group[key]) - linearScale(vid)"
-                          :height="bandSubgroupScale.bandwidth()"
-                          :fill="color(key)"
-                          @mouseover="populateTooltip($event, key, group[key])"
+                    <rect v-for="(value, subgroup) in bargroup" :key="subgroup"
+                          :x="linearScale(0)" :width="linearScale(value) - linearScale(0)"
+                          :y="bandSubgroupScale(subgroup)" :height="bandSubgroupScale.bandwidth()"
+                          :fill="color(subgroup)"
+                          @mouseover="populateTooltip($event, subgroup, value)"
                           @mouseout="showTooltip = false">
-                        <title>{{ linearScale(0) }}</title>
                     </rect>
                 </g>
                 <g v-linearaxis="{scale: linearScale, direction: 'horizontal'}"
@@ -132,12 +129,11 @@ export default {
         },
         bandSubgroupScale() {
             const bandScale = scaleBand()
-                .domain(this.groupKeys)
                 .padding(this.paddingBetweenBars)
 
             return this.direction === 'vertical'
-                ? bandScale.rangeRound([0, this.bandScale.bandwidth()])
-                : bandScale.rangeRound([this.bandScale.bandwidth(), 0])
+                ? bandScale.rangeRound([0, this.bandScale.bandwidth()]).domain(this.groupKeys)
+                : bandScale.rangeRound([this.bandScale.bandwidth(), 0]).domain(this.groupKeys.reverse())
         },
         linearScale() {
             const linearScale = scaleLinear()
