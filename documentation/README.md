@@ -3,14 +3,15 @@
 
 ## Introduction
 
-This directory contains chart components and other basic components used in building interactive visualizations on the
-web. The charts are built using a combination of [Vue.js](https://vuejs.org/v2/guide/) and [D3.js](https://d3js.org/).
-The main rationale for this approach is to move the SVG definitions to the template (HTML) and let Vue actually control
-creating/destroying elements on the page. This is analogous to the "enter/update/exit" strategy used in D3 but without
-all of the pain. Additionally, the scales that control the layouts points, bar, axes, etc. are defined as computed
-properties in Vue. This allows for automatic updating of the chart purely based on changes in the data without having to
-define an additional function to handle updates. A full explanation of the methods used can be
-found [here](./rationale.md)
+Building interactive visualizations on the web can hard, and it can be even harder when you would like to leverage
+existing visualization libraries inside of a Vue.js project. The goal of `Vuesalize` is to simplify this process by
+providing a set of chart components (and a couple others) that are commonly used in building interactive visualizations
+on the web. The charts are built using a combination of [Vue.js](https://vuejs.org/v2/guide/)
+and [D3.js](https://d3js.org/). The main rationale for this approach is to move the SVG definitions to the template (
+HTML), which allows Vue to handle creating and removing elements on the page. This is analogous to the "
+enter/update/exit" strategy used in D3 but specifically taking advantage of the virtual DOM. By building charts where
+the SVG is defined in Vue's template, we can not only send down props to update the chart, but can also emit events on
+interactions (e.g. click, mousover, etc.) and offer scoped slots for custom tooltips!
 
 ## Installation
 
@@ -68,7 +69,7 @@ export default {
 
 ### CDN
 
-It is quite simple to get started with the CDN. The vuesalize [javascript](https://unpkg.com/vuesalize) and [css](https://unpkg.com/vuesalize@0.0.25/dist/vuesalize.css) files need to be linked (lines 5 and 7), 
+It is quite simple to get started with the CDN. The vuesalize [javascript](https://unpkg.com/vuesalize) and [css](https://unpkg.com/vuesalize@0.0.29/dist/vuesalize.css) files need to be linked (lines 5 and 7), 
 and the components that will be used must be declared using `Vue.use()` (line 16). It is also necessary to link the 
 official Vue package as well (line 6).
 
@@ -77,9 +78,9 @@ official Vue package as well (line 6).
 <head>
     <meta charset="utf-8">
     <title>Browser test</title>
-    <link rel="stylesheet" href="https://unpkg.com/vuesalize@0.0.25/dist/vuesalize.css">
+    <link rel="stylesheet" href="https://unpkg.com/vuesalize@0.0.29/dist/vuesalize.css">
     <script src="http_cdn.jsdelivr.net_npm_vue@2.6.12_dist_vue.js"></script>
-    <script src="https://unpkg.com/vuesalize@0.0.25/dist/vuesalize.umd.min.js"></script>
+    <script src="https://unpkg.com/vuesalize@0.0.29/dist/vuesalize.umd.min.js"></script>
 </head>
 <body>
 <div id="app">

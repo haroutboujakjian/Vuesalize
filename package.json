@@ -11,7 +11,8 @@
     "build": "vue-cli-service build --target lib --name vuesalize src/main.js && rm dist/demo.html"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "repository": {
     "type": "git",
