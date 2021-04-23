@@ -37,6 +37,10 @@
                    class="axis" :transform="`translate(${this.margin.left}, 0)`">
                 </g>
             </template>
+            <Annotations :annotations="annotations" :margin="margin"
+                         :linear-scale="linearScale" :bar-scale="bandScale"
+                         :width="width" :height="height" :direction="direction">
+            </Annotations>
         </svg>
         <div v-if="enableTooltip"
              class="tooltipContainer"
@@ -55,9 +59,11 @@ import {scaleBand, scaleLinear, scaleOrdinal} from 'd3-scale';
 import {max} from 'd3-array';
 import {select} from 'd3-selection';
 import {axisLeft, axisBottom} from 'd3-axis';
+import Annotations from "./Annotations";
 
 export default {
     name: "GroupedBarChart",
+    components: {Annotations},
     props: {
         plotData: Array,
         width: Number,
@@ -74,6 +80,12 @@ export default {
         enableTooltip: {
             type: Boolean,
             default: true
+        },
+        annotations: {
+            type: Array,
+            default: function () {
+                return []
+            }
         },
         margin: {
             type: Object,
@@ -162,7 +174,6 @@ export default {
             this.tooltipContent.y_label = key
         }
     },
-
     directives: {
         bandaxis(el, binding) {
             const scale = binding.value.scale
