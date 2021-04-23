@@ -33,7 +33,7 @@ export default {
         return {
             plotData: SBCdata,
             margin: {top: 20, bottom: 20, left: 40, right: 20},
-            annotations: [{type: "line", axis: "y", color: "#ef0202", value: 8000}]
+            annotations: [{type: "line", axis: "y", color: "#ef0202", value: 8000, dash: true}]
         }
     }
 }

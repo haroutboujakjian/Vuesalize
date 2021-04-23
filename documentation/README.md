@@ -753,7 +753,8 @@ export default {
 
 ### Annotations
 
-Most of the plots that contain x and y axes also have the ability to add annotations. Annotations need to be an array of objects, even if it is only one object. The chart below shows this
+Most of the plots that contain x and y axes also have the ability to add annotations. The chart below shows adding
+a horizontal dashed line to stacked bar chart which might indicate, for example, a max budget line.
 
 <div style="display: flex; justify-content: center">
 <stacked-bar-chart-example :annotation="true"></stacked-bar-chart-example>
@@ -772,25 +773,30 @@ Most of the plots that contain x and y axes also have the ability to add annotat
 import SBCdata from './BarChartData.json'
 
 export default {
-    name: "StackedBarChartExample",
-    data() {
-        return {
-            plotData: SBCdata,
-            margin: {top: 20, bottom: 20, left: 40, right: 20},
-            annotations: [{type: "line", axis: "y", color: "#ef0202", value: 8000}]
-        }
-    }
+   name: "StackedBarChartExample",
+   data() {
+      return {
+         plotData: SBCdata,
+         margin: {top: 20, bottom: 20, left: 40, right: 20},
+         annotations: [{
+            type: "line", axis: "y", color: "#ef0202",
+            value: 8000, dash: true
+         }]
+      }
+   }
 }
 </script>
 ```
 
 #### Format
 
-The annotation object requires the following properties
+Annotations need to be an array of objects, even if it is only one object. The annotation object requires the following
+properties
 
 | Name         | Required             | Type     | Default     | Description                                            |
 |--            | :------------------: | -------  | --          |                                                      --|
 | `type`       | :heavy_check_mark:   | `String` |             | type of annotation, current options: 'line'            |
 | `axis`       | :heavy_check_mark:   | `String` |             | options: "x" or "y"                                    |
 | `value`      | :heavy_check_mark:   | `Number` |             | value on the x or y axis                               |
-| `color`      |  :heavy_check_mark:  | `String` |             | color name, hex code, or rgb value                     |
+| `color`      |                      | `String` |   Black     | color name, hex code, or rgb value                     |
+| `dash`       |                      | `Boolean`|  False      | whether line should have dashes or not                 |

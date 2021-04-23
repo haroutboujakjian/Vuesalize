@@ -39,10 +39,10 @@
                    :transform="`translate(0, ${barAxisLocation === 'top' ? margin.top : height - margin.bottom})`">
                 </g>
             </template>
-            <line v-for="(line, i) in annotation_lines" :key="`l${i}}`"
-                  :x1="line.x1" :x2="line.x2" :y1="line.y1" :y2="line.y2"
-                  class="annotation" :stroke="line.color" stroke-dasharray="5 5">
-            </line>
+            <Annotations :annotations="annotations" :margin="margin"
+                         :linear-scale="linearScale" :bar-scale="barScale"
+                         :width="width" :height="height">
+            </Annotations>
         </svg>
         <div v-if="enableTooltip && showTooltip"
              class="tooltipContainer"
@@ -65,9 +65,11 @@ import {select} from 'd3-selection';
 import {axisBottom, axisLeft, axisTop} from 'd3-axis';
 // eslint-disable-next-line no-unused-vars
 import {transition} from 'd3-transition';
+import Annotations from "./Annotations";
 
 export default {
     name: "StackedBarChart",
+    components: {Annotations},
     props: {
         width: Number,
         height: Number,
@@ -143,15 +145,6 @@ export default {
                 .domain(this.series.map(d => d.key))
                 .range(this.colors)
         },
-        annotation_lines() {
-            return this.annotations.filter(annotation => annotation.type === 'line').map(item => ({
-                x1: item.axis === 'y' ? this.margin.left : this.barScale(item.value),
-                x2: item.axis === 'y' ? this.width - this.margin.right : this.barScale(item.value),
-                y1: item.axis === 'y' ? this.linearScale(item.value) : this.margin.top,
-                y2: item.axis === 'y' ? this.linearScale(item.value) : this.height - this.margin.bottom,
-                color: item.color
-            }))
-        }
     },
     methods: {
         populateTooltip(e, bar, row) {
@@ -162,7 +155,6 @@ export default {
             this.tooltipContent.x_label = this.xKey
             this.tooltipContent.y_value = bar.data[row.key]
             this.tooltipContent.y_label = row.key
-
         }
     },
     directives: {
@@ -230,9 +222,5 @@ rect {
 .activeTooltip {
     opacity: 0.9;
     transition: opacity 0.3s;
-}
-
-.annotation {
-    stroke-width: 1;
 }
 </style>
