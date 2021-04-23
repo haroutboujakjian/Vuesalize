@@ -41,7 +41,7 @@
             </template>
             <Annotations :annotations="annotations" :margin="margin"
                          :linear-scale="linearScale" :bar-scale="barScale"
-                         :width="width" :height="height">
+                         :width="width" :height="height" :direction="direction">
             </Annotations>
         </svg>
         <div v-if="enableTooltip && showTooltip"

@@ -32,15 +32,22 @@ export default {
         },
         barScale: {
             type: Function
+        },
+        direction: {
+            type: String,
+            default: 'vertical'
         }
     },
     computed: {
         annotation_lines() {
+            const yScale = this.direction === 'vertical' ? this.linearScale : this.barScale
+            const xScale = this.direction === 'vertical' ? this.barScale : this.linearScale
+
             return this.annotations.filter(annotation => annotation.type === 'line').map(item => ({
-                x1: item.axis === 'y' ? this.margin.left : this.barScale(item.value),
-                x2: item.axis === 'y' ? this.width - this.margin.right : this.barScale(item.value),
-                y1: item.axis === 'y' ? this.linearScale(item.value) : this.margin.top,
-                y2: item.axis === 'y' ? this.linearScale(item.value) : this.height - this.margin.bottom,
+                x1: item.axis === 'y' ? this.margin.left : xScale(item.value),
+                x2: item.axis === 'y' ? this.width - this.margin.right : xScale(item.value),
+                y1: item.axis === 'y' ? yScale(item.value) : this.margin.top,
+                y2: item.axis === 'y' ? yScale(item.value) : this.height - this.margin.bottom,
                 color: item.color ? item.color : 'black',
                 dash: item.dash ? '5 5' : ''
             }))
