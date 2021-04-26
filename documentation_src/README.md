@@ -356,9 +356,9 @@ The line chart component allows for one or more lines to be plotted.
 ```html
 <template>
     <LineChart :plot-data="plotData" x-key="date"
-               :width="450" :height="250"
-               :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
-               :margin="margin">
+               :width="450" :height="250" :margin="margin"
+               x-axis-label="Year" y-axis-label="VA Budget"
+               :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </LineChart>
 </template>
 
@@ -370,7 +370,7 @@ export default {
     data() {
         return {
             plotData: LCdata,
-            margin: {top: 20, bottom: 20, left: 40, right: 20}
+            margin: {top: 20, bottom: 30, left: 50, right: 20}
         }
     }
 }
@@ -388,7 +388,10 @@ export default {
 | `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
 | `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
 |`enable-tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
-
+| `x-axis-label`      |                      | `String` |         | Label for the x-axis                                      |
+| `y-axis-label`      |                      | `String` |         | Label for the y-axis                                      |
+| `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label     |
+| `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label     |
 
 #### Events Emitted
 

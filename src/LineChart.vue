@@ -13,6 +13,10 @@
             <g v-yaxis="{ scale: yScale, width: width - margin.left - margin.right}"
                :transform="`translate(${margin.left} 0)`">
             </g>
+            <AxisLabels :width="width" :height="height" :chart-margin="margin"
+                        :x-axis-label="xAxisLabel" :y-axis-label="yAxisLabel"
+                        :x-axis-label-shift="xAxisLabelShift" :y-axis-label-shift="yAxisLabelShift">
+            </AxisLabels>
         </svg>
 
         <div v-if="enableTooltip && showTooltip" class="tooltipContainer"
@@ -34,9 +38,11 @@ import {axisLeft, axisBottom} from 'd3-axis';
 import {select} from 'd3-selection';
 // eslint-disable-next-line no-unused-vars
 import {transition} from 'd3-transition';
+import AxisLabels from "./AxisLabels";
 
 export default {
     name: "LineChart",
+    components: {AxisLabels},
     props: {
         plotData: Array,
         width: Number,
@@ -52,7 +58,11 @@ export default {
         enableTooltip: {
             type: Boolean,
             default: true,
-        }
+        },
+        xAxisLabel: String,
+        yAxisLabel: String,
+        xAxisLabelShift: Object,
+        yAxisLabelShift: Object,
     },
     data() {
         return {
