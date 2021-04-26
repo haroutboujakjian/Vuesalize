@@ -14,5 +14,6 @@ module.exports = {
     markdown: {
         lineNumbers: true
     },
-    dest: 'docs'
+    dest: 'docs',
+    base: '/Vuesalize/'
 }
