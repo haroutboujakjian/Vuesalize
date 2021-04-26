@@ -1,6 +1,6 @@
 # Vuesalize
 
-## Introduction 
+## What's the point? 
 
 Visit our [interactive docs page](https://haroutboujakjian.github.io/Vuesalize/)!
 
