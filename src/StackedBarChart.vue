@@ -105,6 +105,10 @@ export default {
             default: function () {
                 return []
             }
+        },
+        paddingBetweenBars: {
+            type: Number,
+            default: 0.1
         }
     },
     data() {
@@ -125,7 +129,7 @@ export default {
         barScale() {
             const barScale = scaleBand()
                 .domain(this.plotData.map(d => d[this.xKey]))
-                .padding(0.1)
+                .padding(this.paddingBetweenBars)
 
             return this.direction === 'vertical'
                 ? barScale.range([this.margin.left, this.width - this.margin.right])

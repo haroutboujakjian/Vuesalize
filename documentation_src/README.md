@@ -198,17 +198,18 @@ and stacked bar chart use the same data format for input.
 
 #### Props
 
-| Name         | Required             | Type     | Default | Description                                               |
-|--            | :------------------: | -------  | --      |                                                         --|
-| `plot-data`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
-| `x-key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
-| `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
-| `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
-| `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group|
-| `direction`  |                      | `String` |'vertical' | direction of the chart. can be 'vertical' or 'horizontal'     |
+| Name              | Required             | Type     | Default | Description                                               |
+|--                 | :------------------: | -------  | --      |                                                         --|
+| `plot-data`       | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `x-key`           |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
+| `width`           | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
+| `height`          | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
+| `colors`          |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group|
+| `direction`       |                      | `String` |'vertical' | direction of the chart. can be 'vertical' or 'horizontal'     |
 | `bar-axis-location`|                      | `String`| 'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
-| `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
-|`enable-tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
+| `margin`          |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
+|`enable-tooltip`   |                    |`Boolean` | True    | Turn default tooltip on or off                               |
+| `padding-between-bars`|              | `Number` | 0.10    | padding between the bars in a group. Must be between `0` and `1`         |
 
 #### Events Emitted
 
