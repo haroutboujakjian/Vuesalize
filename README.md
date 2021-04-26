@@ -8,11 +8,11 @@ Building interactive visualizations on the web can be hard, and it can be even h
 existing visualization libraries inside of a Vue.js project. The goal of `Vuesalize` is to simplify this process by
 providing a set of chart components (and a couple others) that are commonly used in building interactive visualizations
 on the web. The charts are built using a combination of [Vue.js](https://vuejs.org/v2/guide/)
-and [D3.js](https://d3js.org/). The main rationale for this approach is to move the SVG definitions to the template (
-HTML), which allows Vue to handle creating and removing elements on the page. This is analogous to the "
-enter/update/exit" strategy used in D3 but specifically taking advantage of the virtual DOM. By building charts where
-the SVG is defined in Vue's template, we can not only send down props to update the chart, but can also emit events on
-interactions (e.g. click, mousover, etc.) and offer scoped slots for custom tooltips!
+and [D3.js](https://d3js.org/). The main rationale for this approach is to fully embrace the Vue paradigm and move the
+SVG definitions to the template (HTML), which allows Vue to handle creating and removing elements on the page. 
+This is analogous to the "enter/update/exit" strategy used in D3 but specifically taking advantage of the virtual DOM.
+By building charts where the SVG is defined in Vue's template, we can not only send down props to update the chart, but
+can also emit events on interactions (e.g. click, mousover, etc.) and offer scoped slots for custom tooltips!
 
 ## Installation
 
