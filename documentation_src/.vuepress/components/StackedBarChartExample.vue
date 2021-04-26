@@ -1,6 +1,7 @@
 <template>
     <StackedBarChart v-if="tooltip" :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
+                     x-axis-label="Year" y-axis-label="VA Budgets"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
         <template v-slot:tooltip="{ bar }">
             <p>Hello from inside the tooltip. Here are values when you hover over this bar</p>
@@ -9,15 +10,19 @@
     </StackedBarChart>
     <StackedBarChart v-else-if="annotation" :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
+                     x-axis-label="Year" y-axis-label="VA Budgets"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                      :annotations="annotations">
     </StackedBarChart>
     <StackedBarChart v-else-if="horizontal" :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" x-key="date" :direction="'horizontal'"
+                     :margin="margin" x-key="date" direction="horizontal"
+                     x-axis-label="VA Budgets" y-axis-label="Year"
+                     :x-axis-label-shift="{ dx: 0, dy: -2}" :y-axis-label-shift="{ dx: 0, dy: 5}"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </StackedBarChart>
     <StackedBarChart v-else :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
+                     x-axis-label="Year" y-axis-label="VA Budgets"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </StackedBarChart>
 
@@ -32,7 +37,7 @@ export default {
     data() {
         return {
             plotData: SBCdata,
-            margin: {top: 20, bottom: 20, left: 40, right: 20},
+            margin: {top: 20, bottom: 35, left: 55, right: 20},
             annotations: [{type: "line", axis: "y", color: "#ef0202", value: 8000, dash: true}]
         }
     }

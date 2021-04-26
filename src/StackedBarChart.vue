@@ -39,6 +39,10 @@
                    :transform="`translate(0, ${barAxisLocation === 'top' ? margin.top : height - margin.bottom})`">
                 </g>
             </template>
+            <AxisLabels :chart-margin="margin" :width="width" :height="height"
+                        :x-axis-label="xAxisLabel" :y-axis-label="yAxisLabel"
+                        :x-axis-label-shift="xAxisLabelShift" :y-axis-label-shift="yAxisLabelShift">
+            </AxisLabels>
             <Annotations :annotations="annotations" :margin="margin"
                          :linear-scale="linearScale" :bar-scale="barScale"
                          :width="width" :height="height" :direction="direction">
@@ -66,10 +70,11 @@ import {axisBottom, axisLeft, axisTop} from 'd3-axis';
 // eslint-disable-next-line no-unused-vars
 import {transition} from 'd3-transition';
 import Annotations from "./Annotations";
+import AxisLabels from "./AxisLabels";
 
 export default {
     name: "StackedBarChart",
-    components: {Annotations},
+    components: {Annotations, AxisLabels},
     props: {
         width: Number,
         height: Number,
@@ -109,7 +114,11 @@ export default {
         paddingBetweenBars: {
             type: Number,
             default: 0.1
-        }
+        },
+        xAxisLabel: String,
+        yAxisLabel: String,
+        xAxisLabelShift: Object,
+        yAxisLabelShift: Object,
     },
     data() {
         return {

@@ -2,11 +2,14 @@
     <GroupedBarChart v-if="horizontal" direction="horizontal"
                      :plot-data="plotdata" x-key="date"
                      :width="450" :height="300" :margin="margin"
+                      x-axis-label="VA Budgets" y-axis-label="Year"
+                     :x-axis-label-shift="{ dx: 0, dy: -2 }" :y-axis-label-shift="{ dx: 0, dy: 5 }"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </GroupedBarChart>
     <GroupedBarChart v-else
                      :plot-data="plotdata" x-key="date"
                      :width="450" :height="300" :margin="margin"
+                     x-axis-label="Year" y-axis-label="VA Budgets"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </GroupedBarChart>
 </template>
@@ -20,7 +23,7 @@ export default {
     data() {
         return {
             plotdata: GBCdata,
-            margin: {top: 20, bottom: 20, left: 40, right: 20}
+            margin: {top: 20, bottom: 35, left: 55, right: 20}
         }
     }
 }

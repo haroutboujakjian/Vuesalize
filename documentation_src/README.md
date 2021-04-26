@@ -123,6 +123,7 @@ stacked bar chart
 <template>
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
+                     x-axis-label="Year" y-axis-label="VA Budgets"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </StackedBarChart>
 </template>
@@ -135,7 +136,7 @@ export default {
     data() {
         return {
             plotData: SBCdata,
-            margin: {top: 20, bottom: 20, left: 40, right: 20}
+            margin: {top: 20, bottom: 35, left: 55, right: 20},
         }
     }
 }
@@ -151,8 +152,9 @@ or a horizontal bar chart can be displayed by passing in 'horizontal' for the `d
 ```html
 <template>
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" x-key="date"
-                     direction="horizontal"
+                     :margin="margin" x-key="date" direction="horizontal"
+                     x-axis-label="VA Budgets" y-axis-label="Year"
+                     :x-axis-label-shift="{ dx: 0, dy: -2}" :y-axis-label-shift="{ dx: 0, dy: 5}"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </StackedBarChart>
 </template>
@@ -165,7 +167,7 @@ export default {
     data() {
         return {
             plotData: SBCdata,
-            margin: {top: 20, bottom: 20, left: 40, right: 20}
+            margin: {top: 20, bottom: 35, left: 55, right: 20},
         }
     }
 }
@@ -198,18 +200,22 @@ and stacked bar chart use the same data format for input.
 
 #### Props
 
-| Name              | Required             | Type     | Default | Description                                               |
-|--                 | :------------------: | -------  | --      |                                                         --|
-| `plot-data`       | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
-| `x-key`           |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
-| `width`           | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
-| `height`          | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
-| `colors`          |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group|
-| `direction`       |                      | `String` |'vertical' | direction of the chart. can be 'vertical' or 'horizontal'     |
-| `bar-axis-location`|                      | `String`| 'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
-| `margin`          |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
-|`enable-tooltip`   |                    |`Boolean` | True    | Turn default tooltip on or off                               |
-| `padding-between-bars`|              | `Number` | 0.10    | padding between the bars in a group. Must be between `0` and `1`         |
+| Name                | Required             | Type     | Default | Description                                               |
+|--                   | :------------------: | -------  | --      |                                                         --|
+| `plot-data`         | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `x-key`             |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
+| `width`             | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
+| `height`            | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
+| `colors`            |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group|
+| `direction`         |                      | `String` |'vertical' | direction of the chart. can be 'vertical' or 'horizontal'     |
+| `bar-axis-location` |                      | `String`| 'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
+| `margin`            |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
+|`enable-tooltip`     |                    |`Boolean` | True    | Turn default tooltip on or off                               |
+|`padding-between-bars`|              | `Number` | 0.10    | padding between the bars in a group. Must be between `0` and `1`         |
+| `x-axis-label`      |                      | `String` |         | Label for the x-axis                                      |
+| `y-axis-label`      |                      | `String` |         | Label for the y-axis                                      |
+| `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label     |
+| `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label     |
 
 #### Events Emitted
 
@@ -241,7 +247,8 @@ Grouped bar charts are useful in comparing values together in and between groups
 <template>
     <GroupedBarChart :plot-data="plotdata" x-key="date"
                      :width="450" :height="300" :margin="margin"
-                     :colors="['#F8CBAD', '#C5E0B4', '#BDD7EE', '#D5B8EA']">
+                     x-axis-label="Year" y-axis-label="VA Budgets"
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </GroupedBarChart>
 </template>
 
@@ -253,7 +260,7 @@ export default {
     data() {
         return {
             plotdata: GBCdata,
-            margin: {top: 20, bottom: 20, left: 40, right: 20}
+            margin: {top: 20, bottom: 35, left: 55, right: 20}
         }
     }
 }
@@ -267,6 +274,30 @@ or a horizontal bar chart can be displayed by passing in 'horizontal' for the di
 </grouped-bar-chart-example>
 </div>
 
+```html
+<template>
+    <GroupedBarChart :plot-data="plotdata" x-key="date"
+                     :width="450" :height="300" :margin="margin"
+                     x-axis-label="VA Budgets" y-axis-label="Year"
+                     :x-axis-label-shift="{ dx: 0, dy: -2 }" :y-axis-label-shift="{ dx: 0, dy: 5 }"
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
+    </GroupedBarChart>
+</template>
+
+<script>
+import GBCdata from "./BarChartData.json"
+
+export default {
+    name: "GroupedBarChartExample",
+    data() {
+        return {
+            plotdata: GBCdata,
+            margin: {top: 20, bottom: 35, left: 55, right: 20}
+        }
+    }
+}
+</script>
+```
 
 #### Format of Data
 
@@ -307,6 +338,10 @@ and stacked bar chart use the same data format for input.
 | `padding-between-groups`|            | `Number` | 0.15    | padding between the groups of bars. Must be between `0` and `1`         |
 | `margin`       |                     | `Object` |         | object that contains the top, bottom, right, and left margins|
 |`enable-tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
+| `x-axis-label`      |                      | `String` |         | Label for the x-axis                                      |
+| `y-axis-label`      |                      | `String` |         | Label for the y-axis                                      |
+| `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label     |
+| `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label     |
 
 #### Events Emitted
 
@@ -686,6 +721,7 @@ are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructurin
 <template>
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
+                     x-axis-label="Year" y-axis-label="VA Budgets"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
         <template v-slot:tooltip="{ bar }">
             <h2>Hello from inside the tooltip. Here are values when you hover over a bar</h2>
@@ -722,6 +758,7 @@ a horizontal dashed line to stacked bar chart which might indicate, for example,
 <template>
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
+                     x-axis-label="Year" y-axis-label="VA Budgets"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                      :annotations="annotations">
     </StackedBarChart>

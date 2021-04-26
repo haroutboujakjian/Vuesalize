@@ -37,6 +37,10 @@
                    class="axis" :transform="`translate(${this.margin.left}, 0)`">
                 </g>
             </template>
+            <AxisLabels :width="width" :height="height" :chart-margin="margin"
+                        :x-axis-label="xAxisLabel" :y-axis-label="yAxisLabel"
+                        :x-axis-label-shift="xAxisLabelShift" :y-axis-label-shift="yAxisLabelShift">
+            </AxisLabels>
             <Annotations :annotations="annotations" :margin="margin"
                          :linear-scale="linearScale" :bar-scale="bandScale"
                          :width="width" :height="height" :direction="direction">
@@ -60,10 +64,11 @@ import {max} from 'd3-array';
 import {select} from 'd3-selection';
 import {axisLeft, axisBottom} from 'd3-axis';
 import Annotations from "./Annotations";
+import AxisLabels from "./AxisLabels";
 
 export default {
     name: "GroupedBarChart",
-    components: {Annotations},
+    components: {Annotations, AxisLabels},
     props: {
         plotData: Array,
         width: Number,
@@ -106,7 +111,11 @@ export default {
             validator: function (value) {
                 return value >= 0 && value <= 1
             }
-        }
+        },
+        xAxisLabel: String,
+        yAxisLabel: String,
+        xAxisLabelShift: Object,
+        yAxisLabelShift: Object,
     },
     data() {
         return {
