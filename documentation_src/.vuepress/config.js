@@ -13,5 +13,6 @@ module.exports = {
     },
     markdown: {
         lineNumbers: true
-    }
+    },
+    dest: 'docs'
 }
