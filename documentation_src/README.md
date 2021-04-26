@@ -1,3 +1,5 @@
+# Vuesalize
+
 ## What's the point?
 
 Building interactive visualizations on the web can be hard, and it can be even harder when you would like to leverage
