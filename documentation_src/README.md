@@ -72,7 +72,7 @@ It is quite simple to get started with the CDN. The vuesalize [javascript](https
 and the components that will be used must be declared using `Vue.use()` (line 16). It is also necessary to link the 
 official Vue package as well (line 6).
 
-```html {5,7,16}
+```html
 <html lang="en">
 <head>
     <meta charset="utf-8">
