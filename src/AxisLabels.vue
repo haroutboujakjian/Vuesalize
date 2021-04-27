@@ -22,10 +22,16 @@ export default {
             type: String
         },
         yAxisLabelShift: {
-            type: Object
+            type: Object,
+            default: function () {
+                return {}
+            }
         },
         xAxisLabelShift: {
-            type: Object
+            type: Object,
+            default: function () {
+                return {}
+            }
         },
         width: {
             type: Number
@@ -39,16 +45,16 @@ export default {
     },
     computed: {
         xaxis_dx() {
-            return this.xAxisLabelShift?.dx
+            return 'dx' in this.xAxisLabelShift ? this.xAxisLabelShift.dx : undefined
         },
         xaxis_dy() {
-            return this.xAxisLabelShift?.dy
+            return 'dy' in this.xAxisLabelShift ? this.xAxisLabelShift.dy : undefined
         },
         yaxis_dx() {
-            return this.yAxisLabelShift?.dx
+            return 'dx' in this.yAxisLabelShift ? this.yAxisLabelShift.dx : undefined
         },
         yaxis_dy() {
-            return this.yAxisLabelShift?.dy
+            return 'dy' in this.yAxisLabelShift ? this.yAxisLabelShift.dy : undefined
         }
     }
 }

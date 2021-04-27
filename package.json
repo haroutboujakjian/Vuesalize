@@ -1,6 +1,6 @@
 {
   "name": "vuesalize",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "description": "Component library dedicated to simplifying interactive visualization building in Vue.js.",
   "private": false,
   "main": "dist/vuesalize.common.js",
@@ -8,7 +8,8 @@
   "scripts": {
     "docs:dev": "node_modules/.bin/vuepress dev documentation_src/",
     "docs:build": "node_modules/.bin/vuepress build documentation_src/",
-    "build": "vue-cli-service build --target lib --name vuesalize src/main.js && rm dist/demo.html"
+    "build": "vue-cli-service build --target lib --name vuesalize src/main.js && rm dist/demo.html",
+    "build:publish": "npm run build && npm publish"
   },
   "files": [
     "dist",
