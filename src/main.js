@@ -7,7 +7,7 @@ import GroupedBarChart from "./GroupedBarChart";
 import LoaderSpinning from "./LoaderSpinning";
 import Network from "./Network";
 import HierarchicalEdgeBundling from "./HierarchicalEdgeBundling";
-import StackedAreaChart from "./StackedAreaChart";
+import AreaChart from "./AreaChart";
 
 const Components = {
     StackedBarChart,
@@ -17,7 +17,7 @@ const Components = {
     LoaderSpinning,
     Network,
     HierarchicalEdgeBundling,
-    StackedAreaChart
+    AreaChart
 }
 
 Object.keys(Components).forEach(name => {

@@ -1,13 +1,13 @@
 <template>
     <div>
-        <StackedAreaChart v-if="stacked" :plot-data="plotData" :width="500" :height="300" x-key="date"
+        <AreaChart v-if="stacked" :plot-data="plotData" :width="500" :height="300" x-key="date"
                           :margin="margin" :stacked="true"
                           :colors="['#ac58e5','#E0488B']">
-        </StackedAreaChart>
-        <StackedAreaChart v-else :plot-data="plotData" :width="500" :height="300" x-key="date"
+        </AreaChart>
+        <AreaChart v-else :plot-data="plotData" :width="500" :height="300" x-key="date"
                           :margin="margin"
                           :colors="['#ac58e5','#E0488B']">
-        </StackedAreaChart>
+        </AreaChart>
     </div>
 </template>
 

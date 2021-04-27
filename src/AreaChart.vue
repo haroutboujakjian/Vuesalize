@@ -41,7 +41,7 @@ import {select} from 'd3-selection';
 // eslint-disable-next-line no-unused-vars
 
 export default {
-    name: "StackedAreaChart",
+    name: "AreaChart",
     props: {
         width: Number,
         height: Number,
