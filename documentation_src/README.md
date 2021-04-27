@@ -112,8 +112,10 @@ Additionally, the SFC component templates can be retrieved from [gitlab](https:/
 
 ### Stacked Bar Chart
 
-Stacked bar charts are one of the most popular chart types. Here is a simple example that constructs a
-stacked bar chart
+Stacked bar charts are one of the most popular chart types. 
+
+#### Example
+Here is a simple example that constructs a stacked bar chart representing different budgets for VA.
 
 <div style="display: flex; justify-content: center">
 <stacked-bar-chart-example></stacked-bar-chart-example>
@@ -123,13 +125,13 @@ stacked bar chart
 <template>
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
-                     x-axis-label="Year" y-axis-label="VA Budgets"
+                     x-axis-label="Year" y-axis-label="VA Budget"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </StackedBarChart>
 </template>
 
 <script>
-import SBCdata from './BarChartData.json'
+import SBCdata from './Budget3Groups.json'
 
 export default {
     name: "StackedBarChartExample",
@@ -143,7 +145,7 @@ export default {
 </script>
 ```
 
-or a horizontal bar chart can be displayed by passing in 'horizontal' for the `direction` prop.
+Alternatively, it's possible to get a horizontal bar chart by passing in 'horizontal' for the `direction` prop.
 
 <div style="display: flex; justify-content: center">
 <stacked-bar-chart-example :horizontal="true"></stacked-bar-chart-example>
@@ -153,14 +155,14 @@ or a horizontal bar chart can be displayed by passing in 'horizontal' for the `d
 <template>
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date" direction="horizontal"
-                     x-axis-label="VA Budgets" y-axis-label="Year"
+                     x-axis-label="VA Budget" y-axis-label="Year"
                      :x-axis-label-shift="{ dx: 0, dy: -2}" :y-axis-label-shift="{ dx: 0, dy: 5}"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </StackedBarChart>
 </template>
 
 <script>
-import SBCdata from './BarChartData.json'
+import SBCdata from './Budget3Groups.json'
 
 export default {
     name: "StackedBarChartExample",
@@ -176,10 +178,10 @@ export default {
 
 
 In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
-key for the x value, and all the other keys will be for y values. The `BarChartData.json` data file that populates
-the example grouped bar chart has "date" for the x value, and "Veteran's Benefit Administration",
-"Veteran's Health Administration", and "National Cemetery Administration" for the y values. Both the grouped bar chart
-and stacked bar chart use the same data format for input.
+key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file that populates
+the example stacked bar chart has "date" for the x value, and "Veteran's Benefit Administration",
+"Veteran's Health Administration", and "National Cemetery Administration" for the y values. All of the axis charts
+(bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
 
 ```json
 [
@@ -239,6 +241,8 @@ Grouped bar charts are useful in comparing values together in and between groups
 
 #### Example
 
+Here is an example using the same VA budget data as the stacked bar chart above but the bars are instead grouped.
+
 <div style="display: flex; justify-content: center">
     <grouped-bar-chart-example></grouped-bar-chart-example>
 </div>
@@ -247,13 +251,13 @@ Grouped bar charts are useful in comparing values together in and between groups
 <template>
     <GroupedBarChart :plot-data="plotdata" x-key="date"
                      :width="450" :height="300" :margin="margin"
-                     x-axis-label="Year" y-axis-label="VA Budgets"
+                     x-axis-label="Year" y-axis-label="VA Budget"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </GroupedBarChart>
 </template>
 
 <script>
-import GBCdata from "./BarChartData.json"
+import GBCdata from "./Budget3Groups.json"
 
 export default {
     name: "GroupedBarChartExample",
@@ -267,7 +271,7 @@ export default {
 </script>
 ```
 
-or a horizontal bar chart can be displayed by passing in 'horizontal' for the direction prop.
+And, again, it's possible to get a horizontal bar chart by passing in 'horizontal' for the direction prop.
 
 <div style="display: flex; justify-content: center">
     <grouped-bar-chart-example :horizontal="true">
@@ -278,14 +282,14 @@ or a horizontal bar chart can be displayed by passing in 'horizontal' for the di
 <template>
     <GroupedBarChart :plot-data="plotdata" x-key="date"
                      :width="450" :height="300" :margin="margin"
-                     x-axis-label="VA Budgets" y-axis-label="Year"
+                     x-axis-label="VA Budget" y-axis-label="Year"
                      :x-axis-label-shift="{ dx: 0, dy: -2 }" :y-axis-label-shift="{ dx: 0, dy: 5 }"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
     </GroupedBarChart>
 </template>
 
 <script>
-import GBCdata from "./BarChartData.json"
+import GBCdata from "./Budget3Groups.json"
 
 export default {
     name: "GroupedBarChartExample",
@@ -301,11 +305,12 @@ export default {
 
 #### Format of Data
 
-In order for the stacked bar chart to render properly, `plot-data` needs to be as an array of objects. There should be
-one key for the x value, and all the other keys will be for y values. The `BarChartData.json` data file that
-populates the example grouped bar chart has "date" for the x value, and "Veteran's Benefit Administration",
-"Veteran's Health Administration", and "National Cemetery Administration" for the y values. Both the grouped bar chart
-and stacked bar chart use the same data format for input.
+In order for the grouped bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
+key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file that populates
+the example grouped bar chart has "date" for the x value, and "Veteran's Benefit Administration",
+"Veteran's Health Administration", and "National Cemetery Administration" for the y values. All of the axis charts
+(bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
+
 
 ```json
 [
@@ -349,6 +354,8 @@ and stacked bar chart use the same data format for input.
 
 The line chart component allows for one or more lines to be plotted.
 
+#### Example
+
 <div style="display: flex; justify-content: center">
     <line-chart-example></line-chart-example>
 </div>
@@ -363,7 +370,7 @@ The line chart component allows for one or more lines to be plotted.
 </template>
 
 <script>
-import LCdata from "./BarChartData.json"
+import LCdata from "./Budget3Groups.json"
 
 export default {
     name: "LineChartExample",
@@ -375,6 +382,32 @@ export default {
     }
 }
 </script>
+```
+
+#### Format of Data
+
+In order for the line chart to render properly, `plotdata` needs to be as an array of objects. There should be one
+key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file that populates
+the example line chart has "date" for the x value, and "Veteran's Benefit Administration",
+"Veteran's Health Administration", and "National Cemetery Administration" for the y values. All of the axis charts
+(bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
+
+
+```json
+[
+  {
+    "date": "2019",
+    "Veteran's Benefit Administration": 5921,
+    "Veteran's Health Administration": 1026,
+    "National Cemetery Administration": 2324
+  },
+  {
+    "date": "2020",
+    "Veteran's Benefit Administration": 1539,
+    "Veteran's Health Administration": 1560,
+    "National Cemetery Administration": 1257
+  }, ...
+]
 ```
 
 #### Props
@@ -406,9 +439,66 @@ a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 | `lines`      | `Object` | contains the x key and all of the y keys for the x value that is hovered over     |
 
 
-### Stacked Area Chart
+### Area Chart
 
-Under construction...
+Area charts are similar to line charts except the area under the curve is filled in. A normal area chart with two
+groups is displayed below
+
+<div style="display: flex; justify-content: center">
+    <area-chart-example></area-chart-example>
+</div>
+
+```html
+<template>
+   <StackedAreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
+                     :margin="margin"
+                     :colors="['#ac58e5','#E0488B']">
+   </StackedAreaChart>
+</template>
+
+<script>
+   import ACdata from './Budget2Groups.json'
+
+   export default {
+      name: "AreaChartExample",
+      data() {
+         return {
+            plotData: ACdata,
+            margin: {top: 20, bottom: 20, left: 40, right: 20}
+         }
+      }
+   }
+</script>
+```
+
+In order to get a stacked area chart, the `stacked` prop can be set to true
+
+<div style="display: flex; justify-content: center">
+    <area-chart-example :stacked="true"></area-chart-example>
+</div>
+
+```html
+<template>
+   <StackedAreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
+                     :margin="margin" :stacked="true"
+                     :colors="['#ac58e5','#E0488B']">
+   </StackedAreaChart>
+</template>
+
+<script>
+   import ACdata from './Budget2Groups.json'
+
+   export default {
+      name: "AreaChartExample",
+      data() {
+         return {
+            plotData: ACdata,
+            margin: {top: 20, bottom: 20, left: 40, right: 20}
+         }
+      }
+   }
+</script>
+```
 
 ### Donut Chart
 
@@ -724,7 +814,7 @@ are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructurin
 <template>
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
-                     x-axis-label="Year" y-axis-label="VA Budgets"
+                     x-axis-label="Year" y-axis-label="VA Budget"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
         <template v-slot:tooltip="{ bar }">
             <h2>Hello from inside the tooltip. Here are values when you hover over a bar</h2>
@@ -734,7 +824,7 @@ are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructurin
 </template>
 
 <script>
-import SBCdata from './BarChartData.json'
+import SBCdata from './Budget3Groups.json'
 
 export default {
     name: "StackedBarChartExample",
@@ -761,14 +851,14 @@ a horizontal dashed line to stacked bar chart which might indicate, for example,
 <template>
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
-                     x-axis-label="Year" y-axis-label="VA Budgets"
+                     x-axis-label="Year" y-axis-label="VA Budget"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                      :annotations="annotations">
     </StackedBarChart>
 </template>
 
 <script>
-import SBCdata from './BarChartData.json'
+import SBCdata from './Budget3Groups.json'
 
 export default {
    name: "StackedBarChartExample",

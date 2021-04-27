@@ -1,10 +1,17 @@
 <template>
     <figure>
         <svg :width="width" :height="height" ref="svgContainer">
-            <g @mousemove="populateTooltip($event)" @mouseleave="removeTooltip()">
+            <g v-if="stacked" @mousemove="populateTooltip($event)" @mouseleave="removeTooltip()">
                 <path v-for="row in series" :key="row.key"
                       :d="areaCalc(row)" :fill="color(row.key)"
                       @click="$emit('click',row.key)">
+                </path>
+            </g>
+            <g v-else @mousemove="populateTooltip($event)" @mouseleave="removeTooltip()">
+                <path v-for="row in series" :key="row.name"
+                      :d="areaCalc(row.values)" :stroke="color(row.name)" stroke-opacity="1"
+                      :fill="color(row.name)" fill-opacity="0.6">
+                    <title>{{ areaCalc(row) }}</title>
                 </path>
             </g>
             <line v-for="(line, i) in annotation_lines" :key="`l${i}}`"
@@ -38,10 +45,19 @@ export default {
     props: {
         width: Number,
         height: Number,
-        margin: Object,
+        margin: {
+            type: Object,
+            default: function () {
+                return {top: 20, bottom: 20, left: 20, right: 20}
+            }
+        },
         plotData: Array,
         colors: Array,
-        x_key: String,
+        xKey: String,
+        stacked: {
+            type: Boolean,
+            default: false,
+        },
         annotations: Array
     },
     data() {
@@ -55,34 +71,58 @@ export default {
         }
     },
     computed: {
-        object_keys() {
-            return Object.keys(this.plotData[0]).filter(item => item !== this.x_key)
+        yValueKeys() {
+            return Object.keys(this.plotData[0]).filter(item => item !== this.xKey)
+        },
+        xValues() {
+            return this.plotData.map(item => item[this.xKey])
         },
         series() {
-            return stack().keys(this.object_keys)(this.plotData)
+            const dataUnstacked = this.yValueKeys.map(key => ({
+                name: key,
+                values: this.plotData.map(year => year[key])
+            }))
+
+            const dataStacked = stack().keys(this.yValueKeys)(this.plotData)
+
+            return this.stacked ? dataStacked : dataUnstacked
         },
         xScale() {
             return scaleTime()
-                .domain(extent(this.plotData, d => new Date(d[this.x_key])))
+                .domain(extent(this.plotData, d => new Date(d[this.xKey])))
                 .range([this.margin.left, this.width - this.margin.right])
         },
         yScale() {
+            let maxVal
+            if (this.stacked) {
+                maxVal = max(this.series, d => max(d, d => d[1]))
+            } else {
+                maxVal = max(this.series.flatMap(row => row.values))
+            }
             return scaleLinear()
-                .domain([0, max(this.series, d => max(d, d => d[1]))])
+                .domain([0, maxVal])
                 .range([this.height - this.margin.bottom, this.margin.top])
                 .nice()
         },
         areaCalc() {
-            return area()
-                .x(d => this.xScale(new Date(d.data[this.x_key])))
+            const areaStacked = area()
+                .x(d => this.xScale(new Date(d.data[this.xKey])))
                 .y0(d => this.yScale(d[0]))
                 .y1(d => this.yScale(d[1]))
+
+            const areaUnstacked = area()
+                .x((d, i) => this.xScale(new Date(this.xValues[i])))
+                .y0(() => this.yScale(0))
+                .y1(d => this.yScale(d))
+
+            return this.stacked ? areaStacked : areaUnstacked
+
         },
         color() {
-            return scaleOrdinal().domain(this.object_keys).range(this.colors)
+            return scaleOrdinal().domain(this.yValueKeys).range(this.colors)
         },
         xBisector() {
-            return bisector(d => new Date(d[this.x_key])).left
+            return bisector(d => new Date(d[this.xKey])).left
         },
         annotation_lines() {
             if (this.annotations === undefined) {
@@ -121,7 +161,7 @@ export default {
         },
         yaxis(el, binding) {
             let scale = binding.value.scale
-            select(el).transition().duration(500).call(axisLeft(scale).ticks())
+            select(el).transition().duration(500).call(axisLeft(scale).ticks(5))
         }
     }
 }

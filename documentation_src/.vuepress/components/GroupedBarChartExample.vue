@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import GBCdata from "./BarChartData.json"
+import GBCdata from './Budget3Groups.json'
 
 export default {
     name: "GroupedBarChartExample",

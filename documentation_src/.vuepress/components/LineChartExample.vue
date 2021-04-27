@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import LCdata from "./BarChartData.json"
+import LCdata from "./Budget3Groups.json"
 
 export default {
     name: "LineChartExample",

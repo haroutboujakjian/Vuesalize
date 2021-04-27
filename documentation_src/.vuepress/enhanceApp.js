@@ -7,7 +7,8 @@ const {
     GroupedBarChart,
     LoaderSpinning,
     Network,
-    HierarchicalEdgeBundling
+    HierarchicalEdgeBundling,
+    StackedAreaChart
 } = Components
 
 export default ({Vue, options, router, siteData}) => {
@@ -18,4 +19,5 @@ export default ({Vue, options, router, siteData}) => {
     Vue.use(LoaderSpinning)
     Vue.use(Network)
     Vue.use(HierarchicalEdgeBundling)
+    Vue.use(StackedAreaChart)
 }

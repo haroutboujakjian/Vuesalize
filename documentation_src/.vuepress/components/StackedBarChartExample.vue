@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import SBCdata from './BarChartData.json'
+import SBCdata from './Budget3Groups.json'
 
 export default {
     name: "StackedBarChartExample",
