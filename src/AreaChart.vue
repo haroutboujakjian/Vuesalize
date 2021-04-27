@@ -3,15 +3,15 @@
         <svg :width="width" :height="height" ref="svgContainer">
             <g v-if="stacked" @mousemove="populateTooltip($event)" @mouseleave="removeTooltip()">
                 <path v-for="row in series" :key="row.key"
-                      :d="areaCalc(row)" :fill="color(row.key)"
+                      :d="areaCalc(row)" :stroke="color(row.name)"
+                      :fill="color(row.key)" :fill-opacity="fillOpacity"
                       @click="$emit('click',row.key)">
                 </path>
             </g>
             <g v-else @mousemove="populateTooltip($event)" @mouseleave="removeTooltip()">
                 <path v-for="row in series" :key="row.name"
-                      :d="areaCalc(row.values)" :stroke="color(row.name)" stroke-opacity="1"
-                      :fill="color(row.name)" fill-opacity="0.6">
-                    <title>{{ areaCalc(row) }}</title>
+                      :d="areaCalc(row.values)" :stroke="color(row.name)"
+                      :fill="color(row.name)" :fill-opacity="fillOpacity">
                 </path>
             </g>
             <line v-for="(line, i) in annotation_lines" :key="`l${i}}`"
@@ -58,7 +58,11 @@ export default {
             type: Boolean,
             default: false,
         },
-        annotations: Array
+        annotations: Array,
+        fillOpacity: {
+            type: Number,
+            default: 0.65
+        }
     },
     data() {
         return {

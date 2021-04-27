@@ -418,7 +418,7 @@ the example line chart has "date" for the x value, and "Veteran's Benefit Admini
 | `x-key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
 | `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
-| `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each bar, must match number of bar in a group   |
+| `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each line, must match number of lines |
 | `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
 |`enable-tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
 | `x-axis-label`      |                      | `String` |         | Label for the x-axis                                      |
@@ -499,6 +499,49 @@ In order to get a stacked area chart, the `stacked` prop can be set to true
    }
 </script>
 ```
+
+#### Format of Data
+
+In order for the area chart to render properly, `plotdata` needs to be as an array of objects. There should be one
+key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file that populates
+the example area chart has "date" for the x value, and "Veteran's Benefit Administration",
+"Veteran's Health Administration", and "National Cemetery Administration" for the y values. All of the axis charts
+(bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
+
+
+```json
+[
+  {
+    "date": "2019",
+    "Veteran's Benefit Administration": 5921,
+    "Veteran's Health Administration": 1026,
+    "National Cemetery Administration": 2324
+  },
+  {
+    "date": "2020",
+    "Veteran's Benefit Administration": 1539,
+    "Veteran's Health Administration": 1560,
+    "National Cemetery Administration": 1257
+  }, ...
+]
+```
+
+#### Props
+
+| Name          | Required             | Type     | Default | Description                                                    |
+|--             | :------------------: | -------  | --      |                                                              --|
+| `plot-data`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                             |
+| `x-key`       | :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata              |
+| `width`       | :heavy_check_mark:   | `Number` |         | chart width in pixels                                          |
+| `height`      | :heavy_check_mark:   | `Number` |         | chart height in pixels                                         |
+| `colors`      |  :heavy_check_mark:  | `Array`  |         | array of colors used for areas                                 |
+| `margin`      |                      | `Object` |         | object that contains the top, bottom, right, and left margins  |
+| `stacked`     |                      | `Boolean`|         | changes to stacked area chart                                  |
+|`fill-opacity` |                      | `Number` |  0.65   | fill opacity for each path, must be between 0 and 1            |
+
+#### Events Emitted
+
+#### Slots
 
 ### Donut Chart
 
