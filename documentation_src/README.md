@@ -105,7 +105,8 @@ official Vue package as well (line 6).
 
 Examples of how each of the components can be used is in each of the sections.
 
-Additionally, the SFC component templates can be retrieved from [gitlab](https://gitlab.mitre.org/full-stack-interactive-visualizations/components/-/tree/master/documentation/.vuepress/components)
+Additionally, the SFC component templates can be retrieved
+from [github](https://github.com/haroutboujakjian/Vuesalize/tree/master/src)
 
 ## Charts
 

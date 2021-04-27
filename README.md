@@ -79,9 +79,9 @@ official Vue package as well (line 6).
 <head>
     <meta charset="utf-8">
     <title>Browser test</title>
-    <link rel="stylesheet" href="https://unpkg.com/vuesalize@0.0.29/dist/vuesalize.css">
+    <link rel="stylesheet" href="https://unpkg.com/vuesalize@0.0.34/dist/vuesalize.css">
     <script src="http_cdn.jsdelivr.net_npm_vue@2.6.12_dist_vue.js"></script>
-    <script src="https://unpkg.com/vuesalize@0.0.29/dist/vuesalize.umd.min.js"></script>
+    <script src="https://unpkg.com/vuesalize@0.0.34/dist/vuesalize.umd.min.js"></script>
 </head>
 <body>
 <div id="app">
