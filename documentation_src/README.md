@@ -203,22 +203,22 @@ the example stacked bar chart has "date" for the x value, and "Veteran's Benefit
 
 #### Props
 
-| Name                 | Required            | Type     | Default | Description                                               |
-|--                    | :-----------------: | -------  | --      |                                                         --|
-| `plot-data`          | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                        |
-| `x-key`              |  :heavy_check_mark: | `String` |         | string that is the key of the x value in plotdata        |
-| `width`              | :heavy_check_mark:  | `Number` |         | chart width in pixels                                     |
-| `height`             | :heavy_check_mark:  | `Number` |         | chart height in pixels                                    |
-| `colors`             |  :heavy_check_mark: | `Array`  |         | array of colors used for each bar, must match number of bar in a group|
-| `direction`          |                     | `String` |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'     |
+| Name                 | Required            | Type     | Default | Description                                                       |
+|--                    | :-----------------: | -------  | --      |                                                                 --|
+| `plot-data`          | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                                |
+| `x-key`              |  :heavy_check_mark: | `String` |         | string that is the key of the x value in plotdata                 |
+| `width`              | :heavy_check_mark:  | `Number` |         | chart width in pixels                                             |
+| `height`             | :heavy_check_mark:  | `Number` |         | chart height in pixels                                            |
+| `colors`             |  :heavy_check_mark: | `Array`  |         | array of colors used for each bar                                 |
+| `direction`          |                     | `String` |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'        |
 | `bar-axis-location`  |                     | `String` |'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
-| `margin`             |                     | `Object` |         | object that contains the top, bottom, right, and left margins|
-|`enable-tooltip`      |                     |`Boolean` | True    | Turn default tooltip on or off                               |
-|`padding-between-bars`|                     | `Number` | 0.10    | padding between the bars in a group. Must be between `0` and `1`         |
-| `x-axis-label`       |                     | `String` |         | Label for the x-axis                                      |
-| `y-axis-label`       |                     | `String` |         | Label for the y-axis                                      |
-| `x-axis-label-shift` |                     | `Object` |         | Takes `dx` and `dy` keys that move the location label     |
-| `y-axis-label-shift` |                     | `Object` |         | Takes `dx` and `dy` keys that move the location label     |
+| `margin`             |                     | `Object` |         | object that contains the top, bottom, right, and left margins     |
+|`enable-tooltip`      |                     |`Boolean` | True    | Turn default tooltip on or off                                    |
+|`padding-between-bars`|                     | `Number` | 0.10    | padding between the bars in a group. Must be between `0` and `1`  |
+| `x-axis-label`       |                     | `String` |         | Label for the x-axis                                              |
+| `y-axis-label`       |                     | `String` |         | Label for the y-axis                                              |
+| `x-axis-label-shift` |                     | `Object` |         | Takes `dx` and `dy` keys that move the location label             |
+| `y-axis-label-shift` |                     | `Object` |         | Takes `dx` and `dy` keys that move the location label             |
 
 #### Events Emitted
 
@@ -332,22 +332,22 @@ the example grouped bar chart has "date" for the x value, and "Veteran's Benefit
 
 #### Props
 
-| Name           | Required            | Type     | Default | Description                                               |
-|--              | :-----------------: | -------  | --      |                                                         --|
-| `plot-data`    | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                        |
-| `x-key`        | :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata        |
-| `width`        | :heavy_check_mark:  | `Number` |         | chart width in pixels                                     |
-| `height`       | :heavy_check_mark:  | `Number` |         | chart height in pixels                                    |
-| `colors`       |  :heavy_check_mark: | `Array`  |         | array of colors used for each bar, must match number of bar in a group |
-| `direction`    |                     |`String` |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'     |
-| `padding-between-bars`|              | `Number` | 0.15    | padding between the bars in a group. Must be between `0` and `1`         |
-| `padding-between-groups`|            | `Number` | 0.15    | padding between the groups of bars. Must be between `0` and `1`         |
-| `margin`       |                     | `Object` |         | object that contains the top, bottom, right, and left margins|
-|`enable-tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
-| `x-axis-label`      |                      | `String` |         | Label for the x-axis                                      |
-| `y-axis-label`      |                      | `String` |         | Label for the y-axis                                      |
-| `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label     |
-| `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label     |
+| Name           | Required            | Type     | Default | Description                                                       |
+|--              | :-----------------: | -------  | --      |                                                                 --|
+| `plot-data`    | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                                |
+| `x-key`        | :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata                 |
+| `width`        | :heavy_check_mark:  | `Number` |         | chart width in pixels                                             |
+| `height`       | :heavy_check_mark:  | `Number` |         | chart height in pixels                                            |
+| `colors`       |  :heavy_check_mark: | `Array`  |         | array of colors used for each bar                                 |
+| `direction`    |                     |`String` |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'         |
+| `padding-between-bars`|              | `Number` | 0.15    | padding between the bars in a group. Must be between `0` and `1`  |
+| `padding-between-groups`|            | `Number` | 0.15    | padding between the groups of bars. Must be between `0` and `1`   |
+| `margin`       |                     | `Object` |         | object that contains the top, bottom, right, and left margins     |
+|`enable-tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                                     |
+| `x-axis-label`      |                      | `String` |         | Label for the x-axis                                        |
+| `y-axis-label`      |                      | `String` |         | Label for the y-axis                                        |
+| `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
+| `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
 
 #### Events Emitted
 
@@ -419,7 +419,7 @@ the example line chart has "date" for the x value, and "Veteran's Benefit Admini
 | `x-key`             |  :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata             |
 | `width`             | :heavy_check_mark:   | `Number` |         | chart width in pixels                                         |
 | `height`            | :heavy_check_mark:   | `Number` |         | chart height in pixels                                        |
-| `colors`            |  :heavy_check_mark:  | `Array`  |         | array of colors used for each line, must match number of lines |
+| `colors`            |  :heavy_check_mark:  | `Array`  |         | array of colors used for each line                            |
 | `margin`            |                      | `Object` |         | object that contains the top, bottom, right, and left margins |
 |`enable-tooltip`     |                      |`Boolean` | True    | Turn default tooltip on or off                                |
 |`stroke-width`       |                      | `Number` |  2      | stroke-width for areas                                        |
