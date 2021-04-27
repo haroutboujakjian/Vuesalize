@@ -87,9 +87,6 @@ export default {
                 .sort()
                 .map(key => ({name: key, values: this.plotData.map(year => year[key])}))
         },
-        max_y_value() {
-            return max(this.y_values, d => max(d.values))
-        },
         xScale() {
             return scaleTime()
                 .domain(extent(this.plotData, d => new Date(d[this.xKey])))
@@ -98,7 +95,7 @@ export default {
         },
         yScale() {
             return scaleLinear()
-                .domain([0, this.max_y_value])
+                .domain([0, max(this.y_values, d => max(d.values))])
                 .range([this.height - this.margin.bottom, this.margin.top])
                 .nice()
         },
