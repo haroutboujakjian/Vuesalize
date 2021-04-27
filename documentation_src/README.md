@@ -591,9 +591,10 @@ Under construction...
 
 ### Hierarchical Edge Bundling
 
-#### Example
+A hierarchical edge bundling chart shows relationships between different entities radially to avoid very long or wide 
+hierarchical charts. 
 
-The code below constructs the hierarchical edge bundling plot below it.
+#### Example
 
 <div style="display: flex; justify-content: center">
     <hierarchical-edge-bundling-example></hierarchical-edge-bundling-example>
