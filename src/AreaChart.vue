@@ -14,16 +14,16 @@
                       :fill="color(row.name)" :fill-opacity="fillOpacity">
                 </path>
             </g>
-            <line v-for="(line, i) in annotation_lines" :key="`l${i}}`"
-                  :x1="line.x1" :x2="line.x2" :y1="line.y1" :y2="line.y2"
-                  class="annotation" :stroke="line.color" stroke-dasharray="5 5">
-            </line>
             <g v-xaxis="{scale: xScale}" :transform="`translate(0, ${height - margin.bottom})`"></g>
             <g v-yaxis="{scale: yScale}" :transform="`translate(${margin.left}, 0)`"></g>
             <AxisLabels :width="width" :height="height" :chart-margin="margin"
                         :x-axis-label="xAxisLabel" :y-axis-label="yAxisLabel"
                         :x-axis-label-shift="xAxisLabelShift" :y-axis-label-shift="yAxisLabelShift">
             </AxisLabels>
+            <Annotations :annotations="annotations" :margin="margin"
+                         :linear-scale="yScale" :bar-scale="xScale"
+                         :width="width" :height="height" direction="vertical">
+            </Annotations>
         </svg>
         <div v-if="showTooltip" class="tooltipContainer"
              :class="{activeTooltip: showTooltip}"
@@ -43,11 +43,12 @@ import {bisector, extent, max} from 'd3-array';
 import {axisBottom, axisLeft} from 'd3-axis';
 import {select} from 'd3-selection';
 // eslint-disable-next-line no-unused-vars
+import Annotations from "./Annotations";
 import AxisLabels from "./AxisLabels";
 
 export default {
     name: "AreaChart",
-    components: {AxisLabels},
+    components: {Annotations, AxisLabels},
     props: {
         width: Number,
         height: Number,
@@ -188,10 +189,6 @@ export default {
 <style scoped>
 path {
     cursor: pointer;
-}
-
-.annotation {
-    stroke-width: 1;
 }
 
 .tooltipContainer {

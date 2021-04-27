@@ -17,6 +17,10 @@
                         :x-axis-label="xAxisLabel" :y-axis-label="yAxisLabel"
                         :x-axis-label-shift="xAxisLabelShift" :y-axis-label-shift="yAxisLabelShift">
             </AxisLabels>
+            <Annotations :annotations="annotations" :margin="margin"
+                         :linear-scale="yScale" :bar-scale="xScale"
+                         :width="width" :height="height" direction="vertical">
+            </Annotations>
         </svg>
 
         <div v-if="enableTooltip && showTooltip" class="tooltipContainer"
@@ -38,11 +42,12 @@ import {axisLeft, axisBottom} from 'd3-axis';
 import {select} from 'd3-selection';
 // eslint-disable-next-line no-unused-vars
 import {transition} from 'd3-transition';
+import Annotations from "./Annotations";
 import AxisLabels from "./AxisLabels";
 
 export default {
     name: "LineChart",
-    components: {AxisLabels},
+    components: {AxisLabels, Annotations},
     props: {
         plotData: Array,
         width: Number,
@@ -63,6 +68,12 @@ export default {
             type: Number,
             default: 1.5
         },
+        annotations: {
+            type: Array,
+            default: function () {
+                return []
+            }
+        },
         xAxisLabel: String,
         yAxisLabel: String,
         xAxisLabelShift: Object,
@@ -79,17 +90,14 @@ export default {
         }
     },
     computed: {
-        object_keys() {
+        yValueKeys() {
             return Object.keys(this.plotData[0]).filter(item => item !== this.xKey).sort()
         },
         x_values() {
             return this.plotData.map(item => item[this.xKey])
         },
         y_values() {
-            return Object.keys(this.plotData[0])
-                .filter(key => key !== this.xKey)
-                .sort()
-                .map(key => ({name: key, values: this.plotData.map(year => year[key])}))
+            return this.yValueKeys.map(key => ({name: key, values: this.plotData.map(year => year[key])}))
         },
         xScale() {
             return scaleTime()
@@ -104,7 +112,7 @@ export default {
                 .nice()
         },
         color() {
-            return scaleOrdinal().domain(this.object_keys).range(this.colors)
+            return scaleOrdinal().domain(this.yValueKeys).range(this.colors)
         },
         lineCalc() {
             return line()
