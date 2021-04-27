@@ -412,19 +412,20 @@ the example line chart has "date" for the x value, and "Veteran's Benefit Admini
 
 #### Props
 
-| Name         | Required             | Type     | Default | Description                                               |
-|--            | :------------------: | -------  | --      |                                                         --|
-| `plot-data`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
-| `x-key`     |  :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata        |
-| `width`      | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
-| `height`     | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
-| `colors`     |  :heavy_check_mark:  | `Array`  |         | array of colors used for each line, must match number of lines |
-| `margin`     |                      | `Object` |         | object that contains the top, bottom, right, and left margins|
-|`enable-tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                               |
-| `x-axis-label`      |                      | `String` |         | Label for the x-axis                                      |
-| `y-axis-label`      |                      | `String` |         | Label for the y-axis                                      |
-| `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label     |
-| `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label     |
+| Name                | Required             | Type     | Default | Description                                                   |
+|--                   | :------------------: | -------  | --      |                                                             --|
+| `plot-data`         | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                            |
+| `x-key`             |  :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata             |
+| `width`             | :heavy_check_mark:   | `Number` |         | chart width in pixels                                         |
+| `height`            | :heavy_check_mark:   | `Number` |         | chart height in pixels                                        |
+| `colors`            |  :heavy_check_mark:  | `Array`  |         | array of colors used for each line, must match number of lines |
+| `margin`            |                      | `Object` |         | object that contains the top, bottom, right, and left margins |
+|`enable-tooltip`     |                      |`Boolean` | True    | Turn default tooltip on or off                                |
+|`stroke-width`       |                      | `Number` |  2      | stroke-width for areas                                        |
+| `x-axis-label`      |                      | `String` |         | Label for the x-axis                                        |
+| `y-axis-label`      |                      | `String` |         | Label for the y-axis                                        |
+| `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
+| `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
 
 #### Events Emitted
 
@@ -450,10 +451,10 @@ groups is displayed below
 
 ```html
 <template>
-   <StackedAreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
-                     :margin="margin"
-                     :colors="['#ac58e5','#E0488B']">
-   </StackedAreaChart>
+        <AreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
+                   :margin="margin" :colors="['#ac58e5','#E0488B']"
+                   x-axis-label="Year" y-axis-label="VA Budget">
+        </AreaChart>
 </template>
 
 <script>
@@ -464,7 +465,7 @@ groups is displayed below
       data() {
          return {
             plotData: ACdata,
-            margin: {top: 20, bottom: 20, left: 40, right: 20}
+            margin: {top: 20, bottom: 30, left: 55, right: 20}
          }
       }
    }
@@ -479,10 +480,10 @@ In order to get a stacked area chart, the `stacked` prop can be set to true
 
 ```html
 <template>
-   <StackedAreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
-                     :margin="margin" :stacked="true"
-                     :colors="['#ac58e5','#E0488B']">
-   </StackedAreaChart>
+        <AreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
+                   :margin="margin" :stacked="true" :colors="['#ac58e5','#E0488B']"
+                   x-axis-label="Year" y-axis-label="VA Budget">
+        </AreaChart>
 </template>
 
 <script>
@@ -493,7 +494,7 @@ In order to get a stacked area chart, the `stacked` prop can be set to true
       data() {
          return {
             plotData: ACdata,
-            margin: {top: 20, bottom: 20, left: 40, right: 20}
+            margin: {top: 20, bottom: 30, left: 55, right: 20}
          }
       }
    }
@@ -538,6 +539,7 @@ the example area chart has "date" for the x value, and "Veteran's Benefit Admini
 | `margin`      |                      | `Object` |         | object that contains the top, bottom, right, and left margins  |
 | `stacked`     |                      | `Boolean`|         | changes to stacked area chart                                  |
 |`fill-opacity` |                      | `Number` |  0.65   | fill opacity for each path, must be between 0 and 1            |
+|`stroke-width` |                      | `Number` |  2      | stroke-width for areas                                         |
 
 #### Events Emitted
 

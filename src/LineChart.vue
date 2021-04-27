@@ -3,7 +3,7 @@
         <svg :width="width" :height="height" ref="svgContainer">
             <g @mousemove="populateTooltip($event)" @mouseleave="removeTooltip()">
                 <path v-for="line in y_values" :key="line.name"
-                      :d="lineCalc(line.values)" :stroke="color(line.name)">
+                      :d="lineCalc(line.values)" :stroke="color(line.name)" :stroke-width="strokeWidth">
                     <title>{{ line.name }}</title>
                 </path>
             </g>
@@ -58,6 +58,10 @@ export default {
         enableTooltip: {
             type: Boolean,
             default: true,
+        },
+        strokeWidth: {
+            type: Number,
+            default: 1.5
         },
         xAxisLabel: String,
         yAxisLabel: String,
@@ -149,7 +153,6 @@ export default {
 
 <style scoped>
 path {
-    stroke-width: 1.5;
     fill: transparent;
 }
 

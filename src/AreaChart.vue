@@ -3,14 +3,14 @@
         <svg :width="width" :height="height" ref="svgContainer">
             <g v-if="stacked" @mousemove="populateTooltip($event)" @mouseleave="removeTooltip()">
                 <path v-for="row in series" :key="row.key"
-                      :d="areaCalc(row)" :stroke="color(row.name)"
-                      :fill="color(row.key)" :fill-opacity="fillOpacity"
+                      :d="areaCalc(row)" :stroke="color(row.key)"
+                      :fill="color(row.key)" :fill-opacity="fillOpacity" :stroke-width="strokeWidth"
                       @click="$emit('click',row.key)">
                 </path>
             </g>
             <g v-else @mousemove="populateTooltip($event)" @mouseleave="removeTooltip()">
                 <path v-for="row in series" :key="row.name"
-                      :d="areaCalc(row.values)" :stroke="color(row.name)"
+                      :d="areaCalc(row.values)" :stroke="color(row.name)" :stroke-width="strokeWidth"
                       :fill="color(row.name)" :fill-opacity="fillOpacity">
                 </path>
             </g>
@@ -20,6 +20,10 @@
             </line>
             <g v-xaxis="{scale: xScale}" :transform="`translate(0, ${height - margin.bottom})`"></g>
             <g v-yaxis="{scale: yScale}" :transform="`translate(${margin.left}, 0)`"></g>
+            <AxisLabels :width="width" :height="height" :chart-margin="margin"
+                        :x-axis-label="xAxisLabel" :y-axis-label="yAxisLabel"
+                        :x-axis-label-shift="xAxisLabelShift" :y-axis-label-shift="yAxisLabelShift">
+            </AxisLabels>
         </svg>
         <div v-if="showTooltip" class="tooltipContainer"
              :class="{activeTooltip: showTooltip}"
@@ -39,9 +43,11 @@ import {bisector, extent, max} from 'd3-array';
 import {axisBottom, axisLeft} from 'd3-axis';
 import {select} from 'd3-selection';
 // eslint-disable-next-line no-unused-vars
+import AxisLabels from "./AxisLabels";
 
 export default {
     name: "AreaChart",
+    components: {AxisLabels},
     props: {
         width: Number,
         height: Number,
@@ -62,7 +68,15 @@ export default {
         fillOpacity: {
             type: Number,
             default: 0.65
-        }
+        },
+        strokeWidth: {
+            type: Number,
+            default: 2
+        },
+        xAxisLabel: String,
+        yAxisLabel: String,
+        xAxisLabelShift: Object,
+        yAxisLabelShift: Object,
     },
     data() {
         return {
