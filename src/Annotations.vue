@@ -1,9 +1,15 @@
 <template>
     <g>
-        <line v-for="(line, i) in annotation_lines" :key="`l${i}}`"
-              :x1="line.x1" :x2="line.x2" :y1="line.y1" :y2="line.y2"
-              class="annotation" :stroke="line.color" :stroke-dasharray="line.dash">
-        </line>
+        <g v-for="(line, i) in annotation_lines" :key="`l${i}}`">
+            <line :x1="line.x1" :x2="line.x2" :y1="line.y1" :y2="line.y2"
+                  class="annotation" :stroke="line.color" :stroke-dasharray="line.dash">
+            </line>
+            <text :x="line.x2" :y="line.y1" :dx="line.labeldx" :dy="line.labeldy"
+                  :text-anchor="line.labelAnchor" :fill="line.color"
+                  class="annotation_label">
+                {{ line.label }}
+            </text>
+        </g>
     </g>
 </template>
 
@@ -49,7 +55,11 @@ export default {
                 y1: item.axis === 'y' ? yScale(item.value) : this.margin.top,
                 y2: item.axis === 'y' ? yScale(item.value) : this.height - this.margin.bottom,
                 color: item.color ? item.color : 'black',
-                dash: item.dash ? '5 5' : ''
+                dash: item.dash ? '5 5' : '',
+                label: item.label,
+                labelAnchor: item.labelAnchor ? item.labelAnchor : 'middle',
+                labeldx: item.labeldx,
+                labeldy: item.labeldy,
             }))
         }
     }
@@ -59,5 +69,9 @@ export default {
 <style scoped>
 .annotation {
     stroke-width: 1;
+}
+
+.annotation_label {
+    font-size: 0.8rem;
 }
 </style>

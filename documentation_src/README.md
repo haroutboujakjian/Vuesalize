@@ -664,7 +664,6 @@ node. Lastly, the `imports` key contains all of the connection to that node.
 
 #### Events Emitted
 
-
 ### Network
 
 Networks are useful in displaying relationships between groups. The sticky force layout below provides an easy way to
@@ -673,6 +672,8 @@ implement one. A few features are available that are quite useful:
 1. Individual nodes can be dragged
 2. The entire graph of nodes and links can be panned (e.g. dragged around)
 3. Nodes and links can be added or removed without having to rerender the entire component
+
+#### Example 
 
 <network-example></network-example>
 
@@ -848,9 +849,11 @@ We provide default tooltips for some of the charts, which make it easy to get up
 common for users to want to define a slightly more custom tooltip that might better fit their needs. This can be done
 with [Slots](https://vuejs.org/v2/guide/components-slots.html)
 and [Scoped Slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots). Each chart that has a
-default tooltip will also have a slot that passes up data about the part of the chart that is hovered on. Here is an
-example that defines a custom tooltip for the same stacked bar chart using the x_label, y_label, x_value, and y_value of
-the bar that is hovered over, which
+default tooltip will also have a slot that passes up data about the part of the chart that is hovered on.
+
+#### Example 
+Here is an example that defines a custom tooltip for the same stacked bar chart using the x_label, y_label, x_value,
+and y_value of the bar that is hovered over, which
 are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructuring-Slot-Props) from the `bar` slot
 
 <div style="display: flex; justify-content: center">
@@ -887,8 +890,12 @@ export default {
 
 ### Annotations
 
-Most of the plots that contain x and y axes also have the ability to add annotations. The chart below shows adding
-a horizontal dashed line to stacked bar chart which might indicate, for example, a max budget line.
+The plots that contain x and y axes also have the ability to add annotations.
+
+#### Example 
+
+The chart below shows adding a horizontal dashed line to stacked bar chart which might indicate, for example, a max
+budget line.
 
 <div style="display: flex; justify-content: center">
 <stacked-bar-chart-example :annotation="true"></stacked-bar-chart-example>
@@ -896,7 +903,7 @@ a horizontal dashed line to stacked bar chart which might indicate, for example,
 
 ```html
 <template>
-    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
+    <StackedBarChart :width="400" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
                      x-axis-label="Year" y-axis-label="VA Budget"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
@@ -912,15 +919,60 @@ export default {
    data() {
       return {
          plotData: SBCdata,
-         margin: {top: 20, bottom: 20, left: 40, right: 20},
-         annotations: [{
-            type: "line", axis: "y", color: "#ef0202",
-            value: 8000, dash: true
-         }]
+         margin: {top: 20, bottom: 35, left: 55, right: 70},
+         annotations: [
+            {
+               type: "line", axis: "y", color: "#ef0202", value: 8000, dash: true,
+               label: 'Max Budget', labeldx: 35, labeldy: -6
+            }]
       }
    }
 }
 </script>
+```
+
+Another example here adds two vertical lines to a line chart indicating specific start and end times for funding
+
+<div style="display: flex; justify-content: center">
+<line-chart-example :annotation="true"></line-chart-example>
+</div>
+
+```html
+<template>
+    <LineChart :plot-data="plotData" x-key="date"
+               :width="450" :height="250" :margin="margin"
+               x-axis-label="Year" y-axis-label="VA Budget"
+               :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+               :annotations="annotations">
+    </LineChart>
+</template>
+
+<script>
+import LCdata from "./Budget3Groups.json"
+
+export default {
+    name: "LineChartExample",
+    data() {
+        return {
+            plotData: LCdata,
+            margin: {top: 20, bottom: 30, left: 50, right: 20},
+           annotations: [
+              {
+                 type: "line", axis: "x", color: "#b3080e",
+                 label: "Start Date", labeldy: -5,
+                 value: new Date(2019, 6, 0)
+              },
+              {
+                 type: "line", axis: "x", color: "#b3080e",
+                 label: "End Date", labeldy: -5,
+                 value: new Date(2020, 9, 0)
+              },
+           ]
+        }
+    }
+}
+</script>
+
 ```
 
 #### Format
@@ -928,10 +980,14 @@ export default {
 Annotations need to be an array of objects, even if it is only one object. The annotation object requires the following
 properties
 
-| Name         | Required             | Type     | Default     | Description                                            |
-|--            | :------------------: | -------  | --          |                                                      --|
-| `type`       | :heavy_check_mark:   | `String` |             | type of annotation, current options: 'line'            |
-| `axis`       | :heavy_check_mark:   | `String` |             | options: "x" or "y"                                    |
-| `value`      | :heavy_check_mark:   | `Number` |             | value on the x or y axis                               |
-| `color`      |                      | `String` |   Black     | color name, hex code, or rgb value                     |
-| `dash`       |                      | `Boolean`|  False      | whether line should have dashes or not                 |
+| Name         | Required             | Type     | Default    | Description                                                      |
+|--            | :------------------: | -------  | --         |                                                                --|
+| `type`       | :heavy_check_mark:   | `String` |            | type of annotation, current options: 'line'                      |
+| `axis`       | :heavy_check_mark:   | `String` |            | options: "x" or "y"                                              |
+| `value`      | :heavy_check_mark:   | `Number` |            | value on the x or y axis                                         |
+| `color`      |                      | `String` |   Black    | color name, hex code, or rgb value                               |
+| `dash`       |                      | `Boolean`|  False     | whether line should have dashes or not                           |
+| `label`      |                      | `String` |            | label used for annotation                                        |
+| `labelAnchor`|                      | `String` |  'middle'  | text-anchor property for label. can be 'start', 'end' or 'middle'|
+| `labeldx`    |                      | `Number` |            | shift label in x direction                                       |
+| `labeldy`    |                      | `Number` |            | shift label in y direction                                       |

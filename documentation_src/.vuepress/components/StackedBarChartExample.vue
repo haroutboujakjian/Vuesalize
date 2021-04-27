@@ -8,8 +8,8 @@
             <p>{{ bar.x_label }}, {{ bar.y_label }}, {{ bar.x_value }}, {{ bar.y_value }}</p>
         </template>
     </StackedBarChart>
-    <StackedBarChart v-else-if="annotation" :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" x-key="date"
+    <StackedBarChart v-else-if="annotation" :width="400" :height="250" :plot-data="plotData"
+                     :margin="annoation_margin" x-key="date"
                      x-axis-label="Year" y-axis-label="VA Budget"
                      :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                      :annotations="annotations">
@@ -38,7 +38,12 @@ export default {
         return {
             plotData: SBCdata,
             margin: {top: 20, bottom: 35, left: 55, right: 20},
-            annotations: [{type: "line", axis: "y", color: "#ef0202", value: 8000, dash: true}]
+            annoation_margin: {top: 20, bottom: 35, left: 55, right: 70},
+            annotations: [
+                {
+                    type: "line", axis: "y", color: "#ef0202", value: 8000, dash: true,
+                    label: 'Max Budget', labeldx: 35, labeldy: -6
+                }]
         }
     }
 }
