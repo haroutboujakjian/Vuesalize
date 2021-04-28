@@ -68,7 +68,8 @@ export default {
 
 ### CDN
 
-It is quite simple to get started with the CDN. The vuesalize [javascript](https://unpkg.com/vuesalize) and [css](https://unpkg.com/vuesalize@0.0.29/dist/vuesalize.css) files need to be linked (lines 5 and 7), 
+It is quite simple to get started with the CDN. The vuesalize [javascript](https://unpkg.com/vuesalize) 
+and [css](https://unpkg.com/vuesalize@0.0.37/dist/vuesalize.css) files need to be linked (lines 5 and 7), 
 and the components that will be used must be declared using `Vue.use()` (line 16). It is also necessary to link the 
 official Vue package as well (line 6).
 
@@ -541,6 +542,10 @@ the example area chart has "date" for the x value, and "Veteran's Benefit Admini
 | `stacked`     |                      | `Boolean`|         | changes to stacked area chart                                  |
 |`fill-opacity` |                      | `Number` |  0.65   | fill opacity for each path, must be between 0 and 1            |
 |`stroke-width` |                      | `Number` |  2      | stroke-width for areas                                         |
+| `x-axis-label`      |                      | `String` |         | Label for the x-axis                                        |
+| `y-axis-label`      |                      | `String` |         | Label for the y-axis                                        |
+| `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
+| `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
 
 #### Events Emitted
 
