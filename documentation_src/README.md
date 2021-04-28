@@ -223,9 +223,9 @@ the example stacked bar chart has "date" for the x value, and "Veteran's Benefit
 
 #### Events Emitted
 
-| Event        | Location          | Value Emitted    |  Description                                                                      |
-|--            | --------          |------          |                                                                                 --|
-| `click`      |   Rectangle       | `Object`          |  `x_label`, `y_label`, `x_value`, and `y_value` of the bar in the stack that is clicked on|
+| Event     | Location          | Value Emitted  |  Description                                                                      |
+|--         | --------          |------          |                                                                                 --|
+| `click`   |   Rectangle       | `Object`       |  `x_label`, `y_label`, `x_value`, and `y_value` of the bar in the stack that is clicked on|
 
 #### Slots
 
@@ -233,9 +233,9 @@ We provide a default tooltip that gives the x and y value for the bar that is ho
 slightly more [custom tooltip](#tooltips), then we pass up the bar's info in
 a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 
-| Name         | Value    |  Description                                                                      |
-|--            | -------  |                                                                                 --|
-| `bar`       | `Object`  | contains `x_label`, `y_label`, `x_value`, and `y_value` keys of the bar in the stack that is hovered over|
+| Name      | Value    |  Description                                                                      |
+|--         | -------  |                                                                                 --|
+| `bar`     | `Object` | contains `x_label`, `y_label`, `x_value`, and `y_value` keys of the bar in the stack that is hovered over|
 
 ### Grouped Bar Chart
 
@@ -333,18 +333,18 @@ the example grouped bar chart has "date" for the x value, and "Veteran's Benefit
 
 #### Props
 
-| Name           | Required            | Type     | Default | Description                                                       |
-|--              | :-----------------: | -------  | --      |                                                                 --|
-| `plot-data`    | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                                |
-| `x-key`        | :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata                 |
-| `width`        | :heavy_check_mark:  | `Number` |         | chart width in pixels                                             |
-| `height`       | :heavy_check_mark:  | `Number` |         | chart height in pixels                                            |
-| `colors`       |  :heavy_check_mark: | `Array`  |         | array of colors used for each bar                                 |
-| `direction`    |                     |`String` |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'         |
-| `padding-between-bars`|              | `Number` | 0.15    | padding between the bars in a group. Must be between `0` and `1`  |
-| `padding-between-groups`|            | `Number` | 0.15    | padding between the groups of bars. Must be between `0` and `1`   |
-| `margin`       |                     | `Object` |         | object that contains the top, bottom, right, and left margins     |
-|`enable-tooltip`|                    |`Boolean` | True    | Turn default tooltip on or off                                     |
+| Name              | Required            | Type     | Default | Description                                                       |
+|--                 | :-----------------: | -------  | --      |                                                                 --|
+| `plot-data`       | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                                |
+| `x-key`           | :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata                 |
+| `width`           | :heavy_check_mark:  | `Number` |         | chart width in pixels                                             |
+| `height`          | :heavy_check_mark:  | `Number` |         | chart height in pixels                                            |
+| `colors`          |  :heavy_check_mark: | `Array`  |         | array of colors used for each bar                                 |
+| `direction`       |                     |`String`  |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'        |
+| `padding-between-bars`|                 | `Number` | 0.15    | padding between the bars in a group. Must be between `0` and `1`  |
+| `padding-between-groups`|               | `Number` | 0.15    | padding between the groups of bars. Must be between `0` and `1`   |
+| `margin`          |                     | `Object` |         | object that contains the top, bottom, right, and left margins     |
+|`enable-tooltip`   |                     |`Boolean` | True    | Turn default tooltip on or off                                    |
 | `x-axis-label`      |                      | `String` |         | Label for the x-axis                                        |
 | `y-axis-label`      |                      | `String` |         | Label for the y-axis                                        |
 | `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
@@ -583,12 +583,12 @@ the example area chart has "date" for the x value, and "Veteran's Benefit Admini
 
 #### Props
 
-| Name          | Required             | Type     | Default                  | Description                                                    |
-|--             | :------------------: | -------  | --                       |                                                              --|
-| `chart-data`  | :heavy_check_mark:   | `Array`  |                          | Data for the slices of the donut chart                         |
-| `chart-title` |                      | `String` | `null`                   | Text in the center of the donut chart                          |
-| `colors`      |                      | `Array`  | `colorbrewer.Paired[12]` | Array of colors used for each slice                            |
-| `value-key`   |                      | `String` | `value`                  | Key for the value of the slice in each element of `chart-data` |
+| Name          | Required           | Type     | Default                  | Description                                                    |
+|--             | :----------------: | -------  | --                       |                                                              --|
+| `chart-data`  | :heavy_check_mark: | `Array`  |                          | Data for the slices of the donut chart                         |
+| `chart-title` |                    | `String` | `null`                   | Text in the center of the donut chart                          |
+| `colors`      |                    | `Array`  | `colorbrewer.Paired[12]` | Array of colors used for each slice                            |
+| `value-key`   |                    | `String` | `value`                  | Key for the value of the slice in each element of `chart-data` |
 
 ### Scatter Plot
 
@@ -607,7 +607,8 @@ hierarchical charts.
 
 ```html
 <template>
-    <HierarchicalEdgeBundling :plot-data="plotdata" :width="600" :height="600">
+    <HierarchicalEdgeBundling :plot-data="plotdata"
+                              :width="500" :height="500" :radial-margin="120">
     </HierarchicalEdgeBundling>
 </template>
 
@@ -661,7 +662,7 @@ node. Lastly, the `imports` key contains all of the connection to that node.
 
 | Name            | Required             | Type     | Default | Description                                               |
 |--               | :------------------: | -------  | --      |                                                         --|
-| `plot-data`      | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
+| `plot-data`     | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                        |
 | `width`         | :heavy_check_mark:   | `Number` |         | chart width in pixels                                     |
 | `height`        | :heavy_check_mark:   | `Number` |         | chart height in pixels                                    |
 | `radial-margin` |                      | `Number` | 70      | margin (in pixels) between the text label and edge of svg |
@@ -739,13 +740,13 @@ don't conflict with any the required keys. Here is the data used to create the n
 
 #### Props
 
-| Name            | Required            | Type     | Default | Description                                               |
-|--               | :-----------------: | -------  | --      |                                                         --|
-| `plot-data`      | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                        |
-| `width`         | :heavy_check_mark:  | `Number` |         | chart width in pixels                                     |
-| `height`        | :heavy_check_mark:  | `Number` |         | chart height in pixels                                    |
-| `node-radius`   |                     | `Number` |   8    | size of node circles                                      |
-| `force-strength`|                     | `Number` |   -80   | [force](https://github.com/d3/d3-force#many-body) causing nodes to repel each other                   |
+| Name            | Required           | Type     | Default | Description                                               |
+|--               | :----------------: | -------  | --      |                                                         --|
+| `plot-data`     | :heavy_check_mark: | `Array`  |         | data necessary to create the chart                        |
+| `width`         | :heavy_check_mark: | `Number` |         | chart width in pixels                                     |
+| `height`        | :heavy_check_mark: | `Number` |         | chart height in pixels                                    |
+| `node-radius`   |                    | `Number` |   8     | size of node circles                                      |
+| `force-strength`|                    | `Number` |   -80   | [force](https://github.com/d3/d3-force#many-body) causing nodes to repel each other   |
 
 #### Events
 | Event        | Location       | Value Emitted     |  Description                                                                      |
@@ -757,7 +758,8 @@ don't conflict with any the required keys. Here is the data used to create the n
 
 ### Basic Legend
 
-Legends are useful for many charts and we provide a simple one in our library. Here is an example that shows how to use a simple legend component in both the vertical and horizontal alignments.
+Legends are useful for many charts and we provide a simple one in our library. Here is an example that shows how to use a
+simple legend component in both the vertical and horizontal alignments.
 
 #### Example
 
@@ -767,9 +769,9 @@ Legends are useful for many charts and we provide a simple one in our library. H
 <template>
     <div>
         <p>Horizontal</p>
-        <BaseLegend :legend-data="legendData" :alignment="'horizontal'"></BaseLegend>
+        <BaseLegend :legend-data="legendData" alignment="'horizontal'"></BaseLegend>
         <p>Vertical</p>
-        <BaseLegend :legend-data="legendData" :alignment="'vertical'"></BaseLegend>
+        <BaseLegend :legend-data="legendData" alignment="'vertical'"></BaseLegend>
     </div>
 </template>
 
@@ -811,16 +813,16 @@ The legend component takes in a simple array of objects that contains name and c
 ```
 
 #### Props
-| Name            | Required             | Type     | Default     | Description                                            |
-|--               | :------------------: | -------  | --          |                                                      --|
-| `legend-data`   | :heavy_check_mark:   | `Object` |             | data necessary to create the legend                    |
-| `alignment`     |                      | `String` | 'horizontal'| Two options for alignment: 'vertical' or 'horizontal'  |
-| `enable-toggle` |                      | `Boolean` | false      | allows the items in the legend to be clickable and emits the object on click|
+| Name            | Required           | Type     | Default     | Description                                            |
+|--               | :----------------: | -------  | --          |                                                      --|
+| `legend-data`   | :heavy_check_mark: | `Object` |             | data necessary to create the legend                    |
+| `alignment`     |                    | `String` | 'horizontal'| Two options for alignment: 'vertical' or 'horizontal'  |
+| `enable-toggle` |                    | `Boolean`| false       | allows the items in the legend to be clickable and emits the object on click|
 
 #### Events
-| Event        | Location       | Value Emitted     |  Description                                                                         |
-|--            | --------       |------             |                                                                                    --|
-| `click`      | Marker or text | `Object`          | If `enable-toggle` prop is true, the entire item object (name and color) is emitted                    |
+| Event    | Location       | Value Emitted   |  Description                                                            |
+|--        | --------       |------           |                                                                       --|
+| `click`  | Marker or text | `Object`        | If `enable-toggle` prop is true, the entire item object (name and color) is emitted  |
 
 ### Loading Spinner
 
