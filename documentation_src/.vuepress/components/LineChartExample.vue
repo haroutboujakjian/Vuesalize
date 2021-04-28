@@ -1,5 +1,5 @@
 <template>
-    <LineChart v-if="annotations" :plot-data="plotData" x-key="date"
+    <LineChart v-if="annotation" :plot-data="plotData" x-key="date"
                :width="450" :height="250" :margin="margin"
                x-axis-label="Year" y-axis-label="VA Budget"
                :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
