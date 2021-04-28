@@ -143,23 +143,11 @@ export default {
         xBisector() {
             return bisector(d => new Date(d[this.xKey])).left
         },
-        annotation_lines() {
-            if (this.annotations === undefined) {
-                return []
-            }
-            return this.annotations.filter(annotation => annotation.type === 'line').map(item => ({
-                x1: item.axis === 'y' ? this.margin.left : this.xScale(item.value),
-                x2: item.axis === 'y' ? this.width - this.margin.right : this.xScale(item.value),
-                y1: item.axis === 'y' ? this.yScale(item.value) : this.margin.top,
-                y2: item.axis === 'y' ? this.yScale(item.value) : this.height - this.margin.bottom,
-                color: item.color
-            }))
-        }
     },
     methods: {
         populateTooltip(evt) {
-            this.tooltip.x = `${evt.x + 5}px`
-            this.tooltip.y = `${evt.y + 5}px`
+            this.tooltip.x = `${evt.pageX + 5}px`
+            this.tooltip.y = `${evt.pageY + 5}px`
 
             let container_start = this.$refs.svgContainer.getBoundingClientRect().left
 
