@@ -140,7 +140,7 @@ export default {
     data() {
         return {
             plotData: SBCdata,
-            margin: {top: 20, bottom: 35, left: 55, right: 20},
+            margin: {top: 20, bottom: 35, left: 60, right: 20},
         }
     }
 }
@@ -171,7 +171,7 @@ export default {
     data() {
         return {
             plotData: SBCdata,
-            margin: {top: 20, bottom: 35, left: 55, right: 20},
+            margin: {top: 20, bottom: 35, left: 60, right: 20},
         }
     }
 }
@@ -608,7 +608,7 @@ hierarchical charts.
 ```html
 <template>
     <HierarchicalEdgeBundling :plot-data="plotdata"
-                              :width="500" :height="500" :radial-margin="120">
+                              :width="500" :height="500" :radial-margin="140">
     </HierarchicalEdgeBundling>
 </template>
 
@@ -888,7 +888,7 @@ export default {
     data() {
         return {
             plotData: SBCdata,
-            margin: {top: 20, bottom: 20, left: 40, right: 20}
+            margin: {top: 20, bottom: 35, left: 60, right: 20},
         }
     }
 }

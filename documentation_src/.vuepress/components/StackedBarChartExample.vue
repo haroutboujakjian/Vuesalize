@@ -37,7 +37,7 @@ export default {
     data() {
         return {
             plotData: SBCdata,
-            margin: {top: 20, bottom: 35, left: 55, right: 20},
+            margin: {top: 20, bottom: 35, left: 60, right: 20},
             annoation_margin: {top: 20, bottom: 35, left: 55, right: 70},
             annotations: [
                 {

@@ -1,6 +1,6 @@
 <template>
     <HierarchicalEdgeBundling :plot-data="plotdata"
-                              :width="500" :height="500" :radial-margin="120">
+                              :width="500" :height="500" :radial-margin="140">
     </HierarchicalEdgeBundling>
 </template>
 
