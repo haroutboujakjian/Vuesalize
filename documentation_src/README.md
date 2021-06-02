@@ -998,3 +998,6 @@ properties
 | `labelAnchor`|                      | `String` |  'middle'  | text-anchor property for label. can be 'start', 'end' or 'middle'|
 | `labeldx`    |                      | `Number` |            | shift label in x direction                                       |
 | `labeldy`    |                      | `Number` |            | shift label in y direction                                       |
+
+
+<small>Copyright 2021 MITRE Corporation. Approved for Public Release - Distribution Unlimited. Case #21-0751</small>
