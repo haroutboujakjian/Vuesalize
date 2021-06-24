@@ -78,6 +78,14 @@ export default {
         yAxisLabel: String,
         xAxisLabelShift: Object,
         yAxisLabelShift: Object,
+        xTickFormat: {
+            type: Function,
+            default: null,
+        },
+        yTickFormat: {
+            type: Function,
+            default: null,
+        }
     },
     data() {
         return {
@@ -141,18 +149,22 @@ export default {
         }
     },
     directives: {
-        xaxis(el, binding) {
+        xaxis(el, binding, vnode) {
             const scale = binding.value.scale
             const height = binding.value.height
+            const xTickFormat = vnode.context._props.xTickFormat
+
             select(el).transition().duration(500)
-                .call(axisBottom(scale).tickSize(-height).tickSizeOuter(0).tickPadding(5).ticks(6))
+                .call(axisBottom(scale).tickSize(-height).tickSizeOuter(0).tickPadding(5).ticks(6).tickFormat(xTickFormat))
                 .selectAll(".tick line").style("stroke-width", "0.3px")
         },
-        yaxis(el, binding) {
+        yaxis(el, binding, vnode) {
             const scale = binding.value.scale
             const width = binding.value.width
+            const yTickFormat = vnode.context._props.yTickFormat
+
             select(el).transition().duration(500)
-                .call(axisLeft(scale).tickSize(-width).tickSizeOuter(0).ticks(5))
+                .call(axisLeft(scale).tickSize(-width).tickSizeOuter(0).ticks(5).tickFormat(yTickFormat))
                 .selectAll(".tick line").style("stroke-width", "0.3px")
         }
     }

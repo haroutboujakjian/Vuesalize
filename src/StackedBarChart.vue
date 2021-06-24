@@ -119,6 +119,14 @@ export default {
         yAxisLabel: String,
         xAxisLabelShift: Object,
         yAxisLabelShift: Object,
+        xTickFormat: {
+            type: Function,
+            default: null,
+        },
+        yTickFormat: {
+            type: Function,
+            default: null,
+        }
     },
     data() {
         return {
@@ -171,25 +179,30 @@ export default {
         }
     },
     directives: {
-        baraxis(el, binding) {
+        baraxis(el, binding, vnode) {
             const scale = binding.value.scale
             const direction = binding.value.direction
+            const xTickFormat = vnode.context._props.xTickFormat
+            const yTickFormat = vnode.context._props.yTickFormat
 
             if (direction === 'vertical') {
-                select(el).transition().duration(500).call(axisBottom(scale).ticks())
+                select(el).transition().duration(500).call(axisBottom(scale).ticks().tickFormat(xTickFormat))
             } else if (direction === 'horizontal') {
-                select(el).transition().duration(500).call(axisLeft(scale).ticks())
+                select(el).transition().duration(500).call(axisLeft(scale).ticks().tickFormat(yTickFormat))
             }
+
         },
         linearaxis(el, binding, vnode) {
             const scale = binding.value.scale
             const direction = binding.value.direction
             const axisType = vnode.context._props.barAxisLocation === 'bottom' ? axisBottom : axisTop
+            const xTickFormat = vnode.context._props.xTickFormat
+            const yTickFormat = vnode.context._props.yTickFormat
 
             if (direction === 'vertical') {
-                select(el).transition().duration(500).call(axisLeft(scale).ticks(5))
+                select(el).transition().duration(500).call(axisLeft(scale).ticks(5).tickFormat(yTickFormat))
             } else if (direction === 'horizontal') {
-                select(el).transition().duration(500).call(axisType(scale).ticks(5))
+                select(el).transition().duration(500).call(axisType(scale).ticks(5).tickFormat(xTickFormat))
             }
         }
     }

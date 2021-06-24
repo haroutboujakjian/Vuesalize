@@ -2,15 +2,17 @@
     <GroupedBarChart v-if="horizontal" direction="horizontal"
                      :plot-data="plotdata" x-key="date"
                      :width="450" :height="300" :margin="margin"
-                      x-axis-label="VA Budget" y-axis-label="Year"
+                     x-axis-label="VA Budget" y-axis-label="Year"
                      :x-axis-label-shift="{ dx: 0, dy: -2 }" :y-axis-label-shift="{ dx: 0, dy: 5 }"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+                     :x-tick-format="d => `$${d}`">
     </GroupedBarChart>
     <GroupedBarChart v-else
                      :plot-data="plotdata" x-key="date"
                      :width="450" :height="300" :margin="margin"
                      x-axis-label="Year" y-axis-label="VA Budget"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+                     :y-tick-format="d => `$${d}`">
     </GroupedBarChart>
 </template>
 

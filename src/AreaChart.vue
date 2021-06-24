@@ -78,6 +78,14 @@ export default {
         yAxisLabel: String,
         xAxisLabelShift: Object,
         yAxisLabelShift: Object,
+        xTickFormat: {
+            type: Function,
+            default: null,
+        },
+        yTickFormat: {
+            type: Function,
+            default: null,
+        }
     },
     data() {
         return {
@@ -162,13 +170,17 @@ export default {
         }
     },
     directives: {
-        xaxis(el, binding) {
-            let scale = binding.value.scale
-            select(el).transition().duration(500).call(axisBottom(scale).ticks(6))
+        xaxis(el, binding, vnode) {
+            const scale = binding.value.scale
+            const xTickFormat = vnode.context._props.xTickFormat
+
+            select(el).transition().duration(500).call(axisBottom(scale).ticks(6).tickFormat(xTickFormat))
         },
-        yaxis(el, binding) {
+        yaxis(el, binding, vnode) {
             let scale = binding.value.scale
-            select(el).transition().duration(500).call(axisLeft(scale).ticks(5))
+            const yTickFormat = vnode.context._props.yTickFormat
+
+            select(el).transition().duration(500).call(axisLeft(scale).ticks(5).tickFormat(yTickFormat))
         }
     }
 }

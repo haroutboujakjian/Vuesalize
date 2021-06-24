@@ -128,7 +128,8 @@ Here is a simple example that constructs a stacked bar chart representing differ
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
                      x-axis-label="Year" y-axis-label="VA Budget"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
+                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+                     :y-tick-format="d => `$${d}`">
     </StackedBarChart>
 </template>
 
@@ -155,18 +156,19 @@ Alternatively, it's possible to get a horizontal bar chart by passing in 'horizo
 
 ```html
 <template>
-    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" x-key="date" direction="horizontal"
-                     x-axis-label="VA Budget" y-axis-label="Year"
-                     :x-axis-label-shift="{ dx: 0, dy: -2}" :y-axis-label-shift="{ dx: 0, dy: 5}"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
-    </StackedBarChart>
+   <StackedBarChart :width="350" :height="250" :plot-data="plotData"
+                    :margin="margin" x-key="date" direction="horizontal"
+                    x-axis-label="VA Budget" y-axis-label="Year"
+                    :x-axis-label-shift="{ dx: 0, dy: -2}" :y-axis-label-shift="{ dx: 0, dy: 5}"
+                    :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+                    :x-tick-format="d => `$${d}`">
+   </StackedBarChart>
 </template>
 
 <script>
-import SBCdata from './Budget3Groups.json'
+   import SBCdata from './Budget3Groups.json'
 
-export default {
+   export default {
     name: "StackedBarChartExample",
     data() {
         return {
@@ -220,6 +222,8 @@ the example stacked bar chart has "date" for the x value, and "Veteran's Benefit
 | `y-axis-label`       |                     | `String` |         | Label for the y-axis                                              |
 | `x-axis-label-shift` |                     | `Object` |         | Takes `dx` and `dy` keys that move the location label             |
 | `y-axis-label-shift` |                     | `Object` |         | Takes `dx` and `dy` keys that move the location label             |
+| `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
+| `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
 
 #### Events Emitted
 
@@ -251,11 +255,12 @@ Here is an example using the same VA budget data as the stacked bar chart above 
 
 ```html
 <template>
-    <GroupedBarChart :plot-data="plotdata" x-key="date"
-                     :width="450" :height="300" :margin="margin"
-                     x-axis-label="Year" y-axis-label="VA Budget"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
-    </GroupedBarChart>
+   <GroupedBarChart :plot-data="plotdata" x-key="date"
+                    :width="450" :height="300" :margin="margin"
+                    x-axis-label="Year" y-axis-label="VA Budget"
+                    :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+                    :y-tick-format="d => `$${d}`">
+   </GroupedBarChart>
 </template>
 
 <script>
@@ -282,12 +287,13 @@ And, again, it's possible to get a horizontal bar chart by passing in 'horizonta
 
 ```html
 <template>
-    <GroupedBarChart :plot-data="plotdata" x-key="date"
-                     :width="450" :height="300" :margin="margin"
-                     x-axis-label="VA Budget" y-axis-label="Year"
-                     :x-axis-label-shift="{ dx: 0, dy: -2 }" :y-axis-label-shift="{ dx: 0, dy: 5 }"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
-    </GroupedBarChart>
+   <GroupedBarChart :plot-data="plotdata" x-key="date"
+                    :width="450" :height="300" :margin="margin"
+                    x-axis-label="VA Budget" y-axis-label="Year"
+                    :x-axis-label-shift="{ dx: 0, dy: -2 }" :y-axis-label-shift="{ dx: 0, dy: 5 }"
+                    :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+                    :x-tick-format="d => `$${d}`">
+   </GroupedBarChart>
 </template>
 
 <script>
@@ -333,22 +339,25 @@ the example grouped bar chart has "date" for the x value, and "Veteran's Benefit
 
 #### Props
 
-| Name              | Required            | Type     | Default | Description                                                       |
-|--                 | :-----------------: | -------  | --      |                                                                 --|
-| `plot-data`       | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                                |
-| `x-key`           | :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata                 |
-| `width`           | :heavy_check_mark:  | `Number` |         | chart width in pixels                                             |
-| `height`          | :heavy_check_mark:  | `Number` |         | chart height in pixels                                            |
-| `colors`          |  :heavy_check_mark: | `Array`  |         | array of colors used for each bar                                 |
-| `direction`       |                     |`String`  |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'        |
+| Name                  | Required            | Type     | Default | Description                                                       |
+|--                     | :-----------------: | -------  | --      |                                                                 --|
+| `plot-data`           | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                                |
+| `x-key`               | :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata                 |
+| `width`               | :heavy_check_mark:  | `Number` |         | chart width in pixels                                             |
+| `height`              | :heavy_check_mark:  | `Number` |         | chart height in pixels                                            |
+| `colors`              |  :heavy_check_mark: | `Array`  |         | array of colors used for each bar                                 |
+| `direction`           |                     |`String`  |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'        |
+| `bar-axis-location`   |                     | `String` |'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
 | `padding-between-bars`|                 | `Number` | 0.15    | padding between the bars in a group. Must be between `0` and `1`  |
 | `padding-between-groups`|               | `Number` | 0.15    | padding between the groups of bars. Must be between `0` and `1`   |
-| `margin`          |                     | `Object` |         | object that contains the top, bottom, right, and left margins     |
-|`enable-tooltip`   |                     |`Boolean` | True    | Turn default tooltip on or off                                    |
-| `x-axis-label`      |                      | `String` |         | Label for the x-axis                                        |
-| `y-axis-label`      |                      | `String` |         | Label for the y-axis                                        |
-| `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
-| `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
+| `margin`              |                     | `Object` |         | object that contains the top, bottom, right, and left margins     |
+|`enable-tooltip`       |                     |`Boolean` | True    | Turn default tooltip on or off                                  |
+| `x-axis-label`        |                      | `String` |         | Label for the x-axis                                        |
+| `y-axis-label`        |                      | `String` |         | Label for the y-axis                                        |
+| `x-axis-label-shift`  |                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
+| `y-axis-label-shift`  |                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
+| `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
+| `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
 
 #### Events Emitted
 
@@ -364,11 +373,12 @@ The line chart component allows for one or more lines to be plotted.
 
 ```html
 <template>
-    <LineChart :plot-data="plotData" x-key="date"
-               :width="450" :height="250" :margin="margin"
-               x-axis-label="Year" y-axis-label="VA Budget"
-               :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
-    </LineChart>
+   <LineChart :plot-data="plotData" x-key="date"
+              :width="450" :height="250" :margin="margin"
+              x-axis-label="Year" y-axis-label="VA Budget"
+              :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+              :y-tick-format="d => `$${d}`">
+   </LineChart>
 </template>
 
 <script>
@@ -428,6 +438,8 @@ the example line chart has "date" for the x value, and "Veteran's Benefit Admini
 | `y-axis-label`      |                      | `String` |         | Label for the y-axis                                        |
 | `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
 | `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
+| `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
+| `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
 
 #### Events Emitted
 
@@ -453,10 +465,11 @@ groups is displayed below
 
 ```html
 <template>
-        <AreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
-                   :margin="margin" :colors="['#ac58e5','#E0488B']"
-                   x-axis-label="Year" y-axis-label="VA Budget">
-        </AreaChart>
+   <AreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
+              :margin="margin" :colors="['#ac58e5','#E0488B']"
+              x-axis-label="Year" y-axis-label="VA Budget"
+              :y-tick-format="d => `$${d}`">
+   </AreaChart>
 </template>
 
 <script>
@@ -482,10 +495,11 @@ In order to get a stacked area chart, the `stacked` prop can be set to true
 
 ```html
 <template>
-        <AreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
-                   :margin="margin" :stacked="true" :colors="['#ac58e5','#E0488B']"
-                   x-axis-label="Year" y-axis-label="VA Budget">
-        </AreaChart>
+   <AreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
+              :margin="margin" :stacked="true" :colors="['#ac58e5','#E0488B']"
+              x-axis-label="Year" y-axis-label="VA Budget"
+              :y-tick-format="d => `$${d}`">
+   </AreaChart>
 </template>
 
 <script>
@@ -546,6 +560,8 @@ the example area chart has "date" for the x value, and "Veteran's Benefit Admini
 | `y-axis-label`      |                      | `String` |         | Label for the y-axis                                        |
 | `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
 | `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
+| `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
+| `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
 
 #### Events Emitted
 
@@ -869,15 +885,16 @@ are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructurin
 
 ```html
 <template>
-    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" x-key="date"
-                     x-axis-label="Year" y-axis-label="VA Budget"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']">
-        <template v-slot:tooltip="{ bar }">
-            <h2>Hello from inside the tooltip. Here are values when you hover over a bar</h2>
-            <p>{{ bar.x_label }}, {{ bar.y_label }}, {{ bar.x_value }}, {{ bar.y_value }}</p>
-        </template>
-    </StackedBarChart>
+   <StackedBarChart :width="350" :height="250" :plot-data="plotData"
+                    :margin="margin" x-key="date"
+                    x-axis-label="Year" y-axis-label="VA Budget"
+                    :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+                    :y-tick-format="d => `$${d}`">
+      <template v-slot:tooltip="{ bar }">
+         <h2>Here are values when you hover over a bar</h2>
+         <p>{{ bar.x_label }}, {{ bar.y_label }}, {{ bar.x_value }}, {{ bar.y_value }}</p>
+      </template>
+   </StackedBarChart>
 </template>
 
 <script>
@@ -910,12 +927,12 @@ budget line.
 
 ```html
 <template>
-    <StackedBarChart :width="400" :height="250" :plot-data="plotData"
-                     :margin="margin" x-key="date"
-                     x-axis-label="Year" y-axis-label="VA Budget"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
-                     :annotations="annotations">
-    </StackedBarChart>
+   <StackedBarChart :width="400" :height="250" :plot-data="plotData"
+                    :margin="margin" x-key="date"
+                    x-axis-label="Year" y-axis-label="VA Budget"
+                    :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+                    :annotations="annotations" :y-tick-format="d => `$${d}`">
+   </StackedBarChart>
 </template>
 
 <script>
@@ -946,12 +963,12 @@ Another example here adds two vertical lines to a line chart indicating specific
 
 ```html
 <template>
-    <LineChart :plot-data="plotData" x-key="date"
-               :width="450" :height="250" :margin="margin"
-               x-axis-label="Year" y-axis-label="VA Budget"
-               :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
-               :annotations="annotations">
-    </LineChart>
+   <LineChart :plot-data="plotData" x-key="date"
+              :width="450" :height="250" :margin="margin"
+              x-axis-label="Year" y-axis-label="VA Budget"
+              :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
+              :annotations="annotations" :y-tick-format="d => `$${d}`">
+   </LineChart>
 </template>
 
 <script>

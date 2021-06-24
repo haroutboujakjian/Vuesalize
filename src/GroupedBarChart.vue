@@ -62,7 +62,7 @@
 import {scaleBand, scaleLinear, scaleOrdinal} from 'd3-scale';
 import {max} from 'd3-array';
 import {select} from 'd3-selection';
-import {axisLeft, axisBottom} from 'd3-axis';
+import {axisLeft, axisBottom, axisTop} from 'd3-axis';
 import Annotations from "./Annotations";
 import AxisLabels from "./AxisLabels";
 
@@ -98,6 +98,13 @@ export default {
                 return {top: 20, bottom: 20, left: 20, right: 20}
             }
         },
+        barAxisLocation: {
+            type: String,
+            default: 'bottom',
+            validator: function (value) {
+                return ['top', 'bottom'].indexOf(value) !== -1
+            }
+        },
         paddingBetweenBars: {
             type: Number,
             default: 0.15,
@@ -116,6 +123,14 @@ export default {
         yAxisLabel: String,
         xAxisLabelShift: Object,
         yAxisLabelShift: Object,
+        xTickFormat: {
+            type: Function,
+            default: null,
+        },
+        yTickFormat: {
+            type: Function,
+            default: null,
+        }
     },
     data() {
         return {
@@ -184,23 +199,29 @@ export default {
         }
     },
     directives: {
-        bandaxis(el, binding) {
+        bandaxis(el, binding, vnode) {
             const scale = binding.value.scale
             const direction = binding.value.direction
-            const tickLabels = binding.value.tickLabels
+            const xTickFormat = vnode.context._props.xTickFormat
+            const yTickFormat = vnode.context._props.yTickFormat
+
             if (direction === 'vertical') {
-                select(el).call(axisBottom(scale).tickValues(tickLabels))
+                select(el).transition().duration(500).call(axisBottom(scale).ticks().tickFormat(xTickFormat))
             } else if (direction === 'horizontal') {
-                select(el).call(axisLeft(scale).tickValues(tickLabels))
+                select(el).transition().duration(500).call(axisLeft(scale).ticks().tickFormat(yTickFormat))
             }
         },
-        linearaxis(el, binding) {
+        linearaxis(el, binding, vnode) {
             const scale = binding.value.scale
             const direction = binding.value.direction
+            const axisType = vnode.context._props.barAxisLocation === 'bottom' ? axisBottom : axisTop
+            const xTickFormat = vnode.context._props.xTickFormat
+            const yTickFormat = vnode.context._props.yTickFormat
+
             if (direction === 'vertical') {
-                select(el).call(axisLeft(scale).ticks(7))
+                select(el).transition().duration(500).call(axisLeft(scale).ticks(5).tickFormat(yTickFormat))
             } else if (direction === 'horizontal') {
-                select(el).call(axisBottom(scale).ticks(7))
+                select(el).transition().duration(500).call(axisType(scale).ticks(5).tickFormat(xTickFormat))
             }
         }
     }

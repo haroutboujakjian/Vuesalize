@@ -2,11 +2,13 @@
     <div>
         <AreaChart v-if="stacked" :plot-data="plotData" :width="500" :height="300" x-key="date"
                    :margin="margin" :stacked="true" :colors="['#ac58e5','#E0488B']"
-                   x-axis-label="Year" y-axis-label="VA Budget">
+                   x-axis-label="Year" y-axis-label="VA Budget"
+                   :y-tick-format="d => `$${d}`">
         </AreaChart>
         <AreaChart v-else :plot-data="plotData" :width="500" :height="300" x-key="date"
                    :margin="margin" :colors="['#ac58e5','#E0488B']"
-                   x-axis-label="Year" y-axis-label="VA Budget">
+                   x-axis-label="Year" y-axis-label="VA Budget"
+                   :y-tick-format="d => `$${d}`">
         </AreaChart>
     </div>
 </template>
