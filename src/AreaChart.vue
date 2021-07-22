@@ -51,8 +51,14 @@ export default {
     name: "AreaChart",
     components: {Annotations, AxisLabels},
     props: {
-        width: Number,
-        height: Number,
+        width: {
+            type: Number,
+            default: 350,
+        },
+        height: {
+            type: Number,
+            default: 250,
+        },
         margin: {
             type: Object,
             default: function () {

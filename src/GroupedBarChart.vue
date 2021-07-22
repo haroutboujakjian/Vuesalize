@@ -72,8 +72,14 @@ export default {
     components: {Annotations, AxisLabels},
     props: {
         plotData: Array,
-        width: Number,
-        height: Number,
+        width: {
+            type: Number,
+            default: 350,
+        },
+        height: {
+            type: Number,
+            default: 250,
+        },
         colors: {
             type: Array,
             default: function () {

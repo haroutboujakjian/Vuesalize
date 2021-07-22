@@ -1,5 +1,5 @@
 <template>
-    <StackedBarChart v-if="tooltip" :width="350" :height="250" :plot-data="plotData"
+    <StackedBarChart v-if="tooltip" :plot-data="plotData"
                      :margin="margin" x-key="date"
                      x-axis-label="Year" y-axis-label="VA Budget"
                      :y-tick-format="d => `$${d}`">
@@ -14,13 +14,13 @@
                      :annotations="annotations"
                      :y-tick-format="d => `$${d}`">
     </StackedBarChart>
-    <StackedBarChart v-else-if="horizontal" :width="350" :height="250" :plot-data="plotData"
+    <StackedBarChart v-else-if="horizontal" :plot-data="plotData"
                      :margin="margin" x-key="date" direction="horizontal"
                      x-axis-label="VA Budget" y-axis-label="Year"
                      :x-axis-label-shift="{ dx: 0, dy: -2}" :y-axis-label-shift="{ dx: 0, dy: 5}"
                      :x-tick-format="d => `$${d}`">
     </StackedBarChart>
-    <StackedBarChart v-else :width="350" :height="250" :plot-data="plotData"
+    <StackedBarChart v-else :plot-data="plotData"
                      :margin="margin" x-key="date"
                      x-axis-label="Year" y-axis-label="VA Budget"
                      :y-tick-format="d => `$${d}`">

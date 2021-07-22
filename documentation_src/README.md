@@ -125,10 +125,9 @@ Here is a simple example that constructs a stacked bar chart representing differ
 
 ```html
 <template>
-    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
-                     :margin="margin" x-key="date"
-                     x-axis-label="Year" y-axis-label="VA Budget"
-                     :y-tick-format="d => `$${d}`">
+    <StackedBarChart :plot-data="plotData" x-key="date"
+                     :margin="margin" x-axis-label="Year" 
+                     y-axis-label="VA Budget" :y-tick-format="d => `$${d}`">
     </StackedBarChart>
 </template>
 
@@ -155,8 +154,8 @@ Alternatively, it's possible to get a horizontal bar chart by passing in 'horizo
 
 ```html
 <template>
-   <StackedBarChart :width="350" :height="250" :plot-data="plotData"
-                    :margin="margin" x-key="date" direction="horizontal"
+   <StackedBarChart :plot-data="plotData" x-key="date"
+                    :margin="margin" direction="horizontal"
                     x-axis-label="VA Budget" y-axis-label="Year"
                     :x-axis-label-shift="{ dx: 0, dy: -2}" :y-axis-label-shift="{ dx: 0, dy: 5}"
                     :x-tick-format="d => `$${d}`">
@@ -208,8 +207,8 @@ the example stacked bar chart has "date" for the x value, and "Veteran's Benefit
 |--                    | :-----------------: | -------  | --      |                                                                 --|
 | `plot-data`          | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                                |
 | `x-key`              |  :heavy_check_mark: | `String` |         | string that is the key of the x value in plotdata                 |
-| `width`              | :heavy_check_mark:  | `Number` |         | chart width in pixels                                             |
-| `height`             | :heavy_check_mark:  | `Number` |         | chart height in pixels                                            |
+| `width`              |                     | `Number` |  350px  | chart width in pixels                                             |
+| `height`             |                     | `Number` |  250px  | chart height in pixels                                            |
 | `colors`             |                     | `Array`  |         | array of colors used for each bar                                 |
 | `direction`          |                     | `String` |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'        |
 | `bar-axis-location`  |                     | `String` |'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
@@ -339,8 +338,8 @@ the example grouped bar chart has "date" for the x value, and "Veteran's Benefit
 |--                     | :-----------------: | -------  | --      |                                                                 --|
 | `plot-data`           | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                                |
 | `x-key`               | :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata                 |
-| `width`               | :heavy_check_mark:  | `Number` |         | chart width in pixels                                             |
-| `height`              | :heavy_check_mark:  | `Number` |         | chart height in pixels                                            |
+| `width`              |                     | `Number` |  350px  | chart width in pixels                                             |
+| `height`             |                     | `Number` |  250px  | chart height in pixels                                            |
 | `colors`              |                     | `Array`  |         | array of colors used for each bar                                 |
 | `direction`           |                     |`String`  |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'        |
 | `bar-axis-location`   |                     | `String` |'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
@@ -423,8 +422,8 @@ the example line chart has "date" for the x value, and "Veteran's Benefit Admini
 |--                   | :------------------: | -------  | --      |                                                             --|
 | `plot-data`         | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                            |
 | `x-key`             |  :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata             |
-| `width`             | :heavy_check_mark:   | `Number` |         | chart width in pixels                                         |
-| `height`            | :heavy_check_mark:   | `Number` |         | chart height in pixels                                        |
+| `width`              |                     | `Number` |  350px  | chart width in pixels                                         |
+| `height`             |                     | `Number` |  250px  | chart height in pixels                                        |
 | `colors`            |                      | `Array`  |         | array of colors used for each line                            |
 | `margin`            |                      | `Object` |         | object that contains the top, bottom, right, and left margins |
 |`enable-tooltip`     |                      |`Boolean` | True    | Turn default tooltip on or off                                |
@@ -544,8 +543,8 @@ the example area chart has "date" for the x value, and "Veteran's Benefit Admini
 |--             | :------------------: | -------  | --      |                                                              --|
 | `plot-data`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                             |
 | `x-key`       | :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata              |
-| `width`       | :heavy_check_mark:   | `Number` |         | chart width in pixels                                          |
-| `height`      | :heavy_check_mark:   | `Number` |         | chart height in pixels                                         |
+| `width`              |                     | `Number` |  350px  | chart width in pixels                                    |
+| `height`             |                     | `Number` |  250px  | chart height in pixels                                   |
 | `colors`      |                      | `Array`  |         | array of colors used for areas                                 |
 | `margin`      |                      | `Object` |         | object that contains the top, bottom, right, and left margins  |
 | `stacked`     |                      | `Boolean`|         | changes to stacked area chart                                  |
@@ -850,11 +849,6 @@ The loading spinner is useful when data is being fetched from an API and there i
 <template>
     <LoaderSpinning></LoaderSpinning>
 </template>
-
-<script>
-export default {
-    name: "StackedBarChartExample",
-}
 </script>
 ```
 
@@ -921,9 +915,8 @@ budget line.
 
 ```html
 <template>
-   <StackedBarChart :width="400" :height="250" :plot-data="plotData"
-                    :margin="margin" x-key="date"
-                    x-axis-label="Year" y-axis-label="VA Budget"
+   <StackedBarChart :plot-data="plotData" x-key="date"
+                    :margin="margin" x-axis-label="Year" y-axis-label="VA Budget"
                     :annotations="annotations" :y-tick-format="d => `$${d}`">
    </StackedBarChart>
 </template>

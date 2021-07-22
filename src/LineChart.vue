@@ -51,8 +51,14 @@ export default {
     components: {AxisLabels, Annotations},
     props: {
         plotData: Array,
-        width: Number,
-        height: Number,
+        width: {
+            type: Number,
+            default: 350,
+        },
+        height: {
+            type: Number,
+            default: 250,
+        },
         margin: {
             type: Object,
             default: function () {
