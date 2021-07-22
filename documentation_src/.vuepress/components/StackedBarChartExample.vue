@@ -2,7 +2,6 @@
     <StackedBarChart v-if="tooltip" :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
                      x-axis-label="Year" y-axis-label="VA Budget"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                      :y-tick-format="d => `$${d}`">
         <template v-slot:tooltip="{ bar }">
             <p>Here are values when you hover over this bar</p>
@@ -12,7 +11,6 @@
     <StackedBarChart v-else-if="annotation" :width="400" :height="250" :plot-data="plotData"
                      :margin="annoation_margin" x-key="date"
                      x-axis-label="Year" y-axis-label="VA Budget"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                      :annotations="annotations"
                      :y-tick-format="d => `$${d}`">
     </StackedBarChart>
@@ -20,13 +18,11 @@
                      :margin="margin" x-key="date" direction="horizontal"
                      x-axis-label="VA Budget" y-axis-label="Year"
                      :x-axis-label-shift="{ dx: 0, dy: -2}" :y-axis-label-shift="{ dx: 0, dy: 5}"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                      :x-tick-format="d => `$${d}`">
     </StackedBarChart>
     <StackedBarChart v-else :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
                      x-axis-label="Year" y-axis-label="VA Budget"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                      :y-tick-format="d => `$${d}`">
     </StackedBarChart>
 

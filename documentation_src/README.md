@@ -128,7 +128,6 @@ Here is a simple example that constructs a stacked bar chart representing differ
     <StackedBarChart :width="350" :height="250" :plot-data="plotData"
                      :margin="margin" x-key="date"
                      x-axis-label="Year" y-axis-label="VA Budget"
-                     :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                      :y-tick-format="d => `$${d}`">
     </StackedBarChart>
 </template>
@@ -160,7 +159,6 @@ Alternatively, it's possible to get a horizontal bar chart by passing in 'horizo
                     :margin="margin" x-key="date" direction="horizontal"
                     x-axis-label="VA Budget" y-axis-label="Year"
                     :x-axis-label-shift="{ dx: 0, dy: -2}" :y-axis-label-shift="{ dx: 0, dy: 5}"
-                    :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                     :x-tick-format="d => `$${d}`">
    </StackedBarChart>
 </template>
@@ -212,7 +210,7 @@ the example stacked bar chart has "date" for the x value, and "Veteran's Benefit
 | `x-key`              |  :heavy_check_mark: | `String` |         | string that is the key of the x value in plotdata                 |
 | `width`              | :heavy_check_mark:  | `Number` |         | chart width in pixels                                             |
 | `height`             | :heavy_check_mark:  | `Number` |         | chart height in pixels                                            |
-| `colors`             |  :heavy_check_mark: | `Array`  |         | array of colors used for each bar                                 |
+| `colors`             |                     | `Array`  |         | array of colors used for each bar                                 |
 | `direction`          |                     | `String` |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'        |
 | `bar-axis-location`  |                     | `String` |'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
 | `margin`             |                     | `Object` |         | object that contains the top, bottom, right, and left margins     |
@@ -258,7 +256,6 @@ Here is an example using the same VA budget data as the stacked bar chart above 
    <GroupedBarChart :plot-data="plotdata" x-key="date"
                     :width="450" :height="300" :margin="margin"
                     x-axis-label="Year" y-axis-label="VA Budget"
-                    :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                     :y-tick-format="d => `$${d}`">
    </GroupedBarChart>
 </template>
@@ -291,7 +288,6 @@ And, again, it's possible to get a horizontal bar chart by passing in 'horizonta
                     :width="450" :height="300" :margin="margin"
                     x-axis-label="VA Budget" y-axis-label="Year"
                     :x-axis-label-shift="{ dx: 0, dy: -2 }" :y-axis-label-shift="{ dx: 0, dy: 5 }"
-                    :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                     :x-tick-format="d => `$${d}`">
    </GroupedBarChart>
 </template>
@@ -345,7 +341,7 @@ the example grouped bar chart has "date" for the x value, and "Veteran's Benefit
 | `x-key`               | :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata                 |
 | `width`               | :heavy_check_mark:  | `Number` |         | chart width in pixels                                             |
 | `height`              | :heavy_check_mark:  | `Number` |         | chart height in pixels                                            |
-| `colors`              |  :heavy_check_mark: | `Array`  |         | array of colors used for each bar                                 |
+| `colors`              |                     | `Array`  |         | array of colors used for each bar                                 |
 | `direction`           |                     |`String`  |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'        |
 | `bar-axis-location`   |                     | `String` |'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
 | `padding-between-bars`|                 | `Number` | 0.15    | padding between the bars in a group. Must be between `0` and `1`  |
@@ -376,7 +372,6 @@ The line chart component allows for one or more lines to be plotted.
    <LineChart :plot-data="plotData" x-key="date"
               :width="450" :height="250" :margin="margin"
               x-axis-label="Year" y-axis-label="VA Budget"
-              :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
               :y-tick-format="d => `$${d}`">
    </LineChart>
 </template>
@@ -430,7 +425,7 @@ the example line chart has "date" for the x value, and "Veteran's Benefit Admini
 | `x-key`             |  :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata             |
 | `width`             | :heavy_check_mark:   | `Number` |         | chart width in pixels                                         |
 | `height`            | :heavy_check_mark:   | `Number` |         | chart height in pixels                                        |
-| `colors`            |  :heavy_check_mark:  | `Array`  |         | array of colors used for each line                            |
+| `colors`            |                      | `Array`  |         | array of colors used for each line                            |
 | `margin`            |                      | `Object` |         | object that contains the top, bottom, right, and left margins |
 |`enable-tooltip`     |                      |`Boolean` | True    | Turn default tooltip on or off                                |
 |`stroke-width`       |                      | `Number` |  2      | stroke-width for areas                                        |
@@ -551,7 +546,7 @@ the example area chart has "date" for the x value, and "Veteran's Benefit Admini
 | `x-key`       | :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata              |
 | `width`       | :heavy_check_mark:   | `Number` |         | chart width in pixels                                          |
 | `height`      | :heavy_check_mark:   | `Number` |         | chart height in pixels                                         |
-| `colors`      |  :heavy_check_mark:  | `Array`  |         | array of colors used for areas                                 |
+| `colors`      |                      | `Array`  |         | array of colors used for areas                                 |
 | `margin`      |                      | `Object` |         | object that contains the top, bottom, right, and left margins  |
 | `stacked`     |                      | `Boolean`|         | changes to stacked area chart                                  |
 |`fill-opacity` |                      | `Number` |  0.65   | fill opacity for each path, must be between 0 and 1            |
@@ -599,12 +594,12 @@ the example area chart has "date" for the x value, and "Veteran's Benefit Admini
 
 #### Props
 
-| Name          | Required           | Type     | Default                  | Description                                                    |
-|--             | :----------------: | -------  | --                       |                                                              --|
-| `chart-data`  | :heavy_check_mark: | `Array`  |                          | Data for the slices of the donut chart                         |
-| `chart-title` |                    | `String` | `null`                   | Text in the center of the donut chart                          |
-| `colors`      |                    | `Array`  | `colorbrewer.Paired[12]` | Array of colors used for each slice                            |
-| `value-key`   |                    | `String` | `value`                  | Key for the value of the slice in each element of `chart-data` |
+| Name          | Required           | Type     | Default           | Description                                                  |
+|--             | :----------------: | -------  | --                |                                                            --|
+| `chart-data`  | :heavy_check_mark: | `Array`  |                   | Data for the slices of the donut chart                      |
+| `chart-title` |                    | `String` | `null`            | Text in the center of the donut chart                       |
+| `colors`      |                    | `Array`  |                   | Array of colors used for each slice                         |
+| `value-key`   |                    | `String` | `value`           | Key for the value of the slice in each element of `chart-data` |
 
 ### Scatter Plot
 
@@ -888,7 +883,6 @@ are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructurin
    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
                     :margin="margin" x-key="date"
                     x-axis-label="Year" y-axis-label="VA Budget"
-                    :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                     :y-tick-format="d => `$${d}`">
       <template v-slot:tooltip="{ bar }">
          <h2>Here are values when you hover over a bar</h2>
@@ -930,7 +924,6 @@ budget line.
    <StackedBarChart :width="400" :height="250" :plot-data="plotData"
                     :margin="margin" x-key="date"
                     x-axis-label="Year" y-axis-label="VA Budget"
-                    :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
                     :annotations="annotations" :y-tick-format="d => `$${d}`">
    </StackedBarChart>
 </template>
@@ -966,7 +959,6 @@ Another example here adds two vertical lines to a line chart indicating specific
    <LineChart :plot-data="plotData" x-key="date"
               :width="450" :height="250" :margin="margin"
               x-axis-label="Year" y-axis-label="VA Budget"
-              :colors="['#717e9b','#b6b6db','#bcd8f1','#d8cfc6']"
               :annotations="annotations" :y-tick-format="d => `$${d}`">
    </LineChart>
 </template>
@@ -975,25 +967,25 @@ Another example here adds two vertical lines to a line chart indicating specific
 import LCdata from "./Budget3Groups.json"
 
 export default {
-    name: "LineChartExample",
-    data() {
-        return {
-            plotData: LCdata,
-            margin: {top: 20, bottom: 30, left: 50, right: 20},
-           annotations: [
-              {
-                 type: "line", axis: "x", color: "#b3080e",
-                 label: "Start Date", labeldy: -5,
-                 value: new Date(2019, 6, 0)
-              },
-              {
-                 type: "line", axis: "x", color: "#b3080e",
-                 label: "End Date", labeldy: -5,
-                 value: new Date(2020, 9, 0)
-              },
-           ]
-        }
-    }
+   name: "LineChartExample",
+   data() {
+      return {
+         plotData: LCdata,
+         margin: {top: 20, bottom: 30, left: 50, right: 20},
+         annotations: [
+            {
+               type: "line", axis: "x", color: "#b3080e",
+               label: "Start Date", labeldy: -5,
+               value: new Date(2019, 6, 0)
+            },
+            {
+               type: "line", axis: "x", color: "#b3080e",
+               label: "End Date", labeldy: -5,
+               value: new Date(2020, 9, 0)
+            },
+         ]
+      }
+   }
 }
 </script>
 

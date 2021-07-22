@@ -71,6 +71,7 @@ import {axisBottom, axisLeft, axisTop} from 'd3-axis';
 import {transition} from 'd3-transition';
 import Annotations from "./Annotations";
 import AxisLabels from "./AxisLabels";
+import colors from "./colors"
 
 export default {
     name: "StackedBarChart",
@@ -99,7 +100,12 @@ export default {
             }
         },
         plotData: Array,
-        colors: Array,
+        colors: {
+            type: Array,
+            default: function () {
+                return colors
+            }
+        },
         xKey: String,
         enableTooltip: {
             type: Boolean,

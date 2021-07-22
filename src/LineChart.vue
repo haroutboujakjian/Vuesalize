@@ -44,6 +44,7 @@ import {select} from 'd3-selection';
 import {transition} from 'd3-transition';
 import Annotations from "./Annotations";
 import AxisLabels from "./AxisLabels";
+import colors from "./colors"
 
 export default {
     name: "LineChart",
@@ -58,7 +59,12 @@ export default {
                 return {top: 20, bottom: 20, left: 20, right: 20}
             }
         },
-        colors: Array,
+        colors: {
+            type: Array,
+            default: function () {
+                return colors
+            }
+        },
         xKey: String,
         enableTooltip: {
             type: Boolean,

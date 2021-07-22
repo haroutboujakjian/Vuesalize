@@ -65,6 +65,7 @@ import {select} from 'd3-selection';
 import {axisLeft, axisBottom, axisTop} from 'd3-axis';
 import Annotations from "./Annotations";
 import AxisLabels from "./AxisLabels";
+import colors from "./colors";
 
 export default {
     name: "GroupedBarChart",
@@ -73,7 +74,12 @@ export default {
         plotData: Array,
         width: Number,
         height: Number,
-        colors: Array,
+        colors: {
+            type: Array,
+            default: function () {
+                return colors
+            }
+        },
         xKey: String,
         direction: {
             type: String,

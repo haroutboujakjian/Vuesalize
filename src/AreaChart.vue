@@ -45,6 +45,7 @@ import {select} from 'd3-selection';
 // eslint-disable-next-line no-unused-vars
 import Annotations from "./Annotations";
 import AxisLabels from "./AxisLabels";
+import colors from "./colors";
 
 export default {
     name: "AreaChart",
@@ -59,7 +60,12 @@ export default {
             }
         },
         plotData: Array,
-        colors: Array,
+        colors: {
+            type: Array,
+            default: function () {
+                return colors
+            }
+        },
         xKey: String,
         stacked: {
             type: Boolean,
