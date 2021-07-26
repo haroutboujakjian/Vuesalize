@@ -1,32 +1,32 @@
 [
   {
     "date": "2019",
-    "Veteran's Benefit Administration": 3521,
-    "Veteran's Health Administration": 1026
+    "Utilities": 3521,
+    "Rent": 1026
   },
   {
     "date": "2020",
-    "Veteran's Benefit Administration": 1539,
-    "Veteran's Health Administration": 1860
+    "Utilities": 1539,
+    "Rent": 1860
   },
   {
     "date": "2021",
-    "Veteran's Benefit Administration": 1957,
-    "Veteran's Health Administration": 3184
+    "Utilities": 1957,
+    "Rent": 3184
   },
   {
     "date": "2022",
-    "Veteran's Benefit Administration": 3880,
-    "Veteran's Health Administration": 1332
+    "Utilities": 3880,
+    "Rent": 1332
   },
   {
     "date": "2023",
-    "Veteran's Benefit Administration": 3280,
-    "Veteran's Health Administration": 2332
+    "Utilities": 3280,
+    "Rent": 2332
   },
     {
     "date": "2024",
-    "Veteran's Benefit Administration": 1880,
-    "Veteran's Health Administration": 2432
+    "Utilities": 1880,
+    "Rent": 2432
   }
 ]

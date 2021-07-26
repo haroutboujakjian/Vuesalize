@@ -133,7 +133,7 @@ Here is a simple example that constructs a stacked bar chart representing differ
 <template>
     <StackedBarChart :plot-data="plotData" x-key="date"
                      :margin="margin" x-axis-label="Year" 
-                     y-axis-label="VA Budget" :y-tick-format="d => `$${d}`">
+                     y-axis-label="Expenses" :y-tick-format="d => `$${d}`">
     </StackedBarChart>
 </template>
 
@@ -162,7 +162,7 @@ Alternatively, it's possible to get a horizontal bar chart by passing in 'horizo
 <template>
    <StackedBarChart :plot-data="plotData" x-key="date"
                     :margin="margin" direction="horizontal"
-                    x-axis-label="VA Budget" y-axis-label="Year"
+                    x-axis-label="Expenses" y-axis-label="Year"
                     :x-axis-label-shift="{ dx: 0, dy: -2}" :y-axis-label-shift="{ dx: 0, dy: 5}"
                     :x-tick-format="d => `$${d}`">
    </StackedBarChart>
@@ -192,18 +192,19 @@ the example stacked bar chart has "date" for the x value, and "Veteran's Benefit
 
 ```json
 [
-  {
-    "date": "2019",
-    "Veteran's Benefit Administration": 5921,
-    "Veteran's Health Administration": 1026,
-    "National Cemetery Administration": 2324
-  },
-  {
-    "date": "2020",
-    "Veteran's Benefit Administration": 1539,
-    "Veteran's Health Administration": 1560,
-    "National Cemetery Administration": 1257
-  }, ...
+   {
+      "date": "2019",
+      "Utilities": 5921,
+      "Rent": 1026,
+      "Insurance": 2324
+   },
+   {
+      "date": "2020",
+      "Utilities": 1539,
+      "Rent": 1560,
+      "Insurance": 1257
+   },
+   ...
 ]
 ```
 
@@ -260,7 +261,7 @@ Here is an example using the same VA budget data as the stacked bar chart above 
 <template>
    <GroupedBarChart :plot-data="plotdata" x-key="date"
                     :width="450" :height="300" :margin="margin"
-                    x-axis-label="Year" y-axis-label="VA Budget"
+                    x-axis-label="Year" y-axis-label="Expenses"
                     :y-tick-format="d => `$${d}`">
    </GroupedBarChart>
 </template>
@@ -291,7 +292,7 @@ And, again, it's possible to get a horizontal bar chart by passing in 'horizonta
 <template>
    <GroupedBarChart :plot-data="plotdata" x-key="date"
                     :width="450" :height="300" :margin="margin"
-                    x-axis-label="VA Budget" y-axis-label="Year"
+                    x-axis-label="Expenses" y-axis-label="Year"
                     :x-axis-label-shift="{ dx: 0, dy: -2 }" :y-axis-label-shift="{ dx: 0, dy: 5 }"
                     :x-tick-format="d => `$${d}`">
    </GroupedBarChart>
@@ -320,21 +321,21 @@ the example grouped bar chart has "date" for the x value, and "Veteran's Benefit
 "Veteran's Health Administration", and "National Cemetery Administration" for the y values. All of the axis charts
 (bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
 
-
 ```json
 [
-  {
-    "date": "2019",
-    "Veteran's Benefit Administration": 5921,
-    "Veteran's Health Administration": 1026,
-    "National Cemetery Administration": 2324
-  },
-  {
-    "date": "2020",
-    "Veteran's Benefit Administration": 1539,
-    "Veteran's Health Administration": 1560,
-    "National Cemetery Administration": 1257
-  }, ...
+   {
+      "date": "2019",
+      "Utilities": 5921,
+      "Rent": 1026,
+      "Insurance": 2324
+   },
+   {
+      "date": "2020",
+      "Utilities": 1539,
+      "Rent": 1560,
+      "Insurance": 1257
+   },
+   ...
 ]
 ```
 
@@ -376,7 +377,7 @@ The line chart component allows for one or more lines to be plotted.
 <template>
    <LineChart :plot-data="plotData" x-key="date"
               :width="450" :height="250" :margin="margin"
-              x-axis-label="Year" y-axis-label="VA Budget"
+              x-axis-label="Year" y-axis-label="Expenses"
               :y-tick-format="d => `$${d}`">
    </LineChart>
 </template>
@@ -404,21 +405,21 @@ the example line chart has "date" for the x value, and "Veteran's Benefit Admini
 "Veteran's Health Administration", and "National Cemetery Administration" for the y values. All of the axis charts
 (bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
 
-
 ```json
 [
-  {
-    "date": "2019",
-    "Veteran's Benefit Administration": 5921,
-    "Veteran's Health Administration": 1026,
-    "National Cemetery Administration": 2324
-  },
-  {
-    "date": "2020",
-    "Veteran's Benefit Administration": 1539,
-    "Veteran's Health Administration": 1560,
-    "National Cemetery Administration": 1257
-  }, ...
+   {
+      "date": "2019",
+      "Utilities": 5921,
+      "Rent": 1026,
+      "Insurance": 2324
+   },
+   {
+      "date": "2020",
+      "Utilities": 1539,
+      "Rent": 1560,
+      "Insurance": 1257
+   },
+   ...
 ]
 ```
 
@@ -467,7 +468,7 @@ groups is displayed below
 <template>
    <AreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
               :margin="margin" :colors="['#ac58e5','#E0488B']"
-              x-axis-label="Year" y-axis-label="VA Budget"
+              x-axis-label="Year" y-axis-label="Expenses"
               :y-tick-format="d => `$${d}`">
    </AreaChart>
 </template>
@@ -497,7 +498,7 @@ In order to get a stacked area chart, the `stacked` prop can be set to true
 <template>
    <AreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
               :margin="margin" :stacked="true" :colors="['#ac58e5','#E0488B']"
-              x-axis-label="Year" y-axis-label="VA Budget"
+              x-axis-label="Year" y-axis-label="Expenses"
               :y-tick-format="d => `$${d}`">
    </AreaChart>
 </template>
@@ -525,21 +526,21 @@ the example area chart has "date" for the x value, and "Veteran's Benefit Admini
 "Veteran's Health Administration", and "National Cemetery Administration" for the y values. All of the axis charts
 (bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
 
-
 ```json
 [
-  {
-    "date": "2019",
-    "Veteran's Benefit Administration": 5921,
-    "Veteran's Health Administration": 1026,
-    "National Cemetery Administration": 2324
-  },
-  {
-    "date": "2020",
-    "Veteran's Benefit Administration": 1539,
-    "Veteran's Health Administration": 1560,
-    "National Cemetery Administration": 1257
-  }, ...
+   {
+      "date": "2019",
+      "Utilities": 5921,
+      "Rent": 1026,
+      "Insurance": 2324
+   },
+   {
+      "date": "2020",
+      "Utilities": 1539,
+      "Rent": 1560,
+      "Insurance": 1257
+   },
+   ...
 ]
 ```
 
@@ -762,9 +763,9 @@ export default {
     data() {
         return {
             legendData: [
-                {name: "Veteran's Benefit Administration", color: '#717e9b'},
-                {name: "Veteran's Health Administration", color: '#b6b6db'},
-                {name: "National Cemetery Administration", color: '#bcd8f1'}
+                {name: "Utilities", color: '#717e9b'},
+                {name: "Rent", color: '#b6b6db'},
+                {name: "Insurance", color: '#bcd8f1'}
             ]
         }
     }
@@ -779,16 +780,13 @@ The legend component takes in a simple array of objects that contains name and c
 ```json
 [
   {
-    "name": "Veteran's Benefit Administration",
-    "color": "#717e9b"
+    "name": "Utilities", "color": "#717e9b"
   },
   {
-    "name": "Veteran's Health Administration",
-    "color": "#b6b6db"
+    "name": "Rent", "color": "#b6b6db"
   },
   {
-    "name": "National Cemetery Administration",
-    "color": "#bcd8f1"
+    "name": "Insurance", "color": "#bcd8f1"
   }
 ]
 ```
@@ -847,7 +845,7 @@ are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructurin
 <template>
    <StackedBarChart :width="350" :height="250" :plot-data="plotData"
                     :margin="margin" x-key="date"
-                    x-axis-label="Year" y-axis-label="VA Budget"
+                    x-axis-label="Year" y-axis-label="Expenses"
                     :y-tick-format="d => `$${d}`">
       <template v-slot:tooltip="{ bar }">
          <h2>Here are values when you hover over a bar</h2>
@@ -887,7 +885,7 @@ budget line.
 ```html
 <template>
    <StackedBarChart :plot-data="plotData" x-key="date"
-                    :margin="margin" x-axis-label="Year" y-axis-label="VA Budget"
+                    :margin="margin" x-axis-label="Year" y-axis-label="Expenses"
                     :annotations="annotations" :y-tick-format="d => `$${d}`">
    </StackedBarChart>
 </template>
@@ -922,7 +920,7 @@ Another example here adds two vertical lines to a line chart indicating specific
 <template>
    <LineChart :plot-data="plotData" x-key="date"
               :width="450" :height="250" :margin="margin"
-              x-axis-label="Year" y-axis-label="VA Budget"
+              x-axis-label="Year" y-axis-label="Expenses"
               :annotations="annotations" :y-tick-format="d => `$${d}`">
    </LineChart>
 </template>

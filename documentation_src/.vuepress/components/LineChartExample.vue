@@ -1,12 +1,12 @@
 <template>
     <LineChart v-if="annotation" :plot-data="plotData" x-key="date"
                :width="450" :height="250" :margin="margin"
-               x-axis-label="Year" y-axis-label="VA Budget"
+               x-axis-label="Year" y-axis-label="Expenses"
                :annotations="annotations" :y-tick-format="d => `$${d}`">
     </LineChart>
     <LineChart v-else :plot-data="plotData" x-key="date"
                :width="450" :height="250" :margin="margin"
-               x-axis-label="Year" y-axis-label="VA Budget"
+               x-axis-label="Year" y-axis-label="Expenses"
                :y-tick-format="d => `$${d}`">
     </LineChart>
 </template>

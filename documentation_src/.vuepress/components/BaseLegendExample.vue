@@ -13,9 +13,9 @@ export default {
     data() {
         return {
             legendData: [
-                {name: "Veteran's Benefit Administration", color: '#717e9b'},
-                {name: "Veteran's Health Administration", color: '#b6b6db'},
-                {name: "National Cemetery Administration", color: '#bcd8f1'}
+                {name: "Utilities", color: '#717e9b'},
+                {name: "Rent", color: '#b6b6db'},
+                {name: "Insurance", color: '#bcd8f1'}
             ]
         }
     }
