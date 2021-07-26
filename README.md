@@ -90,9 +90,9 @@ well (line 6).
 <head>
     <meta charset="utf-8">
     <title>Browser test</title>
-    <link rel="stylesheet" href="https://unpkg.com/vuesalize@0.0.41/dist/vuesalize.css">
+    <link rel="stylesheet" href="https://unpkg.com/vuesalize@0.0.x/dist/vuesalize.css">
     <script src="http_cdn.jsdelivr.net_npm_vue@2.6.12_dist_vue.js"></script>
-    <script src="https://unpkg.com/vuesalize@0.0.41/dist/vuesalize.umd.min.js"></script>
+    <script src="https://unpkg.com/vuesalize@0.0.x/dist/vuesalize.umd.min.js"></script>
 </head>
 <body>
 <div id="app">
@@ -107,7 +107,10 @@ well (line 6).
         el: '#app',
         data() {
             return {
-                testlegend: [{name: 'hello', color: 'red'}, {name: 'bue', color: 'blue'}],
+	            sampleLegendData: [
+					{name: 'finance', color: 'red'},
+					{name: 'accounting', color: 'blue'}
+				],
             }
         }
     })
