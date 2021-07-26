@@ -37,32 +37,35 @@ Vue.use(LoaderSpinning, BaseLegend)
 
 ```html
 <template>
-    <div id="app">
-        <BaseLegend :legend-data="sampleLegendData"></BaseLegend>
-        <LoaderSpinning></LoaderSpinning>
-    </div>
+   <div id="app">
+      <BaseLegend :legend-data="sampleLegendData"></BaseLegend>
+      <LoaderSpinning></LoaderSpinning>
+   </div>
 </template>
 
 <script>
-export default {
-    name: 'App',
-    data() {
-        return {
-            sampleLegendData: [{name: 'hello', color: 'red'}, {name: 'bue', color: 'blue'}],
-        }
-    }
-}
+   export default {
+      name: 'App',
+      data() {
+         return {
+            sampleLegendData: [
+               {name: 'finance', color: 'red'},
+               {name: 'accounting', color: 'blue'}
+            ],
+         }
+      }
+   }
 </script>
 
 <style>
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-}
+   #app {
+      font-family: Avenir, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-align: center;
+      color: #2c3e50;
+      margin-top: 60px;
+   }
 </style>
 ```
 
@@ -76,29 +79,32 @@ official Vue package as well (line 6).
 ```html
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Browser test</title>
-    <link rel="stylesheet" href="https://unpkg.com/vuesalize@0.0.29/dist/vuesalize.css">
-    <script src="http_cdn.jsdelivr.net_npm_vue@2.6.12_dist_vue.js"></script>
-    <script src="https://unpkg.com/vuesalize@0.0.29/dist/vuesalize.umd.min.js"></script>
+   <meta charset="utf-8">
+   <title>Browser test</title>
+   <link rel="stylesheet" href="https://unpkg.com/vuesalize@0.0.x/dist/vuesalize.css">
+   <script src="http_cdn.jsdelivr.net_npm_vue@2.6.12_dist_vue.js"></script>
+   <script src="https://unpkg.com/vuesalize@0.0.x/dist/vuesalize.umd.min.js"></script>
 </head>
 <body>
 <div id="app">
-    <loader-spinning></loader-spinning>
-    <base-legend :legend-data="testlegend"></base-legend>
+   <loader-spinning></loader-spinning>
+   <base-legend :legend-data="testlegend"></base-legend>
 </div>
 
 <script>
-    Vue.use('loader-spinning', 'base-legend')
-    
-    new Vue({
-        el: '#app',
-        data() {
-            return {
-                testlegend: [{name: 'hello', color: 'red'}, {name: 'bue', color: 'blue'}],
-            }
-        }
-    })
+   Vue.use('loader-spinning', 'base-legend')
+
+   new Vue({
+      el: '#app',
+      data() {
+         return {
+            sampleLegendData: [
+               {name: 'finance', color: 'red'},
+               {name: 'accounting', color: 'blue'}
+            ],
+         }
+      }
+   })
 </script>
 </body>
 </html>

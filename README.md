@@ -43,7 +43,6 @@ Vue.use(LoaderSpinning, BaseLegend)
    used in a default `App.vue` file, this is how it would be setup:
 
 ```html
-
 <template>
    <div id="app">
       <BaseLegend :legend-data="sampleLegendData"></BaseLegend>
@@ -85,7 +84,6 @@ that will be used must be declared using `Vue.use()` (line 16). It is also neces
 well (line 6).
 
 ```html
-
 <html lang="en">
 <head>
    <meta charset="utf-8">
