@@ -569,42 +569,7 @@ the example area chart has "date" for the x value, and "Veteran's Benefit Admini
 
 ### Donut Chart
 
-#### Example
-
-```html
-<donut-chart 
-    :chart-data="[
-        {name: 'VA', value: 100},
-        {name: 'MD', value: 150},
-        {name: 'DC', value: 200}
-    ]"
-    :chart-title="'Dummy Data'"
-    style="height: 300px">
-</donut-chart>
-```
-
-<div style="height: 300px">
-    <donut-chart 
-        :chart-data="[
-          {name: 'VA', value: 100},
-          {name: 'MD', value: 150},
-          {name: 'DC', value: 200}
-        ]"
-        :chart-title="'Dummy Data'"
-        >
-    </donut-chart>
-</div>
-
-
-
-#### Props
-
-| Name          | Required           | Type     | Default           | Description                                                  |
-|--             | :----------------: | -------  | --                |                                                            --|
-| `chart-data`  | :heavy_check_mark: | `Array`  |                   | Data for the slices of the donut chart                      |
-| `chart-title` |                    | `String` | `null`            | Text in the center of the donut chart                       |
-| `colors`      |                    | `Array`  |                   | Array of colors used for each slice                         |
-| `value-key`   |                    | `String` | `value`           | Key for the value of the slice in each element of `chart-data` |
+Under construction...
 
 ### Scatter Plot
 

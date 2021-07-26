@@ -7,11 +7,10 @@ import LoaderSpinning from "./LoaderSpinning";
 import Network from "./Network";
 import HierarchicalEdgeBundling from "./HierarchicalEdgeBundling";
 import AreaChart from "./AreaChart";
-import DonutChart from "./DonutChart";
 
 const Components = {
     StackedBarChart, BaseLegend, LineChart, GroupedBarChart, LoaderSpinning, Network,
-    HierarchicalEdgeBundling, AreaChart, DonutChart
+    HierarchicalEdgeBundling, AreaChart
 }
 
 Object.keys(Components).forEach(name => {
