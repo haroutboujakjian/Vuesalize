@@ -51,14 +51,17 @@ Vue.use(LoaderSpinning, BaseLegend)
 </template>
 
 <script>
-    export default {
-        name: 'App',
-        data() {
-            return {
-                sampleLegendData: [{name: 'hello', color: 'red'}, {name: 'bue', color: 'blue'}],
-            }
-        }
-    }
+   export default {
+      name: 'App',
+      data() {
+         return {
+            sampleLegendData: [
+               {name: 'finance', color: 'red'},
+               {name: 'accounting', color: 'blue'}
+            ],
+         }
+      }
+   }
 </script>
 
 <style>
@@ -76,7 +79,7 @@ Vue.use(LoaderSpinning, BaseLegend)
 ### CDN
 
 It is quite simple to get started with the CDN. The vuesalize [javascript](https://unpkg.com/vuesalize)
-and [css](https://unpkg.com/vuesalize@0.0.29/dist/vuesalize.css) files need to be linked (lines 5 and 7), and the components
+and [css](https://unpkg.com/vuesalize@0.0.41/dist/vuesalize.css) files need to be linked (lines 5 and 7), and the components
 that will be used must be declared using `Vue.use()` (line 16). It is also necessary to link the official Vue package as
 well (line 6).
 
@@ -86,9 +89,9 @@ well (line 6).
 <head>
     <meta charset="utf-8">
     <title>Browser test</title>
-    <link rel="stylesheet" href="https://unpkg.com/vuesalize@0.0.34/dist/vuesalize.css">
+    <link rel="stylesheet" href="https://unpkg.com/vuesalize@0.0.41/dist/vuesalize.css">
     <script src="http_cdn.jsdelivr.net_npm_vue@2.6.12_dist_vue.js"></script>
-    <script src="https://unpkg.com/vuesalize@0.0.34/dist/vuesalize.umd.min.js"></script>
+    <script src="https://unpkg.com/vuesalize@0.0.41/dist/vuesalize.umd.min.js"></script>
 </head>
 <body>
 <div id="app">
