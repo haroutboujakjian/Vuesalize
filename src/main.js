@@ -1,4 +1,3 @@
-// import * as components from './index';
 import Vue from "vue";
 import StackedBarChart from "./StackedBarChart";
 import BaseLegend from "./BaseLegend";
