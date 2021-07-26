@@ -2,8 +2,11 @@
 
 Visit our [interactive docs page](https://haroutboujakjian.github.io/Vuesalize/)!
 
-https://img.shields.io/npm/dm/vuesalize?label=npm%20downloads&style=plastic
-https://img.shields.io/bundlephobia/minzip/vuesalize?style=plastic
+<p align="center">
+<a href="https://www.npmjs.com/package/vuesalize"><img src="https://img.shields.io/npm/dm/vuesalize?label=npm%20downloads&style=plastic" alt="Weekly downloads"></a>
+
+<a href="https://bundlephobia.com/package/vuesalize"><img src="https://img.shields.io/bundlephobia/minzip/vuesalize?style=plastic" alt="Bundle Size"></a>
+</p>
 
 ## What's the point?
 
