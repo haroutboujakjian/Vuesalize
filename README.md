@@ -2,6 +2,9 @@
 
 Visit our [interactive docs page](https://haroutboujakjian.github.io/Vuesalize/)!
 
+https://img.shields.io/npm/dm/vuesalize?label=npm%20downloads&style=plastic
+https://img.shields.io/bundlephobia/minzip/vuesalize?style=plastic
+
 ## What's the point?
 
 Building interactive visualizations on the web can be hard, and it can be even harder when you would like to leverage
