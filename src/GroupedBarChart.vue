@@ -51,7 +51,7 @@
              :class="{activeTooltip: showTooltip}"
              :style="`top: ${tooltipContent.top + 10}px; left: ${tooltipContent.left + 10}px`">
             <slot name="tooltip" :bar="tooltipContent">
-                <p>{{ tooltipContent.y_label }}: {{ tooltipContent.y_value }}</p>
+                <span>{{ tooltipContent.y_label }}: {{ tooltipContent.y_value }}</span>
             </slot>
         </div>
     </figure>
@@ -266,6 +266,10 @@ rect {
 .activeTooltip {
     opacity: 1;
     transition: opacity 0.3s;
+}
+
+.tooltipContainer span {
+    display: block;
 }
 </style>
 

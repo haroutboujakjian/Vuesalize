@@ -29,7 +29,7 @@
              :class="{activeTooltip: showTooltip}"
              :style="{top: tooltip.y, left: tooltip.x}">
             <slot name="tooltip" :row="tooltip.values">
-                <p v-for="(value, key) in tooltip.values" :key="key">{{ key }}: {{ value }}</p>
+                <span v-for="(value, key) in tooltip.values" :key="key">{{ key }}: {{ value }}</span>
             </slot>
         </div>
     </figure>
@@ -220,4 +220,7 @@ path {
     transition: opacity 0.3s;
 }
 
+.tooltipContainer span {
+    display: block;
+}
 </style>
