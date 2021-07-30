@@ -1,6 +1,6 @@
 {
   "name": "vuesalize",
-  "version": "0.0.43",
+  "version": "0.0.44",
   "description": "Component library dedicated to simplifying interactive visualization building in Vue.js.",
   "private": false,
   "main": "dist/vuesalize.common.js",
@@ -34,7 +34,9 @@
     "d3-selection": "^2.0.0",
     "d3-shape": "^2.0.0",
     "d3-transition": "^2.0.0",
-    "d3-zoom": "^2.0.0",
+    "d3-zoom": "^2.0.0"
+  },
+  "peerDependencies": {
     "vue": "^2.6.12"
   },
   "keywords": [
