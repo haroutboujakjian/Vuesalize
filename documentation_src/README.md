@@ -123,7 +123,7 @@ from [github](https://github.com/haroutboujakjian/Vuesalize/tree/master/src)
 Stacked bar charts are one of the most popular chart types. 
 
 #### Example
-Here is a simple example that constructs a stacked bar chart representing different budgets for VA.
+Here is a simple example that constructs a stacked bar chart representing a set of generic expenses.
 
 <div style="display: flex; justify-content: center">
 <stacked-bar-chart-example></stacked-bar-chart-example>
@@ -186,8 +186,8 @@ Alternatively, it's possible to get a horizontal bar chart by passing in 'horizo
 
 In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
 key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file that populates
-the example stacked bar chart has "date" for the x value, and "Veteran's Benefit Administration",
-"Veteran's Health Administration", and "National Cemetery Administration" for the y values. All of the axis charts
+the example stacked bar chart has "date" for the x value, and "Utilities",
+"Rent", and "Insurance" for the y values. All of the axis charts
 (bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
 
 ```json
@@ -251,7 +251,7 @@ Grouped bar charts are useful in comparing values together in and between groups
 
 #### Example
 
-Here is an example using the same VA budget data as the stacked bar chart above but the bars are instead grouped.
+Here is an example using the same expenses data as the stacked bar chart above. In this case, the bars are grouped.
 
 <div style="display: flex; justify-content: center">
     <grouped-bar-chart-example></grouped-bar-chart-example>
@@ -315,10 +315,10 @@ export default {
 
 #### Format of Data
 
-In order for the grouped bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
+In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
 key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file that populates
-the example grouped bar chart has "date" for the x value, and "Veteran's Benefit Administration",
-"Veteran's Health Administration", and "National Cemetery Administration" for the y values. All of the axis charts
+the example stacked bar chart has "date" for the x value, and "Utilities",
+"Rent", and "Insurance" for the y values. All of the axis charts
 (bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
 
 ```json
@@ -399,10 +399,10 @@ export default {
 
 #### Format of Data
 
-In order for the line chart to render properly, `plotdata` needs to be as an array of objects. There should be one
+In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
 key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file that populates
-the example line chart has "date" for the x value, and "Veteran's Benefit Administration",
-"Veteran's Health Administration", and "National Cemetery Administration" for the y values. All of the axis charts
+the example stacked bar chart has "date" for the x value, and "Utilities",
+"Rent", and "Insurance" for the y values. All of the axis charts
 (bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
 
 ```json
@@ -458,7 +458,7 @@ a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 ### Area Chart
 
 Area charts are similar to line charts except the area under the curve is filled in. A normal area chart with two
-groups is displayed below
+groups is rendered below
 
 <div style="display: flex; justify-content: center">
     <area-chart-example></area-chart-example>
@@ -488,7 +488,7 @@ groups is displayed below
 </script>
 ```
 
-In order to get a stacked area chart, the `stacked` prop can be set to true
+In order to get a stacked area chart, set the `stacked` prop to true
 
 <div style="display: flex; justify-content: center">
     <area-chart-example :stacked="true"></area-chart-example>
@@ -520,10 +520,10 @@ In order to get a stacked area chart, the `stacked` prop can be set to true
 
 #### Format of Data
 
-In order for the area chart to render properly, `plotdata` needs to be as an array of objects. There should be one
+In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
 key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file that populates
-the example area chart has "date" for the x value, and "Veteran's Benefit Administration",
-"Veteran's Health Administration", and "National Cemetery Administration" for the y values. All of the axis charts
+the example stacked bar chart has "date" for the x value, and "Utilities",
+"Rent", and "Insurance" for the y values. All of the axis charts
 (bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
 
 ```json
@@ -816,9 +816,8 @@ The loading spinner is useful when data is being fetched from an API and there i
 
 ```html
 <template>
-    <LoaderSpinning></LoaderSpinning>
+    <LoaderSpinning/>
 </template>
-</script>
 ```
 
 
