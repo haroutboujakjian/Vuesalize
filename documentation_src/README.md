@@ -457,6 +457,8 @@ a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 
 ### Area Chart
 
+#### Example
+
 Area charts are similar to line charts except the area under the curve is filled in. A normal area chart with two
 groups is rendered below
 
@@ -574,9 +576,33 @@ Under construction...
 
 ### Scatter Plot
 
+#### Example
+
 A scatter plot helps displays relationships between two variables in a plot.
 
+<div style="display: flex; justify-content: center">
 <ScatterPlotExample></ScatterPlotExample>
+</div>
+
+#### Format of Data
+
+The data that needs to be passed in as an array of objects. Each object should contain the x and y values for each points,
+and these can be specified by the `xKey` and `yKey` keys. The table below has all of the possible keys that can be included
+for an objects
+
+| Name         |  Type     |  Description                                            |
+|--            |  -------  |                                                       --|
+| `xKey`       |  `String` |  x value for the point                                  |
+| `yKey`       |  `String` |  y value for the point                                  |
+| `radius`     |  `Number` |  radius of the point                                   |
+| `fill`       |  `String` |  fill of the point                                   |
+| `stroke`     |  `String` |  stroke of the point                                   |
+
+#### Props
+
+#### Events Emitted
+
+#### Slots
 
 ### Hierarchical Edge Bundling
 

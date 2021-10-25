@@ -1,20 +1,19 @@
 <template>
-    <ScatterPlot :plotData="plotData" xKey="profit" yKey="utility">
+    <ScatterPlot :plotData="plotData" xKey="profit" yKey="utility" :margin="margin" :width="400"
+                 y-axis-label="Utility" x-axis-label="Profit" :x-axis-label-shift="{ dx: 5, dy: -5}"
+                 :stroke="'#ff3000'" :fill="'#ff3000'" :fill-opacity="0.60">
     </ScatterPlot>
 </template>
 
 <script>
+import plotData from "./ScatterPlotData.json"
+
 export default {
     name: "ScatterPlotExample",
     data() {
         return {
-            plotData: [
-                {profit: 100, utility: 0.9},
-                {profit: 350, utility: 0.55},
-                {profit: 400, utility: 0.40},
-                {profit: 260, utility: 0.75},
-                {profit: 50, utility: 0.5},
-            ]
+            plotData: plotData,
+            margin: {top: 20, bottom: 40, right: 20, left: 50}
         }
     }
 }

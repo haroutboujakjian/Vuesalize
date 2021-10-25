@@ -1,0 +1,32 @@
+[
+  {
+    "profit": 100,
+    "utility": 9,
+    "radius": 5,
+    "fill": "#ff3000"
+  },
+  {
+    "profit": 350,
+    "utility": 55,
+    "radius": 5,
+    "fill": "#ff3000"
+  },
+  {
+    "profit": 400,
+    "utility": 40,
+    "radius": 5,
+    "fill": "#ff3000"
+  },
+  {
+    "profit": 260,
+    "utility": 75,
+    "radius": 5,
+    "fill": "#ff3000"
+  },
+  {
+    "profit": 50,
+    "utility": 5,
+    "radius": 5,
+    "fill": "#ff3000"
+  }
+]

@@ -1,17 +1,31 @@
 <template>
     <svg :width="width" :height="height">
-        <circle v-for="(point,i) in plotData" :key="i"
-                :cx="xScale(point[xKey])" :cy="yScale(point[yKey])" :r="radius">
+        <circle v-for="(point,i) in points" :key="i"
+                :cx="xScale(point[xKey])" :cy="yScale(point[yKey])" :r="point.radius"
+                :fill="point.fill" :fill-opacity="fillOpacity"
+                :stroke="point.stroke" :stroke-opacity="strokeOpacity">
         </circle>
+        <g v-xaxis="{ scale: xScale }" :transform="`translate(0, ${height - margin.bottom})`"></g>
+        <g v-yaxis="{ scale: yScale }" :transform="`translate(${margin.left}, 0)`"></g>
+        <AxisLabels :width="width" :height="height" :chart-margin="margin"
+                    :x-axis-label="xAxisLabel" :y-axis-label="yAxisLabel"
+                    :x-axis-label-shift="xAxisLabelShift" :y-axis-label-shift="yAxisLabelShift">
+        </AxisLabels>
     </svg>
 </template>
 
 <script>
 import {scaleLinear} from "d3-scale"
 import {min, max} from "d3-array"
+import {select} from "d3-selection";
+import {axisBottom, axisLeft} from "d3-axis";
+// eslint-disable-next-line no-unused-vars
+import {transition} from "d3-transition"
+import AxisLabels from "./AxisLabels";
 
 export default {
     name: "ScatterPlot",
+    components: {AxisLabels},
     props: {
         plotData: Array,
         width: {
@@ -31,6 +45,22 @@ export default {
         radius: {
             type: Number,
             default: 5
+        },
+        fill: {
+            type: String,
+            default: 'black'
+        },
+        fillOpacity: {
+            type: Number,
+            default: 1,
+        },
+        stroke: {
+            type: String,
+            default: 'black'
+        },
+        strokeOpacity: {
+            type: Number,
+            default: 1
         },
         xKey: String,
         yKey: String,
@@ -62,6 +92,14 @@ export default {
         }
     },
     computed: {
+        points() {
+            return this.plotData.map(point => ({
+                ...point,
+                radius: point.radius ? point.radius : this.radius,
+                fill: point.fill ? point.fill : this.fill,
+                stroke: point.stroke ? point.stroke : this.stroke,
+            }))
+        },
         xValues() {
             const xVals = this.plotData.map(point => point[this.xKey])
             const minVal = min(xVals) < 0 ? min(xVals) : 0
@@ -83,6 +121,22 @@ export default {
             return scaleLinear()
                 .domain([this.yValues.min, this.yValues.max])
                 .range([this.height - this.margin.bottom, this.margin.top])
+        }
+    },
+    directives: {
+        xaxis(el, binding, vnode) {
+            const scale = binding.value.scale
+            const xTickFormat = vnode.context._props.xTickFormat
+
+            select(el).transition().duration(500)
+                .call(axisBottom(scale).tickPadding(5).ticks(6).tickFormat(xTickFormat))
+        },
+        yaxis(el, binding, vnode) {
+            const scale = binding.value.scale
+            const yTickFormat = vnode.context._props.yTickFormat
+
+            select(el).transition().duration(500)
+                .call(axisLeft(scale).ticks(5).tickFormat(yTickFormat))
         }
     }
 }
