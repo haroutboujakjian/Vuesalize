@@ -574,7 +574,9 @@ Under construction...
 
 ### Scatter Plot
 
-Under construction...
+A scatter plot helps displays relationships between two variables in a plot.
+
+<ScatterPlotExample></ScatterPlotExample>
 
 ### Hierarchical Edge Bundling
 
