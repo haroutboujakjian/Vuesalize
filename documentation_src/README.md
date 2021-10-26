@@ -345,8 +345,8 @@ the example stacked bar chart has "date" for the x value, and "Utilities",
 |--                     | :-----------------: | -------  | --      |                                                                 --|
 | `plot-data`           | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                                |
 | `x-key`               | :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata                 |
-| `width`              |                     | `Number` |  350px  | chart width in pixels                                             |
-| `height`             |                     | `Number` |  250px  | chart height in pixels                                            |
+| `width`               |                     | `Number` |  350px  | chart width in pixels                                             |
+| `height`              |                     | `Number` |  250px  | chart height in pixels                                            |
 | `colors`              |                     | `Array`  |         | array of colors used for each bar                                 |
 | `direction`           |                     |`String`  |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'        |
 | `bar-axis-location`   |                     | `String` |'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
@@ -358,8 +358,8 @@ the example stacked bar chart has "date" for the x value, and "Utilities",
 | `y-axis-label`        |                      | `String` |         | Label for the y-axis                                        |
 | `x-axis-label-shift`  |                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
 | `y-axis-label-shift`  |                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
-| `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
-| `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
+| `x-tick-format`       |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
+| `y-tick-format`       |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
 
 #### Events Emitted
 
@@ -584,11 +584,36 @@ A scatter plot helps displays relationships between two variables in a plot.
 <ScatterPlotExample></ScatterPlotExample>
 </div>
 
+```html
+<template>
+   <ScatterPlot :plotData="plotData" xKey="profit" yKey="utility" 
+                :margin="margin" :width="400"
+                y-axis-label="Utility" x-axis-label="Profit" :x-axis-label-shift="{ dx: 5, dy: -5}"
+                :stroke="'#ff3000'" :fill="'#ff3000'" :fill-opacity="0.60">
+   </ScatterPlot>
+</template>
+
+<script>
+   import plotData from "./ScatterPlotData.json"
+
+   export default {
+      name: "ScatterPlotExample",
+      data() {
+         return {
+            plotData: plotData,
+            margin: {top: 20, bottom: 40, right: 20, left: 50}
+         }
+      }
+   }
+</script>
+```
+
 #### Format of Data
 
-The data that needs to be passed in as an array of objects. Each object should contain the x and y values for each points,
-and these can be specified by the `xKey` and `yKey` keys. The table below has all of the possible keys that can be included
-for an objects
+The data that needs to be passed in as an array of objects. Each object should contain the x and y values for each point, and
+these can be specified by the `xKey` and `yKey` keys. Passing in the values in the data allows for more fine-grained control
+as opposed to setting one consistent style in the props (e.g. passing in different fill values for each point instead of
+passing in one fill value as a prop). The table below has all of the possible keys that can be included for an objects
 
 | Name         |  Type     |  Description                                            |
 |--            |  -------  |                                                       --|
@@ -600,7 +625,31 @@ for an objects
 
 #### Props
 
+| Name                | Required             | Type     | Default | Description                                                    |
+|--                   | :------------------: | -------  | --      |                                                              --|
+| `plot-data`         | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                             |
+| `x-key`             | :heavy_check_mark:   | `String` |         | string that is the key of the x values in plotdata             |
+| `y-key`             | :heavy_check_mark:   | `String` |         | string that is the key of the y values in plotdata             |
+| `width`             |                      | `Number` |  350px  | chart width in pixels                                          |
+| `height`            |                      | `Number` |  250px  | chart height in pixels                                         |
+| `margin`            |                      | `Object` |         | object that contains the top, bottom, right, and left margins  |
+|`radius`             |                      | `Number` |  5      | radius for all points                                          |
+|`fill`               |                      | `String` |  black  | fill for all points                                            |
+|`fill-opacity`       |                      | `Number` |  1      | fill opacity for all points, must be between 0 and 1          |
+|`stroke`             |                      | `String` |  black  | stroke for all points                                         |
+|`stroke-opacity`     |                      | `Number` |  1      | stroke opacity for all points, must be between 0 and 1        |
+| `x-axis-label`      |                      | `String` |         | Label for the x-axis                                          |
+| `y-axis-label`      |                      | `String` |         | Label for the y-axis                                          |
+| `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label         |
+| `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label         |
+| `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
+| `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
+
 #### Events Emitted
+
+| Event     | Location    | Value Emitted  |  Description                                                                      |
+|--         | --------    |------          |                                                                                 --|
+| `click`   |   Circle    | `Object`       |  the object in the array that is clicked on for the circle will be emitted        |
 
 #### Slots
 

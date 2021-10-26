@@ -3,7 +3,8 @@
         <circle v-for="(point,i) in points" :key="i"
                 :cx="xScale(point[xKey])" :cy="yScale(point[yKey])" :r="point.radius"
                 :fill="point.fill" :fill-opacity="fillOpacity"
-                :stroke="point.stroke" :stroke-opacity="strokeOpacity">
+                :stroke="point.stroke" :stroke-opacity="strokeOpacity"
+                @click="$emit('click', point)">
         </circle>
         <g v-xaxis="{ scale: xScale }" :transform="`translate(0, ${height - margin.bottom})`"></g>
         <g v-yaxis="{ scale: yScale }" :transform="`translate(${margin.left}, 0)`"></g>
@@ -107,7 +108,7 @@ export default {
             return {min: minVal, max: maxVal}
         },
         yValues() {
-            const yVals = this.plotData.map(point => point[this.xKey])
+            const yVals = this.plotData.map(point => point[this.yKey])
             const minVal = min(yVals) < 0 ? min(yVals) : 0
             const maxVal = max(yVals)
             return {min: minVal, max: maxVal}
@@ -116,11 +117,13 @@ export default {
             return scaleLinear()
                 .domain([this.xValues.min, this.xValues.max])
                 .range([this.margin.left, this.width - this.margin.right])
+                .nice()
         },
         yScale() {
             return scaleLinear()
                 .domain([this.yValues.min, this.yValues.max])
                 .range([this.height - this.margin.bottom, this.margin.top])
+                .nice()
         }
     },
     directives: {
