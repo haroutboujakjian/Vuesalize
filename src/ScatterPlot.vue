@@ -33,7 +33,7 @@ import Annotations from "./Annotations"
 
 export default {
     name: "ScatterPlot",
-    components: {AxisLabels},
+    components: {AxisLabels, Annotations},
     props: {
         plotData: Array,
         width: {
