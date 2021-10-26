@@ -1,18 +1,24 @@
 <template>
-    <svg :width="width" :height="height">
-        <circle v-for="(point,i) in points" :key="i"
-                :cx="xScale(point[xKey])" :cy="yScale(point[yKey])" :r="point.radius"
-                :fill="point.fill" :fill-opacity="fillOpacity"
-                :stroke="point.stroke" :stroke-opacity="strokeOpacity"
-                @click="$emit('click', point)">
-        </circle>
-        <g v-xaxis="{ scale: xScale }" :transform="`translate(0, ${height - margin.bottom})`"></g>
-        <g v-yaxis="{ scale: yScale }" :transform="`translate(${margin.left}, 0)`"></g>
-        <AxisLabels :width="width" :height="height" :chart-margin="margin"
-                    :x-axis-label="xAxisLabel" :y-axis-label="yAxisLabel"
-                    :x-axis-label-shift="xAxisLabelShift" :y-axis-label-shift="yAxisLabelShift">
-        </AxisLabels>
-    </svg>
+    <figure>
+        <svg :width="width" :height="height">
+            <circle v-for="(point,i) in points" :key="i"
+                    :cx="xScale(point[xKey])" :cy="yScale(point[yKey])" :r="point.radius"
+                    :fill="point.fill" :fill-opacity="fillOpacity"
+                    :stroke="point.stroke" :stroke-opacity="strokeOpacity"
+                    @click="$emit('click', point)">
+            </circle>
+            <g v-xaxis="{ scale: xScale }" :transform="`translate(0, ${height - margin.bottom})`"></g>
+            <g v-yaxis="{ scale: yScale }" :transform="`translate(${margin.left}, 0)`"></g>
+            <AxisLabels :width="width" :height="height" :chart-margin="margin"
+                        :x-axis-label="xAxisLabel" :y-axis-label="yAxisLabel"
+                        :x-axis-label-shift="xAxisLabelShift" :y-axis-label-shift="yAxisLabelShift">
+            </AxisLabels>
+            <Annotations :annotations="annotations" :margin="margin"
+                         :linear-scale="yScale" :bar-scale="xScale"
+                         :width="width" :height="height" direction="vertical">
+            </Annotations>
+        </svg>
+    </figure>
 </template>
 
 <script>
@@ -23,6 +29,7 @@ import {axisBottom, axisLeft} from "d3-axis";
 // eslint-disable-next-line no-unused-vars
 import {transition} from "d3-transition"
 import AxisLabels from "./AxisLabels";
+import Annotations from "./Annotations"
 
 export default {
     name: "ScatterPlot",
@@ -80,7 +87,13 @@ export default {
         yTickFormat: {
             type: Function,
             default: null,
-        }
+        },
+        annotations: {
+            type: Array,
+            default: function () {
+                return []
+            }
+        },
     },
     data() {
         return {
@@ -132,7 +145,7 @@ export default {
             const xTickFormat = vnode.context._props.xTickFormat
 
             select(el).transition().duration(500)
-                .call(axisBottom(scale).tickPadding(5).ticks(6).tickFormat(xTickFormat))
+                .call(axisBottom(scale).ticks(5).tickFormat(xTickFormat))
         },
         yaxis(el, binding, vnode) {
             const scale = binding.value.scale

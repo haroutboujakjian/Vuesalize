@@ -615,13 +615,33 @@ these can be specified by the `xKey` and `yKey` keys. Passing in the values in t
 as opposed to setting one consistent style in the props (e.g. passing in different fill values for each point instead of
 passing in one fill value as a prop). The table below has all of the possible keys that can be included for an objects
 
-| Name         |  Type     |  Description                                            |
-|--            |  -------  |                                                       --|
-| `xKey`       |  `String` |  x value for the point                                  |
-| `yKey`       |  `String` |  y value for the point                                  |
-| `radius`     |  `Number` |  radius of the point                                   |
-| `fill`       |  `String` |  fill of the point                                   |
-| `stroke`     |  `String` |  stroke of the point                                   |
+| Name         | Required           |  Type     |  Description                                            |
+|--            | :-----------:      |  -------  |                                                       --|
+| `x-key`      | :heavy_check_mark: |  `String` |  x value for the point                                  |
+| `y-key`      | :heavy_check_mark: |`String`   |  y value for the point                                  |
+| `radius`     |                    | `Number`  |  radius of the point                                    |
+| `fill`       |                    |`String`   |  fill of the point                                      |
+| `stroke`     |                    | `String`  |  stroke of the point                                    |
+
+Here is an example below that the scatterplot above uses
+
+```json
+[
+  {
+    "profit": 103,
+    "utility": 9,
+    "radius": 5,
+    "fill": "#ff3000"
+  },
+  {
+    "profit": 359,
+    "utility": 54,
+    "radius": 5,
+    "fill": "#ff3000"
+  },
+   ...
+]
+```
 
 #### Props
 
