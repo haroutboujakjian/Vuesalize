@@ -6,7 +6,9 @@
                         :cx="xScale(point[xKey])" :cy="yScale(point[yKey])" :r="point.radius"
                         :fill="point.fill" :fill-opacity="fillOpacity"
                         :stroke="point.stroke" :stroke-opacity="strokeOpacity"
-                        @click="$emit('click', point)">
+                        @click="$emit('click', point)"
+                        @mouseover="populateTooltip($event, point)"
+                        @mouseout="showTooltip = false">
                 </circle>
             </transition-group>
             <g v-xaxis="{ scale: xScale }" :transform="`translate(0, ${height - margin.bottom})`"></g>
@@ -20,6 +22,14 @@
                          :width="width" :height="height" direction="vertical">
             </Annotations>
         </svg>
+        <div v-if="enableTooltip && showTooltip"
+             class="tooltipContainer"
+             :class="{activeTooltip: showTooltip}"
+             :style="`top: ${tooltip.event.pageY + 10}px; left: ${tooltip.event.pageX + 10}px`">
+            <slot name="tooltip" :point="tooltip">
+                <span>{{ xKey }}: {{ tooltip.point[xKey] }}, {{ yKey }}: {{ tooltip.point[yKey] }}</span>
+            </slot>
+        </div>
     </figure>
 </template>
 
@@ -101,9 +111,8 @@ export default {
         return {
             showTooltip: false,
             tooltip: {
-                x: 0,
-                y: 0,
-                values: {}
+                point: {},
+                event: {}
             },
         }
     },
@@ -141,6 +150,13 @@ export default {
                 .nice()
         }
     },
+    methods: {
+        populateTooltip(e, point) {
+            this.showTooltip = true
+            this.tooltip.event = e
+            this.tooltip.point = point
+        }
+    },
     directives: {
         xaxis(el, binding, vnode) {
             const scale = binding.value.scale
@@ -174,4 +190,22 @@ export default {
 .point-move {
     transition: all 0.5s;
 }
+
+.tooltipContainer {
+    position: absolute;
+    font-size: 0.8rem;
+    padding: 10px;
+    border: solid 1px black;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    background-color: #ffffff;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.activeTooltip {
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+
 </style>
