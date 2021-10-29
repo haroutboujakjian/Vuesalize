@@ -243,7 +243,7 @@ a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 
 | Name      | Value    |  Description                                                                      |
 |--         | -------  |                                                                                 --|
-| `bar`     | `Object` | contains `x_label`, `y_label`, `x_value`, and `y_value` keys of the bar in the stack that is hovered over|
+| `tooltip` | `Object` | contains `x_label`, `y_label`, `x_value`, and `y_value` keys of the bar in the stack that is hovered over|
 
 ### Grouped Bar Chart
 
@@ -452,7 +452,7 @@ a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 
 | Name         | Value    |  Description                                                                      |
 |--            | -------  |                                                                                 --|
-| `lines`      | `Object` | contains the x key and all of the y keys for the x value that is hovered over     |
+| `tooltip`    | `Object` | contains the x key and all of the y keys for the x value that is hovered over     |
 
 
 ### Area Chart
@@ -578,7 +578,8 @@ Under construction...
 
 #### Example
 
-A scatter plot helps displays relationships between two variables in a plot.
+A scatter plot helps displays relationships between two variables in a plot. Transitions are also built in for moving the
+points around, as well transition the fill, radius, etc. Click the update data button below to see this in action!
 
 <div style="display: flex; justify-content: center">
 <ScatterPlotExample></ScatterPlotExample>
@@ -586,10 +587,11 @@ A scatter plot helps displays relationships between two variables in a plot.
 
 ```html
 <template>
-   <ScatterPlot :plotData="plotData" xKey="profit" yKey="utility" 
+   <ScatterPlot :plotData="plotData" xKey="profit" yKey="utility"
                 :margin="margin" :width="400"
                 y-axis-label="Utility" x-axis-label="Profit" :x-axis-label-shift="{ dx: 5, dy: -5}"
-                :stroke="'#ff3000'" :fill="'#ff3000'" :fill-opacity="0.60">
+                :stroke="'#ff3000'" :fill="'#ff3000'" :fill-opacity="0.60"
+                :x-tick-format="d => `$${d}`">
    </ScatterPlot>
 </template>
 
@@ -672,6 +674,10 @@ Here is an example below that the scatterplot above uses
 | `click`   |   Circle    | `Object`       |  the object in the array that is clicked on for the circle will be emitted        |
 
 #### Slots
+
+| Name     | Value    |  Description                                                                      |
+|--        | -------  |                                                                                 --|
+| `tooltip`| `Object` | contains `point` and `event` objects for point that is hovered over             |
 
 ### Hierarchical Edge Bundling
 
