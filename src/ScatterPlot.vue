@@ -1,16 +1,14 @@
 <template>
     <figure>
         <svg :width="width" :height="height">
-            <transition-group name="point" tag="g">
-                <circle v-for="(point,i) in points" :key="i"
-                        :cx="xScale(point[xKey])" :cy="yScale(point[yKey])" :r="point.radius"
-                        :fill="point.fill" :fill-opacity="fillOpacity"
-                        :stroke="point.stroke" :stroke-opacity="strokeOpacity"
-                        @click="$emit('click', point)"
-                        @mouseover="populateTooltip($event, point)"
-                        @mouseout="showTooltip = false">
-                </circle>
-            </transition-group>
+            <circle v-for="(point,i) in points" :key="i"
+                    :cx="xScale(point[xKey])" :cy="yScale(point[yKey])" :r="point.radius"
+                    :fill="point.fill" :fill-opacity="fillOpacity"
+                    :stroke="point.stroke" :stroke-opacity="strokeOpacity"
+                    @click="$emit('click', point)"
+                    @mouseover="populateTooltip($event, point)"
+                    @mouseout="showTooltip = false">
+            </circle>
             <g v-xaxis="{ scale: xScale }" :transform="`translate(0, ${height - margin.bottom})`"></g>
             <g v-yaxis="{ scale: yScale }" :transform="`translate(${margin.left}, 0)`"></g>
             <AxisLabels :width="width" :height="height" :chart-margin="margin"
@@ -177,17 +175,7 @@ export default {
 </script>
 
 <style scoped>
-.point-enter, .point-leave-to {
-    fill-opacity: 0;
-    transform: scale(0);
-}
-
-.point-enter-to {
-    fill-opacity: 1;
-    transform: scale(1);
-}
-
-.point-move {
+circle {
     transition: all 0.5s;
 }
 
