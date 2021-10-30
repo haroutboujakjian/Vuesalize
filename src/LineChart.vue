@@ -4,7 +4,6 @@
             <g @mousemove="populateTooltip($event)" @mouseleave="removeTooltip()">
                 <path v-for="line in y_values" :key="line.name"
                       :d="lineCalc(line.values)" :stroke="color(line.name)" :stroke-width="strokeWidth">
-                    <title>{{ line.name }}</title>
                 </path>
             </g>
             <g v-xaxis="{ scale: xScale, height: height - margin.bottom - margin.top}"
