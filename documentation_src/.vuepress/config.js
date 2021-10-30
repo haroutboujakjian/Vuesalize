@@ -3,7 +3,6 @@ module.exports = {
     themeConfig: {
         nav: [
             {text: 'Home', link: '/'},
-            {text: 'Rationale', link: '/rationale.md'},
         ],
         sidebar: [
             '/',

@@ -74,7 +74,7 @@ Vue.use(LoaderSpinning, BaseLegend)
 It is quite simple to get started with the CDN. The vuesalize [javascript](https://unpkg.com/vuesalize) 
 and [css](https://unpkg.com/vuesalize@0.0.37/dist/vuesalize.css) files need to be linked (lines 5 and 7), 
 and the components that will be used must be declared using `Vue.use()` (line 16). It is also necessary to link the 
-official Vue package as well (line 6).
+official Vue package (line 6) before vuesalize since it relies on base Vue.
 
 ```html
 <html lang="en">
@@ -229,7 +229,7 @@ the example stacked bar chart has "date" for the x value, and "Utilities",
 | `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
 | `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
 
-#### Events Emitted
+#### Events
 
 | Event     | Location          | Value Emitted  |  Description                                                                      |
 |--         | --------          |------          |                                                                                 --|
@@ -238,12 +238,12 @@ the example stacked bar chart has "date" for the x value, and "Utilities",
 #### Slots
 
 We provide a default tooltip that gives the x and y value for the bar that is hovered over. If you want to define a
-slightly more [custom tooltip](#tooltips), then we pass up the bar's info in
+slightly more [custom tooltip](#tooltips), then the bar's data is passed up in
 a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 
-| Name      | Value    |  Description                                                                      |
-|--         | -------  |                                                                                 --|
-| `tooltip` | `Object` | contains `x_label`, `y_label`, `x_value`, and `y_value` keys of the bar in the stack that is hovered over|
+| Slot name  | Value    | Type   |  Description                                                                                        |
+|--          | -------  |  ----  |                                                                                                   --|
+| `tooltip`  | `bar`    | Object | contains `x_label`, `y_label`, `x_value`, and `y_value` keys of the bar in the stack that is hovered over  |
 
 ### Grouped Bar Chart
 
@@ -361,7 +361,9 @@ the example stacked bar chart has "date" for the x value, and "Utilities",
 | `x-tick-format`       |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
 | `y-tick-format`       |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
 
-#### Events Emitted
+#### Events
+
+#### Slots
 
 ### Line Chart
 
@@ -442,17 +444,17 @@ the example stacked bar chart has "date" for the x value, and "Utilities",
 | `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
 | `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
 
-#### Events Emitted
+#### Events
 
 #### Slots
 
 The default tooltip that gives all of the values for the x value hovered over. If you want to define a slightly
-more [custom tooltip](#tooltips), then we pass up the line's info in
+more [custom tooltip](#tooltips), then the line's data is passed up in
 a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 
-| Name         | Value    |  Description                                                                      |
-|--            | -------  |                                                                                 --|
-| `tooltip`    | `Object` | contains the x key and all of the y keys for the x value that is hovered over     |
+| Slot name  | Value    | Type   |  Description                                                                      |
+|--          | -------  |  ----  |                                                                                 --|
+| `tooltip`  | `row`    | Object | contains the x key and all of the y keys for the x value that is hovered over     |
 
 
 ### Area Chart
@@ -566,9 +568,17 @@ the example stacked bar chart has "date" for the x value, and "Utilities",
 | `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
 | `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
 
-#### Events Emitted
+#### Events
 
 #### Slots
+
+The default tooltip that gives all of the values for the x value hovered over. If you want to define a slightly
+more [custom tooltip](#tooltips), then the area's data is passed up in
+a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
+
+| Slot name  | Value    | Type   |  Description                                                                      |
+|--          | -------  |  ----  |                                                                                 --|
+| `tooltip`  | `row`    | Object | contains the x key and all of the y keys for the x value that is hovered over     |
 
 ### Donut Chart
 
@@ -667,7 +677,7 @@ Here is an example below that the scatterplot above uses
 | `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
 | `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
 
-#### Events Emitted
+#### Events
 
 | Event     | Location    | Value Emitted  |  Description                                                                      |
 |--         | --------    |------          |                                                                                 --|
@@ -675,9 +685,9 @@ Here is an example below that the scatterplot above uses
 
 #### Slots
 
-| Name     | Value    |  Description                                                                      |
-|--        | -------  |                                                                                 --|
-| `tooltip`| `Object` | contains `point` and `event` objects for point that is hovered over             |
+| Slot name  | Value    | Type   |  Description                                                                      |
+|--          | -------  |  ----  |                                                                                 --|
+| `tooltip`  | `row`    | Object | contains `point` and `event` objects for point that is hovered over               |
 
 ### Hierarchical Edge Bundling
 
@@ -753,7 +763,9 @@ node. Lastly, the `imports` key contains all of the connection to that node.
 | `radial-margin` |                      | `Number` | 70      | margin (in pixels) between the text label and edge of svg |
 |`highlight-event`|                      | `String` | 'click' | Event that hightlights connections for a specific node and has two options: 'click' or 'mouseover'|
 
-#### Events Emitted
+#### Events
+
+#### Slots
 
 ### Network
 
@@ -838,8 +850,9 @@ don't conflict with any the required keys. Here is the data used to create the n
 |--            | --------       |------             |                                                                                 --|
 | `click`      |   Circle       | `Object`          |  The entire node object is emitted containing node name, x, y, and any other keys |
 
+#### Slots
 
-## Additional useful components
+## Additional Components
 
 ### Basic Legend
 
@@ -937,7 +950,7 @@ default tooltip will also have a slot that passes up data about the part of the 
 #### Example 
 Here is an example that defines a custom tooltip for the same stacked bar chart using the x_label, y_label, x_value,
 and y_value of the bar that is hovered over, which
-are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructuring-Slot-Props) from the `bar` slot
+are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructuring-Slot-Props) from the `tooltip` slot
 
 <div style="display: flex; justify-content: center">
 <stacked-bar-chart-example :tooltip="true"></stacked-bar-chart-example>
@@ -950,7 +963,7 @@ are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructurin
                     x-axis-label="Year" y-axis-label="Expenses"
                     :y-tick-format="d => `$${d}`">
       <template v-slot:tooltip="{ bar }">
-         <h2>Here are values when you hover over a bar</h2>
+         <p>Here are values when you hover over a bar</p>
          <p>{{ bar.x_label }}, {{ bar.y_label }}, {{ bar.x_value }}, {{ bar.y_value }}</p>
       </template>
    </StackedBarChart>
