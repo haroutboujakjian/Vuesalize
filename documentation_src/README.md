@@ -110,17 +110,13 @@ official Vue package (line 6) before vuesalize since it relies on base Vue.
 </html>
 ```
 
-Examples of how each of the components can be used is in each of the sections.
-
-Additionally, the SFC component templates can be retrieved
-from [github](https://github.com/haroutboujakjian/Vuesalize/tree/master/src)
+Examples of how each of the chart components can be used can be found in the sections below. Additionally, the SFC
+component templates can be retrieved from [github](https://github.com/haroutboujakjian/Vuesalize/tree/master/src)
 
 ## Charts
 
 
 ### Stacked Bar Chart
-
-Stacked bar charts are one of the most popular chart types. 
 
 #### Example
 Here is a simple example that constructs a stacked bar chart representing a set of generic expenses.
@@ -183,10 +179,9 @@ Alternatively, it's possible to get a horizontal bar chart by passing in 'horizo
 </script>
 ```
 
-
-In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
-key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file that populates
-the example stacked bar chart has "date" for the x value, and "Utilities",
+In order for the stacked bar chart to render properly, `plot-data` needs to be as an array of objects. There should be
+one key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file (snippet below)
+that populates the example stacked bar chart has "date" for the x value, and "Utilities",
 "Rent", and "Insurance" for the y values. All of the axis charts
 (bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
 
@@ -246,8 +241,6 @@ a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 | `tooltip`  | `bar`    | Object | contains `x_label`, `y_label`, `x_value`, and `y_value` keys of the bar in the stack that is hovered over  |
 
 ### Grouped Bar Chart
-
-Grouped bar charts are useful in comparing values together in and between groups.
 
 #### Example
 
@@ -315,9 +308,9 @@ export default {
 
 #### Format of Data
 
-In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
-key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file that populates
-the example stacked bar chart has "date" for the x value, and "Utilities",
+In order for the stacked bar chart to render properly, `plot-data` needs to be as an array of objects. There should be
+one key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file (snippet below)
+that populates the example grouped bar chart has "date" for the x value, and "Utilities",
 "Rent", and "Insurance" for the y values. All of the axis charts
 (bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
 
@@ -401,9 +394,9 @@ export default {
 
 #### Format of Data
 
-In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
-key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file that populates
-the example stacked bar chart has "date" for the x value, and "Utilities",
+In order for the stacked bar chart to render properly, `plot-data` needs to be as an array of objects. There should be
+one key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file (snippet below)
+that populates the example line chart has "date" for the x value, and "Utilities",
 "Rent", and "Insurance" for the y values. All of the axis charts
 (bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
 
@@ -461,7 +454,7 @@ a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 
 #### Example
 
-Area charts are similar to line charts except the area under the curve is filled in. A normal area chart with two
+Area charts are similar to line charts except the area under the curve is filled in. A simple area chart with two
 groups is rendered below
 
 <div style="display: flex; justify-content: center">
@@ -524,9 +517,9 @@ In order to get a stacked area chart, set the `stacked` prop to true
 
 #### Format of Data
 
-In order for the stacked bar chart to render properly, `plotdata` needs to be as an array of objects. There should be one
-key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file that populates
-the example stacked bar chart has "date" for the x value, and "Utilities",
+In order for the stacked bar chart to render properly, `plot-data` needs to be as an array of objects. There should be
+one key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file (snippet below)
+that populates the example area chart has "date" for the x value, and "Utilities",
 "Rent", and "Insurance" for the y values. All of the axis charts
 (bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
 
@@ -580,16 +573,13 @@ a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 |--          | -------  |  ----  |                                                                                 --|
 | `tooltip`  | `row`    | Object | contains the x key and all of the y keys for the x value that is hovered over     |
 
-### Donut Chart
-
-Under construction...
 
 ### Scatter Plot
 
 #### Example
 
-A scatter plot helps displays relationships between two variables in a plot. Transitions are also built in for moving the
-points around, as well transition the fill, radius, etc. Click the update data button below to see this in action!
+A scatter plot helps display relationships between two variables in a plot. Transitions are built in for moving the
+points around, as well transitioning the fill, radius, etc. Click the update data button below to see this in action!
 
 <div style="display: flex; justify-content: center">
 <ScatterPlotExample></ScatterPlotExample>
@@ -623,7 +613,7 @@ points around, as well transition the fill, radius, etc. Click the update data b
 #### Format of Data
 
 The data that needs to be passed in as an array of objects. Each object should contain the x and y values for each point, and
-these can be specified by the `xKey` and `yKey` keys. Passing in the values in the data allows for more fine-grained control
+these can be specified by the `x-key` and `y-key` keys. Passing in the values in the data allows for more fine-grained control
 as opposed to setting one consistent style in the props (e.g. passing in different fill values for each point instead of
 passing in one fill value as a prop). The table below has all of the possible keys that can be included for an objects
 
@@ -635,7 +625,7 @@ passing in one fill value as a prop). The table below has all of the possible ke
 | `fill`       |                    |`String`   |  fill of the point                                      |
 | `stroke`     |                    | `String`  |  stroke of the point                                    |
 
-Here is an example below that the scatterplot above uses
+Here is a snippet of the data that the example scatterplot above uses
 
 ```json
 [
@@ -689,6 +679,11 @@ Here is an example below that the scatterplot above uses
 |--          | -------  |  ----  |                                                                                 --|
 | `tooltip`  | `row`    | Object | contains `point` and `event` objects for point that is hovered over               |
 
+
+### Donut Chart
+
+Under construction...
+
 ### Hierarchical Edge Bundling
 
 A hierarchical edge bundling chart shows relationships between different entities radially to avoid very long or wide 
@@ -730,26 +725,29 @@ node. Lastly, the `imports` key contains all of the connection to that node.
 
 ```json
 [
-  {
-    "name": "root|Outcome|Meet Client",
-    "color": "#395fa0",
-    "imports": ["root|Outcome|Complete Outcome 1"]
-  },
-  {
-    "name": "root|Indicator|Go To Dinner",
-    "color": "red",
-    "imports": [
-      "root|Outcome|Meet Client"
-    ]
-  },
-  {
-    "name": "root|Indicator|Fill Out Paperwork",
-    "color": "#395fa0",
-    "imports": [
-      "root|Indicator|Go To Dinner",
-      "root|Outcome|Complete Outcome 1"
-    ]
-  }, ...
+   {
+      "name": "root|Outcome|Meet Client",
+      "color": "#395fa0",
+      "imports": [
+         "root|Outcome|Complete Outcome 1"
+      ]
+   },
+   {
+      "name": "root|Indicator|Go To Dinner",
+      "color": "red",
+      "imports": [
+         "root|Outcome|Meet Client"
+      ]
+   },
+   {
+      "name": "root|Indicator|Fill Out Paperwork",
+      "color": "#395fa0",
+      "imports": [
+         "root|Indicator|Go To Dinner",
+         "root|Outcome|Complete Outcome 1"
+      ]
+   },
+   ...
 ]
 ```
 
@@ -856,20 +854,24 @@ don't conflict with any the required keys. Here is the data used to create the n
 
 ### Basic Legend
 
-Legends are useful for many charts and we provide a simple one in our library. Here is an example that shows how to use a
-simple legend component in both the vertical and horizontal alignments.
-
 #### Example
+
+Legends are useful for many charts and a simple component is provided in the library. The examples below show how to use
+a simple legend component in both the vertical and horizontal alignments. The vertical legend also has the
+`enable-toggle` prop added, which allows the legend to be used like a set of checkboxes by emitting a click event with
+the selected objects data.
 
 <base-legend-example></base-legend-example>
 
 ```html
 <template>
     <div>
-        <p>Horizontal</p>
-        <BaseLegend :legend-data="legendData" alignment="'horizontal'"></BaseLegend>
+        <p>Horiztonal</p>
+        <BaseLegend :legend-data="legendData" :alignment="'horizontal'"></BaseLegend>
         <p>Vertical</p>
-        <BaseLegend :legend-data="legendData" alignment="'vertical'"></BaseLegend>
+        <BaseLegend :legend-data="legendDataToggleEnabled" :alignment="'vertical'"
+                    enable-toggle>
+        </BaseLegend>
     </div>
 </template>
 
@@ -882,6 +884,11 @@ export default {
                 {name: "Utilities", color: '#717e9b'},
                 {name: "Rent", color: '#b6b6db'},
                 {name: "Insurance", color: '#bcd8f1'}
+            ],
+            legendDataToggleEnabled: [
+                {name: "Utilities", color: '#717e9b', selected: true},
+                {name: "Rent", color: '#b6b6db'},
+                {name: "Insurance", color: '#bcd8f1', selected: true}
             ]
         }
     }
@@ -891,7 +898,8 @@ export default {
 
 #### Format of Data
 
-The legend component takes in a simple array of objects that contains name and color keys.
+The legend component takes in a simple array of objects that contains name and color keys. If `enable-toggle` is set to
+true, then a selected key can also be passed in with `true` or `false` values.
 
 ```json
 [
@@ -915,9 +923,10 @@ The legend component takes in a simple array of objects that contains name and c
 | `enable-toggle` |                    | `Boolean`| false       | allows the items in the legend to be clickable and emits the object on click|
 
 #### Events
-| Event    | Location       | Value Emitted   |  Description                                                            |
-|--        | --------       |------           |                                                                       --|
-| `click`  | Marker or text | `Object`        | If `enable-toggle` prop is true, the entire item object (name and color) is emitted  |
+| Event           | Location       | Value Emitted   |  Description                                                            |
+|--               | --------       |------           |                                                                       --|
+| `click`         | Marker or text | `Object`        | If `enable-toggle` prop is true, the entire item object (name and color) is emitted  |
+| `keypress.space`| Marker         | `Object`        | If `enable-toggle` prop is true and the marker to tabbed to on the keyboard, the entire item object (name and color) is emitted  |
 
 ### Loading Spinner
 
@@ -925,7 +934,7 @@ The loading spinner is useful when data is being fetched from an API and there i
 
 #### Example 
 
-<div style="display: flex; justify-content: center">
+<div style="display: flex; justify-content: center; margin-bottom: 2rem">
 <loader-spinning></loader-spinning>
 </div>
 
@@ -936,12 +945,18 @@ The loading spinner is useful when data is being fetched from an API and there i
 </template>
 ```
 
+#### Props
+
+| Name            | Required           | Type     | Default     | Description                                            |
+|--               | :----------------: | -------  | --          |                                                      --|
+| `radius`        |                    | `Number` | 64          | radius (in px) of the loading spinner                  |
+| `color`         |                    | `String` | `#fff`      | color of the loading spinner borders                   |
 
 ## Component Parts
 
 ### Tooltips
 
-We provide default tooltips for some of the charts, which make it easy to get up and running quickly. However, it is
+Default tooltips are provided for some of the charts, which make it easy to get up and running quickly. However, it is
 common for users to want to define a slightly more custom tooltip that might better fit their needs. This can be done
 with [Slots](https://vuejs.org/v2/guide/components-slots.html)
 and [Scoped Slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots). Each chart that has a
@@ -986,7 +1001,7 @@ export default {
 
 ### Annotations
 
-The plots that contain x and y axes also have the ability to add annotations.
+The axis based plots also have the ability to add annotations.
 
 #### Example 
 
@@ -1025,7 +1040,7 @@ export default {
 </script>
 ```
 
-Another example here adds two vertical lines to a line chart indicating specific start and end times for funding
+Another example here adds two vertical lines to a line chart indicating specific start and end dates for funding
 
 <div style="display: flex; justify-content: center">
 <line-chart-example :annotation="true"></line-chart-example>

@@ -3,7 +3,9 @@
         <p>Horiztonal</p>
         <BaseLegend :legend-data="legendData" :alignment="'horizontal'"></BaseLegend>
         <p>Vertical</p>
-        <BaseLegend :legend-data="legendData" :alignment="'vertical'"></BaseLegend>
+        <BaseLegend :legend-data="legendDataToggleEnabled" :alignment="'vertical'"
+                    enable-toggle>
+        </BaseLegend>
     </div>
 </template>
 
@@ -16,6 +18,11 @@ export default {
                 {name: "Utilities", color: '#717e9b'},
                 {name: "Rent", color: '#b6b6db'},
                 {name: "Insurance", color: '#bcd8f1'}
+            ],
+            legendDataToggleEnabled: [
+                {name: "Utilities", color: '#717e9b', selected: true},
+                {name: "Rent", color: '#b6b6db'},
+                {name: "Insurance", color: '#bcd8f1', selected: true}
             ]
         }
     }

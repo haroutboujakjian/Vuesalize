@@ -4,8 +4,11 @@
             :style="item_alignment"
             @click="$emit('click', item)">
             <div :class="{legendItem: enableToggle}">
-                <span :style="marker[i]" :class="{toggleMarker: enableToggle}"></span>
-                <p :class="{toggle: enableToggle}">{{ item.name }}</p>
+                <span :style="marker[i]" :class="{toggleMarker: enableToggle}"
+                      role="checkbox" :aria-checked="item.selected" tabindex="0" :aria-labelledby="item.name"
+                      @keypress.space="$emit('click', item)">
+                </span>
+                <p :class="{toggle: enableToggle}" :id="item.name">{{ item.name }}</p>
             </div>
         </li>
     </ul>
@@ -17,12 +20,10 @@ export default {
     props: {
         LegendData: Array,
         alignment: {
-            type: String,
-            default: 'horizontal'
+            type: String, default: 'horizontal'
         },
         enableToggle: {
-            type: Boolean,
-            default: false
+            type: Boolean, default: false
         }
 
     },
@@ -37,7 +38,6 @@ export default {
                 return this.LegendData.map(item => ({
                     backgroundColor: item.selected ? item.color : '',
                     border: item.selected ? '' : 'solid 1px black',
-                    cursor: 'pointer',
                 }))
             } else if (!this.enableToggle) {
                 return this.LegendData.map(item => ({
@@ -46,16 +46,6 @@ export default {
             }
             return {}
         },
-        text() {
-            if (this.enableToggle) {
-                return {
-                    cursor: 'pointer',
-                }
-            } else if (!this.enableToggle) {
-                return {}
-            }
-            return {}
-        }
     }
 }
 </script>
@@ -92,6 +82,7 @@ p {
 .legendItem span {
     border: solid 1px transparent;
     transition: border 0.2s;
+    cursor: pointer;
 }
 
 .legendItem:hover span {

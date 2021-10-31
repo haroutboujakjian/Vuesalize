@@ -1,30 +1,43 @@
 <template>
-    <div class="lds-dual-ring"></div>
+    <div class="lds-dual-ring" :style="{width: `${radius}px`, height: `${radius}px`}">
+        <span :style="spinnerStyle">
+        </span>
+    </div>
 </template>
 
 <script>
 export default {
-    name: "LoaderSpinning"
+    name: "LoaderSpinning",
+    props: {
+        radius: {
+            type: Number, default: 64
+        },
+        color: {
+            type: String, default: '#999'
+        }
+    },
+    computed: {
+        spinnerStyle() {
+            return {
+                width: `${this.radius}px`,
+                height: `${this.radius}px`,
+                borderColor: `${this.color} transparent ${this.color} transparent`
+            }
+        }
+    }
 }
 </script>
 
 <style scoped>
-/* loading spinner */
 .lds-dual-ring {
     display: inline-block;
-    width: 80px;
-    height: 80px;
 }
 
-.lds-dual-ring::after {
-    content: " ";
+.lds-dual-ring span {
     display: block;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
     border-radius: 50%;
-    border: 6px solid #999;
-    border-color: #999 transparent #999 transparent;
+    border-width: 6px;
+    border-style: solid;
     animation: lds-dual-ring 1.2s linear infinite;
 }
 
