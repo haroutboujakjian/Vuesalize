@@ -78,11 +78,10 @@ Vue.use(LoaderSpinning, BaseLegend)
 
 ### CDN
 
-It is quite simple to get started with the CDN. The vuesalize [javascript](https://unpkg.com/vuesalize)
-and [css](https://unpkg.com/vuesalize@0.0.41/dist/vuesalize.css) files need to be linked (lines 5 and 7), and the components
-that will be used must be declared using `Vue.use()` (line 16). It is also necessary to link the official Vue package as
-well (line 6).
-
+It is quite simple to get started with the CDN. The vuesalize [javascript](https://unpkg.com/vuesalize) 
+and [css](https://unpkg.com/vuesalize@0.0.37/dist/vuesalize.css) files need to be linked (lines 5 and 7), 
+and the components that will be used must be declared using `Vue.use()` (line 16). It is also necessary to link the 
+official Vue package (line 6) before vuesalize since it relies on base Vue.
 ```html
 <html lang="en">
 <head>
