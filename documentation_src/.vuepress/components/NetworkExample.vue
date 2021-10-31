@@ -21,6 +21,7 @@ export default {
 div {
     display: flex;
     justify-content: center;
-    border: solid 1px black;
+    border: solid 1px #808080;
+    border-radius: 4px;
 }
 </style>
