@@ -392,6 +392,23 @@ export default {
 </script>
 ```
 
+Using a linear scale instead of a time scale is as simple as passing the prop `:use-time-scale-x-axis="false"`
+
+<div style="display: flex; justify-content: center">
+    <line-chart-example :linear-scale="true"></line-chart-example>
+</div>
+
+```html
+<template>
+   <LineChart :plot-data="plotDataLinear" x-key="days"
+              :use-time-scale-x-axis="false" :x-axis-label-shift="{dy: -5}"
+              :width="450" :height="250" :margin="margin"
+              x-axis-label="Days Since Start of New Program" y-axis-label="Expenses"
+              :y-tick-format="d => `$${d}`">
+   </LineChart>
+</template>
+```
+
 #### Format of Data
 
 In order for the stacked bar chart to render properly, `plot-data` needs to be as an array of objects. There should be
@@ -420,22 +437,23 @@ that populates the example line chart has "date" for the x value, and "Utilities
 
 #### Props
 
-| Name                | Required             | Type     | Default | Description                                                   |
-|--                   | :------------------: | -------  | --      |                                                             --|
-| `plot-data`         | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                            |
-| `x-key`             |  :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata             |
-| `width`              |                     | `Number` |  350px  | chart width in pixels                                         |
-| `height`             |                     | `Number` |  250px  | chart height in pixels                                        |
-| `colors`            |                      | `Array`  |         | array of colors used for each line                            |
-| `margin`            |                      | `Object` |         | object that contains the top, bottom, right, and left margins |
-|`enable-tooltip`     |                      |`Boolean` | True    | Turn default tooltip on or off                                |
-|`stroke-width`       |                      | `Number` |  2      | stroke-width for areas                                        |
-| `x-axis-label`      |                      | `String` |         | Label for the x-axis                                        |
-| `y-axis-label`      |                      | `String` |         | Label for the y-axis                                        |
-| `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
-| `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
-| `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
-| `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
+| Name                   | Required             | Type     | Default | Description                                                   |
+|--                      | :------------------: | -------  | --      |                                                             --|
+| `plot-data`            | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                            |
+| `x-key`                |  :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata             |
+| `use-time-scale-x-axis`|                      | `Boolean`| true    | used to indicate whether a time scale or linear scale is used for x axis. if set to `true` pass in strings that can be converted to dates for x values  |
+| `width`                |                      | `Number` |  350px  | chart width in pixels                                         |
+| `height`               |                      | `Number` |  250px  | chart height in pixels                                        |
+| `colors`               |                      | `Array`  |         | array of colors used for each line                            |
+| `margin`               |                      | `Object` |         | object that contains the top, bottom, right, and left margins |
+|`enable-tooltip`        |                      |`Boolean` | True    | Turn default tooltip on or off                                |
+|`stroke-width`          |                      | `Number` |  2      | stroke-width for areas                                        |
+| `x-axis-label`         |                      | `String` |         | Label for the x-axis                                        |
+| `y-axis-label`         |                      | `String` |         | Label for the y-axis                                        |
+| `x-axis-label-shift`   |                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
+| `y-axis-label-shift`   |                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
+| `x-tick-format`        |                      |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
+| `y-tick-format`        |                      |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
 
 #### Events
 

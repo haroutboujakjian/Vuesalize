@@ -96,6 +96,10 @@ export default {
         yTickFormat: {
             type: Function,
             default: null,
+        },
+        useTimeScaleXAxis: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
@@ -119,8 +123,16 @@ export default {
             return this.yValueKeys.map(key => ({name: key, values: this.plotData.map(year => year[key])}))
         },
         xScale() {
-            return scaleTime()
-                .domain(extent(this.plotData, d => new Date(d[this.xKey])))
+            let scale
+            if (this.useTimeScaleXAxis) {
+                scale = scaleTime()
+                    .domain(extent(this.plotData, d => new Date(d[this.xKey])))
+            } else {
+                scale = scaleLinear()
+                    .domain(extent(this.plotData, d => d[this.xKey]))
+            }
+
+            return scale
                 .range([this.margin.left, this.width - this.margin.right])
                 .nice()
         },
