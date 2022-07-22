@@ -5,10 +5,10 @@
                 <transition-group tag="g">
                     <g v-for="(bargroup, id) in groups" :key="id"
                        :transform="`translate(${bandScale(bandAxisTicks[id])}, 0)`">
-                        <rect v-for="(value, subgroup) in bargroup" :key="subgroup"
+                        <rect v-for="(value, subgroup, index) in bargroup" :key="index"
                               :x="bandSubgroupScale(subgroup)" :width="bandSubgroupScale.bandwidth()"
                               :y="linearScale(value)" :height="height - linearScale(value) - margin.bottom"
-                              :fill="color(subgroup)"
+                              :fill="color(subgroup)" class="animate"
                               @mouseover="populateTooltip($event, subgroup, value)"
                               @mouseout="showTooltip = false">
                         </rect>
