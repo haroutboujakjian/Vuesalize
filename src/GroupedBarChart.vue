@@ -31,7 +31,8 @@
                     </rect>
                 </g>
                 <g v-linearaxis="{scale: linearScale, direction: 'horizontal'}"
-                   :transform="`translate(0, ${this.height - this.margin.bottom})`" class="axis">
+                   :transform="`translate(0, ${barAxisLocation === 'top' ? margin.top : height - margin.bottom})`"
+                   class="axis">
                 </g>
                 <g v-bandaxis="{scale: bandScale, tickLabels: bandAxisTicks, direction: 'horizontal'}"
                    class="axis" :transform="`translate(${this.margin.left}, 0)`">
