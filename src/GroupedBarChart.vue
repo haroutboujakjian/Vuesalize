@@ -2,16 +2,18 @@
     <figure>
         <svg :width="width" :height="height">
             <template v-if="direction === 'vertical'">
-                <g v-for="(bargroup, id) in groups" :key="id"
-                   :transform="`translate(${bandScale(bandAxisTicks[id])}, 0)`">
-                    <rect v-for="(value, subgroup) in bargroup" :key="subgroup"
-                          :x="bandSubgroupScale(subgroup)" :width="bandSubgroupScale.bandwidth()"
-                          :y="linearScale(value)" :height="height - linearScale(value) - margin.bottom"
-                          :fill="color(subgroup)"
-                          @mouseover="populateTooltip($event, subgroup, value)"
-                          @mouseout="showTooltip = false">
-                    </rect>
-                </g>
+                <transition-group tag="g">
+                    <g v-for="(bargroup, id) in groups" :key="id"
+                       :transform="`translate(${bandScale(bandAxisTicks[id])}, 0)`">
+                        <rect v-for="(value, subgroup) in bargroup" :key="subgroup"
+                              :x="bandSubgroupScale(subgroup)" :width="bandSubgroupScale.bandwidth()"
+                              :y="linearScale(value)" :height="height - linearScale(value) - margin.bottom"
+                              :fill="color(subgroup)"
+                              @mouseover="populateTooltip($event, subgroup, value)"
+                              @mouseout="showTooltip = false">
+                        </rect>
+                    </g>
+                </transition-group>
                 <g v-bandaxis="{scale: bandScale, tickLabels: bandAxisTicks, direction: 'vertical'}"
                    class="axis" :transform="`translate(0, ${this.height - this.margin.bottom})`">
                 </g>
@@ -20,16 +22,18 @@
                 </g>
             </template>
             <template v-else>
-                <g v-for="(bargroup, id) in groups" :key="id"
-                   :transform="`translate(0 ,${bandScale(bandAxisTicks[id])})`">
-                    <rect v-for="(value, subgroup) in bargroup" :key="subgroup"
-                          :x="linearScale(0)" :width="linearScale(value) - linearScale(0)"
-                          :y="bandSubgroupScale(subgroup)" :height="bandSubgroupScale.bandwidth()"
-                          :fill="color(subgroup)"
-                          @mouseover="populateTooltip($event, subgroup, value)"
-                          @mouseout="showTooltip = false">
-                    </rect>
-                </g>
+                <transition-group tag="g">
+                    <g v-for="(bargroup, id) in groups" :key="id"
+                       :transform="`translate(0 ,${bandScale(bandAxisTicks[id])})`">
+                        <rect v-for="(value, subgroup) in bargroup" :key="subgroup"
+                              :x="linearScale(0)" :width="linearScale(value) - linearScale(0)"
+                              :y="bandSubgroupScale(subgroup)" :height="bandSubgroupScale.bandwidth()"
+                              :fill="color(subgroup)"
+                              @mouseover="populateTooltip($event, subgroup, value)"
+                              @mouseout="showTooltip = false">
+                        </rect>
+                    </g>
+                </transition-group>
                 <g v-linearaxis="{scale: linearScale, direction: 'horizontal'}"
                    :transform="`translate(0, ${barAxisLocation === 'top' ? margin.top : height - margin.bottom})`"
                    class="axis">
@@ -243,6 +247,24 @@ export default {
 </script>
 
 <style scoped>
+.animate {
+    transition: all 0.5s;
+}
+
+.animate-enter, .animate-leave-to {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.animate-enter-to {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.animate-move {
+    opacity: 1;
+    transition: all 0.5s;
+}
 
 .axis {
     shape-rendering: crispEdges;

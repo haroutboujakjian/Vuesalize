@@ -1,6 +1,6 @@
 {
   "name": "vuesalize",
-  "version": "0.0.48",
+  "version": "0.1.1",
   "description": "Component library dedicated to simplifying interactive visualization building in Vue.js.",
   "private": false,
   "main": "dist/vuesalize.common.js",
