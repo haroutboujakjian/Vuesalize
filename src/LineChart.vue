@@ -100,7 +100,15 @@ export default {
         useTimeScaleXAxis: {
             type: Boolean,
             default: true
-        }
+        },
+        yMin: {
+            type: Number,
+            default: null
+        },
+        yMax: {
+            type: Number,
+            default: null
+        },
     },
     data() {
         return {
@@ -137,8 +145,12 @@ export default {
                 .nice()
         },
         yScale() {
+            // set y scale min and max values based on props if they exist, else default to 0 and max of values
+            const yMin = this.yMin ? this.yMin : 0
+            const yMax = this.yMax ? this.yMax : max(this.y_values, d => max(d.values))
+
             return scaleLinear()
-                .domain([0, max(this.y_values, d => max(d.values))])
+                .domain([yMin, yMax])
                 .range([this.height - this.margin.bottom, this.margin.top])
                 .nice()
         },
