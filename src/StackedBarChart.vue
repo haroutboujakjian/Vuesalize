@@ -138,7 +138,23 @@ export default {
         yTickFormat: {
             type: Function,
             default: null,
-        }
+        },
+        xMin: {
+            type: Number,
+            default: null
+        },
+        xMax: {
+            type: Number,
+            default: null
+        },
+        yMin: {
+            type: Number,
+            default: null
+        },
+        yMax: {
+            type: Number,
+            default: null
+        },
     },
     data() {
         return {
@@ -165,8 +181,13 @@ export default {
                 : barScale.range([this.margin.top, this.height - this.margin.bottom])
         },
         linearScale() {
+            // determine whether x or y min/max scale limits should be applied based on direction of chart
+            const values = this.direction === 'vertical' ? [this.yMin, this.yMax] : [this.xMin, this.xMax]
+            const minValue = values[0] ? values[0] : 0
+            const maxValue = values[1] ? values[1] : max(this.series, d => max(d, d => d[1]))
+
             const linearScale = scaleLinear()
-                .domain([0, max(this.series, d => max(d, d => d[1]))])
+                .domain([minValue, maxValue])
                 .nice()
 
             return this.direction === 'vertical'

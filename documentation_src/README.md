@@ -221,8 +221,12 @@ that populates the example stacked bar chart has "date" for the x value, and "Ut
 | `y-axis-label`       |                     | `String` |         | Label for the y-axis                                              |
 | `x-axis-label-shift` |                     | `Object` |         | Takes `dx` and `dy` keys that move the location label             |
 | `y-axis-label-shift` |                     | `Object` |         | Takes `dx` and `dy` keys that move the location label             |
-| `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
-| `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
+| `x-tick-format`      |                     |`Function`|  `null` | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
+| `y-tick-format`      |                     |`Function`|  `null` | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
+| `x-min`              |                     | `Number` |         | Minimum value used for x scale                                   |
+| `x-max`              |                     | `Number` |         | Maximum value used for x scale                                   |
+| `y-min`              |                     | `Number` |         | Minimum value used for y scale                                   |
+| `y-max`              |                     | `Number` |         | Maximum value used for y scale                                   |
 
 #### Events
 
@@ -334,25 +338,29 @@ that populates the example grouped bar chart has "date" for the x value, and "Ut
 
 #### Props
 
-| Name                  | Required            | Type     | Default | Description                                                       |
-|--                     | :-----------------: | -------  | --      |                                                                 --|
-| `plot-data`           | :heavy_check_mark:  | `Array`  |         | data necessary to create the chart                                |
-| `x-key`               | :heavy_check_mark:  | `String` |         | string that is the key of the x value in plotdata                 |
-| `width`               |                     | `Number` |  350px  | chart width in pixels                                             |
-| `height`              |                     | `Number` |  250px  | chart height in pixels                                            |
-| `colors`              |                     | `Array`  |         | array of colors used for each bar                                 |
-| `direction`           |                     |`String`  |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'        |
-| `bar-axis-location`   |                     | `String` |'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
+| Name                  | Required           | Type     | Default | Description                                                       |
+|--                     | :-----------------:| -------  | --      |                                                                 --|
+| `plot-data`           | :heavy_check_mark: | `Array`  |         | data necessary to create the chart                                |
+| `x-key`               | :heavy_check_mark: | `String` |         | string that is the key of the x value in plotdata                 |
+| `width`               |                    | `Number` |  350px  | chart width in pixels                                             |
+| `height`              |                    | `Number` |  250px  | chart height in pixels                                            |
+| `colors`              |                    | `Array`  |         | array of colors used for each bar                                 |
+| `direction`           |                    |`String`  |'vertical'| direction of the chart. can be 'vertical' or 'horizontal'        |
+| `bar-axis-location`   |                    | `String` |'bottom' | placement of the x-axis for horizontal layout. can be 'bottom' or 'top'|
 | `padding-between-bars`|                 | `Number` | 0.15    | padding between the bars in a group. Must be between `0` and `1`  |
 | `padding-between-groups`|               | `Number` | 0.15    | padding between the groups of bars. Must be between `0` and `1`   |
-| `margin`              |                     | `Object` |         | object that contains the top, bottom, right, and left margins     |
-|`enable-tooltip`       |                     |`Boolean` | True    | Turn default tooltip on or off                                  |
-| `x-axis-label`        |                      | `String` |         | Label for the x-axis                                        |
-| `y-axis-label`        |                      | `String` |         | Label for the y-axis                                        |
-| `x-axis-label-shift`  |                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
-| `y-axis-label-shift`  |                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
-| `x-tick-format`       |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
-| `y-tick-format`       |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
+| `margin`              |                    | `Object` |         | object that contains the top, bottom, right, and left margins     |
+|`enable-tooltip`       |                    |`Boolean` | True    | Turn default tooltip on or off                                  |
+| `x-axis-label`        |                    | `String` |         | Label for the x-axis                                        |
+| `y-axis-label`        |                    | `String` |         | Label for the y-axis                                        |
+| `x-axis-label-shift`  |                    | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
+| `y-axis-label-shift`  |                    | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
+| `x-tick-format`       |                    |`Function`|  `null` | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
+| `y-tick-format`       |                    |`Function`|  `null` | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
+| `x-min`              |                     | `Number` |         | Minimum value used for x scale                                   |
+| `x-max`              |                     | `Number` |         | Maximum value used for x scale                                   |
+| `y-min`              |                     | `Number` |         | Minimum value used for y scale                                   |
+| `y-max`              |                     | `Number` |         | Maximum value used for y scale                                   |
 
 #### Events
 
@@ -454,6 +462,8 @@ that populates the example line chart has "date" for the x value, and "Utilities
 | `y-axis-label-shift`   |                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
 | `x-tick-format`        |                      |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
 | `y-tick-format`        |                      |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
+| `y-min`              |                     | `Number` |         | Minimum value used for y scale                                   |
+| `y-max`              |                     | `Number` |         | Maximum value used for y scale                                   |
 
 #### Events
 

@@ -7,7 +7,7 @@
                        :transform="`translate(${bandScale(bandAxisTicks[id])}, 0)`">
                         <rect v-for="(value, subgroup, index) in bargroup" :key="index"
                               :x="bandSubgroupScale(subgroup)" :width="bandSubgroupScale.bandwidth()"
-                              :y="linearScale(value)" :height="height - linearScale(value) - margin.bottom"
+                              :y="linearScale(value)" :height="linearScale(0) - linearScale(value)"
                               :fill="color(subgroup)" class="animate"
                               @mouseover="populateTooltip($event, subgroup, value)"
                               @mouseout="showTooltip = false">
@@ -147,7 +147,23 @@ export default {
         yTickFormat: {
             type: Function,
             default: null,
-        }
+        },
+        xMin: {
+            type: Number,
+            default: null
+        },
+        xMax: {
+            type: Number,
+            default: null
+        },
+        yMin: {
+            type: Number,
+            default: null
+        },
+        yMax: {
+            type: Number,
+            default: null
+        },
     },
     data() {
         return {
@@ -176,7 +192,7 @@ export default {
         bandScale() {
             const bandScale = scaleBand()
                 .domain(this.bandAxisTicks)
-                .padding(this.paddingBetweenGroups);
+                .padding(this.paddingBetweenGroups)
 
             return this.direction === 'vertical'
                 ? bandScale.range([this.margin.left, this.width - this.margin.right])
@@ -192,8 +208,13 @@ export default {
                 : bandScale.rangeRound([this.bandScale.bandwidth(), 0])
         },
         linearScale() {
+            // determine whether x or y min/max scale limits should be applied based on direction of chart
+            const values = this.direction === 'vertical' ? [this.yMin, this.yMax] : [this.xMin, this.xMax]
+            const minValue = values[0] ? values[0] : 0
+            const maxValue = values[1] ? values[1] : this.getMax(this.groups)
+
             const linearScale = scaleLinear()
-                .domain([0, this.getMax(this.groups)])
+                .domain([minValue, maxValue])
                 .nice()
 
             return this.direction === 'vertical'
