@@ -1,6 +1,16 @@
 <template>
     <figure>
         <svg :width="width" :height="height" ref="svgContainer">
+            <g v-if="showPoints" class="points">
+                <g v-for="line in y_values" :key="line.name" :class="line.name">
+                    <circle v-for="(values, i) in line.values"
+                            :cx="xScale(new Date(x_values[i]))"
+                            :cy="yScale(values)"
+                            :r="pointRadius"
+                            :fill="color(line.name)">
+                    </circle>
+                </g>
+            </g>
             <g @mousemove="populateTooltip($event)" @mouseleave="removeTooltip()">
                 <path v-for="line in y_values" :key="line.name"
                       :d="lineCalc(line.values)" :stroke="color(line.name)" :stroke-width="strokeWidth">
@@ -12,6 +22,7 @@
             <g v-yaxis="{ scale: yScale, width: width - margin.left - margin.right}"
                :transform="`translate(${margin.left} 0)`">
             </g>
+
             <AxisLabels :width="width" :height="height" :chart-margin="margin"
                         :x-axis-label="xAxisLabel" :y-axis-label="yAxisLabel"
                         :x-axis-label-shift="xAxisLabelShift" :y-axis-label-shift="yAxisLabelShift">
@@ -109,6 +120,20 @@ export default {
             type: Number,
             default: null
         },
+        showPoints: {
+            /*
+            show each of the points that construct the line chart
+             */
+            type: Boolean,
+            default: false
+        },
+        pointRadius: {
+            /*
+            if showPoints is set to true, use this for radius of points on line
+             */
+            type: Number,
+            default: 4,
+        }
     },
     data() {
         return {

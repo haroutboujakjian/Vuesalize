@@ -400,7 +400,8 @@ export default {
 </script>
 ```
 
-Using a linear scale instead of a time scale is as simple as passing the prop `:use-time-scale-x-axis="false"`
+Using a linear scale instead of a time scale is as simple as passing the prop `:use-time-scale-x-axis="false"` and you
+can even show the points that create the line chart by passing in `:show-points=true`
 
 <div style="display: flex; justify-content: center">
     <line-chart-example :linear-scale="true"></line-chart-example>
@@ -412,6 +413,7 @@ Using a linear scale instead of a time scale is as simple as passing the prop `:
               :use-time-scale-x-axis="false" :x-axis-label-shift="{dy: -5}"
               :width="450" :height="250" :margin="margin"
               x-axis-label="Days Since Start of New Program" y-axis-label="Expenses"
+              :show-points="true" :point-radius="3"
               :y-tick-format="d => `$${d}`">
    </LineChart>
 </template>
@@ -460,10 +462,12 @@ that populates the example line chart has "date" for the x value, and "Utilities
 | `y-axis-label`         |                      | `String` |         | Label for the y-axis                                        |
 | `x-axis-label-shift`   |                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
 | `y-axis-label-shift`   |                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
-| `x-tick-format`        |                      |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
-| `y-tick-format`        |                      |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
-| `y-min`              |                     | `Number` |         | Minimum value used for y scale                                   |
-| `y-max`              |                     | `Number` |         | Maximum value used for y scale                                   |
+| `x-tick-format`        |                      |`Function`|  `null` | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
+| `y-tick-format`        |                      |`Function`|  `null` | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
+| `y-min`                |                      | `Number` |         | Minimum value used for y scale                                   |
+| `y-max`                |                      | `Number` |         | Maximum value used for y scale                                   |
+| `show-points`          |                      | `Boolean`| `false` | Show points that construct the line chart                        |
+| `point-radius`         |                      | `Number` |    4    | Radius of points if there shown with `show-points=true`           |
 
 #### Events
 

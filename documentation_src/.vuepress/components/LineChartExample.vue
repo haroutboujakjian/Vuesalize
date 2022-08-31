@@ -9,6 +9,7 @@
                :x-axis-label-shift="{dy: -5}"
                :width="450" :height="250" :margin="margin"
                x-axis-label="Days Since Start of New Program" y-axis-label="Expenses"
+               :show-points="true" :point-radius="3"
                :y-tick-format="d => `$${d}`">
     </LineChart>
     <LineChart v-else :plot-data="plotData" x-key="date"
