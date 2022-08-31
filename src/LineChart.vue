@@ -120,6 +120,20 @@ export default {
             type: Number,
             default: null
         },
+        xTicks: {
+            /*
+            number sent into d3.ticks function for x-axis
+             */
+            type: Number,
+            default: 5,
+        },
+        yTicks: {
+            /*
+            number sent into d3.ticks function for y-axis
+            */
+            type: Number,
+            default: 5,
+        },
         showPoints: {
             /*
             show each of the points that construct the line chart
@@ -213,18 +227,21 @@ export default {
             const scale = binding.value.scale
             const height = binding.value.height
             const xTickFormat = vnode.context._props.xTickFormat
+            const xTicks = vnode.context._props.xTicks
+
 
             select(el).transition().duration(500)
-                .call(axisBottom(scale).tickSize(-height).tickSizeOuter(0).tickPadding(5).ticks(6).tickFormat(xTickFormat))
+                .call(axisBottom(scale).tickSize(-height).tickSizeOuter(0).tickPadding(5).ticks(xTicks).tickFormat(xTickFormat))
                 .selectAll(".tick line").style("stroke-width", "0.3px")
         },
         yaxis(el, binding, vnode) {
             const scale = binding.value.scale
             const width = binding.value.width
             const yTickFormat = vnode.context._props.yTickFormat
+            const yTicks = vnode.context._props.yTicks
 
             select(el).transition().duration(500)
-                .call(axisLeft(scale).tickSize(-width).tickSizeOuter(0).ticks(5).tickFormat(yTickFormat))
+                .call(axisLeft(scale).tickSize(-width).tickSizeOuter(0).ticks(yTicks).tickFormat(yTickFormat))
                 .selectAll(".tick line").style("stroke-width", "0.3px")
         }
     }

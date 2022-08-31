@@ -227,6 +227,9 @@ that populates the example stacked bar chart has "date" for the x value, and "Ut
 | `x-max`              |                     | `Number` |         | Maximum value used for x scale                                   |
 | `y-min`              |                     | `Number` |         | Minimum value used for y scale                                   |
 | `y-max`              |                     | `Number` |         | Maximum value used for y scale                                   |
+| `x-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the x-axis                |
+| `y-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis                |
+
 
 #### Events
 
@@ -361,6 +364,8 @@ that populates the example grouped bar chart has "date" for the x value, and "Ut
 | `x-max`              |                     | `Number` |         | Maximum value used for x scale                                   |
 | `y-min`              |                     | `Number` |         | Minimum value used for y scale                                   |
 | `y-max`              |                     | `Number` |         | Maximum value used for y scale                                   |
+| `x-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the x-axis                |
+| `y-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis                |
 
 #### Events
 
@@ -466,6 +471,8 @@ that populates the example line chart has "date" for the x value, and "Utilities
 | `y-tick-format`        |                      |`Function`|  `null` | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
 | `y-min`                |                      | `Number` |         | Minimum value used for y scale                                   |
 | `y-max`                |                      | `Number` |         | Maximum value used for y scale                                   |
+| `x-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the x-axis                |
+| `y-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis                |
 | `show-points`          |                      | `Boolean`| `false` | Show points that construct the line chart                        |
 | `point-radius`         |                      | `Number` |    4    | Radius of points if there shown with `show-points=true`           |
 
@@ -592,6 +599,8 @@ that populates the example area chart has "date" for the x value, and "Utilities
 | `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
 | `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
 | `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
+| `x-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the x-axis                |
+| `y-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis                |
 
 #### Events
 
@@ -698,6 +707,9 @@ Here is a snippet of the data that the example scatterplot above uses
 | `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label         |
 | `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
 | `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
+| `x-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the x-axis                |
+| `y-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis                |
+
 
 #### Events
 

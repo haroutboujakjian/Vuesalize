@@ -164,6 +164,20 @@ export default {
             type: Number,
             default: null
         },
+        xTicks: {
+            /*
+            number sent into d3.ticks function for x-axis
+             */
+            type: Number,
+            default: 5,
+        },
+        yTicks: {
+            /*
+            number sent into d3.ticks function for y-axis
+            */
+            type: Number,
+            default: 5,
+        },
     },
     data() {
         return {
@@ -255,11 +269,13 @@ export default {
             const axisType = vnode.context._props.barAxisLocation === 'bottom' ? axisBottom : axisTop
             const xTickFormat = vnode.context._props.xTickFormat
             const yTickFormat = vnode.context._props.yTickFormat
+            const xTicks = vnode.context._props.xTicks
+            const yTicks = vnode.context._props.yTicks
 
             if (direction === 'vertical') {
-                select(el).transition().duration(500).call(axisLeft(scale).ticks(5).tickFormat(yTickFormat))
+                select(el).transition().duration(500).call(axisLeft(scale).ticks(yTicks).tickFormat(yTickFormat))
             } else if (direction === 'horizontal') {
-                select(el).transition().duration(500).call(axisType(scale).ticks(5).tickFormat(xTickFormat))
+                select(el).transition().duration(500).call(axisType(scale).ticks(xTicks).tickFormat(xTickFormat))
             }
         }
     }

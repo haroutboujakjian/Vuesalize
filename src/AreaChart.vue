@@ -97,7 +97,21 @@ export default {
         yTickFormat: {
             type: Function,
             default: null,
-        }
+        },
+        xTicks: {
+            /*
+            number sent into d3.ticks function for x-axis
+             */
+            type: Number,
+            default: 5,
+        },
+        yTicks: {
+            /*
+            number sent into d3.ticks function for y-axis
+            */
+            type: Number,
+            default: 5,
+        },
     },
     data() {
         return {
@@ -185,14 +199,16 @@ export default {
         xaxis(el, binding, vnode) {
             const scale = binding.value.scale
             const xTickFormat = vnode.context._props.xTickFormat
+            const xTicks = vnode.context._props.xTicks
 
-            select(el).transition().duration(500).call(axisBottom(scale).ticks(6).tickFormat(xTickFormat))
+            select(el).transition().duration(500).call(axisBottom(scale).ticks(xTicks).tickFormat(xTickFormat))
         },
         yaxis(el, binding, vnode) {
             let scale = binding.value.scale
             const yTickFormat = vnode.context._props.yTickFormat
+            const yTicks = vnode.context._props.yTicks
 
-            select(el).transition().duration(500).call(axisLeft(scale).ticks(5).tickFormat(yTickFormat))
+            select(el).transition().duration(500).call(axisLeft(scale).ticks(yTicks).tickFormat(yTickFormat))
         }
     }
 }

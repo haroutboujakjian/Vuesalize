@@ -104,6 +104,20 @@ export default {
                 return []
             }
         },
+        xTicks: {
+            /*
+            number sent into d3.ticks function for x-axis
+             */
+            type: Number,
+            default: 5,
+        },
+        yTicks: {
+            /*
+            number sent into d3.ticks function for y-axis
+            */
+            type: Number,
+            default: 5,
+        },
     },
     data() {
         return {
@@ -159,16 +173,18 @@ export default {
         xaxis(el, binding, vnode) {
             const scale = binding.value.scale
             const xTickFormat = vnode.context._props.xTickFormat
+            const xTicks = vnode.context._props.xTicks
 
             select(el).transition().duration(500)
-                .call(axisBottom(scale).ticks(5).tickFormat(xTickFormat))
+                .call(axisBottom(scale).ticks(xTicks).tickFormat(xTickFormat))
         },
         yaxis(el, binding, vnode) {
             const scale = binding.value.scale
             const yTickFormat = vnode.context._props.yTickFormat
+            const yTicks = vnode.context._props.yTicks
 
             select(el).transition().duration(500)
-                .call(axisLeft(scale).ticks(5).tickFormat(yTickFormat))
+                .call(axisLeft(scale).ticks(yTicks).tickFormat(yTickFormat))
         }
     }
 }

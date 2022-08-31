@@ -1,6 +1,6 @@
 {
   "name": "vuesalize",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Component library dedicated to simplifying interactive visualization building in Vue.js.",
   "private": false,
   "main": "dist/vuesalize.common.js",
@@ -29,7 +29,6 @@
     "d3-array": "^2.11.0",
     "d3-axis": "^2.0.0",
     "d3-force": "^2.1.1",
-    "d3-hierarchy": "^2.0.0",
     "d3-scale": "^3.2.3",
     "d3-selection": "^2.0.0",
     "d3-shape": "^2.0.0",
