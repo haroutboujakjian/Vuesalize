@@ -1,0 +1,6 @@
+{
+    "bracketSameLine": true,
+    "singleAttributePerLine": false,
+    "tabWidth": 4,
+    "semi": false
+}

@@ -3,62 +3,84 @@
         <svg :width="width" :height="height" ref="svgContainer">
             <g v-if="showPoints" class="points">
                 <g v-for="line in y_values" :key="line.name" :class="line.name">
-                    <circle v-for="(values, i) in line.values"
-                            :cx="xScale(new Date(x_values[i]))"
-                            :cy="yScale(values)"
-                            :r="pointRadius"
-                            :fill="color(line.name)">
-                    </circle>
+                    <circle
+                        v-for="(values, i) in line.values"
+                        :cx="xScale(new Date(x_values[i]))"
+                        :cy="yScale(values)"
+                        :r="pointRadius"
+                        :fill="color(line.name)"></circle>
                 </g>
             </g>
-            <g @mousemove="populateTooltip($event)" @mouseleave="removeTooltip()">
-                <path v-for="line in y_values" :key="line.name"
-                      :d="lineCalc(line.values)" :stroke="color(line.name)" :stroke-width="strokeWidth">
-                </path>
+            <g
+                @mousemove="populateTooltip($event)"
+                @mouseleave="removeTooltip()">
+                <path
+                    v-for="line in y_values"
+                    :key="line.name"
+                    :d="lineCalc(line.values)"
+                    :stroke="color(line.name)"
+                    :stroke-width="strokeWidth"></path>
             </g>
-            <g v-xaxis="{ scale: xScale, height: height - margin.bottom - margin.top}"
-               :transform="`translate(0 ${height - margin.bottom})`">
-            </g>
-            <g v-yaxis="{ scale: yScale, width: width - margin.left - margin.right}"
-               :transform="`translate(${margin.left} 0)`">
-            </g>
+            <g
+                v-xaxis="{
+                    scale: xScale,
+                    height: height - margin.bottom - margin.top,
+                }"
+                :transform="`translate(0 ${height - margin.bottom})`"></g>
+            <g
+                v-yaxis="{
+                    scale: yScale,
+                    width: width - margin.left - margin.right,
+                }"
+                :transform="`translate(${margin.left} 0)`"></g>
 
-            <AxisLabels :width="width" :height="height" :chart-margin="margin"
-                        :x-axis-label="xAxisLabel" :y-axis-label="yAxisLabel"
-                        :x-axis-label-shift="xAxisLabelShift" :y-axis-label-shift="yAxisLabelShift">
-            </AxisLabels>
-            <Annotations :annotations="annotations" :margin="margin"
-                         :linear-scale="yScale" :bar-scale="xScale"
-                         :width="width" :height="height" direction="vertical">
-            </Annotations>
+            <AxisLabels
+                :width="width"
+                :height="height"
+                :chart-margin="margin"
+                :x-axis-label="xAxisLabel"
+                :y-axis-label="yAxisLabel"
+                :x-axis-label-shift="xAxisLabelShift"
+                :y-axis-label-shift="yAxisLabelShift"></AxisLabels>
+            <Annotations
+                :annotations="annotations"
+                :margin="margin"
+                :linear-scale="yScale"
+                :bar-scale="xScale"
+                :width="width"
+                :height="height"
+                direction="vertical"></Annotations>
         </svg>
 
-        <div v-if="enableTooltip && showTooltip" class="tooltipContainer"
-             :class="{ activeTooltip: showTooltip}"
-             :style="{top: tooltip.y, left: tooltip.x}">
+        <div
+            v-if="enableTooltip && showTooltip"
+            class="tooltipContainer"
+            :class="{ activeTooltip: showTooltip }"
+            :style="{ top: tooltip.y, left: tooltip.x }">
             <slot name="tooltip" :lines="tooltip.values">
-                <span v-for="(value, key) in tooltip.values" :key="key">{{ key }}: {{ value }}</span>
+                <span v-for="(value, key) in tooltip.values" :key="key"
+                    >{{ key }}: {{ value }}</span
+                >
             </slot>
         </div>
     </figure>
-
 </template>
 
 <script>
-import {scaleTime, scaleLinear, scaleOrdinal} from 'd3-scale';
-import {line} from 'd3-shape';
-import {extent, max, bisector} from 'd3-array';
-import {axisLeft, axisBottom} from 'd3-axis';
-import {select} from 'd3-selection';
+import { scaleTime, scaleLinear, scaleOrdinal } from "d3-scale"
+import { line } from "d3-shape"
+import { extent, max, bisector } from "d3-array"
+import { axisLeft, axisBottom } from "d3-axis"
+import { select } from "d3-selection"
 // eslint-disable-next-line no-unused-vars
-import {transition} from 'd3-transition';
-import Annotations from "./Annotations";
-import AxisLabels from "./AxisLabels";
+import { transition } from "d3-transition"
+import Annotations from "./Annotations.vue"
+import AxisLabels from "./AxisLabels.vue"
 import colors from "./colors"
 
 export default {
     name: "LineChart",
-    components: {AxisLabels, Annotations},
+    components: { AxisLabels, Annotations },
     props: {
         plotData: Array,
         width: {
@@ -72,14 +94,14 @@ export default {
         margin: {
             type: Object,
             default: function () {
-                return {top: 20, bottom: 20, left: 20, right: 20}
-            }
+                return { top: 20, bottom: 20, left: 20, right: 20 }
+            },
         },
         colors: {
             type: Array,
             default: function () {
                 return colors
-            }
+            },
         },
         xKey: String,
         enableTooltip: {
@@ -88,13 +110,13 @@ export default {
         },
         strokeWidth: {
             type: Number,
-            default: 1.5
+            default: 1.5,
         },
         annotations: {
             type: Array,
             default: function () {
                 return []
-            }
+            },
         },
         xAxisLabel: String,
         yAxisLabel: String,
@@ -110,15 +132,15 @@ export default {
         },
         useTimeScaleXAxis: {
             type: Boolean,
-            default: true
+            default: true,
         },
         yMin: {
             type: Number,
-            default: null
+            default: null,
         },
         yMax: {
             type: Number,
-            default: null
+            default: null,
         },
         xTicks: {
             /*
@@ -139,7 +161,7 @@ export default {
             show each of the points that construct the line chart
              */
             type: Boolean,
-            default: false
+            default: false,
         },
         pointRadius: {
             /*
@@ -147,7 +169,7 @@ export default {
              */
             type: Number,
             default: 4,
-        }
+        },
     },
     data() {
         return {
@@ -155,28 +177,35 @@ export default {
             tooltip: {
                 x: 0,
                 y: 0,
-                values: {}
-            }
+                values: {},
+            },
         }
     },
     computed: {
         yValueKeys() {
-            return Object.keys(this.plotData[0]).filter(item => item !== this.xKey).sort()
+            return Object.keys(this.plotData[0])
+                .filter((item) => item !== this.xKey)
+                .sort()
         },
         x_values() {
-            return this.plotData.map(item => item[this.xKey])
+            return this.plotData.map((item) => item[this.xKey])
         },
         y_values() {
-            return this.yValueKeys.map(key => ({name: key, values: this.plotData.map(year => year[key])}))
+            return this.yValueKeys.map((key) => ({
+                name: key,
+                values: this.plotData.map((year) => year[key]),
+            }))
         },
         xScale() {
             let scale
             if (this.useTimeScaleXAxis) {
-                scale = scaleTime()
-                    .domain(extent(this.plotData, d => new Date(d[this.xKey])))
+                scale = scaleTime().domain(
+                    extent(this.plotData, (d) => new Date(d[this.xKey]))
+                )
             } else {
-                scale = scaleLinear()
-                    .domain(extent(this.plotData, d => d[this.xKey]))
+                scale = scaleLinear().domain(
+                    extent(this.plotData, (d) => d[this.xKey])
+                )
             }
 
             return scale
@@ -186,7 +215,9 @@ export default {
         yScale() {
             // set y scale min and max values based on props if they exist, else default to 0 and max of values
             const yMin = this.yMin ? this.yMin : 0
-            const yMax = this.yMax ? this.yMax : max(this.y_values, d => max(d.values))
+            const yMax = this.yMax
+                ? this.yMax
+                : max(this.y_values, (d) => max(d.values))
 
             return scaleLinear()
                 .domain([yMin, yMax])
@@ -199,18 +230,19 @@ export default {
         lineCalc() {
             return line()
                 .x((d, i) => this.xScale(new Date(this.x_values[i])))
-                .y(d => this.yScale(d))
+                .y((d) => this.yScale(d))
         },
         xBisector() {
-            return bisector(d => new Date(d[this.xKey])).left
-        }
+            return bisector((d) => new Date(d[this.xKey])).left
+        },
     },
     methods: {
         populateTooltip(evt) {
             this.tooltip.x = `${evt.pageX + 5}px`
             this.tooltip.y = `${evt.pageY + 5}px`
 
-            let container_start = this.$refs.svgContainer.getBoundingClientRect().left
+            let container_start =
+                this.$refs.svgContainer.getBoundingClientRect().left
 
             let date = this.xScale.invert(evt.x - container_start)
             let index = this.xBisector(this.plotData, date, 1)
@@ -220,31 +252,49 @@ export default {
         },
         removeTooltip() {
             this.showTooltip = false
-        }
+        },
     },
     directives: {
         xaxis(el, binding, vnode) {
             const scale = binding.value.scale
             const height = binding.value.height
-            const xTickFormat = vnode.context._props.xTickFormat
-            const xTicks = vnode.context._props.xTicks
+            const xTickFormat = vnode.ctx.props.xTickFormat
+            const xTicks = vnode.ctx.props.xTicks
 
-
-            select(el).transition().duration(500)
-                .call(axisBottom(scale).tickSize(-height).tickSizeOuter(0).tickPadding(5).ticks(xTicks).tickFormat(xTickFormat))
-                .selectAll(".tick line").style("stroke-width", "0.3px")
+            select(el)
+                .transition()
+                .duration(500)
+                .call(
+                    axisBottom(scale)
+                        .tickSize(-height)
+                        .tickSizeOuter(0)
+                        .tickPadding(5)
+                        .ticks(xTicks)
+                        .tickFormat(xTickFormat)
+                )
+                .selectAll(".tick line")
+                .style("stroke-width", "0.3px")
         },
         yaxis(el, binding, vnode) {
             const scale = binding.value.scale
             const width = binding.value.width
-            const yTickFormat = vnode.context._props.yTickFormat
-            const yTicks = vnode.context._props.yTicks
+            const yTickFormat = vnode.ctx.props.yTickFormat
+            const yTicks = vnode.ctx.props.yTicks
 
-            select(el).transition().duration(500)
-                .call(axisLeft(scale).tickSize(-width).tickSizeOuter(0).ticks(yTicks).tickFormat(yTickFormat))
-                .selectAll(".tick line").style("stroke-width", "0.3px")
-        }
-    }
+            select(el)
+                .transition()
+                .duration(500)
+                .call(
+                    axisLeft(scale)
+                        .tickSize(-width)
+                        .tickSizeOuter(0)
+                        .ticks(yTicks)
+                        .tickFormat(yTickFormat)
+                )
+                .selectAll(".tick line")
+                .style("stroke-width", "0.3px")
+        },
+    },
 }
 </script>
 

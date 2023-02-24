@@ -81,30 +81,34 @@ official Vue package (line 6) before vuesalize since it relies on base Vue.
 <head>
    <meta charset="utf-8">
    <title>Browser test</title>
-   <link rel="stylesheet" href="https://unpkg.com/vuesalize@0.0.x/dist/vuesalize.css">
-   <script src="http_cdn.jsdelivr.net_npm_vue@2.6.12_dist_vue.js"></script>
-   <script src="https://unpkg.com/vuesalize@0.0.x/dist/vuesalize.umd.min.js"></script>
+    <link rel="stylesheet" href="vuesalize.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="vuesalize.umd.js"></script>
 </head>
 <body>
 <div id="app">
    <loader-spinning></loader-spinning>
-   <base-legend :legend-data="testlegend"></base-legend>
+   <stacked-bar-chart :plot-data="barchartdata" x-key="date"></stacked-bar-chart>
 </div>
 
 <script>
-   Vue.use('loader-spinning', 'base-legend')
+    const {createApp} = Vue
 
-   new Vue({
-      el: '#app',
-      data() {
-         return {
-            sampleLegendData: [
-               {name: 'finance', color: 'red'},
-               {name: 'accounting', color: 'blue'}
-            ],
-         }
-      }
-   })
+    const app = createApp({
+        data() {
+            return {
+                barchartdata: [
+                    {"date": 2019, "Utilities": 21, "Rent": 16, "Insurance": 22},
+                    {"date": 2020, "Utilities": 19, "Rent": 10, "Insurance": 17},
+                ]
+            }
+        }
+    })
+
+    app.use(Vuesalize)
+
+    app.mount('#app')
+
 </script>
 </body>
 </html>
@@ -122,7 +126,9 @@ component templates can be retrieved from [github](https://github.com/haroutbouj
 Here is a simple example that constructs a stacked bar chart representing a set of generic expenses.
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
 <stacked-bar-chart-example></stacked-bar-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -151,7 +157,9 @@ export default {
 Alternatively, it's possible to get a horizontal bar chart by passing in 'horizontal' for the `direction` prop.
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
 <stacked-bar-chart-example :horizontal="true"></stacked-bar-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -254,7 +262,9 @@ a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 Here is an example using the same expenses data as the stacked bar chart above. In this case, the bars are grouped.
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
     <grouped-bar-chart-example></grouped-bar-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -284,8 +294,9 @@ export default {
 And, again, it's possible to get a horizontal bar chart by passing in 'horizontal' for the direction prop.
 
 <div style="display: flex; justify-content: center">
-    <grouped-bar-chart-example :horizontal="true">
-</grouped-bar-chart-example>
+<ClientOnly>
+    <grouped-bar-chart-example :horizontal="true"></grouped-bar-chart-example> 
+</ClientOnly>
 </div>
 
 ```html
@@ -378,7 +389,9 @@ The line chart component allows for one or more lines to be plotted.
 #### Example
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
     <line-chart-example></line-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -409,7 +422,9 @@ Using a linear scale instead of a time scale is as simple as passing the prop `:
 can even show the points that create the line chart by passing in `:show-points=true`
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
     <line-chart-example :linear-scale="true"></line-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -497,7 +512,9 @@ Area charts are similar to line charts except the area under the curve is filled
 groups is rendered below
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
     <area-chart-example></area-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -527,7 +544,9 @@ groups is rendered below
 In order to get a stacked area chart, set the `stacked` prop to true
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
     <area-chart-example :stacked="true"></area-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -623,7 +642,9 @@ A scatter plot helps display relationships between two variables in a plot. Tran
 points around, as well transitioning the fill, radius, etc. Click the update data button below to see this in action!
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
 <ScatterPlotExample></ScatterPlotExample>
+</ClientOnly>
 </div>
 
 ```html
@@ -739,7 +760,9 @@ implement one. A few features are available that are quite useful:
 
 #### Example 
 
+<ClientOnly>
 <network-example></network-example>
+</ClientOnly>
 
 ```html
 <template>
@@ -898,7 +921,9 @@ The loading spinner is useful when data is being fetched from an API and there i
 #### Example 
 
 <div style="display: flex; justify-content: center; margin-bottom: 2rem">
+<ClientOnly>
 <loader-spinning></loader-spinning>
+</ClientOnly>
 </div>
 
 
@@ -931,7 +956,9 @@ and y_value of the bar that is hovered over, which
 are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructuring-Slot-Props) from the `tooltip` slot
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
 <stacked-bar-chart-example :tooltip="true"></stacked-bar-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -972,7 +999,9 @@ The chart below shows adding a horizontal dashed line to stacked bar chart which
 budget line.
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
 <stacked-bar-chart-example :annotation="true"></stacked-bar-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -1006,7 +1035,9 @@ export default {
 Another example here adds two vertical lines to a line chart indicating specific start and end dates for funding
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
 <line-chart-example :annotation="true"></line-chart-example>
+</ClientOnly>
 </div>
 
 ```html
