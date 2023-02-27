@@ -1,5 +1,5 @@
 {
-  "name": "vuesalize-vite",
+  "name": "vuesalize",
   "version": "1.0.1",
   "description": "Component library dedicated to simplifying interactive visualization building in Vue.js 3.",
   "private": false,
@@ -39,7 +39,9 @@
     "d3-selection": "^2.0.0",
     "d3-shape": "^2.0.0",
     "d3-transition": "^2.0.0",
-    "d3-zoom": "^2.0.0",
+    "d3-zoom": "^2.0.0"
+  },
+  "peerDependencies": {
     "vue": "^3.2.45"
   },
   "devDependencies": {
