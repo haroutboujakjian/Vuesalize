@@ -3,8 +3,8 @@
 ## What's the point?
 
 Building interactive visualizations on the web can be hard, and it can be even harder when you would like to leverage
-existing visualization libraries inside of a Vue.js project. The goal of `Vuesalize` is to simplify this process by
-providing a set of chart components (and a couple others) that are commonly used in building interactive visualizations
+existing visualization libraries inside a Vue.js project. The goal of `Vuesalize` is to simplify this process by
+providing a set of chart components (and a couple other components) that are commonly used in building interactive visualizations
 on the web. The charts are built using a combination of [Vue.js](https://vuejs.org/v2/guide/)
 and [D3.js](https://d3js.org/). The main rationale for this approach is to fully embrace the Vue paradigm and move the
 SVG definitions to the template (HTML), which allows Vue to handle creating and removing elements on the page. 
@@ -14,97 +14,88 @@ can also emit events on interactions (e.g. click, mousover, etc.) and offer scop
 
 ## Installation
 
-Any Vue.js based project will be able to take advantage of this library. The library is currently available on npm, and
+::: warning
+Starting with version 1.0.1, Vuesalize will only support Vue 3. If you'd like to use Vuesalize with Vue 2, use the last
+available version 0.2.0.
+:::
+
+The library is currently available on npm, and
 it is possible to use it with Vue CLI (recommended) or directly with the CDN version in a `<script>` tag.
 
 ### Vue CLI
 The steps to use is it in a project created using the Vue CLI are as follows: 
 
 1. Install from npm using `npm install vuesalize`
-2. In `main.js`, add the components that are going to be used in the project. Here is an example below for a project
-using the `BaseLegend` and `LoaderSpinning` components
+2. In `main.js`, import the Vuesalize plugin and install it using `use()`. Here is an example below for a project
    
 ```js
-import LoaderSpinning from 'vuesalize'
-import BaseLegend from 'vuesalize'
-import 'vuesalize/dist/vuesalize.css'
+import { createApp } from 'vue'
+import App from './App.vue'
 
-Vue.use(LoaderSpinning, BaseLegend)
+import 'vuesalize/dist/vuesalize.css'
+import Vuesalize from 'vuesalize'
+
+createApp(App).use(Vuesalize).mount('#app')
 ```
 
-3. Start using the components in templates. For example, if the `BaseLegend` and `LoaderSpinning` components were going 
-   to be used in a default `App.vue` file, this is how it would be setup:
+3. Start using the components in templates. For example, if the `StackedBarChart` and `LoaderSpinning` components were
+   going to be used in a default `App.vue` file, this is how it would be setup:
 
 ```html
-<template>
-   <div id="app">
-      <BaseLegend :legend-data="sampleLegendData"></BaseLegend>
-      <LoaderSpinning></LoaderSpinning>
-   </div>
-</template>
-
-<script>
-   export default {
-      name: 'App',
-      data() {
-         return {
-            sampleLegendData: [
-               {name: 'finance', color: 'red'},
-               {name: 'accounting', color: 'blue'}
-            ],
-         }
-      }
-   }
+<script setup>
+const barchartdata = [
+    {"date": 2019, "Utilities": 21, "Rent": 16, "Insurance": 22},
+    {"date": 2020, "Utilities": 19, "Rent": 10, "Insurance": 17},
+]
 </script>
 
-<style>
-   #app {
-      font-family: Avenir, Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-align: center;
-      color: #2c3e50;
-      margin-top: 60px;
-   }
-</style>
+<template>
+    <loader-spinning/>
+    <StackedBarChart :plot-data="barchartdata" x-key="date"></StackedBarChart>
+</template>
+
+<style scoped></style>
 ```
 
 ### CDN
 
-It is quite simple to get started with the CDN. The vuesalize [javascript](https://unpkg.com/vuesalize) 
-and [css](https://unpkg.com/vuesalize@0.0.37/dist/vuesalize.css) files need to be linked (lines 5 and 7), 
-and the components that will be used must be declared using `Vue.use()` (line 16). It is also necessary to link the 
-official Vue package (line 6) before vuesalize since it relies on base Vue.
+It is quite simple to get started with the CDN. The vuesalize javascript and css files need to be linked (lines 5 and
+7 below). Then after creating an app instance `app = createApp({...})`, you can call `app.use(Vuesalize)` to install the
+plugin. As with other packages, it is also necessary to link the official Vue 3 package (line 6) before vuesalize.
 
 ```html
 <html lang="en">
 <head>
    <meta charset="utf-8">
    <title>Browser test</title>
-   <link rel="stylesheet" href="https://unpkg.com/vuesalize@0.0.x/dist/vuesalize.css">
-   <script src="http_cdn.jsdelivr.net_npm_vue@2.6.12_dist_vue.js"></script>
-   <script src="https://unpkg.com/vuesalize@0.0.x/dist/vuesalize.umd.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/vuesalize@1.0.1/dist/vuesalize.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vuesalize@1.0.1/dist/vuesalize.umd.js"></script>
 </head>
 <body>
 <div id="app">
    <loader-spinning></loader-spinning>
-   <base-legend :legend-data="testlegend"></base-legend>
+   <stacked-bar-chart :plot-data="barchartdata" x-key="date"></stacked-bar-chart>
 </div>
 
 <script>
-   Vue.use('loader-spinning', 'base-legend')
+    const {createApp} = Vue
 
-   new Vue({
-      el: '#app',
-      data() {
-         return {
-            sampleLegendData: [
-               {name: 'finance', color: 'red'},
-               {name: 'accounting', color: 'blue'}
-            ],
-         }
-      }
-   })
+    const app = createApp({
+        data() {
+            return {
+                barchartdata: [
+                    {"date": 2019, "Utilities": 21, "Rent": 16, "Insurance": 22},
+                    {"date": 2020, "Utilities": 19, "Rent": 10, "Insurance": 17},
+                ]
+            }
+        }
+    })
+
+    app.use(Vuesalize)
+
+    app.mount('#app')
+
 </script>
 </body>
 </html>
@@ -122,7 +113,9 @@ component templates can be retrieved from [github](https://github.com/haroutbouj
 Here is a simple example that constructs a stacked bar chart representing a set of generic expenses.
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
 <stacked-bar-chart-example></stacked-bar-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -151,7 +144,9 @@ export default {
 Alternatively, it's possible to get a horizontal bar chart by passing in 'horizontal' for the `direction` prop.
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
 <stacked-bar-chart-example :horizontal="true"></stacked-bar-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -254,7 +249,9 @@ a [scoped slot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 Here is an example using the same expenses data as the stacked bar chart above. In this case, the bars are grouped.
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
     <grouped-bar-chart-example></grouped-bar-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -284,8 +281,9 @@ export default {
 And, again, it's possible to get a horizontal bar chart by passing in 'horizontal' for the direction prop.
 
 <div style="display: flex; justify-content: center">
-    <grouped-bar-chart-example :horizontal="true">
-</grouped-bar-chart-example>
+<ClientOnly>
+    <grouped-bar-chart-example :horizontal="true"></grouped-bar-chart-example> 
+</ClientOnly>
 </div>
 
 ```html
@@ -378,7 +376,9 @@ The line chart component allows for one or more lines to be plotted.
 #### Example
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
     <line-chart-example></line-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -409,7 +409,9 @@ Using a linear scale instead of a time scale is as simple as passing the prop `:
 can even show the points that create the line chart by passing in `:show-points=true`
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
     <line-chart-example :linear-scale="true"></line-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -497,7 +499,9 @@ Area charts are similar to line charts except the area under the curve is filled
 groups is rendered below
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
     <area-chart-example></area-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -527,7 +531,9 @@ groups is rendered below
 In order to get a stacked area chart, set the `stacked` prop to true
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
     <area-chart-example :stacked="true"></area-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -623,7 +629,9 @@ A scatter plot helps display relationships between two variables in a plot. Tran
 points around, as well transitioning the fill, radius, etc. Click the update data button below to see this in action!
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
 <ScatterPlotExample></ScatterPlotExample>
+</ClientOnly>
 </div>
 
 ```html
@@ -739,7 +747,9 @@ implement one. A few features are available that are quite useful:
 
 #### Example 
 
+<ClientOnly>
 <network-example></network-example>
+</ClientOnly>
 
 ```html
 <template>
@@ -898,7 +908,9 @@ The loading spinner is useful when data is being fetched from an API and there i
 #### Example 
 
 <div style="display: flex; justify-content: center; margin-bottom: 2rem">
+<ClientOnly>
 <loader-spinning></loader-spinning>
+</ClientOnly>
 </div>
 
 
@@ -931,7 +943,9 @@ and y_value of the bar that is hovered over, which
 are [destructured](https://vuejs.org/v2/guide/components-slots.html#Destructuring-Slot-Props) from the `tooltip` slot
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
 <stacked-bar-chart-example :tooltip="true"></stacked-bar-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -972,7 +986,9 @@ The chart below shows adding a horizontal dashed line to stacked bar chart which
 budget line.
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
 <stacked-bar-chart-example :annotation="true"></stacked-bar-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -1006,7 +1022,9 @@ export default {
 Another example here adds two vertical lines to a line chart indicating specific start and end dates for funding
 
 <div style="display: flex; justify-content: center">
+<ClientOnly>
 <line-chart-example :annotation="true"></line-chart-example>
+</ClientOnly>
 </div>
 
 ```html
@@ -1062,6 +1080,3 @@ properties
 | `labelAnchor`|                      | `String` |  'middle'  | text-anchor property for label. can be 'start', 'end' or 'middle'|
 | `labeldx`    |                      | `Number` |            | shift label in x direction                                       |
 | `labeldy`    |                      | `Number` |            | shift label in y direction                                       |
-
-
-<small>Copyright 2021 MITRE Corporation. Approved for Public Release - Distribution Unlimited. Case #21-0751</small>

@@ -1,9 +1,9 @@
 <template>
     <div>
         <p>Horiztonal</p>
-        <BaseLegend :legend-data="legendData" :alignment="'horizontal'"></BaseLegend>
+        <BaseLegend :LegendData="legendData" :alignment="'horizontal'"></BaseLegend>
         <p>Vertical</p>
-        <BaseLegend :legend-data="legendDataToggleEnabled" :alignment="'vertical'"
+        <BaseLegend :LegendData="legendDataToggleEnabled" :alignment="'vertical'"
                     enable-toggle>
         </BaseLegend>
     </div>

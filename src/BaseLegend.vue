@@ -1,14 +1,23 @@
 <template>
     <ul>
-        <li v-for="(item, i) in LegendData" :key="item.name"
+        <li
+            v-for="(item, i) in LegendData"
+            :key="item.name"
             :style="item_alignment"
             @click="$emit('click', item)">
-            <div :class="{legendItem: enableToggle}">
-                <span :style="marker[i]" :class="{toggleMarker: enableToggle}"
-                      role="checkbox" :aria-checked="item.selected" tabindex="0" :aria-labelledby="item.name"
-                      @keypress.space="$emit('click', item)">
+            <div :class="{ legendItem: enableToggle }">
+                <span
+                    :style="marker[i]"
+                    :class="{ toggleMarker: enableToggle }"
+                    role="checkbox"
+                    :aria-checked="item.selected"
+                    tabindex="0"
+                    :aria-labelledby="item.name"
+                    @keypress.space="$emit('click', item)">
                 </span>
-                <p :class="{toggle: enableToggle}" :id="item.name">{{ item.name }}</p>
+                <p :class="{ toggle: enableToggle }" :id="item.name">
+                    {{ item.name }}
+                </p>
             </div>
         </li>
     </ul>
@@ -20,33 +29,35 @@ export default {
     props: {
         LegendData: Array,
         alignment: {
-            type: String, default: 'horizontal'
+            type: String,
+            default: "horizontal",
         },
         enableToggle: {
-            type: Boolean, default: false
-        }
-
+            type: Boolean,
+            default: false,
+        },
     },
     computed: {
         item_alignment() {
             return {
-                display: this.alignment === 'horizontal' ? 'inline-block' : 'block'
+                display:
+                    this.alignment === "horizontal" ? "inline-block" : "block",
             }
         },
         marker() {
             if (this.enableToggle) {
-                return this.LegendData.map(item => ({
-                    backgroundColor: item.selected ? item.color : '',
-                    border: item.selected ? '' : 'solid 1px black',
+                return this.LegendData.map((item) => ({
+                    backgroundColor: item.selected ? item.color : "",
+                    border: item.selected ? "" : "solid 1px black",
                 }))
             } else if (!this.enableToggle) {
-                return this.LegendData.map(item => ({
+                return this.LegendData.map((item) => ({
                     backgroundColor: item.color,
                 }))
             }
             return {}
         },
-    }
+    },
 }
 </script>
 
@@ -100,5 +111,4 @@ p {
     color: black;
     transition: color 0.2s;
 }
-
 </style>

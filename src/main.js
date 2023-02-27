@@ -1,20 +1,21 @@
-import Vue from "vue";
-import StackedBarChart from "./StackedBarChart";
-import BaseLegend from "./BaseLegend";
-import LineChart from "./LineChart";
-import GroupedBarChart from "./GroupedBarChart";
-import LoaderSpinning from "./LoaderSpinning";
-import Network from "./Network";
-import AreaChart from "./AreaChart";
-import ScatterPlot from "./ScatterPlot"
+import StackedBarChart from "./StackedBarChart.vue"
+import BaseLegend from "./BaseLegend.vue"
+import LineChart from "./LineChart.vue"
+import GroupedBarChart from "./GroupedBarChart.vue"
+import LoaderSpinning from "./LoaderSpinning.vue"
+import Network from "./Network.vue"
+import AreaChart from "./AreaChart.vue"
+import ScatterPlot from "./ScatterPlot.vue"
 
 const Components = {
-    StackedBarChart, BaseLegend, LineChart, GroupedBarChart, LoaderSpinning, Network,
-    AreaChart, ScatterPlot
+    StackedBarChart,
+    BaseLegend,
+    LineChart,
+    GroupedBarChart,
+    LoaderSpinning,
+    Network,
+    AreaChart,
+    ScatterPlot,
 }
 
-Object.keys(Components).forEach(name => {
-    Vue.component(name, Components[name])
-})
-
-export default Components;
+export default Components

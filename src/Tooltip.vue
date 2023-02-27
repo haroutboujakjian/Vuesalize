@@ -1,6 +1,9 @@
 <template>
-    <div class="tooltipContainer"
-         :style="`top: ${tooltipContent.top + 10}px; left: ${tooltipContent.left + 10}px`">
+    <div
+        class="tooltipContainer"
+        :style="`top: ${tooltipContent.top + 10}px; left: ${
+            tooltipContent.left + 10
+        }px`">
         <slot></slot>
     </div>
 </template>
@@ -11,7 +14,7 @@ export default {
     props: {
         tooltipContent: {
             type: Object,
-            required: true
+            required: true,
         },
     },
 }
@@ -31,5 +34,4 @@ export default {
     transform: scale(0);
     visibility: hidden;
 }
-
 </style>

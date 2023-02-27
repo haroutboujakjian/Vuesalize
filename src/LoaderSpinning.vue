@@ -1,7 +1,8 @@
 <template>
-    <div class="lds-dual-ring" :style="{width: `${radius}px`, height: `${radius}px`}">
-        <span :style="spinnerStyle">
-        </span>
+    <div
+        class="lds-dual-ring"
+        :style="{ width: `${radius}px`, height: `${radius}px` }">
+        <span :style="spinnerStyle"> </span>
     </div>
 </template>
 
@@ -10,21 +11,23 @@ export default {
     name: "LoaderSpinning",
     props: {
         radius: {
-            type: Number, default: 64
+            type: Number,
+            default: 64,
         },
         color: {
-            type: String, default: '#999'
-        }
+            type: String,
+            default: "#999",
+        },
     },
     computed: {
         spinnerStyle() {
             return {
                 width: `${this.radius}px`,
                 height: `${this.radius}px`,
-                borderColor: `${this.color} transparent ${this.color} transparent`
+                borderColor: `${this.color} transparent ${this.color} transparent`,
             }
-        }
-    }
+        },
+    },
 }
 </script>
 
