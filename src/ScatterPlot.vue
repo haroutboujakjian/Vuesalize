@@ -1,25 +1,36 @@
 <template>
     <figure>
         <svg :width="width" :height="height">
-            <circle
-                v-for="(point, i) in points"
-                :key="i"
-                :cx="xScale(point[xKey])"
-                :cy="yScale(point[yKey])"
-                :r="point.radius"
-                :fill="point.fill"
-                :fill-opacity="fillOpacity"
-                :stroke="point.stroke"
-                :stroke-opacity="strokeOpacity"
-                @click="$emit('click', point)"
-                @mouseover="populateTooltip($event, point)"
-                @mouseout="showTooltip = false"></circle>
+            <g>
+                <g v-for="(point, i) in points" :key="i">
+                    <circle
+                        :cx="xScale(point[xKey])"
+                        :cy="yScale(point[yKey])"
+                        :r="point.radius"
+                        :fill="point.fill"
+                        :fill-opacity="fillOpacity"
+                        :stroke="point.stroke"
+                        :stroke-opacity="strokeOpacity"
+                        @click="$emit('click', point)"
+                        @mouseover="populateTooltip($event, point)"
+                        @mouseout="showTooltip = false"></circle>
+                    <text
+                        :x="xScale(point[xKey])"
+                        :y="yScale(point[yKey])"
+                        text-anchor="middle"
+                        dominant-baseline="middle"
+                        :font-size="point.labelSize"
+                        :fill="point.labelColor">
+                        {{ point.label }}
+                    </text>
+                </g>
+            </g>
             <g
                 v-xaxis="{ scale: xScale }"
-                :transform="`translate(0, ${height - margin.bottom})`"></g>
+                :transform="`translate(0, ${xAxisTranslation})`"></g>
             <g
                 v-yaxis="{ scale: yScale }"
-                :transform="`translate(${margin.left}, 0)`"></g>
+                :transform="`translate(${yAxisTranslation}, 0)`"></g>
             <AxisLabels
                 :width="width"
                 :height="height"
@@ -128,18 +139,32 @@ export default {
             },
         },
         xTicks: {
-            /*
-            number sent into d3.ticks function for x-axis
-             */
+            // number sent into d3.ticks function for x-axis
             type: Number,
             default: 5,
         },
         yTicks: {
-            /*
-            number sent into d3.ticks function for y-axis
-            */
+            // number sent into d3.ticks function for y-axis
             type: Number,
             default: 5,
+        },
+        xAxisTranslate: {
+            // value that translates the x-axis starting from bottom
+            type: Number,
+            default: 0,
+        },
+        yAxisTranslate: {
+            // value that translates the y-axis starting from left
+            type: Number,
+            default: 0,
+        },
+        labelSize: {
+            type: Number,
+            default: 10,
+        },
+        labelColor: {
+            type: String,
+            default: "black",
         },
     },
     data() {
@@ -158,6 +183,10 @@ export default {
                 radius: point.radius ? point.radius : this.radius,
                 fill: point.fill ? point.fill : this.fill,
                 stroke: point.stroke ? point.stroke : this.stroke,
+                labelColor: point.labelColor
+                    ? point.labelColor
+                    : this.labelColor,
+                labelSize: point.labelSize ? point.labelSize : this.labelSize,
             }))
         },
         xValues() {
@@ -183,6 +212,12 @@ export default {
                 .domain([this.yValues.min, this.yValues.max])
                 .range([this.height - this.margin.bottom, this.margin.top])
                 .nice()
+        },
+        xAxisTranslation() {
+            return this.height - this.margin.bottom - this.xAxisTranslate
+        },
+        yAxisTranslation() {
+            return this.margin.left + this.yAxisTranslate
         },
     },
     methods: {

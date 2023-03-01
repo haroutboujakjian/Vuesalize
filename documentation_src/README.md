@@ -588,25 +588,25 @@ that populates the example area chart has "date" for the x value, and "Utilities
 
 #### Props
 
-| Name          | Required             | Type     | Default | Description                                                    |
-|--             | :------------------: | -------  | --      |                                                              --|
-| `plot-data`   | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                             |
-| `x-key`       | :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata              |
-| `width`              |                     | `Number` |  350px  | chart width in pixels                                    |
-| `height`             |                     | `Number` |  250px  | chart height in pixels                                   |
-| `colors`      |                      | `Array`  |         | array of colors used for areas                                 |
-| `margin`      |                      | `Object` |         | object that contains the top, bottom, right, and left margins  |
-| `stacked`     |                      | `Boolean`|         | changes to stacked area chart                                  |
-|`fill-opacity` |                      | `Number` |  0.65   | fill opacity for each path, must be between 0 and 1            |
-|`stroke-width` |                      | `Number` |  2      | stroke-width for areas                                         |
+| Name                | Required             | Type     | Default | Description                                                    |
+|--                   | :------------------: | -------  | --      |                                                              --|
+| `plot-data`         | :heavy_check_mark:   | `Array`  |         | data necessary to create the chart                             |
+| `x-key`             | :heavy_check_mark:   | `String` |         | string that is the key of the x value in plotdata              |
+| `width`             |                      | `Number` |  350px  | chart width in pixels                                    |
+| `height`            |                      | `Number` |  250px  | chart height in pixels                                   |
+| `colors`            |                      | `Array`  |         | array of colors used for areas                                 |
+| `margin`            |                      | `Object` |         | object that contains the top, bottom, right, and left margins  |
+| `stacked`           |                      | `Boolean`|         | changes to stacked area chart                                  |
+|`fill-opacity`       |                      | `Number` |  0.65   | fill opacity for each path, must be between 0 and 1            |
+|`stroke-width`       |                      | `Number` |  2      | stroke-width for areas                                         |
 | `x-axis-label`      |                      | `String` |         | Label for the x-axis                                        |
 | `y-axis-label`      |                      | `String` |         | Label for the y-axis                                        |
 | `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
 | `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label       |
-| `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
-| `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
-| `x-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the x-axis                |
-| `y-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis                |
+| `x-tick-format`     |                      |`Function`|  `null` | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
+| `y-tick-format`     |                      |`Function`|  `null` | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
+| `x-ticks`           |                      | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the x-axis                |
+| `y-ticks`           |                      | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis                |
 
 #### Events
 
@@ -661,18 +661,22 @@ points around, as well transitioning the fill, radius, etc. Click the update dat
 
 #### Format of Data
 
-The data that needs to be passed in as an array of objects. Each object should contain the x and y values for each point, and
-these can be specified by the `x-key` and `y-key` keys. Passing in the values in the data allows for more fine-grained control
-as opposed to setting one consistent style in the props (e.g. passing in different fill values for each point instead of
-passing in one fill value as a prop). The table below has all of the possible keys that can be included for an objects
+The data format required for the `plot-data` prop is an array of objects. each object should contain the x and y values
+for each point, and these can be specified by the `x-key` and `y-key` keys. additionally, passing in styling values in
+each object offers more fine-grained control as opposed to setting one consistent style in the props (e.g. passing in
+different fill values for each point instead of passing in one fill value as a prop). The table below has all the
+possible keys that can be included for an objects
 
-| Name         | Required           |  Type     |  Description                                            |
-|--            | :-----------:      |  -------  |                                                       --|
-| `x-key`      | :heavy_check_mark: |  `String` |  x value for the point                                  |
-| `y-key`      | :heavy_check_mark: |`String`   |  y value for the point                                  |
-| `radius`     |                    | `Number`  |  radius of the point                                    |
-| `fill`       |                    |`String`   |  fill of the point                                      |
-| `stroke`     |                    | `String`  |  stroke of the point                                    |
+| Name         | Required           |  Type     |  Description                                      |
+|--            | :-----------:      |  -------  |                                                 --|
+| `[x-key]`    | :heavy_check_mark: |  `String` |  x value for the point                            |
+| `[y-key]`    | :heavy_check_mark: | `String`  |  y value for the point                            |
+| `radius`     |                    | `Number`  |  radius of the point                              |
+| `fill`       |                    |`String`   |  fill of the point                                |
+| `stroke`     |                    | `String`  |  stroke of the point                              |
+| `label`      |                    | `String`  |  text that can be added on top of the point       |
+| `labelColor` |                    | `String`  |  text color of label                              |
+| `labelSize`  |                    | `Number`  |  size of label                                    |
 
 Here is a snippet of the data that the example scatterplot above uses
 
@@ -706,17 +710,21 @@ Here is a snippet of the data that the example scatterplot above uses
 | `margin`            |                      | `Object` |         | object that contains the top, bottom, right, and left margins  |
 |`radius`             |                      | `Number` |  5      | radius for all points                                          |
 |`fill`               |                      | `String` |  black  | fill for all points                                            |
-|`fill-opacity`       |                      | `Number` |  1      | fill opacity for all points, must be between 0 and 1          |
-|`stroke`             |                      | `String` |  black  | stroke for all points                                         |
-|`stroke-opacity`     |                      | `Number` |  1      | stroke opacity for all points, must be between 0 and 1        |
-| `x-axis-label`      |                      | `String` |         | Label for the x-axis                                          |
-| `y-axis-label`      |                      | `String` |         | Label for the y-axis                                          |
-| `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label         |
-| `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label         |
-| `x-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis    |
-| `y-tick-format`      |                     |`Function`|  `null`   | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis    |
-| `x-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the x-axis                |
-| `y-ticks`            |                     | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis                |
+|`fill-opacity`       |                      | `Number` |  1      | fill opacity for all points, must be between 0 and 1           |
+|`stroke`             |                      | `String` |  black  | stroke for all points                                          |
+|`stroke-opacity`     |                      | `Number` |  1      | stroke opacity for all points, must be between 0 and 1         |
+| `x-axis-label`      |                      | `String` |         | Label for the x-axis                                           |
+| `y-axis-label`      |                      | `String` |         | Label for the y-axis                                           |
+| `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label          |
+| `y-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label          |
+| `x-axis-translate`  |                      | `Number` |    0    | Value that translates the x-axis starting from bottom          |
+| `y-axis-translate`  |                      | `Number` |    0    | Value that translates the y-axis starting from left            |
+| `x-tick-format`     |                      |`Function`|  `null` | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis   |
+| `y-tick-format`     |                      |`Function`|  `null` | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis   |
+| `x-ticks`           |                      | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the x-axis             |
+| `y-ticks`           |                      | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis             |
+| `label-color`        |                     | `String` |  black  | Text color of all labels                              |
+| `label-size`         |                     | `Number` |   10    | Size of all labels                                    |
 
 
 #### Events
