@@ -20,7 +20,10 @@
                         text-anchor="middle"
                         dominant-baseline="middle"
                         :font-size="point.labelSize"
-                        :fill="point.labelColor">
+                        :fill="point.labelColor"
+                        @click="$emit('click', point)"
+                        @mouseover="populateTooltip($event, point)"
+                        @mouseout="showTooltip = false">
                         {{ point.label }}
                     </text>
                 </g>
@@ -138,6 +141,22 @@ export default {
                 return []
             },
         },
+        xMin: {
+            type: Number,
+            default: null,
+        },
+        xMax: {
+            type: Number,
+            default: null,
+        },
+        yMin: {
+            type: Number,
+            default: null,
+        },
+        yMax: {
+            type: Number,
+            default: null,
+        },
         xTicks: {
             // number sent into d3.ticks function for x-axis
             type: Number,
@@ -190,16 +209,24 @@ export default {
             }))
         },
         xValues() {
+            // compute min and max values for x scale if xMin/xMax props are not passed in
             const xVals = this.plotData.map((point) => point[this.xKey])
             const minVal = min(xVals) < 0 ? min(xVals) : 0
             const maxVal = max(xVals)
-            return { min: minVal, max: maxVal }
+            return {
+                min: this.xMin || minVal,
+                max: this.xMax || maxVal,
+            }
         },
         yValues() {
+            // compute min and max values for y scale if yMin/yMax props are not passed in
             const yVals = this.plotData.map((point) => point[this.yKey])
             const minVal = min(yVals) < 0 ? min(yVals) : 0
             const maxVal = max(yVals)
-            return { min: minVal, max: maxVal }
+            return {
+                min: this.yMin || minVal,
+                max: this.yMax || maxVal,
+            }
         },
         xScale() {
             return scaleLinear()

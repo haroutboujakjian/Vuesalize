@@ -721,10 +721,14 @@ Here is a snippet of the data that the example scatterplot above uses
 | `y-axis-translate`  |                      | `Number` |    0    | Value that translates the y-axis starting from left            |
 | `x-tick-format`     |                      |`Function`|  `null` | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the x-axis   |
 | `y-tick-format`     |                      |`Function`|  `null` | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis   |
+| `x-min`             |                      | `Number` |         | Minimum value used for x scale                                   |
+| `x-max`             |                      | `Number` |         | Maximum value used for x scale                                   |
+| `y-min`             |                      | `Number` |         | Minimum value used for y scale                                   |
+| `y-max`             |                      | `Number` |         | Maximum value used for y scale                                   |
 | `x-ticks`           |                      | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the x-axis             |
 | `y-ticks`           |                      | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis             |
-| `label-color`        |                     | `String` |  black  | Text color of all labels                              |
-| `label-size`         |                     | `Number` |   10    | Size of all labels                                    |
+| `label-color`       |                      | `String` |  black  | Text color of all labels                              |
+| `label-size`        |                      | `Number` |   10    | Size of all labels                                    |
 
 
 #### Events
@@ -838,9 +842,9 @@ don't conflict with any the required keys. Here is the data used to create the n
 #### Example
 
 Legends are useful for many charts and a simple component is provided in the library. The examples below show how to use
-a simple legend component in both the vertical and horizontal alignments. The vertical legend also has the
-`enable-toggle` prop added, which allows the legend to be used like a set of checkboxes by emitting a click event with
-the selected objects data.
+the component in both the vertical and horizontal alignments. The vertical legend also has the `enable-toggle` prop
+added, which allows the legend to be used like a set of checkboxes by emitting a click event with the selected objects'
+data.
 
 <base-legend-example></base-legend-example>
 
