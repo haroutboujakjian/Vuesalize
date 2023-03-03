@@ -667,16 +667,18 @@ each object offers more fine-grained control as opposed to setting one consisten
 different fill values for each point instead of passing in one fill value as a prop). The table below has all the
 possible keys that can be included for an objects
 
-| Name         | Required           |  Type     |  Description                                      |
-|--            | :-----------:      |  -------  |                                                 --|
-| `[x-key]`    | :heavy_check_mark: |  `String` |  x value for the point                            |
-| `[y-key]`    | :heavy_check_mark: | `String`  |  y value for the point                            |
-| `radius`     |                    | `Number`  |  radius of the point                              |
-| `fill`       |                    |`String`   |  fill of the point                                |
-| `stroke`     |                    | `String`  |  stroke of the point                              |
-| `label`      |                    | `String`  |  text that can be added on top of the point       |
-| `labelColor` |                    | `String`  |  text color of label                              |
-| `labelSize`  |                    | `Number`  |  size of label                                    |
+| Name           | Required           |  Type     |  Description                                      |
+|--              | :-----------:      |  -------  |                                                 --|
+| `[x-key]`      | :heavy_check_mark: |  `String` |  x value for the point                            |
+| `[y-key]`      | :heavy_check_mark: | `String`  |  y value for the point                            |
+| `radius`       |                    | `Number`  |  radius of the point                              |
+| `fill`         |                    |`String`   |  fill of the point                                |
+| `fillOpacity`  |                    | `Number`  |  fill opacity of the point                        |
+| `stroke`       |                    | `String`  |  stroke of the point                              |
+| `strokeOpacity`|                    | `Number`  |  stroke opacity of the point                      |
+| `label`        |                    | `String`  |  text that can be added on top of the point       |
+| `labelColor`   |                    | `String`  |  text color of label                              |
+| `labelSize`    |                    | `Number`  |  size of label                                    |
 
 Here is a snippet of the data that the example scatterplot above uses
 

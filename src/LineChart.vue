@@ -1,19 +1,23 @@
 <template>
     <figure>
-        <svg :width="width" :height="height" ref="svgContainer">
+        <svg
+            :width="width"
+            :height="height"
+            ref="svgContainer"
+            @mousemove="populateTooltip($event)"
+            @mouseleave="removeTooltip()">
             <g v-if="showPoints" class="points">
                 <g v-for="line in y_values" :key="line.name" :class="line.name">
                     <circle
                         v-for="(values, i) in line.values"
+                        :key="i"
                         :cx="xScale(new Date(x_values[i]))"
                         :cy="yScale(values)"
                         :r="pointRadius"
                         :fill="color(line.name)"></circle>
                 </g>
             </g>
-            <g
-                @mousemove="populateTooltip($event)"
-                @mouseleave="removeTooltip()">
+            <g>
                 <path
                     v-for="line in y_values"
                     :key="line.name"
@@ -58,9 +62,18 @@
             :class="{ activeTooltip: showTooltip }"
             :style="{ top: tooltip.y, left: tooltip.x }">
             <slot name="tooltip" :lines="tooltip.values">
-                <span v-for="(value, key) in tooltip.values" :key="key"
-                    >{{ key }}: {{ value }}</span
-                >
+                <span
+                    v-for="(value, key) in tooltip.values"
+                    :key="key"
+                    class="tooltipRow">
+                    <span
+                        v-if="key !== xKey"
+                        class="dot"
+                        :style="`color: ${color(key)}`"
+                        >&#x2022;</span
+                    >
+                    {{ key }}: {{ value }}
+                </span>
             </slot>
         </div>
     </figure>
@@ -72,8 +85,6 @@ import { line } from "d3-shape"
 import { extent, max, bisector } from "d3-array"
 import { axisLeft, axisBottom } from "d3-axis"
 import { select } from "d3-selection"
-// eslint-disable-next-line no-unused-vars
-import { transition } from "d3-transition"
 import Annotations from "./Annotations.vue"
 import AxisLabels from "./AxisLabels.vue"
 import colors from "./colors"
@@ -144,29 +155,29 @@ export default {
         },
         xTicks: {
             /*
-            number sent into d3.ticks function for x-axis
-             */
+number sent into d3.ticks function for x-axis
+*/
             type: Number,
             default: 5,
         },
         yTicks: {
             /*
-            number sent into d3.ticks function for y-axis
-            */
+number sent into d3.ticks function for y-axis
+*/
             type: Number,
             default: 5,
         },
         showPoints: {
             /*
-            show each of the points that construct the line chart
-             */
+show each of the points that construct the line chart
+*/
             type: Boolean,
             default: false,
         },
         pointRadius: {
             /*
-            if showPoints is set to true, use this for radius of points on line
-             */
+if showPoints is set to true, use this for radius of points on line
+*/
             type: Number,
             default: 4,
         },
@@ -320,7 +331,12 @@ path {
     transition: opacity 0.3s;
 }
 
-.tooltipContainer span {
-    display: block;
+.tooltipRow {
+    display: flex;
+    align-items: center;
+}
+
+.tooltipRow .dot {
+    font-size: 1.15rem;
 }
 </style>

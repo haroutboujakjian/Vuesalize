@@ -8,9 +8,9 @@
                         :cy="yScale(point[yKey])"
                         :r="point.radius"
                         :fill="point.fill"
-                        :fill-opacity="fillOpacity"
+                        :fill-opacity="point.fillOpacity"
                         :stroke="point.stroke"
-                        :stroke-opacity="strokeOpacity"
+                        :stroke-opacity="point.strokeOpacity"
                         @click="$emit('click', point)"
                         @mouseover="populateTooltip($event, point)"
                         @mouseout="showTooltip = false"></circle>
@@ -73,8 +73,6 @@ import { scaleLinear } from "d3-scale"
 import { min, max } from "d3-array"
 import { select } from "d3-selection"
 import { axisBottom, axisLeft } from "d3-axis"
-// eslint-disable-next-line no-unused-vars
-import { transition } from "d3-transition"
 import AxisLabels from "./AxisLabels.vue"
 import Annotations from "./Annotations.vue"
 
@@ -199,13 +197,13 @@ export default {
         points() {
             return this.plotData.map((point) => ({
                 ...point,
-                radius: point.radius ? point.radius : this.radius,
-                fill: point.fill ? point.fill : this.fill,
-                stroke: point.stroke ? point.stroke : this.stroke,
-                labelColor: point.labelColor
-                    ? point.labelColor
-                    : this.labelColor,
-                labelSize: point.labelSize ? point.labelSize : this.labelSize,
+                radius: point.radius || this.radius,
+                fill: point.fill || this.fill,
+                stroke: point.stroke || this.stroke,
+                fillOpacity: point.fillOpacity || this.fillOpacity,
+                strokeOpacity: point.strokeOpacity || this.strokeOpacity,
+                labelColor: point.labelColor || this.labelColor,
+                labelSize: point.labelSize || this.labelSize,
             }))
         },
         xValues() {
