@@ -676,6 +676,7 @@ possible keys that can be included for an objects
 | `fillOpacity`  |                    | `Number`  |  fill opacity of the point                        |
 | `stroke`       |                    | `String`  |  stroke of the point                              |
 | `strokeOpacity`|                    | `Number`  |  stroke opacity of the point                      |
+| `strokeWidth`  |                    | `Number`  |  stroke width of the point                        |
 | `label`        |                    | `String`  |  text that can be added on top of the point       |
 | `labelColor`   |                    | `String`  |  text color of label                              |
 | `labelSize`    |                    | `Number`  |  size of label                                    |
@@ -715,6 +716,7 @@ Here is a snippet of the data that the example scatterplot above uses
 |`fill-opacity`       |                      | `Number` |  1      | fill opacity for all points, must be between 0 and 1           |
 |`stroke`             |                      | `String` |  black  | stroke for all points                                          |
 |`stroke-opacity`     |                      | `Number` |  1      | stroke opacity for all points, must be between 0 and 1         |
+|`stroke-width`       |                      | `Number` |  1      | stroke width for all points                                    |
 | `x-axis-label`      |                      | `String` |         | Label for the x-axis                                           |
 | `y-axis-label`      |                      | `String` |         | Label for the y-axis                                           |
 | `x-axis-label-shift`|                      | `Object` |         | Takes `dx` and `dy` keys that move the location label          |

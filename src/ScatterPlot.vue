@@ -11,6 +11,7 @@
                         :fill-opacity="point.fillOpacity"
                         :stroke="point.stroke"
                         :stroke-opacity="point.strokeOpacity"
+                        :stroke-width="point.strokeWidth"
                         @click="$emit('click', point)"
                         @mouseover="populateTooltip($event, point)"
                         @mouseout="showTooltip = false"></circle>
@@ -115,6 +116,10 @@ export default {
             type: Number,
             default: 1,
         },
+        strokeWidth: {
+            type: Number,
+            default: 1,
+        },
         xKey: String,
         yKey: String,
         enableTooltip: {
@@ -202,6 +207,7 @@ export default {
                 stroke: point.stroke || this.stroke,
                 fillOpacity: point.fillOpacity || this.fillOpacity,
                 strokeOpacity: point.strokeOpacity || this.strokeOpacity,
+                strokeWidth: point.strokeWidth || this.strokeWidth,
                 labelColor: point.labelColor || this.labelColor,
                 labelSize: point.labelSize || this.labelSize,
             }))
