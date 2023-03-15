@@ -729,6 +729,8 @@ Here is a snippet of the data that the example scatterplot above uses
 | `x-max`             |                      | `Number` |         | Maximum value used for x scale                                   |
 | `y-min`             |                      | `Number` |         | Minimum value used for y scale                                   |
 | `y-max`             |                      | `Number` |         | Maximum value used for y scale                                   |
+| `x-tick-values`     |                      | `Array`  |  `null` | Argument passed into d3's [ticksValues](https://github.com/d3/d3-axis#axis_tickValues) for the x-axis  |
+| `y-tick-values`    |                      | `Array`  |  `null` | Argument passed into d3's [ticksValues](https://github.com/d3/d3-axis#axis_tickValues) for the y-axis  |
 | `x-ticks`           |                      | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the x-axis             |
 | `y-ticks`           |                      | `Number` |    5    | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis             |
 | `label-color`       |                      | `String` |  black  | Text color of all labels                              |

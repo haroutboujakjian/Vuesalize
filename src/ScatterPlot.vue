@@ -176,6 +176,16 @@ export default {
             type: Number,
             default: 5,
         },
+        xTickValues: {
+            // array sent into d3.tickValues function for x-axis
+            type: Array,
+            default: null,
+        },
+        yTickValues: {
+            // array sent into d3.tickValues function for y-axis
+            type: Array,
+            default: null,
+        },
         xAxisTranslate: {
             // value that translates the x-axis starting from bottom
             type: Number,
@@ -270,6 +280,7 @@ export default {
             const height = binding.value.height
             const xTickFormat = vnode.ctx.props.xTickFormat
             const xTicks = vnode.ctx.props.xTicks
+            const xTickValues = vnode.ctx.props.xTickValues
 
             select(el)
                 .transition()
@@ -280,6 +291,7 @@ export default {
                         .tickSizeOuter(0)
                         .ticks(xTicks)
                         .tickFormat(xTickFormat)
+                        .tickValues(xTickValues)
                 )
                 .selectAll(".tick line")
                 .style("stroke-width", "0.3px")
@@ -289,6 +301,7 @@ export default {
             const width = binding.value.width
             const yTickFormat = vnode.ctx.props.yTickFormat
             const yTicks = vnode.ctx.props.yTicks
+            const yTickValues = vnode.ctx.props.yTickValues
 
             select(el)
                 .transition()
@@ -299,6 +312,7 @@ export default {
                         .tickSizeOuter(0)
                         .ticks(yTicks)
                         .tickFormat(yTickFormat)
+                        .tickValues(yTickValues)
                 )
                 .selectAll(".tick line")
                 .style("stroke-width", "0.3px")
