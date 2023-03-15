@@ -1,11 +1,11 @@
 {
   "name": "vuesalize",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Component library dedicated to simplifying interactive visualization building in Vue.js 3.",
   "private": false,
   "scripts": {
     "dev": "vite",
-    "build": "vite build && rm dist/favicon.ico",
+    "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "docs:dev": "vuepress dev documentation_src",

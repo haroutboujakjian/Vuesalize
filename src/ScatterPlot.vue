@@ -30,10 +30,16 @@
                 </g>
             </g>
             <g
-                v-xaxis="{ scale: xScale }"
+                v-xaxis="{
+                    scale: xScale,
+                    height: height - margin.top - margin.bottom,
+                }"
                 :transform="`translate(0, ${xAxisTranslation})`"></g>
             <g
-                v-yaxis="{ scale: yScale }"
+                v-yaxis="{
+                    scale: yScale,
+                    width: width - margin.left - margin.right,
+                }"
                 :transform="`translate(${yAxisTranslation}, 0)`"></g>
             <AxisLabels
                 :width="width"
@@ -261,23 +267,41 @@ export default {
     directives: {
         xaxis(el, binding, vnode) {
             const scale = binding.value.scale
+            const height = binding.value.height
             const xTickFormat = vnode.ctx.props.xTickFormat
             const xTicks = vnode.ctx.props.xTicks
 
             select(el)
                 .transition()
                 .duration(500)
-                .call(axisBottom(scale).ticks(xTicks).tickFormat(xTickFormat))
+                .call(
+                    axisBottom(scale)
+                        .tickSize(-height)
+                        .tickSizeOuter(0)
+                        .ticks(xTicks)
+                        .tickFormat(xTickFormat)
+                )
+                .selectAll(".tick line")
+                .style("stroke-width", "0.3px")
         },
         yaxis(el, binding, vnode) {
             const scale = binding.value.scale
+            const width = binding.value.width
             const yTickFormat = vnode.ctx.props.yTickFormat
             const yTicks = vnode.ctx.props.yTicks
 
             select(el)
                 .transition()
                 .duration(500)
-                .call(axisLeft(scale).ticks(yTicks).tickFormat(yTickFormat))
+                .call(
+                    axisLeft(scale)
+                        .tickSize(-width)
+                        .tickSizeOuter(0)
+                        .ticks(yTicks)
+                        .tickFormat(yTickFormat)
+                )
+                .selectAll(".tick line")
+                .style("stroke-width", "0.3px")
         },
     },
 }
