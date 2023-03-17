@@ -1,6 +1,18 @@
 <template>
     <figure>
         <svg :width="width" :height="height">
+            <g
+                v-xaxis="{
+                    scale: xScale,
+                    height: height - margin.top - margin.bottom,
+                }"
+                :transform="`translate(0, ${xAxisTranslation})`"></g>
+            <g
+                v-yaxis="{
+                    scale: yScale,
+                    width: width - margin.left - margin.right,
+                }"
+                :transform="`translate(${yAxisTranslation}, 0)`"></g>
             <g>
                 <g v-for="(point, i) in points" :key="i">
                     <circle
@@ -29,18 +41,7 @@
                     </text>
                 </g>
             </g>
-            <g
-                v-xaxis="{
-                    scale: xScale,
-                    height: height - margin.top - margin.bottom,
-                }"
-                :transform="`translate(0, ${xAxisTranslation})`"></g>
-            <g
-                v-yaxis="{
-                    scale: yScale,
-                    width: width - margin.left - margin.right,
-                }"
-                :transform="`translate(${yAxisTranslation}, 0)`"></g>
+
             <AxisLabels
                 :width="width"
                 :height="height"
