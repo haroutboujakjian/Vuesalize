@@ -1,12 +1,11 @@
 import Components from "./../../src/main"
-import { defineClientConfig } from '@vuepress/client'
-import AreaChartExample from './components/AreaChartExample.vue'
+import { defineClientConfig } from "@vuepress/client"
+import AreaChartExample from "./components/AreaChartExample.vue"
 import BaseLegendExample from "./components/BaseLegendExample.vue"
 import GroupedBarChartExample from "./components/GroupedBarChartExample.vue"
 import LineChartExample from "./components/LineChartExample.vue"
 import ScatterPlotExample from "./components/ScatterPlotExample.vue"
 import StackedBarChartExample from "./components/StackedBarChartExample.vue"
-import NetworkExample from "./components/NetworkExample.vue"
 
 const {
     StackedBarChart,
@@ -14,9 +13,8 @@ const {
     LineChart,
     GroupedBarChart,
     LoaderSpinning,
-    Network,
     AreaChart,
-    ScatterPlot
+    ScatterPlot,
 } = Components
 
 export default defineClientConfig({
@@ -26,7 +24,6 @@ export default defineClientConfig({
         app.component(GroupedBarChart.name, GroupedBarChart)
         app.component(LineChart.name, LineChart)
         app.component(LoaderSpinning.name, LoaderSpinning)
-        app.component(Network.name, Network)
         app.component(AreaChart.name, AreaChart)
         app.component(ScatterPlot.name, ScatterPlot)
 
@@ -36,6 +33,5 @@ export default defineClientConfig({
         app.component(ScatterPlotExample.name, ScatterPlotExample)
         app.component(LineChartExample.name, LineChartExample)
         app.component(BaseLegendExample.name, BaseLegendExample)
-        app.component(NetworkExample.name, NetworkExample)
     },
 })
