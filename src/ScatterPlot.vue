@@ -13,7 +13,7 @@
                     width: width - margin.left - margin.right,
                 }"
                 :transform="`translate(${yAxisTranslation}, 0)`"></g>
-            <g>
+            <transition-group name="list" tag="g">
                 <g v-for="(point, i) in points" :key="i">
                     <circle
                         :cx="xScale(point[xKey])"
@@ -40,7 +40,7 @@
                         {{ point.label }}
                     </text>
                 </g>
-            </g>
+            </transition-group>
 
             <AxisLabels
                 :width="width"
@@ -342,5 +342,15 @@ circle {
 .activeTooltip {
     opacity: 0.9;
     transition: opacity 0.3s;
+}
+
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
 }
 </style>
