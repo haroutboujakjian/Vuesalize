@@ -1,31 +1,31 @@
 [
   {
     "profit": 103,
-    "utility": 9,
+    "utility": 49,
     "radius": 5,
     "fill": "#ff3000"
   },
   {
     "profit": 359,
-    "utility": 54,
+    "utility": 24,
     "radius": 5,
     "fill": "#ff3000"
   },
   {
-    "profit": 189,
+    "profit": 192,
     "utility": 41,
     "radius": 5,
     "fill": "#ff3000"
   },
   {
-    "profit": 263,
-    "utility": 75,
+    "profit": 63,
+    "utility": 175,
     "radius": 5,
     "fill": "#ff3000"
   },
   {
     "profit": 50,
-    "utility": 6,
+    "utility": 126,
     "radius": 5,
     "fill": "#ff3000"
   },
@@ -41,9 +41,21 @@
     "radius": 5,
     "fill": "#ff3000"
   },
-    {
-    "profit": 227,
+  {
+    "profit": 210,
     "utility": 24,
+    "radius": 5,
+    "fill": "#ff3000"
+  },
+  {
+    "profit": 127,
+    "utility": 64,
+    "radius": 5,
+    "fill": "#ff3000"
+  },
+  {
+    "profit": 227,
+    "utility": 44,
     "radius": 5,
     "fill": "#ff3000"
   }

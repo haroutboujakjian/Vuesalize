@@ -31,7 +31,7 @@ export default {
             plotData: plotData,
             initialData: plotData,
             width: 400,
-            height: 250,
+            height: 300,
             updatedData: [
                 { profit: 30, utility: 92, radius: 5, fill: "#1751c9" },
                 { profit: 319, utility: 50, radius: 10, fill: "#1751c9" },

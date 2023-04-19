@@ -6,6 +6,7 @@ import GroupedBarChartExample from "./components/GroupedBarChartExample.vue"
 import LineChartExample from "./components/LineChartExample.vue"
 import ScatterPlotExample from "./components/ScatterPlotExample.vue"
 import StackedBarChartExample from "./components/StackedBarChartExample.vue"
+import ContourPlotExample from "./components/ContourPlotExample.vue"
 
 const {
     StackedBarChart,
@@ -15,6 +16,7 @@ const {
     LoaderSpinning,
     AreaChart,
     ScatterPlot,
+    ContourPlot,
 } = Components
 
 export default defineClientConfig({
@@ -26,6 +28,7 @@ export default defineClientConfig({
         app.component(LoaderSpinning.name, LoaderSpinning)
         app.component(AreaChart.name, AreaChart)
         app.component(ScatterPlot.name, ScatterPlot)
+        app.component(ContourPlot.name, ContourPlot)
 
         app.component(AreaChartExample.name, AreaChartExample)
         app.component(StackedBarChartExample.name, StackedBarChartExample)
@@ -33,5 +36,6 @@ export default defineClientConfig({
         app.component(ScatterPlotExample.name, ScatterPlotExample)
         app.component(LineChartExample.name, LineChartExample)
         app.component(BaseLegendExample.name, BaseLegendExample)
+        app.component(ContourPlotExample.name, ContourPlotExample)
     },
 })
