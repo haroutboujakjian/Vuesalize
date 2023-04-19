@@ -63,6 +63,10 @@ export default {
         colorScale: {
             type: Function,
         },
+        useThresholds: {
+            type: Boolean,
+            default: true,
+        },
     },
     computed: {
         density() {
@@ -72,19 +76,6 @@ export default {
                 bins: this.bins,
                 bandwidth: this.bandwidth,
             })
-        },
-        contours() {
-            const vals = [...this.density].map((item) => item.z)
-            const contourSet = contours().size(this.bins)(vals)
-            return contourSet.map((item) => ({
-                ...item,
-                path: geoPath().projection(this.projection)(item),
-            }))
-        },
-        projection() {
-            // need to reflect plot over x-axis (a.k.a reflectY below) but also
-            // translate it back down in the svg because it's out of the plot
-            return geoIdentity().reflectY(true).translate([0, this.bins[1]])
         },
         color() {
             const vals = [...this.density].map((item) => item.z)
@@ -103,6 +94,24 @@ export default {
             const domain = range(minVal, maxVal, step).concat(maxVal)
 
             return scaleLinear().domain(domain).range(colors)
+        },
+        projection() {
+            // need to reflect plot over x-axis (a.k.a reflectY below) but also
+            // translate it back down in the svg because it's out of the plot
+            return geoIdentity().reflectY(true).translate([0, this.bins[1]])
+        },
+        contours() {
+            const vals = [...this.density].map((item) => item.z)
+            const contoursGenerator = contours().size(this.bins)
+
+            if (this.useThresholds) {
+                contoursGenerator.thresholds(this.color.domain())
+            }
+
+            return contoursGenerator(vals).map((item) => ({
+                ...item,
+                path: geoPath().projection(this.projection)(item),
+            }))
         },
     },
 }
