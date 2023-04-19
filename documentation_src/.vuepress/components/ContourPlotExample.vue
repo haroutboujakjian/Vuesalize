@@ -21,6 +21,7 @@
             y-key="utility"
             :width="width"
             :height="height"
+            :use-thresholds="false"
             :plot-data="plotData"></ContourPlot>
     </section>
 </template>

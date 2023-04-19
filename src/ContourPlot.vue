@@ -10,7 +10,10 @@
             class="contour"
             :d="contour.path"
             :data-value="contour.value"
-            :fill="color(contour.value)"></path>
+            :fill="color(contour.value)"
+            :stroke="color(contour.value)"
+            :stroke-width="strokeWidth"
+            :stroke-opacity="strokeOpacity"></path>
     </svg>
 </template>
 
@@ -44,6 +47,14 @@ export default {
         yKey: {
             type: String,
             required: true,
+        },
+        strokeWidth: {
+            type: Number,
+            default: 1,
+        },
+        strokeOpacity: {
+            type: Number,
+            default: 1,
         },
         bins: {
             type: Array,

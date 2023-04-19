@@ -779,6 +779,7 @@ and height sliders below to see the plot change size while maintaining its aspec
     y-key="utility"
     :width="width"
     :height="height"
+    :use-thresholds="false"
     :plot-data="plotData">
   </ContourPlot>
 </template>
@@ -828,17 +829,19 @@ Here is a snippet of the data that the example scatterplot above uses
 
 #### Props
 
-| Name             |      Required      | Type       | Default   | Description                                                                                                                                                                      |
-|------------------|:------------------:|------------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `plot-data`      | :heavy_check_mark: | `Array`    |           | data necessary to create the chart                                                                                                                                               |
-| `x-key`          | :heavy_check_mark: | `String`   |           | string that is the key of the x values in plotdata                                                                                                                               |
-| `y-key`          | :heavy_check_mark: | `String`   |           | string that is the key of the y values in plotdata                                                                                                                               |
-| `width`          |                    | `Number`   | 256px     | chart width in pixels                                                                                                                                                            |
-| `height`         |                    | `Number`   | 256px     | chart height in pixels                                                                                                                                                           |
-| `bins`           |                    | `Array`    | [256,256] | number of bins used for internal grid and is passed into [fast-kde](https://github.com/uwdata/fast-kde#2d-density-estimation-1) bins argument                                    |
-| `bandwidth`      |                    | `Array`    | undefined | requires array of two numbers (e.g. [1, 1]). bandwidth passed in to [fast-kde](https://github.com/uwdata/fast-kde#2d-density-estimation-1) bandwidth argument.                   |
-| `color-scale`    |                    | `Function` | black     | d3 [scale](https://github.com/d3/d3-scale) that is used for coloring the contours                                                                                                |
-| `use-thresholds` |                    | `Boolean`  | true      | determines whether to use exact thresholds from color scale. does not require an explicit `color-scale` prop to be passed in. setting to `true` will result in smoother contours |
+| Name             |      Required      | Type       | Default   | Description                                                                                                                                                                       |
+|------------------|:------------------:|------------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `plot-data`      | :heavy_check_mark: | `Array`    |           | data necessary to create the chart                                                                                                                                                |
+| `x-key`          | :heavy_check_mark: | `String`   |           | string that is the key of the x values in plotdata                                                                                                                                |
+| `y-key`          | :heavy_check_mark: | `String`   |           | string that is the key of the y values in plotdata                                                                                                                                |
+| `width`          |                    | `Number`   | 256px     | chart width in pixels                                                                                                                                                             |
+| `height`         |                    | `Number`   | 256px     | chart height in pixels                                                                                                                                                            |
+| `stroke-width`   |                    | `Number`   | 1         | stroke width of each contour polygon                                                                                                                                              |
+| `stroke-opacity` |                    | `Number`   | 1         | stroke opacity of each contour polygon                                                                                                                                            |
+| `bins`           |                    | `Array`    | [256,256] | number of bins used for internal grid and is passed into [fast-kde](https://github.com/uwdata/fast-kde#2d-density-estimation-1) bins argument                                     |
+| `bandwidth`      |                    | `Array`    | undefined | requires array of two numbers (e.g. [1, 1]). bandwidth passed in to [fast-kde](https://github.com/uwdata/fast-kde#2d-density-estimation-1) bandwidth argument.                    |
+| `color-scale`    |                    | `Function` | black     | d3 [scale](https://github.com/d3/d3-scale) that is used for coloring the contours                                                                                                 |
+| `use-thresholds` |                    | `Boolean`  | true      | determines whether to use exact thresholds from color scale. does not require an explicit `color-scale` prop to be passed in. setting to `false` will result in smoother contours |
 
 #### Events
 
