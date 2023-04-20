@@ -1,6 +1,6 @@
 {
   "name": "vuesalize",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Component library dedicated to simplifying interactive visualization building in Vue.js 3.",
   "private": false,
   "scripts": {

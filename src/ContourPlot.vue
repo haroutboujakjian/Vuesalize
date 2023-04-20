@@ -1,20 +1,30 @@
 <template>
-    <svg
-        :width="width"
-        :height="height"
-        :viewBox="`0 0 ${this.bins[0]} ${this.bins[1]}`"
-        preserveAspectRatio="xMidYMid slice">
-        <path
-            v-for="contour in contours"
-            :key="contour.value"
-            class="contour"
-            :d="contour.path"
-            :data-value="contour.value"
-            :fill="color(contour.value)"
-            :stroke="color(contour.value)"
-            :stroke-width="strokeWidth"
-            :stroke-opacity="strokeOpacity"></path>
-    </svg>
+    <figure>
+        <svg
+            :width="width"
+            :height="height"
+            :viewBox="`0 0 ${this.bins[0]} ${this.bins[1]}`"
+            preserveAspectRatio="xMidYMid slice">
+            <g>
+                <path
+                    v-for="contour in contours"
+                    :key="contour.value"
+                    class="contour"
+                    :d="contour.path"
+                    :data-value="contour.value"
+                    :fill="color(contour.value)"
+                    :stroke="color(contour.value)"
+                    :stroke-width="strokeWidth"
+                    :stroke-opacity="strokeOpacity"></path>
+            </g>
+        </svg>
+        <svg class="annotationsContainer" :width="width" :height="height">
+            <!--            need to put annotations in separate svg so preserveAspectRatio doesn't distort them-->
+            <Annotations
+                :annotations="annotations"
+                :margin="margin"></Annotations>
+        </svg>
+    </figure>
 </template>
 
 <script>
@@ -24,9 +34,11 @@ import { geoIdentity, geoPath } from "d3-geo"
 import { extent, range } from "d3-array"
 import { scaleLinear } from "d3-scale"
 import colors from "./colors"
+import Annotations from "./Annotations.vue"
 
 export default {
     name: "ContourPlot",
+    components: { Annotations },
     props: {
         plotData: {
             type: Array,
@@ -35,6 +47,11 @@ export default {
         width: {
             type: Number,
             default: 256,
+        },
+        margin: {
+            default(rawProps) {
+                return { top: 0, bottom: 0, right: 0, left: 0 }
+            },
         },
         height: {
             type: Number,
@@ -77,6 +94,9 @@ export default {
         useThresholds: {
             type: Boolean,
             default: true,
+        },
+        annotations: {
+            type: Array,
         },
     },
     computed: {
@@ -128,4 +148,15 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+figure {
+    position: relative;
+}
+
+.annotationsContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+</style>

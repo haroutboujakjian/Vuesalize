@@ -38,6 +38,20 @@ export default {
             height: 300,
         }
     },
+    computed: {
+        annotations() {
+            return [
+                {
+                    type: "rect",
+                    center: [this.width / 2, this.height / 2],
+                    width: 60,
+                    height: 30,
+                    dash: true,
+                    color: "white",
+                },
+            ]
+        },
+    },
 }
 </script>
 

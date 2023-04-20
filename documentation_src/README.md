@@ -762,8 +762,10 @@ Here is a snippet of the data that the example scatterplot above uses
 
 #### Example
 
-Contour plots display relationships between 3 variables by plotting the "surface" on a 2d plane. Play with the width
-and height sliders below to see the plot change size while maintaining its aspect ratio!
+Contour plots display relationships between 3 variables by plotting the "surface" on a 2d plane. The component actually
+performs a 2D KDE (using the [fast-kde](https://github.com/uwdata/fast-kde) package) under the hood
+on the points passed in. Play with the width and height sliders below to see the plot change size while maintaining its
+aspect ratio!
 
 <div style="display: flex; justify-content: center">
 <ClientOnly>
@@ -1056,7 +1058,8 @@ budget line.
 </script>
 ```
 
-Another example here adds two vertical lines to a line chart indicating specific start and end dates for funding
+Another example here adds two vertical lines to a line chart indicating specific start and end dates of money allocated
+to marketing expenses, and the point at which sales peaked in 2022.
 
 <div style="display: flex; justify-content: center">
 <ClientOnly>
@@ -1075,7 +1078,7 @@ Another example here adds two vertical lines to a line chart indicating specific
 </template>
 
 <script>
-  import LCdata from "./Budget3Groups.json"
+  import LCdata from "./Budget3Groups.json";
 
   export default {
     name: "LineChartExample",
@@ -1085,19 +1088,34 @@ Another example here adds two vertical lines to a line chart indicating specific
         margin: { top: 20, bottom: 30, left: 50, right: 20 },
         annotations: [
           {
-            type: "line", axis: "x", color: "#b3080e",
-            label: "Start Date", labeldy: -5,
+            type: "line",
+            axis: "x",
+            color: "#b3080e",
+            label: "Start Date",
+            labeldy: -5,
             value: new Date(2019, 6, 0)
           },
           {
-            type: "line", axis: "x", color: "#b3080e",
-            label: "End Date", labeldy: -5,
-            value: new Date(2020, 9, 0)
+            type: "line",
+            axis: "x",
+            color: "#b3080e",
+            label: "End Date",
+            labeldy: -5,
+            value: new Date(2020, 6, 0)
           },
+          {
+            type: "circle",
+            center: [new Date(2022, 0, 0), 4900],
+            radius: 17,
+            dash: true,
+            color: "purple",
+            label: "Peak Sales",
+            labeldy: -25
+          }
         ]
-      }
+      };
     }
-  }
+  };
 </script>
 
 ```
@@ -1105,14 +1123,45 @@ Another example here adds two vertical lines to a line chart indicating specific
 #### Format
 
 Annotations need to be an array of objects, even if it is only one object. The annotation object requires the following
-properties
+properties given each annotation type
+
+##### Lines
 
 | Name          |      Required      | Type      | Default  | Description                                                       |
 |---------------|:------------------:|-----------|----------|-------------------------------------------------------------------|
-| `type`        | :heavy_check_mark: | `String`  |          | type of annotation, current options: 'line'                       |
+| `type`        | :heavy_check_mark: | `String`  |          | type of annotation, current options: 'line', 'rect', 'circle'     |
 | `axis`        | :heavy_check_mark: | `String`  |          | options: "x" or "y"                                               |
 | `value`       | :heavy_check_mark: | `Number`  |          | value on the x or y axis                                          |
-| `color`       |                    | `String`  | Black    | color name, hex code, or rgb value                                |
+| `color`       |                    | `String`  | black    | color name, hex code, or rgb value                                |
+| `dash`        |                    | `Boolean` | False    | whether line should have dashes or not                            |
+| `label`       |                    | `String`  |          | label used for annotation                                         |
+| `labelAnchor` |                    | `String`  | 'middle' | text-anchor property for label. can be 'start', 'end' or 'middle' |
+| `labeldx`     |                    | `Number`  |          | shift label in x direction                                        |
+| `labeldy`     |                    | `Number`  |          | shift label in y direction                                        |
+
+##### Circles
+
+| Name          |      Required      | Type      | Default  | Description                                                       |
+|---------------|:------------------:|-----------|----------|-------------------------------------------------------------------|
+| `type`        | :heavy_check_mark: | `String`  |          | type of annotation, current options: 'line', 'rect', 'circle'     |
+| `center`      | :heavy_check_mark: | `Array`   |          | center of rect. array of [x, y], e.g. [150, 200]                  |
+| `radius`      | :heavy_check_mark: | `Number`  |          | radius of circle                                                  |
+| `color`       |                    | `String`  | black    | color name, hex code, or rgb value                                |
+| `dash`        |                    | `Boolean` | False    | whether line should have dashes or not                            |
+| `label`       |                    | `String`  |          | label used for annotation                                         |
+| `labelAnchor` |                    | `String`  | 'middle' | text-anchor property for label. can be 'start', 'end' or 'middle' |
+| `labeldx`     |                    | `Number`  |          | shift label in x direction                                        |
+| `labeldy`     |                    | `Number`  |          | shift label in y direction                                        |
+
+##### Rectangles
+
+| Name          |      Required      | Type      | Default  | Description                                                       |
+|---------------|:------------------:|-----------|----------|-------------------------------------------------------------------|
+| `type`        | :heavy_check_mark: | `String`  |          | type of annotation, current options: 'line', 'rect', 'circle'     |
+| `center`      | :heavy_check_mark: | `Array`   |          | center of rect. array of [x, y], e.g. [150, 200]                  |
+| `width`       | :heavy_check_mark: | `Number`  |          | width of rect.                                                    |
+| `height`      | :heavy_check_mark: | `Number`  |          | height of rect                                                    |
+| `color`       |                    | `String`  | black    | color name, hex code, or rgb value                                |
 | `dash`        |                    | `Boolean` | False    | whether line should have dashes or not                            |
 | `label`       |                    | `String`  |          | label used for annotation                                         |
 | `labelAnchor` |                    | `String`  | 'middle' | text-anchor property for label. can be 'start', 'end' or 'middle' |
