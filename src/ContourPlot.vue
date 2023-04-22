@@ -1,30 +1,20 @@
 <template>
-    <figure>
-        <svg
-            :width="width"
-            :height="height"
-            :viewBox="`0 0 ${this.bins[0]} ${this.bins[1]}`"
-            preserveAspectRatio="xMidYMid slice">
-            <g>
-                <path
-                    v-for="contour in contours"
-                    :key="contour.value"
-                    class="contour"
-                    :d="contour.path"
-                    :data-value="contour.value"
-                    :fill="color(contour.value)"
-                    :stroke="color(contour.value)"
-                    :stroke-width="strokeWidth"
-                    :stroke-opacity="strokeOpacity"></path>
-            </g>
-        </svg>
-        <svg class="annotationsContainer" :width="width" :height="height">
-            <!--            need to put annotations in separate svg so preserveAspectRatio doesn't distort them-->
-            <Annotations
-                :annotations="annotations"
-                :margin="margin"></Annotations>
-        </svg>
-    </figure>
+    <svg
+        :width="width"
+        :height="height"
+        :viewBox="viewBox"
+        preserveAspectRatio="xMidYMid slice">
+        <g>
+            <path
+                v-for="contour in contours"
+                :key="contour.value"
+                class="contour"
+                :d="contour.path"
+                :data-value="contour.value"
+                :fill="color(contour.value)"
+                :stroke="color(contour.value)"></path>
+        </g>
+    </svg>
 </template>
 
 <script>
@@ -34,11 +24,9 @@ import { geoIdentity, geoPath } from "d3-geo"
 import { extent, range } from "d3-array"
 import { scaleLinear } from "d3-scale"
 import colors from "./colors"
-import Annotations from "./Annotations.vue"
 
 export default {
     name: "ContourPlot",
-    components: { Annotations },
     props: {
         plotData: {
             type: Array,
@@ -47,11 +35,6 @@ export default {
         width: {
             type: Number,
             default: 256,
-        },
-        margin: {
-            default(rawProps) {
-                return { top: 0, bottom: 0, right: 0, left: 0 }
-            },
         },
         height: {
             type: Number,
@@ -65,13 +48,13 @@ export default {
             type: String,
             required: true,
         },
-        strokeWidth: {
-            type: Number,
-            default: 1,
+        xScale: {
+            // Only passed in from scatterplot component if contour is displayed below points
+            type: Function,
         },
-        strokeOpacity: {
-            type: Number,
-            default: 1,
+        yScale: {
+            // Only passed in from scatterplot component if contour is displayed below points
+            type: Function,
         },
         bins: {
             type: Array,
@@ -93,19 +76,26 @@ export default {
         },
         useThresholds: {
             type: Boolean,
-            default: true,
-        },
-        annotations: {
-            type: Array,
+            default: false,
         },
     },
     computed: {
+        hasScales() {
+            return this.xScale && this.yScale
+        },
+        viewBox() {
+            return this.hasScales ? null : `0 0 ${this.bins[0]} ${this.bins[1]}`
+        },
         density() {
+            // only add the extent if x and y scales are available to properly display under scatterplot points
             return density2d(this.plotData, {
                 x: this.xKey,
                 y: this.yKey,
                 bins: this.bins,
                 bandwidth: this.bandwidth,
+                ...(this.hasScales && {
+                    extent: [this.xScale.domain(), this.yScale.domain()],
+                }),
             })
         },
         color() {
@@ -128,21 +118,47 @@ export default {
         },
         projection() {
             // need to reflect plot over x-axis (a.k.a reflectY below) but also
-            // translate it back down in the svg because it's out of the plot
-            return geoIdentity().reflectY(true).translate([0, this.bins[1]])
+            // translate it down by height or bins height in the svg because it's out of the plot
+            if (this.hasScales) {
+                return geoIdentity().reflectY(true).translate([0, this.height])
+            } else {
+                return geoIdentity().reflectY(true).translate([0, this.bins[1]])
+            }
         },
         contours() {
             const vals = [...this.density].map((item) => item.z)
-            const contoursGenerator = contours().size(this.bins)
+            const contourGenerator = contours().size(this.bins)
 
             if (this.useThresholds) {
-                contoursGenerator.thresholds(this.color.domain())
+                contourGenerator.thresholds(this.color.domain())
             }
 
-            return contoursGenerator(vals).map((item) => ({
-                ...item,
-                path: geoPath().projection(this.projection)(item),
-            }))
+            if (this.hasScales) {
+                const contourRings = contourGenerator(vals).map((item) => {
+                    return {
+                        ...item,
+                        coordinates: item.coordinates.map((rings) => {
+                            return rings.map((points) => {
+                                // convert from grid coordinates to screen coordinates (pixels)
+                                return points.map(([x, y]) => [
+                                    x * (this.width / this.bins[0]),
+                                    y * (this.height / this.bins[1]),
+                                ])
+                            })
+                        }),
+                    }
+                })
+
+                return contourRings.map((item) => ({
+                    ...item,
+                    path: geoPath().projection(this.projection)(item),
+                }))
+            } else {
+                return contourGenerator(vals).map((item) => ({
+                    ...item,
+                    path: geoPath().projection(this.projection)(item),
+                }))
+            }
         },
     },
 }
@@ -151,6 +167,8 @@ export default {
 <style scoped>
 figure {
     position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 .annotationsContainer {

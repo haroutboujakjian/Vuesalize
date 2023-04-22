@@ -74,9 +74,9 @@ plugin. As with other packages, it is also necessary to link the official Vue 3 
 <head>
    <meta charset="utf-8">
    <title>Browser test</title>
-    <link rel="stylesheet" href="https://unpkg.com/vuesalize@1.0.1/dist/vuesalize.css">
+    <link rel="stylesheet" href="https://unpkg.com/vuesalize@2.1.0/dist/vuesalize.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://unpkg.com/vuesalize@1.0.1/dist/vuesalize.umd.js"></script>
+    <script src="https://unpkg.com/vuesalize@2.1.0/dist/vuesalize.umd.js"></script>
 </head>
 <body>
 <div id="app">

@@ -1,6 +1,21 @@
 <template>
     <figure>
-        <svg :width="width" :height="height">
+        <svg :width="width" :height="height" class="scatterplot">
+            <ContourPlot
+                v-if="summary === 'contour'"
+                class="summary"
+                :plot-data="plotData"
+                :xKey="xKey"
+                :yKey="yKey"
+                :x-scale="xScale"
+                :y-scale="yScale"
+                :width="width - margin.left - margin.right"
+                :height="height - margin.top - margin.bottom"
+                :transform="`translate(${margin.left}, ${margin.top})`"
+                :color-scale="summaryOptions?.colorScale"
+                :bins="summaryOptions?.bins"
+                :bandwidth="summaryOptions?.bandwidth"
+                :use-thresholds="summaryOptions?.useThresholds"></ContourPlot>
             <g
                 v-xaxis="{
                     scale: xScale,
@@ -63,9 +78,7 @@
             v-if="enableTooltip && showTooltip"
             class="tooltipContainer"
             :class="{ activeTooltip: showTooltip }"
-            :style="`top: ${tooltip.event.pageY + 10}px; left: ${
-                tooltip.event.pageX + 10
-            }px`">
+            :style="`top: ${tooltip.y + 10}px; left: ${tooltip.x + 10}px`">
             <slot name="tooltip" :point="tooltip">
                 <span
                     >{{ xKey }}: {{ tooltip.point[xKey] }}, {{ yKey }}:
@@ -205,6 +218,12 @@ export default {
             type: String,
             default: "black",
         },
+        summary: {
+            type: String,
+        },
+        summaryOptions: {
+            type: Object,
+        },
     },
     data() {
         return {
@@ -273,6 +292,8 @@ export default {
             this.showTooltip = true
             this.tooltip.event = e
             this.tooltip.point = point
+            this.tooltip.x = this.xScale(point[this.xKey])
+            this.tooltip.y = this.yScale(point[this.yKey])
         },
     },
     directives: {
@@ -323,6 +344,10 @@ export default {
 </script>
 
 <style scoped>
+figure {
+    position: relative;
+}
+
 circle {
     transition: all 0.5s;
 }
@@ -352,5 +377,10 @@ circle {
 .list-enter-from,
 .list-leave-to {
     opacity: 0;
+}
+
+.summary {
+    position: absolute;
+    z-index: 1;
 }
 </style>

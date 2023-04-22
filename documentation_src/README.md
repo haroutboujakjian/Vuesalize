@@ -72,9 +72,9 @@ plugin. As with other packages, it is also necessary to link the official Vue 3 
 <head>
   <meta charset="utf-8">
   <title>Browser test</title>
-  <link rel="stylesheet" href="https://unpkg.com/vuesalize@1.0.1/dist/vuesalize.css">
+  <link rel="stylesheet" href="https://unpkg.com/vuesalize@2.1.0/dist/vuesalize.css">
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <script src="https://unpkg.com/vuesalize@1.0.1/dist/vuesalize.umd.js"></script>
+  <script src="https://unpkg.com/vuesalize@2.1.0/dist/vuesalize.umd.js"></script>
 </head>
 <body>
 <div id="app">
@@ -669,6 +669,38 @@ points around, as well transitioning the fill, radius, etc. Click the update dat
 </script>
 ```
 
+It is possible to add a contour plot below the scatterplot points by passing in `summary="contour"`. More summary types will
+be added in the future. You can also fine tune the contour plot by passing in an object to the `summary-options` prop
+with any of the contour plots available props.
+
+<div style="display: flex; justify-content: center">
+<ClientOnly>
+<ScatterPlotExample :show-summary="true"></ScatterPlotExample>
+</ClientOnly>
+</div>
+
+```html
+
+<ScatterPlot
+  :plotData="plotData"
+  summary="contour"
+  :summary-options="{}"
+  xKey="profit"
+  yKey="utility"
+  :margin="margin"
+  :height="height"
+  :width="width"
+  y-axis-label="Utility"
+  x-axis-label="Profit"
+  :x-axis-label-shift="{ dx: 5, dy: -5 }"
+  stroke="#fff"
+  fill="white"
+  :fill-opacity="0.7"
+  :radius="3.5"
+  :x-tick-format="(d) => `$${d}`">
+</ScatterPlot>
+```
+
 #### Format of Data
 
 The data format required for the `plot-data` prop is an array of objects. each object should contain the x and y values
@@ -745,6 +777,8 @@ Here is a snippet of the data that the example scatterplot above uses
 | `y-ticks`            |                    | `Number`   | 5       | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis            |
 | `label-color`        |                    | `String`   | black   | Text color of all labels                                                                              |
 | `label-size`         |                    | `Number`   | 10      | Size of all labels                                                                                    |
+| `summary`            |                    | `String`   | `null`  | Add summary under points. Available options: **contour**                                              |
+| `summary-options`    |                    | `Object`   |         | Props that can be passed to underlying summary. Same as `ContourPlot` props                           |
 
 #### Events
 
@@ -836,13 +870,11 @@ Here is a snippet of the data that the example scatterplot above uses
 | `plot-data`      | :heavy_check_mark: | `Array`    |           | data necessary to create the chart                                                                                                                                                |
 | `x-key`          | :heavy_check_mark: | `String`   |           | string that is the key of the x values in plotdata                                                                                                                                |
 | `y-key`          | :heavy_check_mark: | `String`   |           | string that is the key of the y values in plotdata                                                                                                                                |
-| `width`          |                    | `Number`   | 256px     | chart width in pixels                                                                                                                                                             |
-| `height`         |                    | `Number`   | 256px     | chart height in pixels                                                                                                                                                            |
-| `stroke-width`   |                    | `Number`   | 1         | stroke width of each contour polygon                                                                                                                                              |
-| `stroke-opacity` |                    | `Number`   | 1         | stroke opacity of each contour polygon                                                                                                                                            |
+| `width`          |                    | `Number`   | 256       | chart width in pixels                                                                                                                                                             |
+| `height`         |                    | `Number`   | 256       | chart height in pixels                                                                                                                                                            |
 | `bins`           |                    | `Array`    | [256,256] | number of bins used for internal grid and is passed into [fast-kde](https://github.com/uwdata/fast-kde#2d-density-estimation-1) bins argument                                     |
-| `bandwidth`      |                    | `Array`    | undefined | requires array of two numbers (e.g. [1, 1]). bandwidth passed in to [fast-kde](https://github.com/uwdata/fast-kde#2d-density-estimation-1) bandwidth argument.                    |
-| `color-scale`    |                    | `Function` | black     | d3 [scale](https://github.com/d3/d3-scale) that is used for coloring the contours                                                                                                 |
+| `bandwidth`      |                    | `Array`    |           | requires array of two numbers (e.g. [1, 1]). bandwidth passed in to [fast-kde](https://github.com/uwdata/fast-kde#2d-density-estimation-1) bandwidth argument.                    |
+| `color-scale`    |                    | `Function` |           | d3 [scale](https://github.com/d3/d3-scale) that is used for coloring the contours                                                                                                 |
 | `use-thresholds` |                    | `Boolean`  | true      | determines whether to use exact thresholds from color scale. does not require an explicit `color-scale` prop to be passed in. setting to `false` will result in smoother contours |
 
 #### Events

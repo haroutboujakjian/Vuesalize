@@ -1,6 +1,26 @@
 <template>
     <div>
         <ScatterPlot
+            v-if="showSummary"
+            :plotData="summaryPlotData"
+            summary="contour"
+            :summary-options="{}"
+            xKey="profit"
+            yKey="utility"
+            :margin="margin"
+            :height="height"
+            :width="width"
+            y-axis-label="Utility"
+            x-axis-label="Profit"
+            :x-axis-label-shift="{ dx: 5, dy: -5 }"
+            stroke="#fff"
+            fill="white"
+            :fill-opacity="0.7"
+            :radius="3.5"
+            :x-tick-format="(d) => `$${d}`">
+        </ScatterPlot>
+        <ScatterPlot
+            v-if="!showSummary"
             :plotData="plotData"
             xKey="profit"
             yKey="utility"
@@ -15,7 +35,10 @@
             :fill-opacity="0.6"
             :x-tick-format="(d) => `$${d}`">
         </ScatterPlot>
-        <button @click="changeData()" class="updateDataButton">
+        <button
+            v-if="!showSummary"
+            @click="changeData()"
+            class="updateDataButton">
             Update Data!
         </button>
     </div>
@@ -26,12 +49,18 @@ import plotData from "./ScatterPlotData.json"
 
 export default {
     name: "ScatterPlotExample",
+    props: {
+        showSummary: {
+            type: Boolean,
+            default: false,
+        },
+    },
     data() {
         return {
             plotData: plotData,
             initialData: plotData,
-            width: 400,
-            height: 300,
+            width: 450,
+            height: 350,
             updatedData: [
                 { profit: 30, utility: 92, radius: 5, fill: "#1751c9" },
                 { profit: 319, utility: 50, radius: 10, fill: "#1751c9" },
@@ -45,6 +74,14 @@ export default {
             margin: { top: 20, bottom: 40, right: 20, left: 50 },
             change: false,
         }
+    },
+    computed: {
+        summaryPlotData() {
+            return this.plotData.map(({ profit, utility }) => ({
+                profit,
+                utility,
+            }))
+        },
     },
     methods: {
         changeData() {
