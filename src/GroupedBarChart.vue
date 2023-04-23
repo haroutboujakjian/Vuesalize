@@ -30,13 +30,13 @@
                         tickLabels: bandAxisTicks,
                         direction: 'vertical',
                     }"
-                    class="axis"
+                    class="xaxis"
                     :transform="`translate(0, ${
                         this.height - this.margin.bottom
                     })`"></g>
                 <g
                     v-linearaxis="{ scale: linearScale, direction: 'vertical' }"
-                    class="axis"
+                    class="yaxis"
                     :transform="`translate(${this.margin.left}, 0)`"></g>
             </template>
             <template v-else>
@@ -71,14 +71,14 @@
                             ? margin.top
                             : height - margin.bottom
                     })`"
-                    class="axis"></g>
+                    class="xaxis"></g>
                 <g
                     v-bandaxis="{
                         scale: bandScale,
                         tickLabels: bandAxisTicks,
                         direction: 'horizontal',
                     }"
-                    class="axis"
+                    class="yaxis"
                     :transform="`translate(${this.margin.left}, 0)`"></g>
             </template>
             <AxisLabels

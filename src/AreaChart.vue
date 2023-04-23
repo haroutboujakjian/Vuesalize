@@ -30,9 +30,11 @@
             </g>
             <g
                 v-xaxis="{ scale: xScale }"
+                class="xaxis"
                 :transform="`translate(0, ${height - margin.bottom})`"></g>
             <g
                 v-yaxis="{ scale: yScale }"
+                class="yaxis"
                 :transform="`translate(${margin.left}, 0)`"></g>
             <AxisLabels
                 :width="width"

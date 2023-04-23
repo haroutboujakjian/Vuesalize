@@ -21,12 +21,14 @@
                     scale: xScale,
                     height: height - margin.top - margin.bottom,
                 }"
+                class="xaxis"
                 :transform="`translate(0, ${xAxisTranslation})`"></g>
             <g
                 v-yaxis="{
                     scale: yScale,
                     width: width - margin.left - margin.right,
                 }"
+                class="yaxis"
                 :transform="`translate(${yAxisTranslation}, 0)`"></g>
             <transition-group name="list" tag="g">
                 <g v-for="(point, i) in points" :key="i">
