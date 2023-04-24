@@ -646,10 +646,17 @@ points around, as well transitioning the fill, radius, etc. Click the update dat
 ```html
 
 <template>
-  <ScatterPlot :plotData="plotData" xKey="profit" yKey="utility"
-               :margin="margin" :width="400"
-               y-axis-label="Utility" x-axis-label="Profit" :x-axis-label-shift="{ dx: 5, dy: -5}"
-               :stroke="'#ff3000'" :fill="'#ff3000'" :fill-opacity="0.60"
+  <ScatterPlot :plotData="plotData" 
+               x-key="profit" 
+               y-key="utility"
+               :margin="margin" 
+               :width="400"
+               y-axis-label="Utility" 
+               x-axis-label="Profit" 
+               :x-axis-label-shift="{ dx: 5, dy: -5}"
+               stroke="#ff3000" 
+               fill="#ff3000" 
+               :fill-opacity="0.60"
                :x-tick-format="d => `$${d}`">
   </ScatterPlot>
 </template>
@@ -903,9 +910,13 @@ data.
 <template>
   <div>
     <p>Horiztonal</p>
-    <BaseLegend :legend-data="legendData" :alignment="'horizontal'"></BaseLegend>
+    <BaseLegend :legend-data="legendData" 
+                :alignment="'horizontal'"> 
+    </BaseLegend>
+     
     <p>Vertical</p>
-    <BaseLegend :legend-data="legendDataToggleEnabled" :alignment="'vertical'"
+    <BaseLegend :legend-data="legendDataToggleEnabled" 
+                :alignment="'vertical'"
                 enable-toggle>
     </BaseLegend>
   </div>
@@ -1199,3 +1210,4 @@ properties given each annotation type
 | `labelAnchor` |                    | `String`  | 'middle' | text-anchor property for label. can be 'start', 'end' or 'middle' |
 | `labeldx`     |                    | `Number`  |          | shift label in x direction                                        |
 | `labeldy`     |                    | `Number`  |          | shift label in y direction                                        |
+| `useScale`    |                    | `Boolean` | False    | use same x and y scales when projecting the rectangle on the plot |

@@ -137,37 +137,61 @@ export default {
         annotation_rects() {
             return this.annotations
                 .filter((annotation) => annotation.type === "rect")
-                .map((item) => ({
-                    width: item.width,
-                    height: item.height,
-                    center: this.xScale
-                        ? [
-                              this.xScale(item.center[0]),
-                              this.yScale(item.center[1]),
-                          ]
-                        : item.center,
-                    color: item.color ? item.color : "black",
-                    dash: item.dash ? "5 5" : "",
-                }))
+                .map((item) => {
+                    const center = [
+                        this.xScale(item.center[0]),
+                        this.yScale(item.center[1]),
+                    ]
+
+                    return {
+                        width: item.useScale
+                            ? this.scaledWidth(item.width, item.center)
+                            : item.width,
+                        height: item.useScale
+                            ? this.scaledHeight(item.height, item.center)
+                            : item.height,
+                        center: this.xScale ? center : item.center,
+                        color: item.color ? item.color : "black",
+                        dash: item.dash ? "5 5" : "",
+                    }
+                })
         },
         annotation_circles() {
             return this.annotations
                 .filter((annotation) => annotation.type === "circle")
-                .map((item) => ({
-                    center: this.xScale
-                        ? [
-                              this.xScale(item.center[0]),
-                              this.yScale(item.center[1]),
-                          ]
-                        : item.center,
-                    radius: item.radius,
-                    color: item.color ? item.color : "black",
-                    dash: item.dash ? "5 5" : "",
-                    label: item.label,
-                    labelAnchor: item.labelAnchor ? item.labelAnchor : "middle",
-                    labeldx: item.labeldx,
-                    labeldy: item.labeldy,
-                }))
+                .map((item) => {
+                    const center = [
+                        this.xScale(item.center[0]),
+                        this.yScale(item.center[1]),
+                    ]
+
+                    return {
+                        center: this.xScale ? center : item.center,
+                        radius: item.radius,
+                        color: item.color ? item.color : "black",
+                        dash: item.dash ? "5 5" : "",
+                        label: item.label,
+                        labelAnchor: item.labelAnchor
+                            ? item.labelAnchor
+                            : "middle",
+                        labeldx: item.labeldx,
+                        labeldy: item.labeldy,
+                    }
+                })
+        },
+    },
+    methods: {
+        scaledWidth(width, center) {
+            const halfWidth = width / 2
+            const x0 = this.xScale(center[0] - halfWidth)
+            const x1 = this.xScale(center[0] + halfWidth)
+            return x1 - x0
+        },
+        scaledHeight(height, center) {
+            const halfHeight = height / 2
+            const y0 = this.yScale(center[1] - halfHeight)
+            const y1 = this.yScale(center[1] + halfHeight)
+            return -(y1 - y0)
         },
     },
 }
