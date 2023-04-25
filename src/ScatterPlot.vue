@@ -1,21 +1,24 @@
 <template>
     <figure>
         <svg :width="width" :height="height" class="scatterplot">
-            <ContourPlot
-                v-if="summary === 'contour'"
-                class="summary"
-                :plot-data="plotData"
-                :xKey="xKey"
-                :yKey="yKey"
-                :x-scale="xScale"
-                :y-scale="yScale"
-                :width="width - margin.left - margin.right"
-                :height="height - margin.top - margin.bottom"
-                :transform="`translate(${margin.left}, ${margin.top})`"
-                :color-scale="summaryOptions?.colorScale"
-                :bins="summaryOptions?.bins"
-                :bandwidth="summaryOptions?.bandwidth"
-                :use-thresholds="summaryOptions?.useThresholds"></ContourPlot>
+            <g :transform="`translate(${margin.left}, ${margin.top})`">
+                <ContourPlot
+                    v-if="summary === 'contour'"
+                    class="summary"
+                    :plot-data="plotData"
+                    :xKey="xKey"
+                    :yKey="yKey"
+                    :x-scale="xScale"
+                    :y-scale="yScale"
+                    :width="width - margin.left - margin.right"
+                    :height="height - margin.top - margin.bottom"
+                    :color-scale="summaryOptions?.colorScale"
+                    :bins="summaryOptions?.bins"
+                    :bandwidth="summaryOptions?.bandwidth"
+                    :use-thresholds="
+                        summaryOptions?.useThresholds
+                    "></ContourPlot>
+            </g>
             <g
                 v-xaxis="{
                     scale: xScale,
@@ -276,16 +279,24 @@ export default {
             }
         },
         xScale() {
-            return scaleLinear()
+            const scale = scaleLinear()
                 .domain([this.xValues.min, this.xValues.max])
                 .range([this.margin.left, this.width - this.margin.right])
-                .nice()
+
+            if (!this.xMin || !this.xMax) {
+                scale.nice()
+            }
+            return scale
         },
         yScale() {
-            return scaleLinear()
+            const scale = scaleLinear()
                 .domain([this.yValues.min, this.yValues.max])
                 .range([this.height - this.margin.bottom, this.margin.top])
-                .nice()
+
+            if (!this.yMin || !this.yMax) {
+                scale.nice()
+            }
+            return scale
         },
         xAxisTranslation() {
             return this.height - this.margin.bottom - this.xAxisTranslate
@@ -387,7 +398,6 @@ circle {
 }
 
 .summary {
-    position: absolute;
     z-index: 1;
 }
 </style>
