@@ -104,10 +104,13 @@ export default {
 
             if (this.colorScale) {
                 // adjust the values of the domain to be scaled by the range of the data
-                const colorDomain = this.colorScale
+                // make copy in order to avoid changing original scale passed in
+                const scale = this.colorScale.copy()
+
+                const colorDomain = scale
                     .domain()
                     .map((d) => d * (maxVal - minVal))
-                return this.colorScale.domain(colorDomain)
+                return scale.domain(colorDomain)
             }
 
             // need to concat the max value to the domain because range doesn't include it
