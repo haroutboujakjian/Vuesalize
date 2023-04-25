@@ -646,16 +646,16 @@ points around, as well transitioning the fill, radius, etc. Click the update dat
 ```html
 
 <template>
-  <ScatterPlot :plotData="plotData" 
-               x-key="profit" 
+  <ScatterPlot :plotData="plotData"
+               x-key="profit"
                y-key="utility"
-               :margin="margin" 
+               :margin="margin"
                :width="400"
-               y-axis-label="Utility" 
-               x-axis-label="Profit" 
+               y-axis-label="Utility"
+               x-axis-label="Profit"
                :x-axis-label-shift="{ dx: 5, dy: -5}"
-               stroke="#ff3000" 
-               fill="#ff3000" 
+               stroke="#ff3000"
+               fill="#ff3000"
                :fill-opacity="0.60"
                :x-tick-format="d => `$${d}`">
   </ScatterPlot>
@@ -676,7 +676,8 @@ points around, as well transitioning the fill, radius, etc. Click the update dat
 </script>
 ```
 
-It is possible to add a contour plot below the scatterplot points by passing in `summary="contour"`. More summary types will
+It is possible to add a contour plot below the scatterplot points by passing in `summary="contour"`. More summary types
+will
 be added in the future. You can also fine tune the contour plot by passing in an object to the `summary-options` prop
 with any of the contour plots available props.
 
@@ -786,6 +787,7 @@ Here is a snippet of the data that the example scatterplot above uses
 | `label-size`         |                    | `Number`   | 10      | Size of all labels                                                                                    |
 | `summary`            |                    | `String`   | `null`  | Add summary under points. Available options: **contour**                                              |
 | `summary-options`    |                    | `Object`   |         | Props that can be passed to underlying summary. Same as `ContourPlot` props                           |
+| `show-points`        |                    | `Boolean`  | `true`  | Option to show/hide all points. Useful to display summary with axes and not display any of the points |
 
 #### Events
 
@@ -910,12 +912,12 @@ data.
 <template>
   <div>
     <p>Horiztonal</p>
-    <BaseLegend :legend-data="legendData" 
-                :alignment="'horizontal'"> 
+    <BaseLegend :legend-data="legendData"
+                :alignment="'horizontal'">
     </BaseLegend>
-     
+
     <p>Vertical</p>
-    <BaseLegend :legend-data="legendDataToggleEnabled" 
+    <BaseLegend :legend-data="legendDataToggleEnabled"
                 :alignment="'vertical'"
                 enable-toggle>
     </BaseLegend>

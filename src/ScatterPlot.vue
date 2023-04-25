@@ -30,7 +30,7 @@
                 }"
                 class="yaxis"
                 :transform="`translate(${yAxisTranslation}, 0)`"></g>
-            <transition-group name="list" tag="g">
+            <transition-group name="list" tag="g" v-if="showPoints">
                 <g v-for="(point, i) in points" :key="i">
                     <circle
                         :cx="xScale(point[xKey])"
@@ -211,6 +211,11 @@ export default {
             // value that translates the y-axis starting from left
             type: Number,
             default: 0,
+        },
+        showPoints: {
+            // this option can be useful if only to display summary with scales
+            type: Boolean,
+            default: true,
         },
         labelSize: {
             type: Number,
