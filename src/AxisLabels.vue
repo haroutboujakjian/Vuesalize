@@ -1,19 +1,19 @@
 <template>
-    <g>
+    <g class="axislabels">
         <text
             class="yAxisLabel"
             :x="-chartMargin.top"
-            :dx="yaxis_dx"
+            :dx="yAxisLabelShift.dx"
             :y="10"
-            :dy="yaxis_dy">
+            :dy="yAxisLabelShift.dy">
             {{ yAxisLabel }}
         </text>
         <text
             class="xAxisLabel"
             :x="width - chartMargin.right"
             :y="height"
-            :dx="xaxis_dx"
-            :dy="xaxis_dy">
+            :dx="xAxisLabelShift.dx"
+            :dy="xAxisLabelShift.dy">
             {{ xAxisLabel }}
         </text>
     </g>
@@ -51,28 +51,6 @@ export default {
             type: Object,
         },
     },
-    computed: {
-        xaxis_dx() {
-            return "dx" in this.xAxisLabelShift
-                ? this.xAxisLabelShift.dx
-                : undefined
-        },
-        xaxis_dy() {
-            return "dy" in this.xAxisLabelShift
-                ? this.xAxisLabelShift.dy
-                : undefined
-        },
-        yaxis_dx() {
-            return "dx" in this.yAxisLabelShift
-                ? this.yAxisLabelShift.dx
-                : undefined
-        },
-        yaxis_dy() {
-            return "dy" in this.yAxisLabelShift
-                ? this.yAxisLabelShift.dy
-                : undefined
-        },
-    },
 }
 </script>
 
@@ -81,12 +59,12 @@ export default {
     transform: rotate(-90deg);
     text-anchor: end;
     font-size: 0.8rem;
-    fill: #2c3e50;
+    fill: currentColor;
 }
 
 .xAxisLabel {
     text-anchor: end;
     font-size: 0.8rem;
-    fill: #2c3e50;
+    fill: currentColor;
 }
 </style>
