@@ -24,6 +24,7 @@
                     scale: xScale,
                     height: height - margin.top - margin.bottom,
                 }"
+                v-if="showXAxis"
                 class="xaxis"
                 :transform="`translate(0, ${xAxisTranslation})`"></g>
             <g
@@ -31,6 +32,7 @@
                     scale: yScale,
                     width: width - margin.left - margin.right,
                 }"
+                v-if="showYAxis"
                 class="yaxis"
                 :transform="`translate(${yAxisTranslation}, 0)`"></g>
             <transition-group name="list" tag="g" v-if="showPoints">
@@ -214,6 +216,14 @@ export default {
             // value that translates the y-axis starting from left
             type: Number,
             default: 0,
+        },
+        showXAxis: {
+            type: Boolean,
+            default: true,
+        },
+        showYAxis: {
+            type: Boolean,
+            default: true,
         },
         showPoints: {
             // this option can be useful if only to display summary with scales

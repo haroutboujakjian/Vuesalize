@@ -787,7 +787,9 @@ Here is a snippet of the data that the example scatterplot above uses
 | `label-size`         |                    | `Number`   | 10      | Size of all labels                                                                                    |
 | `summary`            |                    | `String`   | `null`  | Add summary under points. Available options: **contour**                                              |
 | `summary-options`    |                    | `Object`   |         | Props that can be passed to underlying summary. Same as `ContourPlot` props                           |
-| `show-points`        |                    | `Boolean`  | `true`  | Option to show/hide all points. Useful to display summary with axes and not display any of the points |
+| `show-points`        |                    | `Boolean`  | `true`  | Show/hide all points. Useful to display summary with axes and not display any of the points           |
+| `show-x-axis`        |                    | `Boolean`  | `true`  | Show/hide x axis. Useful to optimize summary plots if not planning to use points or axes.             |
+| `show-y-axis`        |                    | `Boolean`  | `true`  | Show/hide y axis. Useful to optimize summary plots if not planning to use points or axes.             |
 
 #### Events
 
