@@ -1,0 +1,80 @@
+[
+  {
+    "days": 10,
+    "Android": {
+      "lower": 3221,
+      "value": 3521,
+      "upper": 3921
+    },
+    "iPhone": {
+      "lower": 825,
+      "value": 1021,
+      "upper": 1321
+    }
+  },
+  {
+    "days": 20,
+    "Android": {
+      "lower": 1193,
+      "value": 1593,
+      "upper": 1793
+    },
+    "iPhone": {
+      "lower": 1060,
+      "value": 1860,
+      "upper": 1960
+    }
+  },
+  {
+    "days": 30,
+    "Android": {
+      "lower": 1657,
+      "value": 1957,
+      "upper": 2150
+    },
+    "iPhone": {
+      "lower": 2884,
+      "value": 3184,
+      "upper": 3584
+    }
+  },
+  {
+    "days": 40,
+    "Android": {
+      "lower": 3480,
+      "value": 3800,
+      "upper": 3980
+    },
+    "iPhone": {
+      "lower": 1050,
+      "value": 1250,
+      "upper": 1450
+    }
+  },
+  {
+    "days": 50,
+    "Android": {
+      "lower": 3280,
+      "value": 3680,
+      "upper": 4080
+    },
+    "iPhone": {
+      "lower": 2102,
+      "value": 2332,
+      "upper": 2532
+    }
+  },
+  {
+    "days": 60,
+    "Android": {
+      "lower": 1680,
+      "value": 1880,
+      "upper": 1980
+    },
+    "iPhone": {
+      "lower": 2132,
+      "value": 2432,
+      "upper": 2732
+    }
+  }
+]

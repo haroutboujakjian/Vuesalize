@@ -6,6 +6,15 @@
             ref="svgContainer"
             @mousemove="populateTooltip($event)"
             @mouseleave="removeTooltip()">
+            <g v-if="boundsIncluded" class="areas">
+                <path
+                    v-for="area in areas"
+                    :key="area.name"
+                    :d="area.path"
+                    :fill="color(area.key)"
+                    :fill-opacity="areaFillOpacity" />
+            </g>
+
             <g v-if="showPoints" class="points">
                 <g v-for="line in y_values" :key="line.name" :class="line.name">
                     <circle
@@ -17,14 +26,17 @@
                         :fill="color(line.name)"></circle>
                 </g>
             </g>
-            <g>
+
+            <g class="lines">
                 <path
-                    v-for="line in y_values"
-                    :key="line.name"
-                    :d="lineCalc(line.values)"
-                    :stroke="color(line.name)"
+                    v-for="line in lines"
+                    :key="line.key"
+                    :d="line.path"
+                    fill="transparent"
+                    :stroke="color(line.key)"
                     :stroke-width="strokeWidth"></path>
             </g>
+
             <g
                 v-xaxis="{
                     scale: xScale,
@@ -82,10 +94,10 @@
 </template>
 
 <script>
-import { scaleTime, scaleLinear, scaleOrdinal } from "d3-scale"
-import { line } from "d3-shape"
-import { extent, max, bisector } from "d3-array"
-import { axisLeft, axisBottom } from "d3-axis"
+import { scaleLinear, scaleOrdinal, scaleTime } from "d3-scale"
+import { line, area } from "d3-shape"
+import { bisector, extent, max } from "d3-array"
+import { axisBottom, axisLeft } from "d3-axis"
 import { select } from "d3-selection"
 import Annotations from "./Annotations.vue"
 import AxisLabels from "./AxisLabels.vue"
@@ -156,32 +168,36 @@ export default {
             default: null,
         },
         xTicks: {
-            /*
-number sent into d3.ticks function for x-axis
-*/
+            /**
+             * number sent into d3.ticks function for x-axis
+             */
             type: Number,
             default: 5,
         },
         yTicks: {
-            /*
-number sent into d3.ticks function for y-axis
-*/
+            /**
+             * number sent into d3.ticks function for y-axis
+             */
             type: Number,
             default: 5,
         },
         showPoints: {
-            /*
-show each of the points that construct the line chart
-*/
+            /**
+             * show each of the points that construct the line chart
+             */
             type: Boolean,
             default: false,
         },
         pointRadius: {
-            /*
-if showPoints is set to true, use this for radius of points on line
-*/
+            /**
+             * if showPoints is set to true, use this for radius of points on line
+             */
             type: Number,
             default: 4,
+        },
+        areaFillOpacity: {
+            type: Number,
+            default: 0.6,
         },
     },
     data() {
@@ -209,6 +225,13 @@ if showPoints is set to true, use this for radius of points on line
                 values: this.plotData.map((year) => year[key]),
             }))
         },
+        boundsIncluded() {
+            /**
+             * if the first value is an object then it is assumed the upper and lower bounds are passed in for areas
+             * if the first value is an integer, then only lines are plotted
+             */
+            return typeof this.y_values[0]?.values[0] == "object"
+        },
         xScale() {
             let scale
             if (this.useTimeScaleXAxis) {
@@ -228,9 +251,7 @@ if showPoints is set to true, use this for radius of points on line
         yScale() {
             // set y scale min and max values based on props if they exist, else default to 0 and max of values
             const yMin = this.yMin ? this.yMin : 0
-            const yMax = this.yMax
-                ? this.yMax
-                : max(this.y_values, (d) => max(d.values))
+            const yMax = this.calculateMax()
 
             return scaleLinear()
                 .domain([yMin, yMax])
@@ -240,13 +261,48 @@ if showPoints is set to true, use this for radius of points on line
         color() {
             return scaleOrdinal().domain(this.yValueKeys).range(this.colors)
         },
-        lineCalc() {
+        lineGenerator() {
             return line()
                 .x((d, i) => this.xScale(new Date(this.x_values[i])))
                 .y((d) => this.yScale(d))
         },
         xBisector() {
             return bisector((d) => new Date(d[this.xKey])).left
+        },
+        lines() {
+            if (this.boundsIncluded) {
+                return this.y_values.map((item) => {
+                    const values = item.values.map((d) => d.value)
+                    return {
+                        key: item.name,
+                        path: this.lineGenerator(values),
+                    }
+                })
+            } else {
+                return this.y_values.map((item) => ({
+                    key: item.name,
+                    path: this.lineGenerator(item.values),
+                }))
+            }
+        },
+        areaGenerator() {
+            return area()
+                .x((d, i) => this.xScale(new Date(this.x_values[i])))
+                .y0((d) => this.yScale(d.lower))
+                .y1((d) => this.yScale(d.upper))
+        },
+        areas() {
+            if (this.boundsIncluded) {
+                return this.y_values.map((item) => {
+                    const values = item.values
+                    console.log(values)
+                    return {
+                        key: item.name,
+                        path: this.areaGenerator(values),
+                    }
+                })
+            }
+            return []
         },
     },
     methods: {
@@ -265,6 +321,18 @@ if showPoints is set to true, use this for radius of points on line
         },
         removeTooltip() {
             this.showTooltip = false
+        },
+        calculateMax() {
+            if (this.yMax) return this.yMax
+
+            if (this.boundsIncluded) {
+                const all_values = this.y_values
+                    .flatMap((d) => d.values)
+                    .flatMap((d) => Object.values(d))
+                return max(all_values)
+            } else {
+                return max(this.y_values, (d) => max(d.values))
+            }
         },
     },
     directives: {
@@ -312,10 +380,6 @@ if showPoints is set to true, use this for radius of points on line
 </script>
 
 <style scoped>
-path {
-    fill: transparent;
-}
-
 .tooltipContainer {
     position: absolute;
     font-size: 0.8rem;

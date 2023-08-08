@@ -378,9 +378,11 @@ that populates the example grouped bar chart has "date" for the x value, and "Ut
 
 ### Line Chart
 
-The line chart component allows for one or more lines to be plotted.
 
-#### Example
+#### Simple Time Scale
+
+The line chart component allows for one or more lines to be plotted. The default for x-axis scale is a time scale.
+Here is a simple example:
 
 <div style="display: flex; justify-content: center">
 <ClientOnly>
@@ -390,58 +392,21 @@ The line chart component allows for one or more lines to be plotted.
 
 ```html
 
-<template>
-  <LineChart :plot-data="plotData" x-key="date"
-             :width="450" :height="250" :margin="margin"
-             x-axis-label="Year" y-axis-label="Expenses"
-             :y-tick-format="d => `$${d}`">
-  </LineChart>
-</template>
-
-<script>
-  import LCdata from "./Budget3Groups.json"
-
-  export default {
-    name: "LineChartExample",
-    data() {
-      return {
-        plotData: LCdata,
-        margin: { top: 20, bottom: 30, left: 50, right: 20 }
-      }
-    }
-  }
-</script>
+<LineChart :plot-data="plotData"
+           x-key="date"
+           :width="450"
+           :height="250"
+           :margin="{ top: 20, bottom: 30, left: 50, right: 20 }"
+           x-axis-label="Year" 
+           y-axis-label="Expenses"
+           :y-tick-format="d => `$${d}`">
+</LineChart>
 ```
 
-Using a linear scale instead of a time scale is as simple as passing the prop `:use-time-scale-x-axis="false"` and you
-can even show the points that create the line chart by passing in `:show-points=true`
-
-<div style="display: flex; justify-content: center">
-<ClientOnly>
-    <line-chart-example :linear-scale="true"></line-chart-example>
-</ClientOnly>
-</div>
-
-```html
-
-<template>
-  <LineChart :plot-data="plotDataLinear" x-key="days"
-             :use-time-scale-x-axis="false" :x-axis-label-shift="{dy: -5}"
-             :width="450" :height="250" :margin="margin"
-             x-axis-label="Days Since Start of New Program" y-axis-label="Expenses"
-             :show-points="true" :point-radius="3"
-             :y-tick-format="d => `$${d}`">
-  </LineChart>
-</template>
-```
-
-#### Format of Data
-
-In order for the stacked bar chart to render properly, `plot-data` needs to be as an array of objects. There should be
-one key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file (snippet below)
-that populates the example line chart has "date" for the x value, and "Utilities",
-"Rent", and "Insurance" for the y values. All of the axis charts
-(bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
+The format of the `plot-data` prop needs to be as an array of objects. There should be one key for the x value, and all the other
+keys will be for y values. The `Budget3Groups.json` data file (snippet below) that populates the example line chart
+has "date" for the x value, and "Utilities", "Rent", and "Insurance" for the y values. All the axis charts (bar charts,
+line charts, area charts) use the same format for data, making it easier to switch between them.
 
 ```json
 [
@@ -460,6 +425,99 @@ that populates the example line chart has "date" for the x value, and "Utilities
   ...
 ]
 ```
+
+#### Linear Scale With Points
+
+Using a linear scale instead of a time scale is as simple as passing the prop `:use-time-scale-x-axis="false"`, and you
+can even show the points that create the line chart by passing in `:show-points=true`
+
+<div style="display: flex; justify-content: center">
+<ClientOnly>
+    <line-chart-example :linear-scale="true"></line-chart-example>
+</ClientOnly>
+</div>
+
+```html
+
+<LineChart :plot-data="plotDataLinear"
+           x-key="days"
+           :width="450" :height="250" 
+           :margin="margin"
+           :use-time-scale-x-axis="false" 
+           :x-axis-label-shift="{dy: -5}"
+           x-axis-label="Days Since Start of New Program" 
+           y-axis-label="Expenses"
+           :show-points="true" 
+           :point-radius="3"
+           :y-tick-format="d => `$${d}`">
+</LineChart>
+```
+
+#### Uncertainty Bounds
+
+Lastly, you can also plot uncertainty bounds with the lines. The format of `plot-data` is similar but will need to be
+altered slightly to pass in the bounds. A sample of component code and data format are below the chart.
+
+<div style="display: flex; justify-content: center">
+<ClientOnly>
+    <line-chart-example :uncertainty="true"></line-chart-example>
+</ClientOnly>
+</div>
+
+```html
+
+<LineChart
+        :plot-data="UncertaintyData"
+        x-key="days"
+        :width="450"
+        :height="250"
+        :margin="margin"
+        x-axis-label="Days Since Launch"
+        :x-axis-label-shift="{ dy: -6 }"
+        y-axis-label="Revenue"
+        :use-time-scale-x-axis="false"
+        :y-tick-format="(d) => `$${d}`"
+        :area-fill-opacity="0.5"
+        :stroke-width="2.5">
+</LineChart>
+```
+
+The format of `plot-data` in this case also needs to be an array of objects. The x values should all have the same 
+`x-key` and the y values should be objects. The objects need `lower`, `value`, and `upper` keys in order to render the 
+areas with `lower` and `upper`, and the line with `value`.
+
+```json
+[
+  {
+    "days": 10,
+    "Android": {
+      "lower": 3221,
+      "value": 3521,
+      "upper": 3921
+    },
+    "iPhone": {
+      "lower": 825,
+      "value": 1021,
+      "upper": 1321
+    }
+  },
+  {
+    "days": 20,
+    "Android": {
+      "lower": 1193,
+      "value": 1593,
+      "upper": 1793
+    },
+    "iPhone": {
+      "lower": 1060,
+      "value": 1860,
+      "upper": 1960
+    }
+  },...
+]
+```
+
+
 
 #### Props
 
@@ -486,6 +544,7 @@ that populates the example line chart has "date" for the x value, and "Utilities
 | `y-ticks`               |                    | `Number`   | 5       | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis                                                             |
 | `show-points`           |                    | `Boolean`  | `false` | Show points that construct the line chart                                                                                                              |
 | `point-radius`          |                    | `Number`   | 4       | Radius of points if there shown with `show-points=true`                                                                                                |
+| `area-fill-opacity`     |                    | `Number`   | 0.6     | Fill opacity used for area uncertainty bounds                                                                                                          |
 
 #### Events
 
@@ -514,27 +573,15 @@ groups is rendered below
 
 ```html
 
-<template>
-  <AreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
-             :margin="margin" :colors="['#ac58e5','#E0488B']"
-             x-axis-label="Year" y-axis-label="Expenses"
-             :y-tick-format="d => `$${d}`">
-  </AreaChart>
-</template>
-
-<script>
-  import ACdata from './Budget2Groups.json'
-
-  export default {
-    name: "AreaChartExample",
-    data() {
-      return {
-        plotData: ACdata,
-        margin: { top: 20, bottom: 30, left: 55, right: 20 }
-      }
-    }
-  }
-</script>
+<AreaChart :plot-data="plotData"
+           :width="500"
+           :height="300"
+           x-key="date"
+           :margin="{ top: 20, bottom: 30, left: 55, right: 20 }"
+           :colors="['#ac58e5','#E0488B']"
+           x-axis-label="Year"
+           y-axis-label="Expenses"
+           :y-tick-format="d => `$${d}`" />
 ```
 
 In order to get a stacked area chart, set the `stacked` prop to true
@@ -547,36 +594,25 @@ In order to get a stacked area chart, set the `stacked` prop to true
 
 ```html
 
-<template>
-  <AreaChart :plot-data="plotData" :width="500" :height="300" x-key="date"
-             :margin="margin" :stacked="true" :colors="['#ac58e5','#E0488B']"
-             x-axis-label="Year" y-axis-label="Expenses"
-             :y-tick-format="d => `$${d}`">
-  </AreaChart>
-</template>
-
-<script>
-  import ACdata from './Budget2Groups.json'
-
-  export default {
-    name: "AreaChartExample",
-    data() {
-      return {
-        plotData: ACdata,
-        margin: { top: 20, bottom: 30, left: 55, right: 20 }
-      }
-    }
-  }
-</script>
+<AreaChart :plot-data="plotData"
+           :stacked="true"
+           :width="500"
+           :height="300"
+           x-key="date"
+           :margin="{ top: 20, bottom: 30, left: 55, right: 20 }"
+           :colors="['#ac58e5','#E0488B']"
+           x-axis-label="Year"
+           y-axis-label="Expenses"
+           :y-tick-format="d => `$${d}`" />
 ```
 
 #### Format of Data
 
 In order for the stacked bar chart to render properly, `plot-data` needs to be as an array of objects. There should be
 one key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file (snippet below)
-that populates the example area chart has "date" for the x value, and "Utilities",
-"Rent", and "Insurance" for the y values. All of the axis charts
-(bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
+that populates the example area chart has `date` for the x value, and `Utilities`, `Rent`, and `Insurance` for the y
+values. All axis charts (bar charts, line charts, area charts) use the same format for data, making it easier to
+switch between them.
 
 ```json
 [
@@ -690,22 +726,22 @@ with any of the contour plots available props.
 ```html
 
 <ScatterPlot
-  :plotData="plotData"
-  summary="contour"
-  :summary-options="{}"
-  xKey="profit"
-  yKey="utility"
-  :margin="margin"
-  :height="height"
-  :width="width"
-  y-axis-label="Utility"
-  x-axis-label="Profit"
-  :x-axis-label-shift="{ dx: 5, dy: -5 }"
-  stroke="#fff"
-  fill="white"
-  :fill-opacity="0.7"
-  :radius="3.5"
-  :x-tick-format="(d) => `$${d}`">
+        :plotData="plotData"
+        summary="contour"
+        :summary-options="{}"
+        xKey="profit"
+        yKey="utility"
+        :margin="margin"
+        :height="height"
+        :width="width"
+        y-axis-label="Utility"
+        x-axis-label="Profit"
+        :x-axis-label-shift="{ dx: 5, dy: -5 }"
+        stroke="#fff"
+        fill="white"
+        :fill-opacity="0.7"
+        :radius="3.5"
+        :x-tick-format="(d) => `$${d}`">
 </ScatterPlot>
 ```
 
@@ -1176,7 +1212,7 @@ properties given each annotation type
 
 | Name          |      Required      | Type      | Default  | Description                                                       |
 |---------------|:------------------:|-----------|----------|-------------------------------------------------------------------|
-| `type`        | :heavy_check_mark: | `String`  |          | type of annotation, current options: 'line', 'rect', 'circle'     |
+| `type`        | :heavy_check_mark: | `String`  |          | type of annotation, current options: `line`, `rect`, `circle`     |
 | `axis`        | :heavy_check_mark: | `String`  |          | options: "x" or "y"                                               |
 | `value`       | :heavy_check_mark: | `Number`  |          | value on the x or y axis                                          |
 | `color`       |                    | `String`  | black    | color name, hex code, or rgb value                                |
@@ -1190,7 +1226,7 @@ properties given each annotation type
 
 | Name          |      Required      | Type      | Default  | Description                                                       |
 |---------------|:------------------:|-----------|----------|-------------------------------------------------------------------|
-| `type`        | :heavy_check_mark: | `String`  |          | type of annotation, current options: 'line', 'rect', 'circle'     |
+| `type`        | :heavy_check_mark: | `String`  |          | type of annotation, current options: `line`, `rect`, `circle`     |
 | `center`      | :heavy_check_mark: | `Array`   |          | center of rect. array of [x, y], e.g. [150, 200]                  |
 | `radius`      | :heavy_check_mark: | `Number`  |          | radius of circle                                                  |
 | `color`       |                    | `String`  | black    | color name, hex code, or rgb value                                |
@@ -1204,7 +1240,7 @@ properties given each annotation type
 
 | Name          |      Required      | Type      | Default  | Description                                                       |
 |---------------|:------------------:|-----------|----------|-------------------------------------------------------------------|
-| `type`        | :heavy_check_mark: | `String`  |          | type of annotation, current options: 'line', 'rect', 'circle'     |
+| `type`        | :heavy_check_mark: | `String`  |          | type of annotation, current options: `line`, `rect`, `circle`     |
 | `center`      | :heavy_check_mark: | `Array`   |          | center of rect. array of [x, y], e.g. [150, 200]                  |
 | `width`       | :heavy_check_mark: | `Number`  |          | width of rect.                                                    |
 | `height`      | :heavy_check_mark: | `Number`  |          | height of rect                                                    |
