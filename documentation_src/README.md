@@ -46,15 +46,16 @@ createApp(App).use(Vuesalize).mount('#app')
 ```html
 
 <script setup>
-  const barchartdata = [
-    { "date": 2019, "Utilities": 21, "Rent": 16, "Insurance": 22 },
-    { "date": 2020, "Utilities": 19, "Rent": 10, "Insurance": 17 },
-  ]
+   const barchartdata = [
+      { "date": 2019, "Utilities": 21, "Rent": 16, "Insurance": 22 },
+      { "date": 2020, "Utilities": 19, "Rent": 10, "Insurance": 17 },
+   ]
 </script>
 
 <template>
-  <loader-spinning />
-  <StackedBarChart :plot-data="barchartdata" x-key="date"></StackedBarChart>
+   <loader-spinning />
+   <StackedBarChart :plot-data="barchartdata"
+                    x-key="date" />
 </template>
 
 <style scoped></style>
@@ -70,35 +71,35 @@ plugin. As with other packages, it is also necessary to link the official Vue 3 
 
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Browser test</title>
-  <link rel="stylesheet" href="https://unpkg.com/vuesalize@2.1.0/dist/vuesalize.css">
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <script src="https://unpkg.com/vuesalize@2.1.0/dist/vuesalize.umd.js"></script>
+   <meta charset="utf-8">
+   <title>Browser test</title>
+   <link rel="stylesheet" href="https://unpkg.com/vuesalize@2.1.7/dist/vuesalize.css">
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <script src="https://unpkg.com/vuesalize@2.1.7/dist/vuesalize.umd.js"></script>
 </head>
 <body>
 <div id="app">
-  <loader-spinning></loader-spinning>
-  <stacked-bar-chart :plot-data="barchartdata" x-key="date"></stacked-bar-chart>
+   <loader-spinning></loader-spinning>
+   <stacked-bar-chart :plot-data="barchartdata" x-key="date"></stacked-bar-chart>
 </div>
 
 <script>
-  const { createApp } = Vue
+   const { createApp } = Vue
 
-  const app = createApp({
-    data() {
-      return {
-        barchartdata: [
-          { "date": 2019, "Utilities": 21, "Rent": 16, "Insurance": 22 },
-          { "date": 2020, "Utilities": 19, "Rent": 10, "Insurance": 17 },
-        ]
+   const app = createApp({
+      data() {
+         return {
+            barchartdata: [
+               { "date": 2019, "Utilities": 21, "Rent": 16, "Insurance": 22 },
+               { "date": 2020, "Utilities": 19, "Rent": 10, "Insurance": 17 },
+            ]
+         }
       }
-    }
-  })
+   })
 
-  app.use(Vuesalize)
+   app.use(Vuesalize)
 
-  app.mount('#app')
+   app.mount('#app')
 
 </script>
 </body>
@@ -124,26 +125,12 @@ Here is a simple example that constructs a stacked bar chart representing a set 
 
 ```html
 
-<template>
-  <StackedBarChart :plot-data="plotData" x-key="date"
-                   :margin="margin" x-axis-label="Year"
-                   y-axis-label="Expenses" :y-tick-format="d => `$${d}`">
-  </StackedBarChart>
-</template>
-
-<script>
-  import SBCdata from './Budget3Groups.json'
-
-  export default {
-    name: "StackedBarChartExample",
-    data() {
-      return {
-        plotData: SBCdata,
-        margin: { top: 20, bottom: 35, left: 60, right: 20 },
-      }
-    }
-  }
-</script>
+<StackedBarChart :plot-data="plotData"
+                 x-key="date"
+                 :margin="{ top: 20, bottom: 35, left: 60, right: 20 }"
+                 x-axis-label="Year"
+                 y-axis-label="Expenses"
+                 :y-tick-format="d => `$${d}`" />
 ```
 
 Alternatively, it's possible to get a horizontal bar chart by passing in 'horizontal' for the `direction` prop.
@@ -156,35 +143,22 @@ Alternatively, it's possible to get a horizontal bar chart by passing in 'horizo
 
 ```html
 
-<template>
-  <StackedBarChart :plot-data="plotData" x-key="date"
-                   :margin="margin" direction="horizontal"
-                   x-axis-label="Expenses" y-axis-label="Year"
-                   :x-axis-label-shift="{ dx: 0, dy: -2}" :y-axis-label-shift="{ dx: 0, dy: 5}"
-                   :x-tick-format="d => `$${d}`">
-  </StackedBarChart>
-</template>
-
-<script>
-  import SBCdata from './Budget3Groups.json'
-
-  export default {
-    name: "StackedBarChartExample",
-    data() {
-      return {
-        plotData: SBCdata,
-        margin: { top: 20, bottom: 35, left: 60, right: 20 },
-      }
-    }
-  }
-</script>
+<StackedBarChart :plot-data="plotData"
+                 x-key="date"
+                 direction="horizontal"
+                 :margin="{ top: 20, bottom: 35, left: 60, right: 20 }"
+                 x-axis-label="Expenses"
+                 y-axis-label="Year"
+                 :x-axis-label-shift="{ dx: 0, dy: -2}"
+                 :y-axis-label-shift="{ dx: 0, dy: 5}"
+                 :x-tick-format="d => `$${d}`" />
 ```
 
 In order for the stacked bar chart to render properly, `plot-data` needs to be as an array of objects. There should be
 one key for the x value, and all the other keys will be for y values. The `Budget3Groups.json` data file (snippet below)
 that populates the example stacked bar chart has "date" for the x value, and "Utilities",
-"Rent", and "Insurance" for the y values. All of the axis charts
-(bar charts, line charts, area charts) use the same format for data, making it easier to switch between them.
+"Rent", and "Insurance" for the y values. All the axis charts (bar charts, line charts, area charts) use the same format
+for data, making it easier to switch between them.
 
 ```json
 [
@@ -261,27 +235,14 @@ Here is an example using the same expenses data as the stacked bar chart above. 
 
 ```html
 
-<template>
-  <GroupedBarChart :plot-data="plotdata" x-key="date"
-                   :width="450" :height="300" :margin="margin"
-                   x-axis-label="Year" y-axis-label="Expenses"
-                   :y-tick-format="d => `$${d}`">
-  </GroupedBarChart>
-</template>
-
-<script>
-  import GBCdata from "./Budget3Groups.json"
-
-  export default {
-    name: "GroupedBarChartExample",
-    data() {
-      return {
-        plotdata: GBCdata,
-        margin: { top: 20, bottom: 35, left: 55, right: 20 }
-      }
-    }
-  }
-</script>
+<GroupedBarChart :plot-data="plotdata"
+                 x-key="date"
+                 :width="450"
+                 :height="300"
+                 :margin="{ top: 20, bottom: 35, left: 55, right: 20 }"
+                 x-axis-label="Year"
+                 y-axis-label="Expenses"
+                 :y-tick-format="d => `$${d}`" />
 ```
 
 And, again, it's possible to get a horizontal bar chart by passing in 'horizontal' for the direction prop.
@@ -294,28 +255,16 @@ And, again, it's possible to get a horizontal bar chart by passing in 'horizonta
 
 ```html
 
-<template>
-  <GroupedBarChart :plot-data="plotdata" x-key="date"
-                   :width="450" :height="300" :margin="margin"
-                   x-axis-label="Expenses" y-axis-label="Year"
-                   :x-axis-label-shift="{ dx: 0, dy: -2 }" :y-axis-label-shift="{ dx: 0, dy: 5 }"
-                   :x-tick-format="d => `$${d}`">
-  </GroupedBarChart>
-</template>
-
-<script>
-  import GBCdata from "./Budget3Groups.json"
-
-  export default {
-    name: "GroupedBarChartExample",
-    data() {
-      return {
-        plotdata: GBCdata,
-        margin: { top: 20, bottom: 35, left: 55, right: 20 }
-      }
-    }
-  }
-</script>
+<GroupedBarChart :plot-data="plotdata" 
+                 x-key="date"
+                 :width="450" 
+                 :height="300" 
+                 :margin="margin"
+                 x-axis-label="Expenses" 
+                 y-axis-label="Year"
+                 :x-axis-label-shift="{ dx: 0, dy: -2 }"
+                 :y-axis-label-shift="{ dx: 0, dy: 5 }"
+                 :x-tick-format="d => `$${d}`" />
 ```
 
 #### Format of Data
@@ -399,8 +348,7 @@ Here is a simple example:
            :margin="{ top: 20, bottom: 30, left: 50, right: 20 }"
            x-axis-label="Year" 
            y-axis-label="Expenses"
-           :y-tick-format="d => `$${d}`">
-</LineChart>
+           :y-tick-format="d => `$${d}`" />
 ```
 
 The format of the `plot-data` prop needs to be as an array of objects. There should be one key for the x value, and all the other
@@ -441,16 +389,16 @@ can even show the points that create the line chart by passing in `:show-points=
 
 <LineChart :plot-data="plotDataLinear"
            x-key="days"
-           :width="450" :height="250" 
+           :width="450" 
+           :height="250"
            :margin="margin"
-           :use-time-scale-x-axis="false" 
+           :use-time-scale-x-axis="false"
            :x-axis-label-shift="{dy: -5}"
-           x-axis-label="Days Since Start of New Program" 
+           x-axis-label="Days Since Start of New Program"
            y-axis-label="Expenses"
-           :show-points="true" 
+           :show-points="true"
            :point-radius="3"
-           :y-tick-format="d => `$${d}`">
-</LineChart>
+           :y-tick-format="d => `$${d}`" />
 ```
 
 #### Uncertainty Bounds
@@ -478,8 +426,7 @@ altered slightly to pass in the bounds. A sample of component code and data form
         :use-time-scale-x-axis="false"
         :y-tick-format="(d) => `$${d}`"
         :area-fill-opacity="0.5"
-        :stroke-width="2.5">
-</LineChart>
+        :stroke-width="2.5" />
 ```
 
 The format of `plot-data` in this case also needs to be an array of objects. The x values should all have the same 
@@ -681,35 +628,18 @@ points around, as well transitioning the fill, radius, etc. Click the update dat
 
 ```html
 
-<template>
-  <ScatterPlot :plotData="plotData"
-               x-key="profit"
-               y-key="utility"
-               :margin="margin"
-               :width="400"
-               y-axis-label="Utility"
-               x-axis-label="Profit"
-               :x-axis-label-shift="{ dx: 5, dy: -5}"
-               stroke="#ff3000"
-               fill="#ff3000"
-               :fill-opacity="0.60"
-               :x-tick-format="d => `$${d}`">
-  </ScatterPlot>
-</template>
-
-<script>
-  import plotData from "./ScatterPlotData.json"
-
-  export default {
-    name: "ScatterPlotExample",
-    data() {
-      return {
-        plotData: plotData,
-        margin: { top: 20, bottom: 40, right: 20, left: 50 }
-      }
-    }
-  }
-</script>
+<ScatterPlot :plotData="plotData"
+             x-key="profit"
+             y-key="utility"
+             :margin="{ top: 20, bottom: 40, right: 20, left: 50 }"
+             :width="400"
+             y-axis-label="Utility"
+             x-axis-label="Profit"
+             :x-axis-label-shift="{ dx: 5, dy: -5}"
+             stroke="#ff3000"
+             fill="#ff3000"
+             :fill-opacity="0.60"
+             :x-tick-format="d => `$${d}`" />
 ```
 
 It is possible to add a contour plot below the scatterplot points by passing in `summary="contour"`. More summary types
@@ -741,8 +671,7 @@ with any of the contour plots available props.
         fill="white"
         :fill-opacity="0.7"
         :radius="3.5"
-        :x-tick-format="(d) => `$${d}`">
-</ScatterPlot>
+        :x-tick-format="(d) => `$${d}`" />
 ```
 
 #### Format of Data
@@ -951,14 +880,12 @@ data.
   <div>
     <p>Horiztonal</p>
     <BaseLegend :legend-data="legendData"
-                :alignment="'horizontal'">
-    </BaseLegend>
+                :alignment="'horizontal'" />
 
     <p>Vertical</p>
     <BaseLegend :legend-data="legendDataToggleEnabled"
                 :alignment="'vertical'"
-                enable-toggle>
-    </BaseLegend>
+                enable-toggle />
   </div>
 </template>
 
@@ -1034,9 +961,7 @@ The loading spinner is useful when data is being fetched from an API and there i
 
 ```html
 
-<template>
-  <LoaderSpinning />
-</template>
+<LoaderSpinning />
 ```
 
 #### Props
