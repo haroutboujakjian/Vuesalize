@@ -96,7 +96,7 @@
 <script>
 import { scaleLinear, scaleOrdinal, scaleTime } from "d3-scale"
 import { line, area } from "d3-shape"
-import { bisector, extent, max } from "d3-array"
+import { bisector, extent, max, min } from "d3-array"
 import { axisBottom, axisLeft } from "d3-axis"
 import { select } from "d3-selection"
 import Annotations from "./Annotations.vue"
@@ -250,7 +250,7 @@ export default {
         },
         yScale() {
             // set y scale min and max values based on props if they exist, else default to 0 and max of values
-            const yMin = this.yMin ? this.yMin : 0
+            const yMin = this.calculateMin()
             const yMax = this.calculateMax()
 
             return scaleLinear()
@@ -295,7 +295,6 @@ export default {
             if (this.boundsIncluded) {
                 return this.y_values.map((item) => {
                     const values = item.values
-                    console.log(values)
                     return {
                         key: item.name,
                         path: this.areaGenerator(values),
@@ -323,7 +322,7 @@ export default {
             this.showTooltip = false
         },
         calculateMax() {
-            if (this.yMax) return this.yMax
+            if (this.yMax !== null) return this.yMax
 
             if (this.boundsIncluded) {
                 const all_values = this.y_values
@@ -332,6 +331,18 @@ export default {
                 return max(all_values)
             } else {
                 return max(this.y_values, (d) => max(d.values))
+            }
+        },
+        calculateMin() {
+            if (this.yMin != null) return this.yMin
+
+            if (this.boundsIncluded) {
+                const all_values = this.y_values
+                    .flatMap((d) => d.values)
+                    .flatMap((d) => Object.values(d))
+                return min(all_values)
+            } else {
+                return min(this.y_values, (d) => min(d.values))
             }
         },
     },

@@ -346,6 +346,7 @@ Here is a simple example:
            :width="450"
            :height="250"
            :margin="{ top: 20, bottom: 30, left: 50, right: 20 }"
+           :y-min="0"
            x-axis-label="Year" 
            y-axis-label="Expenses"
            :y-tick-format="d => `$${d}`" />
@@ -393,6 +394,7 @@ can even show the points that create the line chart by passing in `:show-points=
            :height="250"
            :margin="margin"
            :use-time-scale-x-axis="false"
+           :y-min="500"
            :x-axis-label-shift="{dy: -5}"
            x-axis-label="Days Since Start of New Program"
            y-axis-label="Expenses"
@@ -420,6 +422,7 @@ altered slightly to pass in the bounds. A sample of component code and data form
         :width="450"
         :height="250"
         :margin="margin"
+        :y-min="0"
         x-axis-label="Days Since Launch"
         :x-axis-label-shift="{ dy: -6 }"
         y-axis-label="Revenue"

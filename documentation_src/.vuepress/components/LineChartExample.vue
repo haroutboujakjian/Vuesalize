@@ -20,6 +20,7 @@
         :width="450"
         :height="250"
         :margin="margin"
+        :y-min="500"
         x-axis-label="Days Since Start of New Program"
         y-axis-label="Expenses"
         :show-points="true"
@@ -33,6 +34,7 @@
         :width="450"
         :height="250"
         :margin="margin"
+        :y-min="0"
         x-axis-label="Days Since Launch"
         :x-axis-label-shift="{ dy: -6 }"
         y-axis-label="Revenue"
@@ -48,6 +50,7 @@
         :width="450"
         :height="250"
         :margin="margin"
+        :y-min="0"
         x-axis-label="Year"
         y-axis-label="Expenses"
         :y-tick-format="(d) => `$${d}`">
