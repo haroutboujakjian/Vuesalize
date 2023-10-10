@@ -53,6 +53,28 @@
                 {{ circle.label }}
             </text>
         </g>
+        <g v-for="(rect, i) in annotation_vranges" class="range" :key="`vr${i}`">
+            <rect
+                :x="rect.xy[0]"
+                :y="rect.xy[1]"
+                :width="rect.width"
+                :height="rect.height"
+                class="annotation"
+                :fill="rect.color"
+                :stroke="rect.color"
+                :style="`fill-opacity: ${rect.opacity}`"></rect>
+        </g>
+        <g v-for="(rect, i) in annotation_hranges" class="range" :key="`hr${i}`">
+            <rect
+                :x="rect.xy[0]"
+                :y="rect.xy[1]"
+                :width="rect.width"
+                :height="rect.height"
+                class="annotation"
+                :fill="rect.color"
+                :stroke="rect.color"
+                :style="`fill-opacity: ${rect.opacity}`"></rect>
+        </g>
     </g>
 </template>
 
@@ -176,6 +198,34 @@ export default {
                             : "middle",
                         labeldx: item.labeldx,
                         labeldy: item.labeldy,
+                    }
+                })
+        },
+        annotation_vranges() {
+            return this.annotations
+                .filter(annotation => annotation.type === "vertical_range")
+                .map(item => {
+                    let xy = [this.xScale(item.start), this.margin.top]
+                    let width = this.xScale(item.end) - this.xScale(item.start)
+                    let height = this.height - this.margin.bottom - this.margin.top
+                    return {
+                        xy, width, height,
+                        color: item.color,
+                        opacity: item.opacity
+                    }
+                })
+        },
+        annotation_hranges() {
+            return this.annotations
+                .filter(annotation => annotation.type === "horizontal_range")
+                .map(item => {
+                    let xy = [this.margin.left, this.yScale(item.start)]
+                    let width = this.margin.right - this.margin.left
+                    let height = this.yScale(item.end) - this.yScale(item.start)
+                    return {
+                        xy, width, height,
+                        color: item.color,
+                        opacity: item.opacity
                     }
                 })
         },
