@@ -60,7 +60,7 @@
             :style="{ top: tooltip.y, left: tooltip.x }">
             <slot name="tooltip" :row="tooltip.values">
                 <span v-for="(value, key) in tooltip.values" :key="key"
-                    >{{ key }}: {{ value }}</span
+                >{{ key }}: {{ value }}</span
                 >
             </slot>
         </div>
@@ -84,38 +84,38 @@ export default {
     props: {
         width: {
             type: Number,
-            default: 350,
+            default: 350
         },
         height: {
             type: Number,
-            default: 250,
+            default: 250
         },
         margin: {
             type: Object,
-            default: function () {
+            default: function() {
                 return { top: 20, bottom: 20, left: 20, right: 20 }
-            },
+            }
         },
         plotData: Array,
         colors: {
             type: Array,
-            default: function () {
+            default: function() {
                 return colors
-            },
+            }
         },
         xKey: String,
         stacked: {
             type: Boolean,
-            default: false,
+            default: false
         },
         annotations: Array,
         fillOpacity: {
             type: Number,
-            default: 0.65,
+            default: 0.65
         },
         strokeWidth: {
             type: Number,
-            default: 2,
+            default: 2
         },
         xAxisLabel: String,
         yAxisLabel: String,
@@ -123,26 +123,34 @@ export default {
         yAxisLabelShift: Object,
         xTickFormat: {
             type: Function,
-            default: null,
+            default: null
         },
         yTickFormat: {
             type: Function,
-            default: null,
+            default: null
         },
         xTicks: {
             /*
             number sent into d3.ticks function for x-axis
              */
             type: Number,
-            default: 5,
+            default: 5
         },
         yTicks: {
             /*
             number sent into d3.ticks function for y-axis
             */
             type: Number,
-            default: 5,
+            default: 5
         },
+        yMin: {
+            type: Number,
+            default: null
+        },
+        yMax: {
+            type: Number,
+            default: null
+        }
     },
     data() {
         return {
@@ -150,8 +158,8 @@ export default {
             tooltip: {
                 x: 0,
                 y: 0,
-                values: {},
-            },
+                values: {}
+            }
         }
     },
     computed: {
@@ -166,7 +174,7 @@ export default {
         series() {
             const dataUnstacked = this.yValueKeys.map((key) => ({
                 name: key,
-                values: this.plotData.map((year) => year[key]),
+                values: this.plotData.map((year) => year[key])
             }))
 
             const dataStacked = stack().keys(this.yValueKeys)(this.plotData)
@@ -179,14 +187,11 @@ export default {
                 .range([this.margin.left, this.width - this.margin.right])
         },
         yScale() {
-            let maxVal
-            if (this.stacked) {
-                maxVal = max(this.series, (d) => max(d, (d) => d[1]))
-            } else {
-                maxVal = max(this.series.flatMap((row) => row.values))
-            }
+            const maxVal = this.getMaxYValue()
+            const minVal = this.yMin ? this.yMin : 0
+
             return scaleLinear()
-                .domain([0, maxVal])
+                .domain([minVal, maxVal])
                 .range([this.height - this.margin.bottom, this.margin.top])
                 .nice()
         },
@@ -208,7 +213,7 @@ export default {
         },
         xBisector() {
             return bisector((d) => new Date(d[this.xKey])).left
-        },
+        }
     },
     methods: {
         populateTooltip(evt) {
@@ -227,6 +232,19 @@ export default {
         removeTooltip() {
             this.showTooltip = false
         },
+        getMaxYValue() {
+            let maxVal
+
+            if (this.yMax) {
+                maxVal = this.yMax
+            } else if (this.stacked) {
+                maxVal = max(this.series, (d) => max(d, (d) => d[1]))
+            } else {
+                maxVal = max(this.series.flatMap((row) => row.values))
+            }
+
+            return maxVal
+        }
     },
     directives: {
         xaxis(el, binding, vnode) {
@@ -248,8 +266,8 @@ export default {
                 .transition()
                 .duration(500)
                 .call(axisLeft(scale).ticks(yTicks).tickFormat(yTickFormat))
-        },
-    },
+        }
+    }
 }
 </script>
 
