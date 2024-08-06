@@ -603,6 +603,8 @@ switch between them.
 | `y-tick-format`      |                    | `Function` | `null`  | Function passed into d3's [tickFormat](https://github.com/d3/d3-axis#axis_tickFormat) for the y-axis |
 | `x-ticks`            |                    | `Number`   | 5       | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the x-axis           |
 | `y-ticks`            |                    | `Number`   | 5       | Argument passed into d3's [ticks](https://github.com/d3/d3-axis#axis_ticks) for the y-axis           |
+| `y-min`              |                    | `Number`   |         | Minimum value used for y scale                                                                       |
+| `y-max`              |                    | `Number`   |         | Maximum value used for y scale                                                                       |
 
 #### Events
 
